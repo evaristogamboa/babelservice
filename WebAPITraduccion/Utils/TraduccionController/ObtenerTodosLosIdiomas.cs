@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
-using WebAPITraduccion.Models;
+using WebAPEtiqueta.Models;
 
-namespace WebApiTraduccion.Utils.TraduccionController
+namespace WebApEtiqueta.Utils.EtiquetaController
 {
 	public class ObtenerTodosLosIdiomas
 	{
-		private TraduccionFactory traduccionFactory;
-		private ObtenerTodosLosIdiomasResponse listaTraducciones;
+		private EtiquetaFactory EtiquetaFactory;
+		private ObtenerTodosLosIdiomasResponse listaEtiquetaes;
 
-		public ObtenerTodosLosIdiomas(TraduccionFactory traduccionFactory, ObtenerTodosLosIdiomasResponse listaTraducciones)
+		public ObtenerTodosLosIdiomas(EtiquetaFactory EtiquetaFactory, ObtenerTodosLosIdiomasResponse listaEtiquetaes)
 		{
-			this.traduccionFactory = traduccionFactory;
-			this.listaTraducciones = listaTraducciones;
+			this.EtiquetaFactory = EtiquetaFactory;
+			this.listaEtiquetaes = listaEtiquetaes;
 		}
-		public ObtenerTodosLosIdiomasResponse GenerarRespuesta(DataTable dtTraducciones)
+		public ObtenerTodosLosIdiomasResponse GenerarRespuesta(DataTable dtEtiquetaes)
 		{
 			throw new NotImplementedException();
 		}

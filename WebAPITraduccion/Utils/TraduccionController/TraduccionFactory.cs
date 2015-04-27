@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WebApiTraduccion.Utils.TraduccionController
+namespace WebApEtiqueta.Utils.EtiquetaController
 {
-	public class TraduccionFactory
+	public class EtiquetaFactory
 	{
 	}
 }

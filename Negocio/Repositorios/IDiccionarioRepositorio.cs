@@ -5,7 +5,7 @@ using Negocio.Entidades;
 
 namespace Negocio.Repositorios
 {
-	public interface IDiccionarioRepositorio : IRepositorio<Traduccion>
+	public interface IDiccionarioRepositorio : IRepositorio<Etiqueta>
 	{
 	}
 }

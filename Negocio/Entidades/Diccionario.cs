@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Negocio.Interfaces;
 
 namespace Negocio.Entidades
 {
 	public class Diccionario
 	{
 		private Guid Id;
-		private List<ITraduccion> Traducciones;
+		private List<Etiqueta> Etiquetaes;
 
 		private Diccionario()
 		{
 			this.Id = new Guid();
-			this.Traducciones = null;
+			this.Etiquetaes = null;
 		}
 		
 		public static Diccionario CrearNuevoDiccionarioVacio()
@@ -26,27 +25,27 @@ namespace Negocio.Entidades
 			return this;
 		}
 		
-		public Diccionario AgregarUnaEtiquetaAlDiccionario(List<ITraduccion> traduccion)
+		public Diccionario AgregarUnaEtiquetaAlDiccionario(List<Etiqueta> Etiqueta)
 		{
 
-			return ModificarEtiquetasDelDiccionario(traduccion);
+			return ModificarEtiquetasDelDiccionario(Etiqueta);
 
 		}
 
-		public Diccionario AgregarVariasEtiquetasAlDiccionario(List<ITraduccion> traducciones)
+		public Diccionario AgregarVariasEtiquetasAlDiccionario(List<Etiqueta> Etiquetaes)
 		{
-			return ModificarEtiquetasDelDiccionario(traducciones);
+			return ModificarEtiquetasDelDiccionario(Etiquetaes);
 		}
 
-		public Diccionario ModificarEtiquetasDelDiccionario(List<ITraduccion> traducciones)
+		public Diccionario ModificarEtiquetasDelDiccionario(List<Etiqueta> Etiquetaes)
 		{
-			this.Traducciones = traducciones;
+			this.Etiquetaes = Etiquetaes;
 			return this;
 		}
 
 		public Diccionario EliminarTodoElDiccionario()
 		{
-			this.Traducciones = new List<ITraduccion>();
+			this.Etiquetaes = new List<Etiqueta>();
 			return this;
 		}
 
@@ -56,8 +55,8 @@ namespace Negocio.Entidades
 			return this.Id;
 		}
 
-		public List<ITraduccion> ObtenerListaDeTraducciones() {
-			return this.Traducciones;
+		public List<Etiqueta> ObtenerListaDeEtiquetaes() {
+			return this.Etiquetaes;
 		}
 
 	}

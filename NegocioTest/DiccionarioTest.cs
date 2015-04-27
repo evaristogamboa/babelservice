@@ -2,7 +2,6 @@
 using System.Linq;
 using NUnit.Framework;
 using Should;
-using Negocio.Interfaces;
 using Negocio.Entidades;
 using System.Collections.Generic;
 
@@ -12,16 +11,16 @@ namespace NegocioTest
 	public class DiccionarioTest
 	{
 		private Diccionario diccionario;
-		private List<ITraduccion> listaEtiquetas;
-		private ITraduccion etiqueta1;
-		private ITraduccion etiqueta2;
+		private List<Etiqueta> listaEtiquetas;
+		private Etiqueta etiqueta1;
+		private Etiqueta etiqueta2;
 	
 		public DiccionarioTest()
 		{
 
-			this.listaEtiquetas = new List<ITraduccion>();
-			this.etiqueta1 = Traduccion.CrearNuevaTraduccion("en", "1 test de mi aplicación", "1 test", "1 El tooltip de la traduccion");
-			this.etiqueta2 = Traduccion.CrearNuevaTraduccion("es", "2 test de mi aplicación", "2 test", "2 El tooltip de la traduccion");
+			this.listaEtiquetas = new List<Etiqueta>();
+			this.etiqueta1 = Etiqueta.CrearNuevaEtiqueta("en", "1 test de mi aplicación", "1 test", "1 El tooltip de la Etiqueta");
+			this.etiqueta2 = Etiqueta.CrearNuevaEtiqueta("es", "2 test de mi aplicación", "2 test", "2 El tooltip de la Etiqueta");
 			this.listaEtiquetas.Add(this.etiqueta1);
 			this.listaEtiquetas.Add(this.etiqueta2);
 			this.diccionario = Diccionario.CrearNuevoDiccionarioVacio();
@@ -56,9 +55,9 @@ namespace NegocioTest
 			//Act
 			prueba.AgregarVariasEtiquetasAlDiccionario(this.listaEtiquetas);
 			//Assert
-			prueba.ObtenerListaDeTraducciones().ShouldBeType(typeof(List<ITraduccion>));
-			prueba.ObtenerListaDeTraducciones().Count().ShouldBeGreaterThan(0);
-			prueba.ObtenerListaDeTraducciones().ShouldContain(etiqueta1);
+			prueba.ObtenerListaDeEtiquetaes().ShouldBeType(typeof(List<Etiqueta>));
+			prueba.ObtenerListaDeEtiquetaes().Count().ShouldBeGreaterThan(0);
+			prueba.ObtenerListaDeEtiquetaes().ShouldContain(etiqueta1);
 		}
 
 		[Test]
@@ -69,9 +68,9 @@ namespace NegocioTest
 			//Act
 			prueba.AgregarVariasEtiquetasAlDiccionario(this.listaEtiquetas);
 			//Assert
-			prueba.ObtenerListaDeTraducciones().ShouldBeType(typeof(List<ITraduccion>));
-			prueba.ObtenerListaDeTraducciones().Count().ShouldBeGreaterThan(0);
-			prueba.ObtenerListaDeTraducciones().ShouldContain(etiqueta1);
+			prueba.ObtenerListaDeEtiquetaes().ShouldBeType(typeof(List<Etiqueta>));
+			prueba.ObtenerListaDeEtiquetaes().Count().ShouldBeGreaterThan(0);
+			prueba.ObtenerListaDeEtiquetaes().ShouldContain(etiqueta1);
 		}
 	}
 }

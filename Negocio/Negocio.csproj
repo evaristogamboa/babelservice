@@ -44,9 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comunes\IRepositorio.cs" />
-    <Compile Include="Interfaces\ITraduccion.cs" />
     <Compile Include="Repositorios\IDiccionarioRepositorio.cs" />
-    <Compile Include="Entidades\Traduccion.cs" />
+    <Compile Include="Entidades\Etiqueta.cs" />
     <Compile Include="Entidades\Diccionario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

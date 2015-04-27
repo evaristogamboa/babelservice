@@ -10,45 +10,45 @@ using Negocio.Repositorios;
 
 namespace AccesoDatos
 {
-	public class TraduccionesRepositorioSql : IDiccionarioRepositorio
+	public class EtiquetaesRepositorioSql : IDiccionarioRepositorio
 	{
 		private Conexion basedatos;
-		private DataTable dtTraducciones;
+		private DataTable dtEtiquetaes;
 		private Hashtable parametros;
-		private Traduccion traduccion;
-		private List<Traduccion> listaTraducciones;
+		private Etiqueta Etiqueta;
+		private List<Etiqueta> listaEtiquetaes;
 
-		private TraduccionesRepositorioSql(Conexion basedatos, DataTable dtTraducciones, Hashtable parametros, Traduccion traduccion, List<Traduccion> listaTraducciones)
+		private EtiquetaesRepositorioSql(Conexion basedatos, DataTable dtEtiquetaes, Hashtable parametros, Etiqueta Etiqueta, List<Etiqueta> listaEtiquetaes)
 		{
 			this.basedatos = basedatos;
-			this.dtTraducciones = dtTraducciones;
+			this.dtEtiquetaes = dtEtiquetaes;
 			this.parametros = parametros;
-			this.traduccion = traduccion;
-			this.listaTraducciones = listaTraducciones;
+			this.Etiqueta = Etiqueta;
+			this.listaEtiquetaes = listaEtiquetaes;
 		}
 
-		public static TraduccionesRepositorioSql CrearNuevoRepositorioTraduccioneSql(Conexion basedatos, DataTable dtTraducciones, Hashtable parametros, Traduccion traduccion, List<Traduccion> listaTraducciones)
+		public static EtiquetaesRepositorioSql CrearNuevoRepositorioEtiquetaeSql(Conexion basedatos, DataTable dtEtiquetaes, Hashtable parametros, Etiqueta Etiqueta, List<Etiqueta> listaEtiquetaes)
 		{
-			return new TraduccionesRepositorioSql(basedatos, dtTraducciones, parametros, traduccion, listaTraducciones);
+			return new EtiquetaesRepositorioSql(basedatos, dtEtiquetaes, parametros, Etiqueta, listaEtiquetaes);
 		}
 
-		public List<Traduccion> GetAll()
+		public List<Etiqueta> GetAll()
 		{
-			this.dtTraducciones = this.basedatos.ExecuteSelect(ref this.parametros);
-			if (dtTraducciones.Rows.Count > 0)
+			this.dtEtiquetaes = this.basedatos.ExecuteSelect(ref this.parametros);
+			if (dtEtiquetaes.Rows.Count > 0)
 			{
-				for (int i = 0; i <= dtTraducciones.Rows.Count - 1; i++)
+				for (int i = 0; i <= dtEtiquetaes.Rows.Count - 1; i++)
 				{
-					Traduccion datosTraduccion = Traduccion.CrearNuevaTraduccion(this.dtTraducciones.Rows[i].ItemArray[0].ToString(),
-						this.dtTraducciones.Rows[i].ItemArray[1].ToString(),
-						this.dtTraducciones.Rows[i].ItemArray[2].ToString(),
-						 this.dtTraducciones.Rows[i].ItemArray[3].ToString()
+					Etiqueta datosEtiqueta = Etiqueta.CrearNuevaEtiqueta(this.dtEtiquetaes.Rows[i].ItemArray[0].ToString(),
+						this.dtEtiquetaes.Rows[i].ItemArray[1].ToString(),
+						this.dtEtiquetaes.Rows[i].ItemArray[2].ToString(),
+						 this.dtEtiquetaes.Rows[i].ItemArray[3].ToString()
 						);
 
-					listaTraducciones.Add(datosTraduccion);
+					listaEtiquetaes.Add(datosEtiqueta);
 				}
 			}
-			return listaTraducciones;
+			return listaEtiquetaes;
 		}
 	}
 }

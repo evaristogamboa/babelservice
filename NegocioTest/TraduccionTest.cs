@@ -2,75 +2,34 @@
 using NUnit.Framework;
 using Negocio.Entidades;
 using Should;
-using Negocio.Interfaces;
 
 namespace NegocioTest
 {
 	[TestFixture]
-    public class TraduccionTest
+    public class EtiquetaTest
     {
-		private ITraduccion etiqueta;
-		public TraduccionTest()
+		private Etiqueta etiqueta;
+		public EtiquetaTest()
 		{
-			this.etiqueta = Traduccion.CrearNuevaTraduccion("en", "test de mi aplicación", "test", "Es Gay");
+			this.etiqueta = Etiqueta.CrearNuevaEtiqueta("en", "test de mi aplicación", "test", "Es Gay");
 		}
 		[Test]
 		public void ProbarCreacionDeNuevaEtiqueta()
 		{ 
 			//Arrange
-			Traduccion prueba = Traduccion.CrearNuevaTraduccion("en", "test de mi aplicación", "test", "Es Gay");
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("en", "test de mi aplicación", "test", "Es Gay");
 			//Act
 			//Assert
-			prueba.ShouldBeType(typeof(Traduccion));		
+			prueba.ShouldBeType(typeof(Etiqueta));		
 		}
 
-		[Test]
-		public void ProbarRetornoDescripcionEtiqueta()
-		{
-			//Arrange
-			//Act
-			string pruebaDescripcionDeEtiqueta = this.etiqueta.ObtenerDescripcionDeEtiqueta();
-			//Assert
-			pruebaDescripcionDeEtiqueta.ShouldEqual("Es Gay");
-			
-		}
+	
 
 		[Test]
-		public void ProbarRetornoNombreEtiqueta()
-		{
-			//Arrange
-			//Act
-			string pruebaNombreDeEtiqueta = this.etiqueta.ObtenerNombreDeEtiqueta();
-			//Assert
-			pruebaNombreDeEtiqueta.ShouldEqual("test de mi aplicación");
-			
-		}
-
-		[Test]
-		public void ProbarRetornoIdomaISO()
-		{
-			//Arrange			
-			//Act
-			string pruebaIdiomaISO = this.etiqueta.ObtenerIdiomaIso();
-			//Assert
-			pruebaIdiomaISO.ShouldEqual("en");			
-		}
-
-		[Test]
-		public void PruebaRetornoValorEtiqueta()
-		{
-			//Arrange			
-			//Act
-			string pruebaValorEtiqueta = this.etiqueta.ObtenerValorDeEtiqueta();
-			//Assert
-			pruebaValorEtiqueta.ShouldEqual("test");			
-		}
-
-		[Test]
-		public void PruebaEqualsEsFalsoCuandoNoEsLaMismaTraduccion()
+		public void PruebaEqualsEsFalsoCuandoNoEsLaMismaEtiqueta()
 		{
 			//Arrange	
-			Traduccion prueba = Traduccion.CrearNuevaTraduccion("es", "test de mi aplicación", "test", "Es Gay");
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("es", "test de mi aplicación", "test", "Es Gay");
 			//Act
 
 			Boolean resultado = this.etiqueta.Equals(prueba);
@@ -81,10 +40,10 @@ namespace NegocioTest
 		}
 
 		[Test]
-		public void PruebaEqualsEsVerdaderoCuandoEsUnaTraduccionConLosMismosValores()
+		public void PruebaEqualsEsVerdaderoCuandoEsUnaEtiquetaConLosMismosValores()
 		{
 			//Arrange	
-			Traduccion prueba = Traduccion.CrearNuevaTraduccion("en", "test de mi aplicación", "test", "Es Gay");
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("en", "test de mi aplicación", "test", "Es Gay");
 			//Act			
 			Boolean resultado=this.etiqueta.Equals(prueba);
 			//Assert
@@ -93,7 +52,7 @@ namespace NegocioTest
 		}
 
 		[Test]
-		public void PruebaEqualsVerdaderoCuandoEsElMismoObjetoDeTraduccion()
+		public void PruebaEqualsVerdaderoCuandoEsElMismoObjetoDeEtiqueta()
 		{
 			//Arrange				
 			//Act
@@ -117,7 +76,7 @@ namespace NegocioTest
 		public void PruebaHashCodeEsEntero()
 		{
 			//Arrange
-			Traduccion prueba = Traduccion.CrearNuevaTraduccion(null, null, null, null);
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta(null, null, null, null);
 	     	//Act
 			int resultado =prueba.GetHashCode();
 			//Assert

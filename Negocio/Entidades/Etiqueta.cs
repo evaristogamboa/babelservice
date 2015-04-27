@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Negocio.Interfaces;
 
 namespace Negocio.Entidades
 {
-	public class Traduccion : ITraduccion, IEquatable<Traduccion>
+	public class Etiqueta : IEquatable<Etiqueta>
 	{
 		private Guid id;
 		private string idiomaISO;
@@ -12,7 +11,7 @@ namespace Negocio.Entidades
 		private string etiquetaValor;
 		private string etiquetaDescripcion;
 
-		private Traduccion(string idiomaISO, string etiquetaNombre, string etiquetaValor, string etiquetaDescripcion)
+		private Etiqueta(string idiomaISO, string etiquetaNombre, string etiquetaValor, string etiquetaDescripcion)
 		{
 			this.id = new Guid();
 			this.idiomaISO = idiomaISO;
@@ -21,30 +20,12 @@ namespace Negocio.Entidades
 			this.etiquetaDescripcion = etiquetaDescripcion;
 		}
 
-		public static Traduccion CrearNuevaTraduccion(string idiomaISO, string etiquetaNombre, string etiquetaValor, string etiquetaDescripcion)
+		public static Etiqueta CrearNuevaEtiqueta(string idiomaISO, string etiquetaNombre, string etiquetaValor, string etiquetaDescripcion)
 		{
-			return new Traduccion(idiomaISO, etiquetaNombre, etiquetaValor, etiquetaDescripcion);
+			return new Etiqueta(idiomaISO, etiquetaNombre, etiquetaValor, etiquetaDescripcion);
 		}
 
-		public string ObtenerIdiomaIso()
-		{
-			return this.idiomaISO;
-		}
-
-		public string ObtenerNombreDeEtiqueta()
-		{
-			return this.etiquetaNombre;
-		}
-
-		public string ObtenerValorDeEtiqueta()
-		{
-			return this.etiquetaValor;
-		}
-
-		public string ObtenerDescripcionDeEtiqueta()
-		{
-			return this.etiquetaDescripcion;
-		}
+		
 		public override int GetHashCode()
 		{
 			unchecked
@@ -58,7 +39,7 @@ namespace Negocio.Entidades
 			}
 		}
 
-		public bool Equals(Traduccion other)
+		public bool Equals(Etiqueta other)
 		{
 			if (ReferenceEquals(null, other))
 			{
@@ -76,7 +57,7 @@ namespace Negocio.Entidades
 
 		public override bool Equals(object obj)
 		{
-			Traduccion temp = obj as Traduccion;
+			Etiqueta temp = obj as Etiqueta;
 			if (temp == null)
 				return false;
 			return this.Equals(temp);

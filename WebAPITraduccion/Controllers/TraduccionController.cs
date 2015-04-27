@@ -9,14 +9,14 @@ using AccesoDatos;
 using System.Collections;
 using System.Configuration;
 using System.Data.SqlClient;
-using WebApiTraduccion.Utils.TraduccionController;
-using WebAPITraduccion.Models;
+using WebApEtiqueta.Utils.EtiquetaController;
+using WebAPEtiqueta.Models;
 using Negocio.Entidades;
 
-namespace WebAPITraduccion.Controllers
+namespace WebAPEtiqueta.Controllers
 {
 
-	public class TraduccionController : ApiController
+	public class EtiquetaController : ApiController
 	{
 		private Diccionario tra;
 		private ObtenerTodosLosIdiomas util;
@@ -35,19 +35,19 @@ namespace WebAPITraduccion.Controllers
 			return response1;
 		}
 		private void GetDependecyObjects() {
-			//List<Entidades.Traduccion> listaTraducciones = new List<Entidades.Traduccion>();
-			//DataTable dtTraducciones = new DataTable();
+			//List<Entidades.Etiqueta> listaEtiquetaes = new List<Entidades.Etiqueta>();
+			//DataTable dtEtiquetaes = new DataTable();
 			//SqlConnection cnn = new SqlConnection(this.ConnectionString);
-			//SqlCommand cmd = new SqlCommand("ListaDeTraduccionesIdiomas", cnn);
+			//SqlCommand cmd = new SqlCommand("ListaDeEtiquetaesIdiomas", cnn);
 			//SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 			//DataTable dataObject = new DataTable();
 			//SqlParameterFactory sqlparameterFactory = new SqlParameterFactory();
 			//Conexion basedatos = new Conexion(cnn, cmd, adapter, dataObject, sqlparameterFactory);
 			//Hashtable parametros = new Hashtable();
-			//TraduccionFactory traduccionFactory = new TraduccionFactory();
-			//this.response=new ObtenerTodosLosIdiomasResponse(listaTraducciones);
-			//this.tra = Traducciones.CrearNuevaTraduccionConParametrosBD(dtTraducciones, basedatos, parametros);
-			//this.util = new ObtenerTodosLosIdiomas(traduccionFactory,response);
+			//EtiquetaFactory EtiquetaFactory = new EtiquetaFactory();
+			//this.response=new ObtenerTodosLosIdiomasResponse(listaEtiquetaes);
+			//this.tra = Etiquetaes.CrearNuevaEtiquetaConParametrosBD(dtEtiquetaes, basedatos, parametros);
+			//this.util = new ObtenerTodosLosIdiomas(EtiquetaFactory,response);
 
 		}
 	}

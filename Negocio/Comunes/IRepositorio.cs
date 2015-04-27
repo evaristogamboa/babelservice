@@ -8,6 +8,14 @@ namespace Negocio.Comunes
 {
 	public interface  IRepositorio<T>
 	{
-		List<T> GetAll();
+		List<T> ObtenerTodosLosElementos<T>();
+
+		T ObtenerUnElemento<T>();
+
+		Boolean EliminarUnElemento(Guid id);
+
+		T ModificarUnElemento<T>(T elementoAModificar);
+
+		T CrearUnElemento<T>(T elementoACrear);
 	}
 }

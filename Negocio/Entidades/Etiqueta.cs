@@ -25,6 +25,9 @@ namespace Negocio.Entidades
 			return new Etiqueta(idiomaISO, etiquetaNombre, etiquetaValor, etiquetaDescripcion);
 		}
 
+		public Etiqueta RetornarEtiqueta() {
+			return this;
+		}
 		
 		public override int GetHashCode()
 		{

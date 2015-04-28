@@ -1,56 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPITraduccion", "WebAPITraduccion\WebAPITraduccion.csproj", "{33AE78BA-87AB-4503-A0F0-6205A65974E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Negocio\Dominio.csproj", "{C7562B90-054F-4E96-B33E-4595F1E6B7CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\AccesoDatos.csproj", "{9F3E0092-B584-4736-8DE8-A21EBF702A92}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{C7562B90-054F-4E96-B33E-4595F1E6B7CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NegocioTest", "NegocioTest\NegocioTest.csproj", "{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominioTests", "NegocioTest\DominioTests.csproj", "{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://sve02-110:8085/tfs/investigacion
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = AccesoDatos\\AccesoDatos.csproj
-		SccProjectName1 = AccesoDatos
-		SccLocalPath1 = AccesoDatos
-		SccProjectUniqueName2 = Negocio\\Negocio.csproj
-		SccProjectName2 = Negocio
-		SccLocalPath2 = Negocio
-		SccProjectUniqueName3 = NegocioTest\\NegocioTest.csproj
-		SccProjectName3 = NegocioTest
-		SccLocalPath3 = NegocioTest
-		SccProjectUniqueName4 = WebAPITraduccion\\WebAPITraduccion.csproj
-		SccProjectName4 = WebAPITraduccion
-		SccLocalPath4 = WebAPITraduccion
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{33AE78BA-87AB-4503-A0F0-6205A65974E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33AE78BA-87AB-4503-A0F0-6205A65974E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33AE78BA-87AB-4503-A0F0-6205A65974E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33AE78BA-87AB-4503-A0F0-6205A65974E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F3E0092-B584-4736-8DE8-A21EBF702A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F3E0092-B584-4736-8DE8-A21EBF702A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F3E0092-B584-4736-8DE8-A21EBF702A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F3E0092-B584-4736-8DE8-A21EBF702A92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7562B90-054F-4E96-B33E-4595F1E6B7CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.VersionControlPolicy = $1
+		$1.inheritsSet = Mono
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

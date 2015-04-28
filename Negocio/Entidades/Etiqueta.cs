@@ -1,70 +1,40 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 
-namespace Negocio.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 {
-	public class Etiqueta : IEquatable<Etiqueta>
+	public class Etiqueta : Entity<Etiqueta>
 	{
-		private Guid id;
-		private string idiomaISO;
-		private string etiquetaNombre;
-		private string etiquetaValor;
-		private string etiquetaDescripcion;
+		public Traducciones traducciones{ get; private set; }
 
-		private Etiqueta(string idiomaISO, string etiquetaNombre, string etiquetaValor, string etiquetaDescripcion)
+		public string nombre { get; private set; }
+
+		public Traducciones descripcion { get; private set; }
+
+		private Etiqueta (string nombre)
 		{
-			this.id = new Guid();
-			this.idiomaISO = idiomaISO;
-			this.etiquetaNombre = etiquetaNombre;
-			this.etiquetaValor = etiquetaValor;
-			this.etiquetaDescripcion = etiquetaDescripcion;
+			this.id = Guid.NewGuid ();
+			this.nombre = nombre;
+			this.descripcion = Traducciones.CrearNuevaTraduccion ();
+			this.traducciones = Traducciones.CrearNuevaTraduccion ();
 		}
 
-		public static Etiqueta CrearNuevaEtiqueta(string idiomaISO, string etiquetaNombre, string etiquetaValor, string etiquetaDescripcion)
+		public static Etiqueta CrearNuevaEtiqueta (string nombre)
 		{
-			return new Etiqueta(idiomaISO, etiquetaNombre, etiquetaValor, etiquetaDescripcion);
+			return new Etiqueta (nombre);
 		}
 
-		public Etiqueta RetornarEtiqueta() {
+		public Etiqueta RetornarEtiqueta ()
+		{
 			return this;
 		}
-		
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				int result = 17;
-				result = result * 23 + ((idiomaISO != null) ? this.idiomaISO.GetHashCode() : 0);
-				result = result * 23 + ((etiquetaNombre != null) ? this.etiquetaNombre.GetHashCode() : 0);
-				result = result * 23 + ((etiquetaValor != null) ? this.etiquetaValor.GetHashCode() : 0);
-				result = result * 23 + ((etiquetaDescripcion != null) ? this.etiquetaDescripcion.GetHashCode() : 0);
-				return result;
-			}
-		}
 
-		public bool Equals(Etiqueta other)
+		public Traduccion RetornarTraduccionDeEtiqueta (Cultura cultura)
 		{
-			if (ReferenceEquals(null, other))
-			{
-				return false;
-			}
-			if (ReferenceEquals(this, other))
-			{
-				return true;
-			}
-			return Equals(this.idiomaISO, other.idiomaISO) &&
-				   Equals(this.etiquetaNombre, other.etiquetaNombre) &&
-				   Equals(this.etiquetaValor, other.etiquetaValor) &&
-				   Equals(this.etiquetaDescripcion, other.etiquetaDescripcion);
+			return traducciones [cultura];
 		}
-
-		public override bool Equals(object obj)
-		{
-			Etiqueta temp = obj as Etiqueta;
-			if (temp == null)
-				return false;
-			return this.Equals(temp);
-		}
-
 	}
 }

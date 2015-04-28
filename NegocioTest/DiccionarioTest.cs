@@ -1,76 +1,262 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
 using Should;
-using Negocio.Entidades;
 using System.Collections.Generic;
 
-namespace NegocioTest
+namespace Nubise.Hc.Utils.I18n.Babel.DominioTests
 {
 	[TestFixture]
 	public class DiccionarioTest
 	{
-		private Diccionario diccionario;
-		private List<Etiqueta> listaEtiquetas;
+		private Diccionario diccionarioPrueba;
+		private Dictionary<string,Etiqueta> listaEtiquetas;
 		private Etiqueta etiqueta1;
 		private Etiqueta etiqueta2;
-	
-		public DiccionarioTest()
+
+		public DiccionarioTest ()
 		{
 
-			this.listaEtiquetas = new List<Etiqueta>();
-			this.etiqueta1 = Etiqueta.CrearNuevaEtiqueta("en", "1 test de mi aplicación", "1 test", "1 El tooltip de la Etiqueta");
-			this.etiqueta2 = Etiqueta.CrearNuevaEtiqueta("es", "2 test de mi aplicación", "2 test", "2 El tooltip de la Etiqueta");
-			this.listaEtiquetas.Add(this.etiqueta1);
-			this.listaEtiquetas.Add(this.etiqueta2);
-			this.diccionario = Diccionario.CrearNuevoDiccionarioVacio();
-			
+			this.listaEtiquetas = new Dictionary<string,Etiqueta> ();
+			this.etiqueta1 = Etiqueta.CrearNuevaEtiqueta ("1 test de mi aplicación");
+			this.etiqueta2 = Etiqueta.CrearNuevaEtiqueta ("2 test de mi aplicación");
+			this.listaEtiquetas.Add (this.etiqueta1.nombre, this.etiqueta1);
+			this.listaEtiquetas.Add (this.etiqueta2.nombre, this.etiqueta2);
+
 		}
 
+		[SetUp]
+		public void SetUp ()
+		{
+			this.diccionarioPrueba = Diccionario.CrearNuevoDiccionarioVacio ();
+		}
+
+		#region creacion
 
 		[Test]
-		public void PruebaCrearDiciconarioNuevo()
+		public void PruebaCrearDiciconarioNuevo ()
 		{
 			//Arrange
-			Diccionario prueba = Diccionario.CrearNuevoDiccionarioVacio();
 			//Act
 			//Assert
-			prueba.ShouldBeType(typeof(Diccionario));
+			this.diccionarioPrueba.ShouldBeType (typeof(Diccionario));
 		
 		}
 
 		[Test]
-		public void PruebaObtenerGuidDiccionario()
+		public void PruebaObtenerGuidDiccionario ()
+		{
+			//Arrange
+
+			//Act
+			//Assert
+			this.diccionarioPrueba.id.ShouldBeType (typeof(Guid));
+
+		}
+
+		#endregion
+
+		#region agregar etiquetas
+
+		[Test]
+		public void PruebaAgregarUnaEtiquetaNoExistenteAlDiccionarioVacio ()
+		{
+			//Arrange
+
+			//Act
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta1);
+			//Assert
+			this.diccionarioPrueba.etiquetas.ShouldBeType (typeof(Dictionary<string,Etiqueta>));
+			this.diccionarioPrueba.etiquetas.Count ().ShouldBeGreaterThan (0);
+			this.diccionarioPrueba.etiquetas.ShouldContain (new KeyValuePair<string, Etiqueta> (etiqueta1.nombre, etiqueta1));
+		}
+
+		[Test]
+		public void PruebaAgregarUnaEtiquetaNoExistenteAlDiccionarioConValores ()
+		{
+			//Arrange
+
+			//Act
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta1);
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta2);
+			//Assert
+			this.diccionarioPrueba.etiquetas.ShouldBeType (typeof(Dictionary<string,Etiqueta>));
+			this.diccionarioPrueba.etiquetas.Count ().ShouldBeGreaterThan (0);
+			this.diccionarioPrueba.etiquetas.ShouldContain (new KeyValuePair<string, Etiqueta> (etiqueta1.nombre, etiqueta1));
+			this.diccionarioPrueba.etiquetas.ShouldContain (new KeyValuePair<string, Etiqueta> (etiqueta2.nombre, etiqueta2));
+
+		}
+
+		[Test]
+		public void PruebaAgregarUnaEtiquetaExistenteAlDiccionarioConValores ()
+		{
+			//Arrange
+
+			//Act
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta1);
+
+			//Assert
+			Assert.Throws<ArgumentException> (delegate {
+				this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta1);
+			});
+
+		}
+
+		[Test]
+		public void PruebaAgregarUnaEtiquetaNullAlDiccionarioVacio ()
 		{
 			//Arrange
 			//Act
 			//Assert
-			this.diccionario.ObtenerIdDiccionario().ShouldBeType(typeof(Guid));
+			Assert.Throws<NullReferenceException> (delegate {
+				this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (null);
+			});
 
-		}
-		[Test]
-		public void PruebaAgregarEtiquetasAlDiccionario(){
-			//Arrange
-			Diccionario prueba=Diccionario.CrearNuevoDiccionarioVacio();
-			//Act
-			prueba.AgregarVariasEtiquetasAlDiccionario(this.listaEtiquetas);
-			//Assert
-			prueba.ObtenerListaDeEtiquetaes().ShouldBeType(typeof(List<Etiqueta>));
-			prueba.ObtenerListaDeEtiquetaes().Count().ShouldBeGreaterThan(0);
-			prueba.ObtenerListaDeEtiquetaes().ShouldContain(etiqueta1);
 		}
 
 		[Test]
-		public void PruebaModificarEtiquetasAlDiccionario()
+		public void PruebaAgregarUnaEtiquetaNullAlDiccionarioConValores ()
 		{
 			//Arrange
-			Diccionario prueba = Diccionario.CrearNuevoDiccionarioVacio();
+
 			//Act
-			prueba.AgregarVariasEtiquetasAlDiccionario(this.listaEtiquetas);
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (etiqueta1);
+
 			//Assert
-			prueba.ObtenerListaDeEtiquetaes().ShouldBeType(typeof(List<Etiqueta>));
-			prueba.ObtenerListaDeEtiquetaes().Count().ShouldBeGreaterThan(0);
-			prueba.ObtenerListaDeEtiquetaes().ShouldContain(etiqueta1);
+			Assert.Throws<NullReferenceException> (delegate {
+				this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (null);
+			});
+
 		}
+
+		[Test]
+		public void PruebaAgregarUnaEtiquetaConKeyNullAlDiccionarioVacio ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta (null);		
+			//Act
+			//Assert
+			Assert.Throws<ArgumentNullException> (delegate {
+				this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (prueba);
+			});
+
+		}
+
+		[Test]
+		public void PruebaAgregarUnaEtiquetaConKeyNullAlDiccionarioConValores ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta (null);	
+			//Act
+			//Assert
+			Assert.Throws<ArgumentNullException> (delegate {
+				this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (prueba);
+			});
+		}
+
+		#endregion
+
+
+
+		#region Pruebas Eliminado de etiquetas
+
+		[Test]
+		public void PruebaEliminarDiccionarioCompleto ()
+		{
+			//Arrange
+
+			//Act
+			this.diccionarioPrueba.EliminarTodoElDiccionario ();
+			//Assert
+			this.diccionarioPrueba.etiquetas.Count ().ShouldEqual (0);
+		}
+
+		[Test]
+		public void PruebaEliminarUnaEtiquetaExistenteAlDiccionarioConValores ()
+		{
+			//Arrange
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta1);
+			//Act
+			this.diccionarioPrueba.EliminarEtiqueta (this.etiqueta1);
+			//Assert
+			this.diccionarioPrueba.etiquetas.ShouldNotContain (new KeyValuePair<string, Etiqueta> (this.etiqueta1.nombre, this.etiqueta1));
+		}
+
+		[Test]
+		public void PruebaEliminarUnaEtiquetaNoExistenteAlDiccionarioConValores ()
+		{
+			//Arrange
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (this.etiqueta2);
+			//Act		
+			this.diccionarioPrueba.EliminarEtiqueta (this.etiqueta1);
+			//Assert
+			this.diccionarioPrueba.etiquetas.Count ().ShouldEqual (1);
+		}
+
+
+		[Test]
+		public void PruebaEliminarUnaEtiquetaConKeyNullAlDiccionarioConValores ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta (null);	
+			//Act
+			//Assert
+			Assert.Throws<ArgumentNullException> (delegate {
+				this.diccionarioPrueba.EliminarEtiqueta (prueba);
+			});
+		}
+
+		[Test]
+		public void PruebaEliminarUnaEtiquetaNullAlDiccionarioConValores ()
+		{
+			//Arrange
+
+			//Act
+			this.diccionarioPrueba.AgregarUnaEtiquetaAlDiccionario (etiqueta1);
+
+			//Assert
+			Assert.Throws<NullReferenceException> (delegate {
+				this.diccionarioPrueba.EliminarEtiqueta (null);
+			});
+
+		}
+
+
+		#endregion
+
+		#region Igualdad
+
+		[Test]
+		public void PruebaIgualdadDeDiccionariosTrueCuandoEsElMismoDiccionario ()
+		{
+			//Arrange
+			//Act
+			//Assert
+			this.diccionarioPrueba.Equals (this.diccionarioPrueba).ShouldBeTrue ();
+		}
+
+		[Test]
+		public void PruebaIgualdadDeDiccionariosFalseCuandoSonDiccionariosDistintos ()
+		{
+			//Arrange
+			Diccionario prueba = Diccionario.CrearNuevoDiccionarioVacio ();
+			//Act
+			//Assert
+			this.diccionarioPrueba.Equals (prueba).ShouldBeFalse ();
+		}
+
+		[Test]
+		public void PruebaIgualdadDeDiccionariosFalseCuandoComparoConNull ()
+		{
+			//Arrange
+			Diccionario prueba = null;
+			//Act
+			//Assert
+			this.diccionarioPrueba.Equals (prueba).ShouldBeFalse ();
+		}
+
+		#endregion
 	}
+
 }

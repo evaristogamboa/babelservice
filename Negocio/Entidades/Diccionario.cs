@@ -1,63 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 
-namespace Negocio.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 {
-	public class Diccionario
+	public class Diccionario : Entity<Diccionario>
 	{
-		private Guid Id;
-		private List<Etiqueta> Etiquetaes;
+		#region propiedades
 
-		private Diccionario()
-		{
-			this.Id = new Guid();
-			this.Etiquetaes = null;
-		}
-		
-		public static Diccionario CrearNuevoDiccionarioVacio()
-		{
-			return new Diccionario();
-		}
+		public Dictionary<string,Etiqueta> etiquetas;
 
-		public Diccionario RetornarDiccionario()
-		{
-			return this;
-		}
-		
-		public Diccionario AgregarUnaEtiquetaAlDiccionario(List<Etiqueta> Etiqueta)
-		{
+		#endregion
 
-			return ModificarEtiquetasDelDiccionario(Etiqueta);
+		#region constructores
 
+		private Diccionario ()
+		{
+			this.id = Guid.NewGuid ();
+			this.etiquetas = new Dictionary<string,Etiqueta> ();
 		}
 
-		public Diccionario AgregarVariasEtiquetasAlDiccionario(List<Etiqueta> Etiquetaes)
+		#endregion
+
+		#region métodos
+
+		public static Diccionario CrearNuevoDiccionarioVacio ()
 		{
-			return ModificarEtiquetasDelDiccionario(Etiquetaes);
+			return new Diccionario ();
 		}
 
-		public Diccionario ModificarEtiquetasDelDiccionario(List<Etiqueta> Etiquetaes)
+		public Diccionario RetornarDiccionario ()
 		{
-			this.Etiquetaes = Etiquetaes;
-			return this;
+			throw new NotImplementedException ();
 		}
 
-		public Diccionario EliminarTodoElDiccionario()
+		#endregion
+
+		#region agregar
+
+		public Diccionario AgregarUnaEtiquetaAlDiccionario (Etiqueta etiqueta)
 		{
-			this.Etiquetaes = new List<Etiqueta>();
+			this.etiquetas.Add (etiqueta.nombre, etiqueta);
 			return this;
 		}
 
+		#endregion
 
-		public Guid ObtenerIdDiccionario()
+		public Diccionario ModificarEtiquetasDelDiccionario (List<Etiqueta> etiquetas)
 		{
-			return this.Id;
+			throw new NotImplementedException ();
 		}
 
-		public List<Etiqueta> ObtenerListaDeEtiquetaes() {
-			return this.Etiquetaes;
+		#region eliminar
+
+		public void EliminarTodoElDiccionario ()
+		{
+			this.etiquetas.Clear ();
 		}
+
+
+		public Diccionario EliminarEtiqueta (Etiqueta etiqueta)
+		{
+			this.etiquetas.Remove (etiqueta.nombre);
+			return this;
+		}
+
+		#endregion
 
 	}
 }

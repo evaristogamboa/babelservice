@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
@@ -18,7 +17,10 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 		private Diccionario ()
 		{
 			this.id = Guid.NewGuid ();
+			this.fechaCreacion = DateTime.UtcNow;
+			this.fechaModificacion = DateTime.UtcNow;
 			this.etiquetas = new Dictionary<string,Etiqueta> ();
+
 		}
 
 		#endregion

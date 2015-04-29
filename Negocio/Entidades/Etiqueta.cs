@@ -20,6 +20,8 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 			this.nombre = nombre;
 			this.descripcion = Traducciones.CrearNuevaTraduccion ();
 			this.traducciones = Traducciones.CrearNuevaTraduccion ();
+			this.fechaCreacion = DateTime.UtcNow;
+			this.fechaModificacion = DateTime.UtcNow;
 		}
 
 		public static Etiqueta CrearNuevaEtiqueta (string nombre)

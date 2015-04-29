@@ -9,6 +9,10 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes
 	{
 		public Guid id { get; protected set; }
 
+		public DateTime fechaCreacion { get; protected set; }
+
+		public DateTime fechaModificacion { get; protected set; }
+
 		public override bool Equals (object obj)
 		{
 			if (obj == null)
@@ -17,8 +21,6 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes
 			return Equals (other);
 
 		}
-
-
 
 		public override int GetHashCode ()
 		{

@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
 using Should;
 
-namespace Nubise.Hc.Utils.I18n.Babel.DominioTest
+namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 {
 	[TestFixture]
 	public class EtiquetaTest
@@ -14,7 +14,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTest
 		{
 			this.etiqueta = Etiqueta.CrearNuevaEtiqueta ("en");
 		}
-
+		#region creacion
 		[Test]
 		public void ProbarCreacionDeNuevaEtiqueta ()
 		{ 
@@ -24,8 +24,9 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTest
 			//Assert
 			prueba.ShouldBeType (typeof(Etiqueta));		
 		}
+		#endregion
 
-	
+		#region igualdad
 
 		[Test]
 		public void PruebaEqualsEsFalsoCuandoNoEsLaMismaEtiqueta ()
@@ -33,9 +34,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTest
 			//Arrange	
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("es");
 			//Act
-
 			Boolean resultado = this.etiqueta.Equals (prueba);
-
 			//Assert
 			resultado.ShouldBeFalse ();
 			
@@ -73,7 +72,9 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTest
 			//Assert
 			resultado.ShouldBeFalse ();
 		}
+            
 
+		#region hashcode
 		[Test]
 		public void PruebaHashCodeEsEntero ()
 		{
@@ -85,5 +86,6 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTest
 			resultado.ShouldBeType (typeof(int));
 			
 		}
+		#endregion
 	}
 }

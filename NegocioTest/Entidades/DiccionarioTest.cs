@@ -5,7 +5,7 @@ using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
 using Should;
 using System.Collections.Generic;
 
-namespace Nubise.Hc.Utils.I18n.Babel.DominioTests
+namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 {
 	[TestFixture]
 	public class DiccionarioTest
@@ -159,7 +159,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests
 
 
 
-		#region Pruebas Eliminado de etiquetas
+		#region eliminar etiquetas
 
 		[Test]
 		public void PruebaEliminarDiccionarioCompleto ()
@@ -222,6 +222,46 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests
 
 		}
 
+		[Test]
+		public void PruebaEliminarUnaEtiquetaAlDiccionarioVacio ()
+		{
+			//Arrange
+			Diccionario prueba = Diccionario.CrearNuevoDiccionarioVacio ();
+			//Act
+			prueba.EliminarEtiqueta (this.etiqueta1);
+			//Assert
+			prueba.etiquetas.Count ().ShouldEqual (0);
+		}
+
+
+
+
+		[Test]
+		public void PruebaEliminarUnaEtiquetaConKeyNullAlDiccionarioVacio ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta (null);
+			Diccionario dicprueba = Diccionario.CrearNuevoDiccionarioVacio ();
+			//Act
+			//Assert
+			Assert.Throws<ArgumentNullException> (delegate {
+				dicprueba.EliminarEtiqueta (prueba);
+			});
+		}
+
+		[Test]
+		public void PruebaEliminarUnaEtiquetaNullAlDiccionarioVacio ()
+		{
+			//Arrange
+
+			//Act
+			Diccionario prueba = Diccionario.CrearNuevoDiccionarioVacio ();
+			//Assert
+			Assert.Throws<NullReferenceException> (delegate {
+				prueba.EliminarEtiqueta (null);
+			});
+
+		}
 
 		#endregion
 

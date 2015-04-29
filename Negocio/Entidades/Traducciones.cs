@@ -28,9 +28,9 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 			return this;
 		}
 
-		public Traducciones EliminarTraduccion (Traduccion traduccion)
+		public Traducciones EliminarTraduccion (Cultura cultura)
 		{
-			this.dict.Remove (traduccion.cultura);
+			this.dict.Remove (cultura);
 
 			return this;
 		}

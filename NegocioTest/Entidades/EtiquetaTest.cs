@@ -24,7 +24,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 
 		[Category ("Long")]
 		[Test]
-		public void ProbarCreacionDeNuevaEtiqueta ()
+		public void PruebaCreacionDeNuevaEtiqueta ()
 		{ 
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("en");
@@ -103,7 +103,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 		#region agregar traducciones
 
 		[Test]
-		public void ProbarAgregarTraduccionExitenteAEtiquetaVacia ()
+		public void PruebaAgregarTraduccionExitenteAEtiquetaConTraducciones ()
 		{
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
@@ -118,7 +118,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 		}
 
 		[Test]
-		public void ProbarAgregarTraduccionesAEtiquetaVacia ()
+		public void PruebaAgregarTraduccionAEtiquetaSinTraducciones ()
 		{
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
@@ -133,7 +133,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 		}
 
 		[Test]
-		public void ProbarAgregarTraduccionesAEtiquetaConValores ()
+		public void PruebaAgregarTraduccionAEtiquetaConTraducciones ()
 		{
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
@@ -151,6 +151,33 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 		}
 
 
+
+		#endregion
+
+		#region eliminar traducciones
+
+		[Test]
+		public void PruebaEliminarTraduccionAEtiquetaSinTraducciones ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			//Act
+			prueba.traducciones.EliminarTraduccion (this.cultura);
+			//Assert
+			prueba.traducciones.dict.Count.ShouldEqual (0);
+		}
+
+		[Test]
+		public void PruebaEliminarTraduccionExistenteAEtiquetaConTraducciones ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.valor));
+			//Act
+			prueba.traducciones.EliminarTraduccion (this.cultura);
+			//Assert
+			prueba.traducciones.dict.Count.ShouldEqual (0);
+		}
 
 		#endregion
 	}

@@ -179,6 +179,50 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 			prueba.traducciones.dict.Count.ShouldEqual (0);
 		}
 
+		[Test]
+		public void PruebaEliminarTraduccionNoExistenteAEtiquetaConTraducciones ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.valor));
+			//Act
+			prueba.traducciones.EliminarTraduccion (Cultura.CrearNuevoValorDeCultura ("es"));
+			//Assert
+			prueba.traducciones.dict.Count.ShouldEqual (1);
+		}
+
+		#endregion
+
+		#region modificar traducciones
+
+		[Test]
+		public void PruebaModificarTraduccionAEtiquetaSinTraducciones ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar"));
+			//Act
+			prueba.traducciones.ModificarTraduccion (traduccion);
+			//Assert
+			prueba.traducciones.dict.Count.ShouldEqual (1);
+			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar")));
+		}
+
+		[Test]
+		public void PruebaModificarTraduccionExistenteAEtiquetaConTraducciones ()
+		{
+			//Arrange
+			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.valor));
+			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("oajsdojand"));
+			//Act
+			prueba.traducciones.ModificarTraduccion (traduccion);
+			//Assert
+			prueba.traducciones.dict.Count.ShouldEqual (1);
+			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("oajsdojand")));
+
+		}
+
 		#endregion
 	}
 }

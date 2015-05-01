@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Diccionario;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
 using Should;
 using System.Collections.Generic;
 

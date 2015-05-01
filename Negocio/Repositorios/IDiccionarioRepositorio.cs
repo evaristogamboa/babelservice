@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿
 using Negocio.Comunes;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Repositorios
 {

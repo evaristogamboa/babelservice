@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
 {
 	public class Etiqueta : Entity<Etiqueta>
 	{
@@ -34,9 +32,9 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 			return this;
 		}
 
-		public Traduccion RetornarTraduccionDeEtiqueta (Cultura cultura)
-		{
-			return traducciones [cultura];
-		}
+		//		public Traduccion RetornarTraduccionDeEtiqueta (Cultura cultura)
+		//		{
+		//			return traducciones.;
+		//		}
 	}
 }

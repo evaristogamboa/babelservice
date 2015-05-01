@@ -1,10 +1,6 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Servicios;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
 {
 	public class Cultura : ValueObject<Cultura>
 	{

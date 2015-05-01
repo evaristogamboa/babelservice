@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
 using Should;
 
 namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
@@ -202,8 +202,10 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
 			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar"));
 			//Act
-			prueba.traducciones.ModificarTraduccion (traduccion);
+			Traducciones respuesta = prueba.traducciones.ModificarTraduccion (traduccion);
 			//Assert
+			respuesta.dict.Count.ShouldEqual (1);
+			respuesta.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar")));
 			prueba.traducciones.dict.Count.ShouldEqual (1);
 			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar")));
 		}
@@ -213,13 +215,13 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 		{
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.valor));
-			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("oajsdojand"));
+			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("oajsdojand")));
+			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("fdfdaddsa"));
 			//Act
 			prueba.traducciones.ModificarTraduccion (traduccion);
 			//Assert
 			prueba.traducciones.dict.Count.ShouldEqual (1);
-			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("oajsdojand")));
+			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("fdfdaddsa")));
 
 		}
 

@@ -1,8 +1,6 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
+
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
 {
 	public class Valor
 	{

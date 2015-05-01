@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
+
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Diccionario
 {
 	public class Diccionario : Entity<Diccionario>
 	{
 		#region propiedades
 
-		public Dictionary<string,Etiqueta> etiquetas;
+		public Dictionary<string,Etiqueta> etiquetas{ get; private set; }
 
 		#endregion
 
@@ -44,6 +46,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
 		public Diccionario AgregarUnaEtiquetaAlDiccionario (Etiqueta etiqueta)
 		{
 			this.etiquetas.Add (etiqueta.nombre, etiqueta);
+
 			return this;
 		}
 

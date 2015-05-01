@@ -51,11 +51,11 @@
     <Compile Include="Comunes\ValueObject.cs" />
     <Compile Include="Comunes\Entity.cs" />
     <Compile Include="Entidades\Diccionario\Diccionario.cs" />
-    <Compile Include="Entidades\Etiqueta\Cultura.cs" />
-    <Compile Include="Entidades\Etiqueta\Valor.cs" />
-    <Compile Include="Entidades\Etiqueta\Traduccion.cs" />
-    <Compile Include="Entidades\Etiqueta\Etiqueta.cs" />
-    <Compile Include="Entidades\Etiqueta\Traducciones.cs" />
+    <Compile Include="Entidades\Etiquetas\Cultura.cs" />
+    <Compile Include="Entidades\Etiquetas\Valor.cs" />
+    <Compile Include="Entidades\Etiquetas\Traduccion.cs" />
+    <Compile Include="Entidades\Etiquetas\Etiqueta.cs" />
+    <Compile Include="Entidades\Etiquetas\Traducciones.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -68,6 +68,6 @@
   <ItemGroup>
     <Folder Include="Servicios\" />
     <Folder Include="Entidades\Diccionario\" />
-    <Folder Include="Entidades\Etiqueta\" />
+    <Folder Include="Entidades\Etiquetas\" />
   </ItemGroup>
 </Project>

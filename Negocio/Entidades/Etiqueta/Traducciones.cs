@@ -5,7 +5,7 @@ using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 using System.Xml.Linq;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Traducciones
 {
 	public class Traducciones : ValueObject<Traducciones>
 	{

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Negocio\Dominio.csproj", "{C7562B90-054F-4E96-B33E-4595F1E6B7CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{C7562B90-054F-4E96-B33E-4595F1E6B7CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominioTests", "NegocioTest\DominioTests.csproj", "{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominioPruebasUnitarias", "DominioPruebasUnitarias\DominioPruebasUnitarias.csproj", "{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -40,7 +40,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
 			if (dict.ContainsKey (traduccion.cultura) == true) {
 				dict [traduccion.cultura] = traduccion.valor;
 			} else {
-				AgregarTraduccion (traduccion);
+				this.AgregarTraduccion (traduccion);
 			}
 
 			return this;

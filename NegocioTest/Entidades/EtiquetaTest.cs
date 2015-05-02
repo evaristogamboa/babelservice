@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
 using Should;
@@ -196,22 +197,20 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 		#region modificar traducciones
 
 		[Test]
-		public void PruebaModificarTraduccionAEtiquetaSinTraducciones ()
+		public void PruebaModificarTraduccionAEtiquetaSinTraduccionesAgregaNuevaTraduccion ()
 		{
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
 			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar"));
 			//Act
-			Traducciones respuesta = prueba.traducciones.ModificarTraduccion (traduccion);
+			prueba.traducciones.ModificarTraduccion (traduccion);
 			//Assert
-			respuesta.dict.Count.ShouldEqual (1);
-			respuesta.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar")));
 			prueba.traducciones.dict.Count.ShouldEqual (1);
-			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar")));
+			prueba.traducciones.dict.ContainsKey (Cultura.CrearNuevoValorDeCultura ("es")).ShouldEqual (true);
 		}
 
 		[Test]
-		public void PruebaModificarTraduccionExistenteAEtiquetaConTraducciones ()
+		public void PruebaModificarTraduccionExistenteAEtiquetaConTraduccionesCambiaValorDeLaTraduccion ()
 		{
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
@@ -221,8 +220,8 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioTests.Entidades
 			prueba.traducciones.ModificarTraduccion (traduccion);
 			//Assert
 			prueba.traducciones.dict.Count.ShouldEqual (1);
-			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("fdfdaddsa")));
-
+			prueba.traducciones.dict.ContainsKey (Cultura.CrearNuevoValorDeCultura ("jp")).ShouldEqual (true);
+			prueba.traducciones.dict [Cultura.CrearNuevoValorDeCultura ("jp")].ShouldEqual (Valor.CrearNuevoValorDeTraduccion ("fdfdaddsa"));
 		}
 
 		#endregion

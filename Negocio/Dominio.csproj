@@ -46,7 +46,6 @@
     <Compile Include="Comunes\IRepositorio.cs" />
     <Compile Include="Repositorios\IDiccionarioRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorios\IEntiquetaRepositorio.cs" />
     <Compile Include="Servicios\ServicioDeCulturasIso.cs" />
     <Compile Include="Comunes\ValueObject.cs" />
     <Compile Include="Comunes\Entity.cs" />

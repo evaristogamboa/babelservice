@@ -1,8 +1,8 @@
-
+using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
 {
-	public class Valor
+	public class Valor : ValueObject<Valor>
 	{
 		public string valor{ get; private set; }
 

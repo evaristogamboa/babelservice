@@ -1,11 +1,9 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
-using System.Xml.Linq;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
 	public class Traducciones : ValueObject<Traducciones>
 	{
@@ -58,5 +56,4 @@ namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
 		//			}
 		//		}
 	}
-
 }

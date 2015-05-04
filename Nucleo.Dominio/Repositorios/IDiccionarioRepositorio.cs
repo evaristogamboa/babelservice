@@ -1,10 +1,9 @@
-﻿
-using Negocio.Comunes;
+﻿using System;
 using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Diccionario;
-using System;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Repositorios
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Repositorios
 {
 	public interface IDiccionarioRepositorio : IRepositorio<Diccionario>
 	{

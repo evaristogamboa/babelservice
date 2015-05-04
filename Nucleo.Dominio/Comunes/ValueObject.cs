@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes
 {
 	public abstract class ValueObject<T> : IEquatable<T>
 

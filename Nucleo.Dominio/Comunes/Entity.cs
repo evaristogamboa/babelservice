@@ -3,7 +3,7 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes
 {
 	public abstract class Entity<T> : IEquatable<T> where T: Entity<T>
 	{

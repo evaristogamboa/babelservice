@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9AAD693-83D4-4F0C-9AF5-9B5674708AEC}</ProjectGuid>
+    <ProjectGuid>{21F63D7A-52FC-4311-A9D0-7E4CF18F27A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entidades</RootNamespace>
-    <AssemblyName>Entidades</AssemblyName>
+    <RootNamespace>Nucleo.Aplicacion.PruebasUnitarias</RootNamespace>
+    <AssemblyName>Nucleo.Aplicacion.PruebasUnitarias</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,9 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Traduccion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TraduccionFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

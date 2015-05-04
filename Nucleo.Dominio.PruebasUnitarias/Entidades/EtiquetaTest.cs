@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using Should;
 
-namespace Nubise.Hc.Utils.I18n.Babel.DominioPruebasUnitarias.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 {
 	[TestFixture]
 	public class EtiquetaTest

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
-
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Diccionario
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario
 {
 	public class Diccionario : Entity<Diccionario>
 	{

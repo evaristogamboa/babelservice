@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Negocio.Comunes
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes
 {
 	public interface  IRepositorio<T>
 	{

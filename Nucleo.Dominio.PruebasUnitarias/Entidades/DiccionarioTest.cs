@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Diccionario;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using Should;
 using System.Collections.Generic;
 
-namespace Nubise.Hc.Utils.I18n.Babel.DominioPruebasUnitarias.Entidades
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 {
 	[TestFixture]
 	public class DiccionarioTest
@@ -158,8 +158,6 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioPruebasUnitarias.Entidades
 
 		#endregion
 
-
-
 		#region eliminar etiquetas
 
 		[Test]
@@ -299,5 +297,4 @@ namespace Nubise.Hc.Utils.I18n.Babel.DominioPruebasUnitarias.Entidades
 
 		#endregion
 	}
-
 }

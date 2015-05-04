@@ -1,8 +1,7 @@
 ﻿using System;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas;
-using Nubise.Hc.Utils.I18n.Babel.Dominio.Comunes;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Entidades.Etiquetas
+namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
 	public class Etiqueta : Entity<Etiqueta>
 	{

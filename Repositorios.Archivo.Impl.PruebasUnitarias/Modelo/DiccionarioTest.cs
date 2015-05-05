@@ -12,15 +12,16 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 		public void ProbarCreacionDiccionarioXML ()
 		{
 			//Arrange
-			var prueba = new Diccionarios ();
+			var diccionario = new Diccionario ("dev");
+			var diccionarios = new Diccionarios (diccionario);
 			//Act
-			Serialize (prueba);
+			Serialize (diccionarios);
 			//Assert
 		}
 
 		private void Serialize (Diccionarios diccionario)
 		{
-			XmlSerializer serializer = new XmlSerializer (typeof(Diccionarios));
+			var serializer = new XmlSerializer (typeof(Diccionarios));
 			using (TextWriter writer = new StreamWriter (@"C:\Users\gcarrillo\Documents\Xml.xml")) {
 				serializer.Serialize (writer, diccionario);
 			} 

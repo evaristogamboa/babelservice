@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiccionarioRepositorioArchivo
+namespace Nucleo.Aplicación.PruebasUnitarias
 {
 	public class MyClass
 	{

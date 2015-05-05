@@ -1,40 +1,39 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo.Comunes;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo.Etiquetas
 {
-    public class Traducciones : ValueObject<Traducciones>
-    {
-        public readonly Dictionary<Cultura, Valor> dict;
+	public class Traducciones
+	{
+		public readonly Dictionary<Cultura, Valor> dict;
 
-        private Traducciones()
-        {
-            dict = new Dictionary<Cultura, Valor>();
-        }
+		private Traducciones ()
+		{
+			dict = new Dictionary<Cultura, Valor> ();
+		}
 
 		public static Traducciones CrearNuevaTraduccion ()
 		{
 			return new Traducciones ();
 		}
 
-        public Traducciones AgregarTraduccion(Traduccion traduccion)
-        {
+		public Traducciones AgregarTraduccion (Traduccion traduccion)
+		{
 			this.dict.Add (traduccion.cultura, traduccion.valor);
 
 			return this;
 		}
 
-        public Traducciones EliminarTraduccion(Cultura cultura)
-        {
+		public Traducciones EliminarTraduccion (Cultura cultura)
+		{
 			this.dict.Remove (cultura);
 
 			return this;
 		}
 
-        public Traducciones ModificarTraduccion(Traduccion traduccion)
-        {
+		public Traducciones ModificarTraduccion (Traduccion traduccion)
+		{
 			if (dict.ContainsKey (traduccion.cultura) == true) {
 				dict [traduccion.cultura] = traduccion.valor;
 			} else {

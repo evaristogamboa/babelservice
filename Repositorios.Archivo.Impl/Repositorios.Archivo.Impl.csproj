@@ -29,18 +29,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modelo\Comunes\Entity.cs" />
-    <Compile Include="Modelo\Comunes\IRepositorio.cs" />
-    <Compile Include="Modelo\Comunes\ValueObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Modelo\Diccionario\Diccionario.cs" />
     <Compile Include="Modelo\Etiquetas\Cultura.cs" />
-    <Compile Include="Modelo\Etiquetas\Etiqueta.cs" />
     <Compile Include="Modelo\Etiquetas\Traduccion.cs" />
     <Compile Include="Modelo\Etiquetas\Traducciones.cs" />
     <Compile Include="Modelo\Etiquetas\Valor.cs" />
+    <Compile Include="Modelo\Diccionarios.cs" />
+    <Compile Include="Modelo\Etiqueta.cs" />
+    <Compile Include="Modelo\Diccionario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

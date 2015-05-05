@@ -2,9 +2,8 @@
 
 namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 {
-	public class Diccionario
+	public class Etiqueta
 	{
-
+		
 	}
 }
-

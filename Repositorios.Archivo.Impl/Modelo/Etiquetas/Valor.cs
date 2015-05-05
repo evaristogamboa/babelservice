@@ -1,8 +1,8 @@
-using Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo.Comunes;
+
 namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo.Etiquetas
 {
-    public class Valor : ValueObject<Valor>
-    {
+	public class Valor
+	{
 		public string valor{ get; private set; }
 
 		private Valor (string valor)

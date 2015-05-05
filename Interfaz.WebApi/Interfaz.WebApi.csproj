@@ -78,6 +78,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\DiccionariosController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -131,4 +132,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{C7562B90-054F-4E96-B33E-4595F1E6B7CC}</Project>
+      <Name>Nucleo.Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

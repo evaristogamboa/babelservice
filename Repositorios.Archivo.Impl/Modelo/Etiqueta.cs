@@ -19,19 +19,20 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 		public string defecto { get; set; }
 
 		[XmlElement ("nombre")]
-		public string nombreEtiqueta { get; set; }
+		public string nombreEtiqueta { get { return this.nombre; } set { this.nombreEtiqueta = value; } }
 
 		[XmlElement ("descripcion")]
 		public string descripcion { get; set; }
 
 		[XmlElement ("traducciones")]
-		public List<Traduccion> etiquetas{ get; set; }
+		public Traducciones traducciones{ get; set; }
 
 
 		public Etiqueta ()
 		{
 			this.id = Guid.NewGuid ();
 			this.activo = false;
+			this.defecto = string.Empty;
 
 		}
 	}

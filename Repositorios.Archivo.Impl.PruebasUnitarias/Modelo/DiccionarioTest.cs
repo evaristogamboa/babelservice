@@ -11,9 +11,22 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 		[Test]
 		public void ProbarCreacionDiccionarioXML ()
 		{
+			
+				
 			//Arrange
-			var diccionario = new Diccionario ("dev");
+			var traduccion1 = new Traduccion ("es-VE", "aceptar", "aceptar");
+			var traduccion2 = new Traduccion ("es", "aceptar", "aceptar");
+			var traducciones = new Traducciones ();
+			traducciones.traducciones.Add (traduccion1);
+			traducciones.traducciones.Add (traduccion2);
+			var etiqueta = new Etiqueta ();
+			etiqueta.nombre = "app.common.aceptar";
+			etiqueta.descripcion = "seh";
+			etiqueta.traducciones = traducciones;
+			var etiquetas = new Etiquetas (etiqueta);
+			var diccionario = new Diccionario ("dev", etiquetas);
 			var diccionarios = new Diccionarios (diccionario);
+
 			//Act
 			Serialize (diccionarios);
 			//Assert
@@ -21,13 +34,9 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 
 		private void Serialize (Diccionarios diccionario)
 		{
-<<<<<<< HEAD
-			XmlSerializer serializer = new XmlSerializer (typeof(Diccionarios));
-			using (TextWriter writer = new StreamWriter (@"C:\Users\egamboa\Documents\Xml.xml")) {
-=======
+
 			var serializer = new XmlSerializer (typeof(Diccionarios));
 			using (TextWriter writer = new StreamWriter (@"C:\Users\gcarrillo\Documents\Xml.xml")) {
->>>>>>> f373642623764edbc798add26b85b1fdc7ded6e0
 				serializer.Serialize (writer, diccionario);
 			} 
 		}

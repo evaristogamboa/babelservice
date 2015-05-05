@@ -8,7 +8,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 	{
 		#region propiedades
 
-		[XmlElement ("diccionarios")]
+		[XmlElement ("diccionario")]
 		public List<Diccionario> diccionarios{ get; set; }
 
 		#endregion

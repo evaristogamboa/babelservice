@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 {
-	
+	[XmlRoot ("diccionario")]
 	public class Diccionario
 	{
 		#region propiedades
@@ -16,7 +16,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 		public string ambiente{ get; set; }
 
 		[XmlElement ("etiquetas")]
-		public List<Etiqueta> etiquetas;
+		public Etiquetas etiquetas;
 
 		#endregion
 
@@ -26,12 +26,19 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 		{
 			this.id = Guid.NewGuid ();
 			this.ambiente = ambiente;
-			this.etiquetas = new List<Etiqueta> ();
+			this.etiquetas = new Etiquetas ();
 		}
 
 		public Diccionario ()
 		{
 			this.id = Guid.NewGuid ();
+		}
+
+		public Diccionario (string ambiente, Etiquetas etiquetas)
+		{
+			this.id = Guid.NewGuid ();
+			this.ambiente = ambiente;
+			this.etiquetas = etiquetas;
 		}
 
 		#endregion

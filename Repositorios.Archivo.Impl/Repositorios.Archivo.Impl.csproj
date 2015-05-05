@@ -40,6 +40,7 @@
     <Compile Include="Modelo\Diccionarios.cs" />
     <Compile Include="Modelo\Etiqueta.cs" />
     <Compile Include="Modelo\Diccionario.cs" />
+    <Compile Include="Modelo\Traduccion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

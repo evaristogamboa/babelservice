@@ -63,5 +63,9 @@
       <Project>{74912BE2-439D-4691-A25F-5631CF1FF1F3}</Project>
       <Name>Repositorios.Archivo.Impl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{C7562B90-054F-4E96-B33E-4595F1E6B7CC}</Project>
+      <Name>Nucleo.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

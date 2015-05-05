@@ -21,7 +21,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 		private void Serialize (Diccionarios diccionario)
 		{
 			XmlSerializer serializer = new XmlSerializer (typeof(Diccionarios));
-			using (TextWriter writer = new StreamWriter (@"C:\Users\gcarrillo\Documents\Xml.xml")) {
+			using (TextWriter writer = new StreamWriter (@"C:\Users\egamboa\Documents\Xml.xml")) {
 				serializer.Serialize (writer, diccionario);
 			} 
 		}

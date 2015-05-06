@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web;
 using System.Net;
 using System;
+using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response;
 
 
 namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers
@@ -13,7 +14,9 @@ namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers
 		[Route ("api/diccionarios")]
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
 		{
-			HttpResponseMessage response = new HttpResponseMessage (HttpStatusCode.OK);
+			//Obtener Contenido
+			//Preparar Respuesta
+			HttpResponseMessage response = Request.CreateResponse (HttpStatusCode.OK, new ObtenerTodosLosDiccionariosResponse ());
 			return response;
 		}
 

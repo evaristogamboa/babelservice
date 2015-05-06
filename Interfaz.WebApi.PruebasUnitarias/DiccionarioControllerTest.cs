@@ -1,9 +1,11 @@
 ﻿using System;
+using Should;
 using NUnit.Framework;
 using System.Net.Http;
 using System.Web.Http;
 using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers;
 using System.Net;
+using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response;
 
 namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias
 {
@@ -74,7 +76,9 @@ namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias
 			controller.Configuration = new HttpConfiguration ();
 
 			//Act
+			var response = controller.ObtenerTodosLosDiccionarios ();
 			//Assert
+			response.Content.ShouldBeType<ObtenerTodosLosDiccionariosResponse> ();
 		}
 
 		#endregion

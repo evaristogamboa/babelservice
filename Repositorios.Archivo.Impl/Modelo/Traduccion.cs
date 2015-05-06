@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Xml;
 using System.Xml.Serialization;
-using System.Xml.Schema;
+
 
 namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 {

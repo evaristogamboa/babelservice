@@ -9,7 +9,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 	public class DiccionarioTest
 	{
 		[Test]
-		public void ProbarCreacionDiccionarioXML ()
+		public void ProbarCreacionDiccionarioXml ()
 		{
 			
 				

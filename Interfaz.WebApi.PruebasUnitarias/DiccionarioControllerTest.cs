@@ -6,6 +6,7 @@ using System.Web.Http;
 using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers;
 using System.Net;
 using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response;
+using Newtonsoft.Json;
 
 namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias
 {
@@ -68,7 +69,7 @@ namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias
 		#region contenido
 
 		[Test]
-		public void ProbarContenidoDeObtenerDiccionariosEsCorrecto ()
+		public void ProbarContenidoDeObtenerDiccionariosEsTipoCorrecto ()
 		{
 			//Arrange
 			var controller = new DiccionariosController ();
@@ -77,8 +78,26 @@ namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias
 
 			//Act
 			var response = controller.ObtenerTodosLosDiccionarios ();
+			var responseString = response.Content.ReadAsStringAsync ().Result;
+			var responseDeserialized = JsonConvert.DeserializeObject<ObtenerTodosLosDiccionariosResponse> (responseString);
 			//Assert
-			response.Content.ShouldBeType<ObtenerTodosLosDiccionariosResponse> ();
+			responseDeserialized.ShouldBeType<ObtenerTodosLosDiccionariosResponse> ();
+		}
+
+		[Test]
+		public void ProbarContenidoDeObtenerUnDiccionarioEsTipoCorrecto ()
+		{
+			//Arrange
+			var controller = new DiccionariosController ();
+			controller.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionario/id/1"));
+			controller.Configuration = new HttpConfiguration ();
+
+			//Act
+			var response = controller.ObtenerUnDiccionarioEspecifico (1);
+			var responseString = response.Content.ReadAsStringAsync ().Result;
+			var responseDeserialized = JsonConvert.DeserializeObject<ObtenerUnDiccionarioEspecificoResponse> (responseString);
+			//Assert
+			responseDeserialized.ShouldBeType<ObtenerUnDiccionarioEspecificoResponse> ();
 		}
 
 		#endregion

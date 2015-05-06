@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo

@@ -4,6 +4,7 @@ using System.Web;
 using System.Net;
 using System;
 using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response;
+using System.Net.Http.Headers;
 
 
 namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers
@@ -14,9 +15,11 @@ namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers
 		[Route ("api/diccionarios")]
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
 		{
-			//Obtener Contenido
-			//Preparar Respuesta
-			HttpResponseMessage response = Request.CreateResponse (HttpStatusCode.OK, new ObtenerTodosLosDiccionariosResponse ());
+			//Obtener contenido respuesta
+			var responsemodel = new ObtenerTodosLosDiccionariosResponse ();
+			//Preparar respuesta
+			HttpResponseMessage response = Request.CreateResponse (HttpStatusCode.OK, responsemodel, new MediaTypeWithQualityHeaderValue ("application/json"));
+			//Retornar respuesta
 			return response;
 		}
 
@@ -24,21 +27,9 @@ namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers
 		[Route ("api/diccionario/id/{id}")]
 		public HttpResponseMessage ObtenerUnDiccionarioEspecifico (int id)
 		{
-			HttpResponseMessage response = new HttpResponseMessage ();
-			switch (id) {
-			case 1:
-				{
-					response.StatusCode = HttpStatusCode.OK;
-					break;
-				}
-				;
-			default:
-				{
-					response.StatusCode = HttpStatusCode.NotFound;
-					break;
-				}
-			}
-
+			HttpResponseMessage response;
+			var responsemodel = new ObtenerUnDiccionarioEspecificoResponse ();
+			response = id == 1 ? Request.CreateResponse (HttpStatusCode.OK, responsemodel, new MediaTypeWithQualityHeaderValue ("application/json")) : Request.CreateResponse (HttpStatusCode.NotFound, responsemodel, new MediaTypeWithQualityHeaderValue ("application/json"));
 			return response;
 		}
 	}

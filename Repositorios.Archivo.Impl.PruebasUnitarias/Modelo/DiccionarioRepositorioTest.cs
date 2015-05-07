@@ -27,7 +27,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 		{		
 			//Arrange
 			DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl ();
-			var diccionario = Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionarioVacio ();
+			var diccionario = Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario ();
 			Guid id = new Guid ("ecf7b09c-2ccc-4205-8cb1-2dc935a20595");
 			//Act
 			diccionario = repositorio.ObtenerUnDiccionario (id);

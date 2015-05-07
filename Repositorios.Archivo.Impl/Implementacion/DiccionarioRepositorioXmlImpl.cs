@@ -73,28 +73,29 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Implementacion
 
 		private EntidadDom.Diccionario.Diccionario MapearRepositorioConDiccionario (EntidadRepo.Diccionario diccionarioRepo)
 		{
-			diccionarioDominio = Diccionario.CrearInstaciaDiccionarioPorId (diccionarioRepo.id);
-
+			diccionarioDominio = Diccionario.CrearNuevoDiccionario (diccionarioRepo.id);
+			/*
 			foreach (EntidadRepo.Etiqueta item in diccionarioRepo.etiquetas.etiquetas) {
 				var etiquetaDominio = EntidadDom.Etiquetas.Etiqueta.CrearNuevaEtiqueta (item.nombreEtiqueta);
-				etiquetaDominio.activo = item.activo;
-				etiquetaDominio.descripcion = item.descripcion;
-				etiquetaDominio.idiomaPorDefecto = item.idiomaPorDefecto;
-				etiquetaDominio.nombre = item.nombre;
-				etiquetaDominio.traducciones = MapearRepositorioConTraducciones (item.traducciones);
+				etiquetaDominio.Activo = item.activo;
+				etiquetaDominio.Descripcion = item.descripcion;
+				etiquetaDominio.IdiomaPorDefecto = item.idiomaPorDefecto;
+				etiquetaDominio.Nombre = item.nombre;
+				etiquetaDominio.Traducciones = MapearRepositorioConTraducciones (item.traducciones);
 
 				diccionarioDominio.AgregarUnaEtiquetaAlDiccionario (etiquetaDominio);
 			}
 				
 			diccionarioDominio.ambiente = diccionarioRepo.ambiente;
-
+			*/
 			return diccionarioDominio;
 		}
 
 	
-		private EntidadDom.Etiquetas.Traducciones MapearRepositorioConTraducciones (EntidadRepo.Traducciones traduccionesRepo)
+		private IEnumerable<EntidadDom.Etiquetas.Traduccion> MapearRepositorioConTraducciones (EntidadRepo.Traducciones traduccionesRepo)
 		{
-			EntidadDom.Etiquetas.Traducciones traduccionesDom = EntidadDom.Etiquetas.Traducciones.CrearNuevaTraduccion ();
+			/*
+			List<EntidadDom.Etiquetas.Traduccion> traduccionesDom = EntidadDom.Etiquetas.Traducciones.CrearNuevaTraduccion ();
 			EntidadDom.Etiquetas.Cultura cultura;
 			EntidadDom.Etiquetas.Traduccion traduccion;
 			EntidadDom.Etiquetas.Valor valor;
@@ -107,6 +108,8 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Implementacion
 			}
 
 			return traduccionesDom;
+			*/
+			return null;
 		}
 
 		#endregion

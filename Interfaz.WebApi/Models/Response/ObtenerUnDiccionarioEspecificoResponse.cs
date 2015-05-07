@@ -9,7 +9,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response
 
 		public ObtenerUnDiccionarioEspecificoResponse ()
 		{
-			this.Diccionario = Diccionario.CrearNuevoDiccionarioVacio ();
+			this.Diccionario = Diccionario.CrearNuevoDiccionario ();
 		}
 	}
 }

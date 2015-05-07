@@ -6,73 +6,75 @@ using System.Collections.ObjectModel;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
-    public class Etiqueta : Entity<Etiqueta>
-    {
-        private readonly IDictionary<string, Traduccion> textos = new Dictionary<string, Traduccion>();
-        private readonly IDictionary<string, Traduccion> descripciones = new Dictionary<string, Traduccion>();
+	public class Etiqueta : Entity<Etiqueta>
+	{
+		private readonly IDictionary<string, Traduccion> textos = new Dictionary<string, Traduccion> ();
+		//private readonly IDictionary<string, Traduccion> descripciones = new Dictionary<string, Traduccion>();
 
-        [Required]
-        public string Nombre { get; private set; }
+		[Required]
+		public bool Activo { get; set; }
 
-        public IReadOnlyCollection<Traduccion> Textos
-        {
-            get { return new List<Traduccion>(this.textos.Values).AsReadOnly(); }
-        }
+		[Required]
+		public string IdiomaPorDefecto { get; set; }
 
-        public IReadOnlyCollection<Traduccion> Descripciones
-        {
-            get { return new List<Traduccion>(this.descripciones.Values).AsReadOnly(); }
-        }
+		[Required]
+		public string Descripcion { get; set; }
 
-        private Etiqueta(string nombre)
-        {
-            this.Nombre = nombre;
-        }
+		[Required]
+		public string Nombre { get; set; }
 
-        public static Etiqueta CrearNuevaEtiqueta(string nombre)
-        {
-            var entidad = new Etiqueta(nombre);
+		public IReadOnlyCollection<Traduccion> Textos {
+			get { return new List<Traduccion> (this.textos.Values).AsReadOnly (); }
+		}
 
-            Validator.ValidateObject(entidad, new ValidationContext(entidad), true);
 
-            return entidad;
-        }
 
-        public Etiqueta AgregarTraduccion(Traduccion traduccion)
-        {
-            Validator.ValidateObject(traduccion, new ValidationContext(traduccion), true);
+		private Etiqueta (string nombre)
+		{
+			this.Nombre = nombre;
+		}
 
-            this.textos.Add(traduccion.Cultura.CodigoISO, traduccion);
+		public static Etiqueta CrearNuevaEtiqueta (string nombre)
+		{
+			var entidad = new Etiqueta (nombre);
 
-            return this;
-        }
+			Validator.ValidateObject (entidad, new ValidationContext (entidad), true);
 
-        public Etiqueta EliminarTraduccion(Cultura cultura)
-        {
-            this.textos.Remove(cultura.CodigoISO);
+			return entidad;
+		}
 
-            return this;
-        }
+		public Etiqueta AgregarTraduccion (Traduccion traduccion)
+		{
+			Validator.ValidateObject (traduccion, new ValidationContext (traduccion), true);
 
-        public Etiqueta EliminarTraduccion(Traduccion traduccion)
-        {
-            this.textos.Remove(traduccion.Cultura.CodigoISO);
+			this.textos.Add (traduccion.Cultura.CodigoISO, traduccion);
 
-            return this;
-        }
+			return this;
+		}
 
-        public Etiqueta ModificarTraduccion(Traduccion traduccion)
-        {
-            if (this.textos.ContainsKey(traduccion.Cultura.CodigoISO) == true)
-            {
-                this.textos[traduccion.Cultura.CodigoISO] = traduccion;
-            }
-            else
-            {
-                this.AgregarTraduccion(traduccion);
-            }
+		public Etiqueta EliminarTraduccion (Cultura cultura)
+		{
+			this.textos.Remove (cultura.CodigoISO);
 
-            return this;
-        }
-    }
+			return this;
+		}
+
+		public Etiqueta EliminarTraduccion (Traduccion traduccion)
+		{
+			this.textos.Remove (traduccion.Cultura.CodigoISO);
+
+			return this;
+		}
+
+		public Etiqueta ModificarTraduccion (Traduccion traduccion)
+		{
+			if (this.textos.ContainsKey (traduccion.Cultura.CodigoISO) == true) {
+				this.textos [traduccion.Cultura.CodigoISO] = traduccion;
+			} else {
+				this.AgregarTraduccion (traduccion);
+			}
+
+			return this;
+		}
+	}
 }

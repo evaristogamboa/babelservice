@@ -1,39 +1,78 @@
 ﻿using System;
+using System.Collections.Generic;
 using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
-	public class Etiqueta : Entity<Etiqueta>
-	{
-		public Traducciones traducciones{ get; private set; }
+    public class Etiqueta : Entity<Etiqueta>
+    {
+        private readonly IDictionary<string, Traduccion> textos = new Dictionary<string, Traduccion>();
+        private readonly IDictionary<string, Traduccion> descripciones = new Dictionary<string, Traduccion>();
 
-		public string nombre { get; private set; }
+        [Required]
+        public string Nombre { get; private set; }
 
-		public Traducciones descripcion { get; private set; }
+        public IReadOnlyCollection<Traduccion> Textos
+        {
+            get { return new List<Traduccion>(this.textos.Values).AsReadOnly(); }
+        }
 
-		private Etiqueta (string nombre)
-		{
-			this.id = Guid.NewGuid ();
-			this.nombre = nombre;
-			this.descripcion = Traducciones.CrearNuevaTraduccion ();
-			this.traducciones = Traducciones.CrearNuevaTraduccion ();
-			this.fechaCreacion = DateTime.UtcNow;
-			this.fechaModificacion = DateTime.UtcNow;
-		}
+        public IReadOnlyCollection<Traduccion> Descripciones
+        {
+            get { return new List<Traduccion>(this.descripciones.Values).AsReadOnly(); }
+        }
 
-		public static Etiqueta CrearNuevaEtiqueta (string nombre)
-		{
-			return new Etiqueta (nombre);
-		}
+        private Etiqueta(string nombre)
+        {
+            this.Nombre = nombre;
+        }
 
-		public Etiqueta RetornarEtiqueta ()
-		{
-			return this;
-		}
+        public static Etiqueta CrearNuevaEtiqueta(string nombre)
+        {
+            var entidad = new Etiqueta(nombre);
 
-		//		public Traduccion RetornarTraduccionDeEtiqueta (Cultura cultura)
-		//		{
-		//			return traducciones.;
-		//		}
-	}
+            Validator.ValidateObject(entidad, new ValidationContext(entidad), true);
+
+            return entidad;
+        }
+
+        public Etiqueta AgregarTraduccion(Traduccion traduccion)
+        {
+            Validator.ValidateObject(traduccion, new ValidationContext(traduccion), true);
+
+            this.textos.Add(traduccion.Cultura.CodigoISO, traduccion);
+
+            return this;
+        }
+
+        public Etiqueta EliminarTraduccion(Cultura cultura)
+        {
+            this.textos.Remove(cultura.CodigoISO);
+
+            return this;
+        }
+
+        public Etiqueta EliminarTraduccion(Traduccion traduccion)
+        {
+            this.textos.Remove(traduccion.Cultura.CodigoISO);
+
+            return this;
+        }
+
+        public Etiqueta ModificarTraduccion(Traduccion traduccion)
+        {
+            if (this.textos.ContainsKey(traduccion.Cultura.CodigoISO) == true)
+            {
+                this.textos[traduccion.Cultura.CodigoISO] = traduccion;
+            }
+            else
+            {
+                this.AgregarTraduccion(traduccion);
+            }
+
+            return this;
+        }
+    }
 }

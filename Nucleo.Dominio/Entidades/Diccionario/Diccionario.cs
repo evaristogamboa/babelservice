@@ -2,75 +2,96 @@
 using System.Collections.Generic;
 using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
 using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas;
+using System.Collections.ObjectModel;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario
 {
-	public class Diccionario : Entity<Diccionario>
-	{
-		#region propiedades
+    public class Diccionario : Entity<Diccionario>
+    {
+        # region campos
 
-		public Dictionary<string,Etiqueta> etiquetas{ get; private set; }
+        private readonly IDictionary<string, Etiqueta> etiquetas = new Dictionary<string, Etiqueta>();
 
-		#endregion
-
-		#region constructores
-
-		private Diccionario ()
-		{
-			this.id = Guid.NewGuid ();
-			this.fechaCreacion = DateTime.UtcNow;
-			this.fechaModificacion = DateTime.UtcNow;
-			this.etiquetas = new Dictionary<string,Etiqueta> ();
-
-		}
-
-		#endregion
-
-		#region métodos
-
-		public static Diccionario CrearNuevoDiccionarioVacio ()
-		{
-			return new Diccionario ();
-		}
-
-		public Diccionario RetornarDiccionario ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion
-
-		#region agregar
-
-		public Diccionario AgregarUnaEtiquetaAlDiccionario (Etiqueta etiqueta)
-		{
-			this.etiquetas.Add (etiqueta.nombre, etiqueta);
-
-			return this;
-		}
-
-		#endregion
-
-		public Diccionario ModificarEtiquetasDelDiccionario (List<Etiqueta> etiquetas)
-		{
-			throw new NotImplementedException ();
-		}
-
-		#region eliminar
-
-		public void EliminarTodoElDiccionario ()
-		{
-			this.etiquetas.Clear ();
-		}
+        #endregion
 
 
-		public Diccionario EliminarEtiqueta (Etiqueta etiqueta)
-		{
-			this.etiquetas.Remove (etiqueta.nombre);
-			return this;
-		}
+        #region propiedades
 
-		#endregion
+        public IReadOnlyCollection<Etiqueta> Etiquetas
+        {
+            get { return new List<Etiqueta>(this.etiquetas.Values).AsReadOnly(); }
+        }
 
-	}
+        #endregion
+
+        #region constructores
+
+        private Diccionario()
+        {
+        }
+
+        private Diccionario(Guid id)
+            : base(id)
+        {
+        }
+
+        #endregion
+
+        #region métodos
+
+        public static Diccionario CrearNuevoDiccionario()
+        {
+            return new Diccionario();
+        }
+
+        public static Diccionario CrearNuevoDiccionario(Guid id)
+        {
+            return new Diccionario(id);
+        }
+
+        #endregion
+
+        #region agregar
+
+        public Diccionario AgregarEtiqueta(Etiqueta etiqueta)
+        {
+            if (etiqueta == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.etiquetas.Add(etiqueta.Nombre, etiqueta);
+
+            return this;
+        }
+
+        #endregion
+
+        public Diccionario ModificarEtiquetas(List<Etiqueta> etiquetas)
+        {
+            throw new NotImplementedException();
+        }
+
+        #region eliminar
+
+        public void EliminarTodoElDiccionario()
+        {
+            this.etiquetas.Clear();
+        }
+
+        public Diccionario EliminarEtiqueta(Etiqueta etiqueta)
+        {
+            if (etiqueta == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            this.etiquetas.Remove(etiqueta.Nombre);
+
+            return this;
+        }
+
+        #endregion
+
+    }
 }

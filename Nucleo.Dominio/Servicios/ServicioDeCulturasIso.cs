@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Collections;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Servicios
+namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Servicios
 {
 	public class ServicioDeCulturasIso
 	{
@@ -24,4 +25,5 @@ namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Servicios
 
 	
 	}
+
 }

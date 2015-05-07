@@ -7,223 +7,227 @@ using Should;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 {
-	[TestFixture]
-	public class EtiquetaTest
-	{
-		private Etiqueta etiqueta;
-		private Cultura cultura;
-		private Valor valor;
+    [TestFixture]
+    public class EtiquetaTest
+    {
+        private Etiqueta etiqueta;
+        private Cultura cultura;
+        private string texto;
 
-		public EtiquetaTest ()
-		{
-			this.etiqueta = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			this.cultura = Cultura.CrearNuevoValorDeCultura ("en-US");
-			this.valor = Valor.CrearNuevoValorDeTraduccion ("accept");
-		}
+        public EtiquetaTest()
+        {
+            this.etiqueta = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            this.cultura = Cultura.CrearNuevaCultura("en-US");
+            this.texto = "accept";
+        }
 
-		#region creacion
+        #region creacion
 
-		[Category ("Long")]
-		[Test]
-		public void PruebaCreacionDeNuevaEtiqueta ()
-		{ 
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("en");
-			//Act
-			//Assert
-			prueba.ShouldBeType (typeof(Etiqueta));		
-		}
+        [Category("Creación")]
+        [Test]
+        public void PruebaCreacionDeNuevaEtiqueta()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("en");
+            //Act
+            //Assert
+            prueba.ShouldBeType(typeof(Etiqueta));
+        }
 
-		#endregion
+        #endregion
 
-		#region igualdad
+        #region igualdad
 
-		[Test]
-		public void PruebaEqualsEsFalsoCuandoNoEsLaMismaEtiqueta ()
-		{
-			//Arrange	
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("es");
-			//Act
-			Boolean resultado = this.etiqueta.Equals (prueba);
-			//Assert
-			resultado.ShouldBeFalse ();
-			
-		}
+        [Test]
+        public void PruebaEqualsEsFalsoCuandoNoEsLaMismaEtiqueta()
+        {
+            //Arrange	
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("es");
+            //Act
+            Boolean resultado = this.etiqueta.Equals(prueba);
+            //Assert
+            resultado.ShouldBeFalse();
 
-		[Test]
-		public void PruebaEqualsEsFalsoCuandoEsUnaEtiquetaConLosMismosValores ()
-		{
-			//Arrange	
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("en");
-			//Act			
-			Boolean resultado = this.etiqueta.Equals (prueba);
-			//Assert
-			resultado.ShouldBeFalse ();
-			
-		}
+        }
 
-		[Test]
-		public void PruebaEqualsVerdaderoCuandoEsElMismoObjetoDeEtiqueta ()
-		{
-			//Arrange				
-			//Act
-			Boolean resultado = this.etiqueta.Equals (this.etiqueta);
-			//Assert
-			resultado.ShouldBeTrue ();
-			
-		}
+        [Test]
+        public void PruebaEqualsEsFalsoCuandoEsUnaEtiquetaConLosMismosValores()
+        {
+            //Arrange	
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("en");
+            //Act			
+            Boolean resultado = this.etiqueta.Equals(prueba);
+            //Assert
+            resultado.ShouldBeFalse();
 
-		[Test]
-		public void PruebaEqualsFalsoCuandoElObjetoEsNulo ()
-		{
-			//Arrange				
-			//Act
-			Boolean resultado = this.etiqueta.Equals (null);
-			//Assert
-			resultado.ShouldBeFalse ();
-		}
+        }
 
-		#endregion
+        [Test]
+        public void PruebaEqualsVerdaderoCuandoEsElMismoObjetoDeEtiqueta()
+        {
+            //Arrange				
+            //Act
+            Boolean resultado = this.etiqueta.Equals(this.etiqueta);
+            //Assert
+            resultado.ShouldBeTrue();
 
-		#region hashcode
+        }
 
-		[Test]
-		public void PruebaHashCodeEsEntero ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta (null);
-			//Act
-			int resultado = prueba.GetHashCode ();
-			//Assert
-			resultado.ShouldBeType (typeof(int));
-			
-		}
+        [Test]
+        public void PruebaEqualsFalsoCuandoElObjetoEsNulo()
+        {
+            //Arrange				
+            //Act
+            Boolean resultado = this.etiqueta.Equals(null);
+            //Assert
+            resultado.ShouldBeFalse();
+        }
 
-		#endregion
+        #endregion
 
-		#region agregar traducciones
+        #region hashcode
 
-		[Test]
-		public void PruebaAgregarTraduccionExitenteAEtiquetaConTraducciones ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (this.cultura, this.valor);
-			Traduccion traduccion2 = Traduccion.CrearNuevaTraduccion (this.cultura, this.valor);
-			//Act
-			prueba.traducciones.AgregarTraduccion (traduccion);
-			//Assert
-			Assert.Throws<ArgumentException> (delegate {
-				prueba.traducciones.AgregarTraduccion (traduccion2);
-			});
-		}
+        [Test]
+        public void PruebaHashCodeEsEntero()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("prueba");
+            //Act
+            int resultado = prueba.GetHashCode();
+            //Assert
+            resultado.ShouldBeType(typeof(int));
+        }
 
-		[Test]
-		public void PruebaAgregarTraduccionAEtiquetaSinTraducciones ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			//Act
-			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (this.cultura, this.valor);
-			prueba.traducciones.AgregarTraduccion (traduccion);
-			//Assert
-			prueba.ShouldBeType<Etiqueta> ();
-			prueba.traducciones.dict.Count.ShouldEqual (1);
-			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (this.cultura, this.valor));
+        #endregion
 
-		}
+        #region agregar traducciones
 
-		[Test]
-		public void PruebaAgregarTraduccionAEtiquetaConTraducciones ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (this.cultura, this.valor);
-			prueba.traducciones.AgregarTraduccion (traduccion);
-			//Act
-			Traduccion traprueba = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("en"), this.valor);
-			prueba.traducciones.AgregarTraduccion (traprueba);
-			//Assert
-			prueba.ShouldBeType<Etiqueta> ();
-			prueba.traducciones.dict.Count.ShouldEqual (2);
-			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (this.cultura, this.valor));
-			prueba.traducciones.dict.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("en"), this.valor));
+        [Test]
+        public void PruebaAgregarTraduccionExitenteAEtiquetaConTraducciones()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            Traduccion traduccion = Traduccion.CrearNuevaTraduccion(this.cultura, this.texto);
+            Traduccion traduccion2 = Traduccion.CrearNuevaTraduccion(this.cultura, this.texto);
+            //Act
+            prueba.AgregarTraduccion(traduccion);
+            //Assert
+            Assert.Throws<ArgumentException>(delegate
+            {
+                prueba.AgregarTraduccion(traduccion2);
+            });
+        }
 
-		}
+        [Test]
+        public void PruebaAgregarTraduccionAEtiquetaSinTraducciones()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            //Act
+            Traduccion traduccion = Traduccion.CrearNuevaTraduccion(this.cultura, this.texto);
+            prueba.AgregarTraduccion(traduccion);
+            //Assert
+            prueba.ShouldBeType<Etiqueta>();
+            prueba.Textos.Count.ShouldEqual(1);
+            //prueba.Textos.ShouldContain(new KeyValuePair<string, Traduccion>(this.cultura, this.valor));
+            prueba.Textos.ShouldContain(traduccion);
+
+        }
+
+        [Test]
+        public void PruebaAgregarTraduccionAEtiquetaConTraducciones()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            Traduccion traduccion = Traduccion.CrearNuevaTraduccion(this.cultura, this.texto);
+            prueba.AgregarTraduccion(traduccion);
+            //Act
+            Traduccion traprueba = Traduccion.CrearNuevaTraduccion(Cultura.CrearNuevaCultura("en"), this.texto);
+            prueba.AgregarTraduccion(traprueba);
+            //Assert
+            //prueba.ShouldBeType<Etiqueta>();
+            prueba.Textos.Count.ShouldEqual(2);
+            //prueba.Textos.ShouldContain (new KeyValuePair<Cultura, Valor> (this.cultura, this.valor));
+            //prueba.Textos.ShouldContain (new KeyValuePair<Cultura, Valor> (Cultura.CrearNuevoValorDeCultura ("en"), this.valor));
+            prueba.Textos.ShouldContain(traduccion);
+            prueba.Textos.ShouldContain(traprueba);
+        }
 
 
 
-		#endregion
+        #endregion
 
-		#region eliminar traducciones
+        #region eliminar traducciones
 
-		[Test]
-		public void PruebaEliminarTraduccionAEtiquetaSinTraducciones ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			//Act
-			prueba.traducciones.EliminarTraduccion (this.cultura);
-			//Assert
-			prueba.traducciones.dict.Count.ShouldEqual (0);
-		}
+        [Test]
+        public void PruebaEliminarTraduccionAEtiquetaSinTraducciones()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            //Act
+            prueba.EliminarTraduccion(this.cultura);
+            //Assert
+            prueba.Textos.Count.ShouldEqual(0);
+        }
 
-		[Test]
-		public void PruebaEliminarTraduccionExistenteAEtiquetaConTraducciones ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.valor));
-			//Act
-			prueba.traducciones.EliminarTraduccion (this.cultura);
-			//Assert
-			prueba.traducciones.dict.Count.ShouldEqual (0);
-		}
+        [Test]
+        public void PruebaEliminarTraduccionExistenteAEtiquetaConTraducciones()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            prueba.AgregarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, this.texto));
+            //Act
+            prueba.EliminarTraduccion(this.cultura);
+            //Assert
+            prueba.Textos.Count.ShouldEqual(0);
+        }
 
-		[Test]
-		public void PruebaEliminarTraduccionNoExistenteAEtiquetaConTraducciones ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.valor));
-			//Act
-			prueba.traducciones.EliminarTraduccion (Cultura.CrearNuevoValorDeCultura ("es"));
-			//Assert
-			prueba.traducciones.dict.Count.ShouldEqual (1);
-		}
+        [Test]
+        public void PruebaEliminarTraduccionNoExistenteAEtiquetaConTraducciones()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            prueba.AgregarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, this.texto));
+            //Act
+            prueba.EliminarTraduccion(Cultura.CrearNuevaCultura("es"));
+            //Assert
+            prueba.Textos.Count.ShouldEqual(1);
+        }
 
-		#endregion
+        #endregion
 
-		#region modificar traducciones
+        #region modificar traducciones
 
-		[Test]
-		public void PruebaModificarTraduccionAEtiquetaSinTraduccionesAgregaNuevaTraduccion ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("es"), Valor.CrearNuevoValorDeTraduccion ("aceptar"));
-			//Act
-			prueba.traducciones.ModificarTraduccion (traduccion);
-			//Assert
-			prueba.traducciones.dict.Count.ShouldEqual (1);
-			prueba.traducciones.dict.ContainsKey (Cultura.CrearNuevoValorDeCultura ("es")).ShouldEqual (true);
-		}
+        [Test]
+        public void PruebaModificarTraduccionAEtiquetaSinTraduccionesAgregaNuevaTraduccion()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            Traduccion traduccion = Traduccion.CrearNuevaTraduccion(Cultura.CrearNuevaCultura("es"), "aceptar");
+            //Act
+            prueba.ModificarTraduccion(traduccion);
+            //Assert
+            prueba.Textos.Count.ShouldEqual(1);
+            //prueba.Textos.ContainsKey(Cultura.CrearNuevoValorDeCultura("es")).ShouldEqual(true);
+            prueba.Textos.ShouldContain(traduccion);
+        }
 
-		[Test]
-		public void PruebaModificarTraduccionExistenteAEtiquetaConTraduccionesCambiaValorDeLaTraduccion ()
-		{
-			//Arrange
-			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
-			prueba.traducciones.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("oajsdojand")));
-			Traduccion traduccion = Traduccion.CrearNuevaTraduccion (Cultura.CrearNuevoValorDeCultura ("jp"), Valor.CrearNuevoValorDeTraduccion ("fdfdaddsa"));
-			//Act
-			prueba.traducciones.ModificarTraduccion (traduccion);
-			//Assert
-			prueba.traducciones.dict.Count.ShouldEqual (1);
-			prueba.traducciones.dict.ContainsKey (Cultura.CrearNuevoValorDeCultura ("jp")).ShouldEqual (true);
-			prueba.traducciones.dict [Cultura.CrearNuevoValorDeCultura ("jp")].ShouldEqual (Valor.CrearNuevoValorDeTraduccion ("fdfdaddsa"));
-		}
+        [Test]
+        public void PruebaModificarTraduccionExistenteAEtiquetaConTraduccionesCambiaValorDeLaTraduccion()
+        {
+            //Arrange
+            Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+            prueba.AgregarTraduccion(Traduccion.CrearNuevaTraduccion(Cultura.CrearNuevaCultura("it"), "hola"));
+            Traduccion traduccion = Traduccion.CrearNuevaTraduccion(Cultura.CrearNuevaCultura("it"), "ciao");
+            //Act
+            prueba.ModificarTraduccion(traduccion);
+            //Assert
+            prueba.Textos.Count.ShouldEqual(1);
+            //prueba.Textos.ContainsKey(Cultura.CrearNuevoValorDeCultura("it")).ShouldEqual(true);
+            //prueba.Textos.[Cultura.CrearNuevoValorDeCultura("it")].ShouldEqual(Valor.CrearNuevoValorDeTraduccion("ciao"));
+            prueba.Textos.ShouldContain(traduccion);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

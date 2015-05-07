@@ -1,23 +1,31 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
 
 namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
-	public class Traduccion
-	{
-		public Cultura cultura { get; private set; }
+    public class Traduccion : ValueObject<Traduccion>
+    {
+        [Required]
+        public Cultura Cultura { get; private set; }
 
-		public Valor valor { get; private set; }
+        [Required]
+        public string Texto { get; private set; }
 
-		private  Traduccion (Cultura cultura, Valor valor)
-		{
-			this.cultura = cultura;
-			this.valor = valor;
-		}
+        private Traduccion(Cultura cultura, string texto)
+        {
+            this.Cultura = cultura;
+            this.Texto = texto;
+        }
 
-		public static Traduccion CrearNuevaTraduccion (Cultura cultura, Valor valor)
-		{
-			return new Traduccion (cultura, valor);
-		}
-	}
+        public static Traduccion CrearNuevaTraduccion(Cultura cultura, string texto)
+        {
+            var instancia = new Traduccion(cultura, texto);
+
+            Validator.ValidateObject(instancia, new ValidationContext(instancia), true);
+
+            return instancia;
+        }
+    }
 }

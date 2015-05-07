@@ -7,32 +7,32 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 	public class Etiqueta
 	{
 		[XmlAttribute ("id")]
-		public Guid id { get; set; }
+		public Guid Id { get; set; }
 
 		[XmlAttribute ("nombre")]
-		public string nombre { get; set; }
+		public string Nombre { get; set; }
 
 		[XmlAttribute ("activo")]
-		public bool activo { get; set; }
+		public bool Activo { get; set; }
 
 		[XmlAttribute ("default")]
-		public string idiomaPorDefecto { get; set; }
+		public string IdiomaPorDefecto { get; set; }
 
 		[XmlElement ("nombre")]
-		public string nombreEtiqueta { get ; set ; }
+		public string NombreEtiqueta { get ; set ; }
 
 		[XmlElement ("descripcion")]
-		public string descripcion { get; set; }
+		public string Descripcion { get; set; }
 
 		[XmlElement ("traducciones")]
-		public Traducciones traducciones{ get; set; }
+		public Traducciones Traducciones{ get; set; }
 
 
 		public Etiqueta ()
 		{
-			this.id = Guid.NewGuid ();
-			this.activo = false;
-			this.idiomaPorDefecto = string.Empty;
+			this.Id = Guid.NewGuid ();
+			this.Activo = false;
+			this.IdiomaPorDefecto = string.Empty;
 
 		}
 	}

@@ -30,7 +30,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 		public DiccionarioTest ()
 		{
 
-			var traduccion1 = new Traduccion ("es-VE", "aceptar", "aceptar");
+			/*var traduccion1 = new Traduccion ("es-VE", "aceptar", "aceptar");
 			var traduccion2 = new Traduccion ("es", "aceptar", "aceptar");
 			traducciones = new Traducciones ();
 			traducciones.traducciones.Add (traduccion1);
@@ -44,6 +44,7 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorios.Archivo.Impl.PruebasUnitarias.
 			diccionario = new Diccionario ("dev", etiquetas);
 
 			this.diccionarios = new Diccionarios (diccionario);
+			*/
 
 
 		}

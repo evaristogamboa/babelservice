@@ -8,13 +8,13 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 	public class Traduccion
 	{
 		[XmlAttribute ("cultura")]
-		public string cultura{ get; set; }
+		public string Cultura{ get; set; }
 
 		[XmlAttribute ("tooltip")]
-		public string tooltip{ get; set; }
+		public string Tooltip{ get; set; }
 
 		[XmlText]
-		public string value{ get; set; }
+		public string Value{ get; set; }
 
 		public Traduccion ()
 		{
@@ -23,9 +23,9 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 
 		public Traduccion (string cultura, string tooltip, string value)
 		{
-			this.cultura = cultura;
-			this.tooltip = tooltip;
-			this.value = value;
+			this.Cultura = cultura;
+			this.Tooltip = tooltip;
+			this.Value = value;
 		}
 	}
 }

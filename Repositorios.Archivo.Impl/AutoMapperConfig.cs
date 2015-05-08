@@ -65,6 +65,8 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl
 				.ForMember (dest => dest.Value, src => src.MapFrom (val => val.Texto))
 				.ForMember (dest => dest.Tooltip, src => src.MapFrom (val => val.ToolTip));
 
+
+
 		}
 	}
 }

@@ -9,17 +9,17 @@ namespace Nubise.Hc.Utils.I18n.Babel.Repositorio.Archivo.Impl.Modelo
 	public class Etiquetas
 	{
 		[XmlElement ("etiqueta")]
-		public List<Etiqueta> etiquetas { get; set; }
+		public List<Etiqueta> ListaEtiquetas { get; set; }
 
 		public Etiquetas ()
 		{
-			this.etiquetas = new List<Etiqueta> ();
+			this.ListaEtiquetas = new List<Etiqueta> ();
 		}
 
 		public Etiquetas (Etiqueta etiqueta)
 		{
-			this.etiquetas = new List<Etiqueta> ();
-			this.etiquetas.Add (etiqueta);
+			this.ListaEtiquetas = new List<Etiqueta> ();
+			this.ListaEtiquetas.Add (etiqueta);
 		}
 	}
 }

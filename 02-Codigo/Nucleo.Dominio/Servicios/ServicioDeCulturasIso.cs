@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Collections;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Dominio.Servicios
+namespace Babel.Dominio.Servicios
 {
 	public class ServicioDeCulturasIso
 	{

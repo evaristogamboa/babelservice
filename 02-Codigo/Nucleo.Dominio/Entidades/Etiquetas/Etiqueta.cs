@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
+using Babel.Nucleo.Dominio.Comunes;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
+namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
 	public class Etiqueta : Entity<Etiqueta>
 	{

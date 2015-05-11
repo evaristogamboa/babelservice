@@ -3,12 +3,12 @@ using Should;
 using NUnit.Framework;
 using System.Net.Http;
 using System.Web.Http;
-using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Controllers;
+using Babel.Interfaz.WebApi.Controllers;
 using System.Net;
-using Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response;
+using Babel.Interfaz.WebApi.Models.Response;
 using Newtonsoft.Json;
 
-namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias
+namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 {
 	[TestFixture]
 	public class DiccionarioControllerTest

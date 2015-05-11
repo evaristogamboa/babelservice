@@ -1,9 +1,9 @@
-using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using System.Collections.Generic;
 
 
 
-namespace  Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.Models.Response
+namespace  Babel.Interfaz.WebApi.Models.Response
 {
 	public class ObtenerTodosLosDiccionariosResponse
 	{

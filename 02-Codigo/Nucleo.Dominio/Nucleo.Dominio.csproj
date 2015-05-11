@@ -7,8 +7,8 @@
     <ProjectGuid>{C7562B90-054F-4E96-B33E-4595F1E6B7CC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio</RootNamespace>
-    <AssemblyName>HCBabelNucleoDominio</AssemblyName>
+    <RootNamespace>Babel.Nucleo.Dominio</RootNamespace>
+    <AssemblyName>Babel.Nucleo.Dominio</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

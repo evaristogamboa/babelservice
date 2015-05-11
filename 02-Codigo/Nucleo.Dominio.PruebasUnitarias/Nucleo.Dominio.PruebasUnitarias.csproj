@@ -7,8 +7,8 @@
     <ProjectGuid>{5FF6CAD7-12F7-4DC2-95A4-3165E30BC256}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.PruebasUnitarias</RootNamespace>
-    <AssemblyName>HCBabelNucleoDominioPruebasUnitarias</AssemblyName>
+    <RootNamespace>Babel.Nucleo.Dominio.PruebasUnitarias</RootNamespace>
+    <AssemblyName>Babel.Nucleo.Dominio.PruebasUnitarias</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

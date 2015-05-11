@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Comunes;
+using Babel.Nucleo.Dominio.Comunes;
 
-namespace Nubise.Hc.Utils.I18n.Babel.Nucleo.Dominio.Entidades.Etiquetas
+namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
 	public class Traduccion : ValueObject<Traduccion>
 	{

@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B16792D2-3450-45A4-BDA7-98FB1BD1AABB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Nubise.Hc.Utils.I18n.Babel.Interfaz.WebApi.PruebasUnitarias</RootNamespace>
-    <AssemblyName>Interfaz.WebApi.PruebasUnitarias</AssemblyName>
+    <RootNamespace>Babel.Interfaz.WebApi.PruebasUnitarias</RootNamespace>
+    <AssemblyName>Babel.Interfaz.WebApi.PruebasUnitarias</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

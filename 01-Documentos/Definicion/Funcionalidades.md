@@ -1,4 +1,4 @@
-﻿# Funcionalidades
+# Funcionalidades
 
 En este documento se muestran las funcionalidades que describen el comportamiento del servicio Babel.
 

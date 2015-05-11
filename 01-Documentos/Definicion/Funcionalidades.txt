@@ -1,7 +1,0 @@
-# Funcionalidades
-
-## Idiomas Soportados
-Se soportan traducciones en los siguientes idiomas.
-
-- Español
-- Inglés

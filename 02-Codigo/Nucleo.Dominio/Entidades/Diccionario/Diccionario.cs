@@ -13,8 +13,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 		private readonly IDictionary<string, Etiqueta> etiquetas = new Dictionary<string, Etiqueta> ();
 
 		#endregion
-
-
+        
 		#region propiedades
 
 		public IReadOnlyCollection<Etiqueta> Etiquetas {
@@ -33,10 +32,6 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 			: base (id)
 		{
 		}
-
-		#endregion
-
-		#region métodos
 
 		public static Diccionario CrearNuevoDiccionario ()
 		{
@@ -65,10 +60,12 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 
 		#endregion
 
+        #region editar
 		public Diccionario ModificarEtiquetas (List<Etiqueta> etiquetas)
 		{
 			throw new NotImplementedException ();
 		}
+        #endregion
 
 		#region eliminar
 

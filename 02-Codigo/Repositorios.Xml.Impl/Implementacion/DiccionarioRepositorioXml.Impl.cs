@@ -59,8 +59,12 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 			var deserializer = new XmlSerializer (typeof(EntidadRepo.Diccionarios));	
 
 			StreamReader reader = new StreamReader (directory);
-			object obj = deserializer.Deserialize (reader);
-			reader.Close ();
+            object obj;
+            
+            using (reader)
+            {
+                obj = deserializer.Deserialize(reader);
+            }
 
 			diccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
 
@@ -68,7 +72,6 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
 
 			return MapearRepositorioConDiccionario (diccionarioRepo);
-
 		}
 
 		private EntidadDom.Diccionario.Diccionario MapearRepositorioConDiccionario (EntidadRepo.Diccionario diccionarioRepo)

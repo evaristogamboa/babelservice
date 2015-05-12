@@ -13,7 +13,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 	[TestFixture]
 	public class DiccionarioControllerTest
 	{
-		private const int id = 1;
+		private const int Id = 1;
 
 		public DiccionarioControllerTest ()
 		{
@@ -22,7 +22,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 		#region status
 
 		[Test]
-		public void PruebaGETDiccionariosOk ()
+		public void PruebaGetDiccionariosOk ()
 		{
 			//Arrange
 			var controller = new DiccionariosController ();
@@ -35,7 +35,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 		}
 
 		[Test]
-		public void PruebaGETDiccionarioOkCuandoDiccionarioExiste ()
+		public void PruebaGetDiccionarioOkCuandoDiccionarioExiste ()
 		{
 			//Arrange
 			var controller = new DiccionariosController ();
@@ -44,13 +44,13 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 
 
 			//Act
-			var response = controller.ObtenerUnDiccionarioEspecifico (id);
+			var response = controller.ObtenerUnDiccionarioEspecifico (Id);
 			//Assert
 			Assert.AreEqual (HttpStatusCode.OK, response.StatusCode);
 		}
 
 		[Test]
-		public void PruebaGETDiccionarioNotFoundCuandoDiccionarioNoExiste ()
+		public void PruebaGetDiccionarioNotFoundCuandoDiccionarioNoExiste ()
 		{
 			//Arrange
 			var controller = new DiccionariosController ();

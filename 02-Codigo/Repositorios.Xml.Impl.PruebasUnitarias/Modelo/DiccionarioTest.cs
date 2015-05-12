@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 using Babel.Repositorio.Xml.Impl.Modelo;
 using Should;
 using System;
-using System.Xml;
 
 namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 {
@@ -12,39 +11,38 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
     public class DiccionarioTest
     {
 
-        public Diccionarios diccionarios { get; set; }
+        public Diccionarios Diccionarios { get; set; }
 
-        public Diccionario diccionario { get; set; }
+        public Diccionario Diccionario { get; set; }
 
-        public Etiquetas etiquetas { get; set; }
+        public Etiquetas Etiquetas { get; set; }
 
-        public Etiqueta etiqueta { get; set; }
+        public Etiqueta Etiqueta { get; set; }
 
 
 
-        public Traducciones traducciones { get; set; }
+        public Traducciones Traducciones { get; set; }
 
-        //private string directory = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) + @"\Xml.xml";
-        private string directory = "DatosPrueba\\diccionario_ok.xml";
-
+        //private string Directory = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) + @"\Xml.xml";
+        private readonly string directory = "DatosPrueba\\diccionario_ok.xml";
 
         public DiccionarioTest()
         {
 
             /*var traduccion1 = new Traduccion ("es-VE", "aceptar", "aceptar");
             var traduccion2 = new Traduccion ("es", "aceptar", "aceptar");
-            traducciones = new Traducciones ();
-            traducciones.traducciones.Add (traduccion1);
-            traducciones.traducciones.Add (traduccion2);
-            etiqueta = new Etiqueta ();
-            etiqueta.nombre = "app.common.aceptar";
-            etiqueta.descripcion = "seh";
-            etiqueta.traducciones = traducciones;
-            etiqueta.nombreEtiqueta = etiqueta.nombre;
-            etiquetas = new Etiquetas (etiqueta);
-            diccionario = new Diccionario ("dev", etiquetas);
+            Traducciones1 = new Traducciones ();
+            Traducciones1.Traducciones1.Add (traduccion1);
+            Traducciones1.Traducciones1.Add (traduccion2);
+            Etiqueta = new Etiqueta ();
+            Etiqueta.nombre = "app.common.aceptar";
+            Etiqueta.descripcion = "seh";
+            Etiqueta.Traducciones1 = Traducciones1;
+            Etiqueta.nombreEtiqueta = Etiqueta.nombre;
+            Etiquetas = new Etiquetas (Etiqueta);
+            Diccionario = new Diccionario ("dev", Etiquetas);
 
-            this.diccionarios = new Diccionarios (diccionario);
+            this.Diccionarios = new Diccionarios (Diccionario);
             */
 
 
@@ -52,7 +50,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         [Test]
-        public void ProbarCreacionArchivoXMLEnDiscoConEstructuraEsperada()
+        public void ProbarCreacionArchivoXmlEnDiscoConEstructuraEsperada()
         {
             //Arrange
             if (File.Exists(directory))
@@ -67,7 +65,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
                 //Act
                 using (TextWriter writer = new StreamWriter(directory))
                 {
-                    serializer.Serialize(writer, this.diccionarios);
+                    serializer.Serialize(writer, this.Diccionarios);
                 }
                 //Assert
                 Assert.IsTrue(File.Exists(directory));
@@ -76,7 +74,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         }
 
         [Test]
-        public void ProbarDeserealizarDiccionariosDesdeArchivoXMLEnDisco()
+        public void ProbarDeserealizarDiccionariosDesdeArchivoXmlEnDisco()
         {
             //Arrange
             var deserializer = new XmlSerializer(typeof(Diccionarios));

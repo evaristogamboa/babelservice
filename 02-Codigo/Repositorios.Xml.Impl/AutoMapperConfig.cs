@@ -1,7 +1,6 @@
 ﻿using System;
 using AutoMapper;
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
 
 using ED = Babel.Nucleo.Dominio.Entidades;
 using ER = Babel.Repositorio.Xml.Impl.Modelo;
@@ -12,7 +11,7 @@ namespace Babel.Repositorio.Xml.Impl
 	{
 
 		private static bool autoMapperConfigured = false;
-		private static object autoMapperLock = new object ();
+		private static readonly object autoMapperLock = new object ();
 
 		static AutoMapperConfig ()
 		{
@@ -67,11 +66,11 @@ namespace Babel.Repositorio.Xml.Impl
 
 			//Define el mapeo de Cultura de Domino a Cultura de Repositorio
 			Mapper.CreateMap<ED.Etiquetas.Cultura, ER.Traduccion> ()
-				.ForMember (dest => dest.Cultura, src => src.MapFrom (val => val.CodigoISO));
+				.ForMember (dest => dest.Cultura, src => src.MapFrom (val => val.CodigoIso));
 
 			//Define el mapeo de Cultura de Repositorio a Cultura de Dominio
 			Mapper.CreateMap< ER.Traduccion, ED.Etiquetas.Cultura > ()
-				.ForMember (dest => dest.CodigoISO, src => src.MapFrom (val => val.Cultura));
+				.ForMember (dest => dest.CodigoIso, src => src.MapFrom (val => val.Cultura));
 			
 
 		}

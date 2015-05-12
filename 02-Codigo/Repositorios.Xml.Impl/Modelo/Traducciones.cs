@@ -8,17 +8,17 @@ namespace Babel.Repositorio.Xml.Impl.Modelo
 	public class Traducciones
 	{
 		[XmlElement ("traduccion")]
-		public List<Traduccion> traducciones{ get; set; }
+		public List<Traduccion> Traducciones1{ get; set; }
 
 		public Traducciones ()
 		{
-			this.traducciones = new List<Traduccion> ();
+			this.Traducciones1 = new List<Traduccion> ();
 		}
 
 		public Traducciones (Traduccion traduccion)
 		{
-			this.traducciones = new List<Traduccion> ();
-			this.traducciones.Add (traduccion);
+			this.Traducciones1 = new List<Traduccion> ();
+			this.Traducciones1.Add (traduccion);
 		}
 	}
 }

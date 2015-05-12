@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Babel.Nucleo.Dominio.Comunes;
 using System.ComponentModel.DataAnnotations;
-using System.Collections.ObjectModel;
 
 namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
@@ -50,29 +49,29 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 		{
 			Validator.ValidateObject (traduccion, new ValidationContext (traduccion), true);
 
-			this.textos.Add (traduccion.Cultura.CodigoISO, traduccion);
+			this.textos.Add (traduccion.Cultura.CodigoIso, traduccion);
 
 			return this;
 		}
 
 		public Etiqueta EliminarTraduccion (Cultura cultura)
 		{
-			this.textos.Remove (cultura.CodigoISO);
+			this.textos.Remove (cultura.CodigoIso);
 
 			return this;
 		}
 
 		public Etiqueta EliminarTraduccion (Traduccion traduccion)
 		{
-			this.textos.Remove (traduccion.Cultura.CodigoISO);
+			this.textos.Remove (traduccion.Cultura.CodigoIso);
 
 			return this;
 		}
 
 		public Etiqueta ModificarTraduccion (Traduccion traduccion)
 		{
-			if (this.textos.ContainsKey (traduccion.Cultura.CodigoISO) == true) {
-				this.textos [traduccion.Cultura.CodigoISO] = traduccion;
+			if (this.textos.ContainsKey (traduccion.Cultura.CodigoIso) == true) {
+				this.textos [traduccion.Cultura.CodigoIso] = traduccion;
 			} else {
 				this.AgregarTraduccion (traduccion);
 			}

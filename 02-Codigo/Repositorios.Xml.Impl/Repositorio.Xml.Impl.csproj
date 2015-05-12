@@ -46,7 +46,7 @@
     <Compile Include="Modelo\Etiquetas.cs" />
     <Compile Include="Modelo\Traducciones.cs" />
     <Compile Include="AutoMapperConfig.cs" />
-    <Compile Include="Implementacion\DiccionarioRepositorioXml.Impl.cs" />
+    <Compile Include="Implementacion\DiccionarioRepositorioXmlImpl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

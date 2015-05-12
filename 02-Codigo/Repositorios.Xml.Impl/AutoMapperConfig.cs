@@ -53,19 +53,26 @@ namespace Babel.Repositorio.Xml.Impl
 				.ForMember (dest => dest.Nombre, src => src.MapFrom (val => val.Nombre))
 				.ForMember (dest => dest.Textos, src => src.Ignore ());
 
-			// Define el mapeo de Traduccion de Dominio a Traduccion de Repositorio
+			// Define el mapeo de Traduccion de Dominio a Traduccion de Repositoriow
 			Mapper.CreateMap<ER.Traduccion,ED.Etiquetas.Traduccion> ()
-				.ForMember (dest => dest.Cultura, src => src.MapFrom (val => val.Cultura))
+				.ForMember (dest => dest.Cultura, src => src.Ignore ())
 				.ForMember (dest => dest.Texto, src => src.MapFrom (val => val.Value))
 				.ForMember (dest => dest.ToolTip, src => src.MapFrom (val => val.Tooltip));
 			
 			// Define el mapeo de Traduccion de Dominio a Traduccion de Repositorio
 			Mapper.CreateMap<ED.Etiquetas.Traduccion,ER.Traduccion> ()
-				.ForMember (dest => dest.Cultura, src => src.MapFrom (val => val.Cultura))
+				.ForMember (dest => dest.Cultura, src => src.Ignore ())
 				.ForMember (dest => dest.Value, src => src.MapFrom (val => val.Texto))
 				.ForMember (dest => dest.Tooltip, src => src.MapFrom (val => val.ToolTip));
 
+			//Define el mapeo de Cultura de Domino a Cultura de Repositorio
+			Mapper.CreateMap<ED.Etiquetas.Cultura, ER.Traduccion> ()
+				.ForMember (dest => dest.Cultura, src => src.MapFrom (val => val.CodigoISO));
 
+			//Define el mapeo de Cultura de Repositorio a Cultura de Dominio
+			Mapper.CreateMap< ER.Traduccion, ED.Etiquetas.Cultura > ()
+				.ForMember (dest => dest.CodigoISO, src => src.MapFrom (val => val.Cultura));
+			
 
 		}
 	}

@@ -23,11 +23,14 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 		[Required]
 		public string Nombre { get; set; }
 
-		public IReadOnlyCollection<Traduccion> Textos {
+
+		public List<Traduccion> Textos { get; set; }
+
+		/*public IReadOnlyCollection<Traduccion> Textos {
 			get { return new List<Traduccion> (this.textos.Values).AsReadOnly (); }
 		}
 
-
+*/
 
 		private Etiqueta (string nombre)
 		{

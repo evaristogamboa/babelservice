@@ -11,6 +11,8 @@ using AutoMapper;
 using System.Xml;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using Babel.Nucleo.Dominio.Comunes;
+using Babel.Repositorio.Xml.Impl.Modelo;
+using System.Linq;
 
 
 
@@ -29,14 +31,14 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
 		public DiccionarioRepositorioXmlImpl ()
 		{
-
+			AutoMapperConfig.SetAutoMapperConfiguration ();
 		}
 
 		#region IDiccionarioRepositorio implementation
 
-		public List<Diccionario> ObtenerDiccionarios ()
+		public List<EntidadDom.Diccionario.Diccionario> ObtenerDiccionarios ()
 		{
-			List<Diccionario> diccionarios = new List<Diccionario> ();
+			List<EntidadDom.Diccionario.Diccionario> diccionarios = new List<EntidadDom.Diccionario.Diccionario> ();
 			var deserializer = new XmlSerializer (typeof(EntidadRepo.Diccionarios));	
 
 			StreamReader reader = new StreamReader (directory);
@@ -45,7 +47,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
 			diccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
 
-			foreach (EntidadRepo.Diccionario item in diccionariosRepositorio.diccionarios) {
+			foreach (EntidadRepo.Diccionario item in diccionariosRepositorio.ListaDiccionarios) {
 				diccionarios.Add (MapearRepositorioConDiccionario (item));
 			}
 
@@ -53,98 +55,44 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 			return diccionarios;
 		}
 
-		public Diccionario ObtenerUnDiccionario (Guid diccionarioId)
-		{
 
-			var deserializer = new XmlSerializer (typeof(EntidadRepo.Diccionarios));	
-
-			StreamReader reader = new StreamReader (directory);
-            object obj;
-            
-            using (reader)
-            {
-                obj = deserializer.Deserialize(reader);
-            }
-
-			diccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
-
-			var diccionarioRepo = diccionariosRepositorio.diccionarios.Find (d => d.id == diccionarioId);
-
-
-			return MapearRepositorioConDiccionario (diccionarioRepo);
-		}
 
 		private EntidadDom.Diccionario.Diccionario MapearRepositorioConDiccionario (EntidadRepo.Diccionario diccionarioRepo)
 		{
-			diccionarioDominio = Diccionario.CrearNuevoDiccionario (diccionarioRepo.id);
-			/*
-			foreach (EntidadRepo.Etiqueta item in diccionarioRepo.etiquetas.etiquetas) {
-				var etiquetaDominio = EntidadDom.Etiquetas.Etiqueta.CrearNuevaEtiqueta (item.nombreEtiqueta);
-				etiquetaDominio.Activo = item.activo;
-				etiquetaDominio.Descripcion = item.descripcion;
-				etiquetaDominio.IdiomaPorDefecto = item.idiomaPorDefecto;
-				etiquetaDominio.Nombre = item.nombre;
-				etiquetaDominio.Traducciones = MapearRepositorioConTraducciones (item.traducciones);
+			diccionarioDominio = EntidadDom.Diccionario.Diccionario.CrearNuevoDiccionario (diccionarioRepo.Id);
+			diccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta> ();
 
-				diccionarioDominio.AgregarUnaEtiquetaAlDiccionario (etiquetaDominio);
+
+
+			for (int i = 00; i < diccionarioRepo.Etiquetas.ListaEtiquetas.Count (); i++) {
+			
+				diccionarioDominio.Etiquetas.Add (Mapper.Map<EntidadDom.Etiquetas.Etiqueta> (diccionarioRepo.Etiquetas.ListaEtiquetas [i]));
+				for (int x = 0; x < diccionarioRepo.Etiquetas.ListaEtiquetas [i].Traducciones.traducciones.Count (); x++) {
+
+					var cultura = EntidadDom.Etiquetas.Cultura.CrearNuevaCultura (diccionarioRepo.Etiquetas.ListaEtiquetas [i].Traducciones.traducciones [x].Cultura);
+					var traduccion = Mapper.Map<EntidadDom.Etiquetas.Traduccion> (diccionarioRepo.Etiquetas.ListaEtiquetas [i].Traducciones.traducciones [x]);
+					traduccion.Cultura = cultura;
+					diccionarioDominio.Etiquetas [i].Textos = new List<EntidadDom.Etiquetas.Traduccion> ();
+					diccionarioDominio.Etiquetas [i].Textos.Add (traduccion);
+				}
 			}
-				
-			diccionarioDominio.ambiente = diccionarioRepo.ambiente;
-			*/
+
+		
 			return diccionarioDominio;
 		}
 
+
+
+		public IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> SalvarDiccionarios (IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> diccionarioLista)
+		{
+			throw new NotImplementedException ();
+		}
+
+		#endregion
+
+
+
 	
-		private IEnumerable<EntidadDom.Etiquetas.Traduccion> MapearRepositorioConTraducciones (EntidadRepo.Traducciones traduccionesRepo)
-		{
-			/*
-			List<EntidadDom.Etiquetas.Traduccion> traduccionesDom = EntidadDom.Etiquetas.Traducciones.CrearNuevaTraduccion ();
-			EntidadDom.Etiquetas.Cultura cultura;
-			EntidadDom.Etiquetas.Traduccion traduccion;
-			EntidadDom.Etiquetas.Valor valor;
-
-			foreach (EntidadRepo.Traduccion item in traduccionesRepo.traducciones) {
-				cultura = EntidadDom.Etiquetas.Cultura.CrearNuevoValorDeCultura (item.cultura);
-				valor = EntidadDom.Etiquetas.Valor.CrearNuevoValorDeTraduccion (item.value);
-				traduccion = EntidadDom.Etiquetas.Traduccion.CrearNuevaTraduccion (cultura, valor);
-				traduccionesDom.AgregarTraduccion (traduccion);
-			}
-
-			return traduccionesDom;
-			*/
-			return null;
-		}
-
-		#endregion
-
-		#region IRepositorio implementation
-
-		public List<Diccionario> ObtenerTodosLosElementos ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public Diccionario ObtenerUnElemento ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public bool EliminarUnElemento (Guid id)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public Diccionario ModificarUnElemento (Diccionario elementoAModificar)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public Diccionario CrearUnElemento (Diccionario elementoACrear)
-		{
-			throw new NotImplementedException ();
-		}
-
-		#endregion
 	}
 }
 

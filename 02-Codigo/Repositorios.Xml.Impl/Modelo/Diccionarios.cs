@@ -9,7 +9,7 @@ namespace Babel.Repositorio.Xml.Impl.Modelo
 		#region propiedades
 
 		[XmlElement ("diccionario")]
-		public List<Diccionario> diccionarios{ get; set; }
+		public List<Diccionario> ListaDiccionarios{ get; set; }
 
 		#endregion
 
@@ -17,13 +17,13 @@ namespace Babel.Repositorio.Xml.Impl.Modelo
 
 		public Diccionarios ()
 		{
-			this.diccionarios = new List<Diccionario> ();
+			this.ListaDiccionarios = new List<Diccionario> ();
 		}
 
 		public Diccionarios (Diccionario diccionario)
 		{
-			this.diccionarios = new List<Diccionario> ();
-			this.diccionarios.Add (diccionario);
+			this.ListaDiccionarios = new List<Diccionario> ();
+			this.ListaDiccionarios.Add (diccionario);
 		}
 
 

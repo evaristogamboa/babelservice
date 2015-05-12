@@ -8,13 +8,17 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 	public class Traduccion : ValueObject<Traduccion>
 	{
 		[Required]
-		public Cultura Cultura { get; private set; }
+		public Cultura Cultura { get; set; }
 
 		[Required]
-		public string Texto { get; private set; }
+		public string Texto { get; set; }
 
 
-		public string ToolTip { get; private set; }
+		public string ToolTip { get; set; }
+
+		public Traduccion ()
+		{
+		}
 
 		private Traduccion (Cultura cultura, string texto)
 		{

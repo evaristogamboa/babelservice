@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <diccionario id="ecf7b09c-2ccc-4205-8cb1-2dc935a20595" ambiente="dev">
+    <etiquetas>
+      <etiqueta id="a44ca28c-b6e1-41ac-9e22-d081090d9127" nombre="app.common.aceptar" activo="false" default="">
+        <nombre>app.common.aceptar</nombre>
+        <descripcion>seh</descripcion>
+        <traducciones>
+          <traduccion cultura="es-VE" tooltip="aceptar">aceptar</traduccion>
+          <traduccion cultura="es" tooltip="aceptar">aceptar</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+</diccionarios>

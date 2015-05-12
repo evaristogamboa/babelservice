@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using System.Collections;
 
 namespace Babel.Repositorio.Xml.Impl.Modelo
 {
@@ -10,13 +11,13 @@ namespace Babel.Repositorio.Xml.Impl.Modelo
 		#region propiedades
 
 		[XmlAttribute ("id")]
-		public Guid id { get; set; }
+		public Guid Id { get; set; }
 
 		[XmlAttribute ("ambiente")]
-		public string ambiente{ get; set; }
+		public string Ambiente{ get; set; }
 
 		[XmlElement ("etiquetas")]
-		public Etiquetas etiquetas;
+		public Etiquetas Etiquetas;
 
 		#endregion
 
@@ -24,21 +25,21 @@ namespace Babel.Repositorio.Xml.Impl.Modelo
 
 		public Diccionario (string ambiente)
 		{
-			this.id = Guid.NewGuid ();
-			this.ambiente = ambiente;
-			this.etiquetas = new Etiquetas ();
+			this.Id = Guid.NewGuid ();
+			this.Ambiente = ambiente;
+			this.Etiquetas = new Etiquetas ();
 		}
 
 		public Diccionario ()
 		{
-			this.id = Guid.NewGuid ();
+			this.Id = Guid.NewGuid ();
 		}
 
 		public Diccionario (string ambiente, Etiquetas etiquetas)
 		{
-			this.id = Guid.NewGuid ();
-			this.ambiente = ambiente;
-			this.etiquetas = etiquetas;
+			this.Id = Guid.NewGuid ();
+			this.Ambiente = ambiente;
+			this.Etiquetas = new Etiquetas ();
 		}
 
 		#endregion

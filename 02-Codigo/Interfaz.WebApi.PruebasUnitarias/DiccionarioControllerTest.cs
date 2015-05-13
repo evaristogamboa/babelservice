@@ -30,22 +30,26 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 			controller.Configuration = new HttpConfiguration ();
 			//Act
 			var response = controller.ObtenerTodosLosDiccionarios ();
-			//Assert
+			
+            //Assert
+            response.StatusCode.ShouldEqual(HttpStatusCode.OK);
 			Assert.AreEqual (HttpStatusCode.OK, response.StatusCode);
 		}
 
 		[Test]
-		public void PruebaGetDiccionarioOkCuandoDiccionarioExiste ()
+		public void PruebaGetDiccionarioOkCuandoDiccionarioExiste (int id)
 		{
 			//Arrange
 			var controller = new DiccionariosController ();
-			controller.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionarios"));
+			controller.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionarios/" + id));
 			controller.Configuration = new HttpConfiguration ();
 
 
 			//Act
-			var response = controller.ObtenerUnDiccionarioEspecifico (Id);
+			var response = controller.ObtenerUnDiccionarioPorId (Id);
+
 			//Assert
+            response.StatusCode.ShouldEqual(HttpStatusCode.OK);
 			Assert.AreEqual (HttpStatusCode.OK, response.StatusCode);
 		}
 
@@ -59,7 +63,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 
 
 			//Act
-			var response = controller.ObtenerUnDiccionarioEspecifico (3);
+			var response = controller.ObtenerUnDiccionarioPorId (3);
 			//Assert
 			Assert.AreEqual (HttpStatusCode.NotFound, response.StatusCode);
 		}
@@ -93,7 +97,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 			controller.Configuration = new HttpConfiguration ();
 
 			//Act
-			var response = controller.ObtenerUnDiccionarioEspecifico (1);
+			var response = controller.ObtenerUnDiccionarioPorId (1);
 			var responseString = response.Content.ReadAsStringAsync ().Result;
 			var responseDeserialized = JsonConvert.DeserializeObject<ObtenerUnDiccionarioEspecificoResponse> (responseString);
 			//Assert

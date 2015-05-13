@@ -5,13 +5,13 @@ using System;
 using Babel.Interfaz.WebApi.Models.Response;
 using System.Net.Http.Headers;
 
-
-namespace  Babel.Interfaz.WebApi.Controllers
+namespace Babel.Interfaz.WebApi.Controllers
 {
+    [RoutePrefix("api/diccionarios")]
 	public class DiccionariosController : ApiController
 	{
 		[HttpGet]
-		[Route ("api/diccionarios")]
+		[Route ("")]
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
 		{
 			//Obtener contenido respuesta
@@ -23,8 +23,8 @@ namespace  Babel.Interfaz.WebApi.Controllers
 		}
 
 		[HttpGet]
-		[Route ("api/diccionario/id/{id}")]
-		public HttpResponseMessage ObtenerUnDiccionarioEspecifico (int id)
+		[Route ("id/{id}")]
+		public HttpResponseMessage ObtenerUnDiccionarioPorId (int id)
 		{
 			HttpResponseMessage response;
 			var responsemodel = new ObtenerUnDiccionarioEspecificoResponse ();

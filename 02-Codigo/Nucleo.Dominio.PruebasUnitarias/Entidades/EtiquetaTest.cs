@@ -15,9 +15,9 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 
 		public EtiquetaTest ()
 		{
-			this.etiqueta = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			this.etiqueta = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar2");
 			this.cultura = Cultura.CrearNuevaCultura ("en-US");
-			this.texto = "accept";
+			this.texto = "accept2";
 		}
 
 		#region creacion

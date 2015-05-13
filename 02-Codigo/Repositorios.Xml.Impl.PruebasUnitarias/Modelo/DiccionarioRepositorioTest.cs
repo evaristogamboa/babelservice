@@ -11,11 +11,20 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 	{
 
 
-		public DiccionarioRepositorioTest ()
+        [Test]
+		public void DiccionarioRepositorioTestSalvar ()
 		{
+
+            var file = @"diccionario_ok.xml";
+
+            var directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + file;
+
+
 
 
 		}
+
+
 
 
 

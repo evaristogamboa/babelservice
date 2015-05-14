@@ -42,34 +42,31 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 		{
 			Validator.ValidateObject (traduccion, new ValidationContext (traduccion), true);
 
-			this.Textos.Add (traduccion.Cultura.CodigoIso, traduccion);
+			this.Textos.Add ( traduccion);
 
 			return this;
 		}
 
-		public Etiqueta EliminarTraduccion (Cultura cultura)
-		{
-			this.Textos.Remove (cultura.CodigoIso);
-
-			return this;
-		}
 
 		public Etiqueta EliminarTraduccion (Traduccion traduccion)
 		{
-			this.Textos.Remove (traduccion.Cultura.CodigoIso);
+			this.Textos.Remove (traduccion);
 
 			return this;
 		}
 
-        //public Etiqueta ModificarTraduccion (Traduccion traduccion)
-        //{
-        //    if (this.Textos. (traduccion.Cultura.CodigoIso) == true) {
-        //        this.Textos [traduccion.Cultura.CodigoIso] = traduccion;
-        //    } else {
-        //        this.AgregarTraduccion (traduccion);
-        //    }
+        public Etiqueta ModificarTraduccion(Traduccion traduccion)
+        {
+            //if (this.Textos(traduccion.Cultura.CodigoIso) == true)
+            //{
+            //    this.Textos[traduccion.Cultura.CodigoIso] = traduccion;
+            //}
+            //else
+            //{
+            //    this.AgregarTraduccion(traduccion);
+            //}
 
-        //    return this;
-        //}
+            return this;
+        }
 	}
 }

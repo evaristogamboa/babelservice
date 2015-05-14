@@ -34,6 +34,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 		private Diccionario (Guid id)
 			: base (id)
 		{
+            
 		}
 
 		public static Diccionario CrearNuevoDiccionario ()

@@ -31,13 +31,43 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\Request\AgregarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\CrearUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\EliminarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\EliminarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Request\ModificarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Response\AgregarEtiquetasAUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\ConsultarDiccionariosRespuesta.cs" />
+    <Compile Include="Modelos\Request\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
+    <Compile Include="Modelos\Request\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Response\ConsultarEtiquetasDeDiccionarioPorNombreRespuesta.cs" />
+    <Compile Include="Modelos\Request\ConsultarEtiquetasPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Response\ConsultarEtiquetasPorNombreRespuesta.cs" />
+    <Compile Include="Modelos\Request\ConsultarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Response\CrearUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\DiccionConsultarUnDiccionarioarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\EliminarEtiquetasAUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\EliminarUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\ModificarEtiquetasAUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\ModificarUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Response\ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.cs" />
+    <Compile Include="Fachada\IAplicacionMantenimientoDiccionario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\AplicacionServicio.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Fachada\" />
-    <Folder Include="Modelos\Request\" />
-    <Folder Include="Modelos\Response\" />
-    <Folder Include="Servicios\" />
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>
+      <Name>Nucleo.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

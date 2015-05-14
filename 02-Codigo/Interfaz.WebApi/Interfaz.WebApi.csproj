@@ -101,16 +101,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
-<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">
       <Project>{42cf1793-2674-424b-806a-c89555257e26}</Project>
       <Name>Nucleo.Aplicacion</Name>
     </ProjectReference>
-=======
     <Folder Include="Models\Request\" />
->>>>>>> 3577ca3a5a64e67faa774c682cc6716d3510d401
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

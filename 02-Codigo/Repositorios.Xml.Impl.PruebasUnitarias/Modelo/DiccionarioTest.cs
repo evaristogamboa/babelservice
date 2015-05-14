@@ -304,14 +304,13 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             DiccionariosRepositorio = new EntidadRepo.Diccionarios();
 
             DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
-
-
-            var dicctionarioRepo = new EntidadRepo.Diccionario();
-
-            dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
-
+           
 
             foreach (var diccioario in listaDiccionarios) {
+
+                var dicctionarioRepo = new EntidadRepo.Diccionario();
+                
+                dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
 
 
                 foreach (var etiqueta in diccioario.Etiquetas)
@@ -351,9 +350,10 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                 }
 
+                DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
             }
 
-            DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
+            
 
             if (File.Exists(directory))
             {

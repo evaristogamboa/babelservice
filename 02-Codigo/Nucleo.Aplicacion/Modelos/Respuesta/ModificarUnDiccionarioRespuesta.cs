@@ -3,9 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Babel.Nucleo.Aplicacion.Fachada
+namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
 	public class ModificarUnDiccionarioRespuesta
-	{
+    {
+
+        #region Propiedades
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Guid DiccionarioId { get; set; }
+
+        #endregion
+       
+        #region Constructores
+
+	    /// <summary>
+	    /// 
+	    /// </summary>
+        private ModificarUnDiccionarioRespuesta()
+	    {
+	        
+	    }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static ModificarUnDiccionarioRespuesta CrearNuevaInstancia()
+	    {
+            return new ModificarUnDiccionarioRespuesta();
+	    }
+
+        #endregion
+
 	}
 }

@@ -63,7 +63,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 			var respuesta = controlador.ObtenerUnDiccionarioPorId (3);
 			
             //Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
 		}
 
 		#endregion
@@ -102,6 +102,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
             //Assert
             respuestadeserializada.ShouldBeType<Diccionario>();
 		}
+
 
 		#endregion
 	}

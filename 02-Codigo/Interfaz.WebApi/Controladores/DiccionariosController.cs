@@ -3,8 +3,10 @@ using System.Web.Http;
 using System.Net;
 using System;
 using System.Net.Http.Headers;
-using Babel.Interfaz.WebApi.Modelos;
+using ModeloPeticion = Babel.Interfaz.WebApi.Modelos.Peticion;
+using ModeloRespuesta = Babel.Interfaz.WebApi.Modelos.Respuesta;
 using Babel.Nucleo.Aplicacion.Fachada;
+
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
@@ -54,7 +56,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         public HttpResponseMessage CrearUndiccionario()
         {
             //Leer Parametros
-            var modeloPeticion = this.CrearUndiccionario();
+            var modeloPeticion = ;
              
 
             //Solicitar Contenido

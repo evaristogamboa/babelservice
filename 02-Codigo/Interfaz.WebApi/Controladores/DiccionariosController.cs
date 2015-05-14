@@ -12,6 +12,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 	{
         HttpResponseMessage respuesta;
 
+        #region metodos Get
 		[HttpGet]
 		[Route ("")]
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
@@ -33,8 +34,11 @@ namespace Babel.Interfaz.WebApi.Controladores
             //retornar respuesta
             return respuesta;
 		}
+        #endregion
 
 
+        [HttpPost]
+        public HttpResponseMessage 
 	}
 
 }

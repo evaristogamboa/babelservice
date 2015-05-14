@@ -24,7 +24,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 		}
 
 		[HttpGet]
-		[Route ("id/{id}")]
+		[Route ("diccionario/{id}")]
 		public HttpResponseMessage ObtenerUnDiccionarioPorId (int id)
 		{
 
@@ -34,6 +34,9 @@ namespace Babel.Interfaz.WebApi.Controladores
             //retornar respuesta
             return respuesta;
 		}
+
+
+
         #endregion
 	}
 

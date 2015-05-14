@@ -69,6 +69,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
         [Test]
         public void ProbarPostDiccionarioCreatedCuandoDiccionarioNoExiste()
         {
+            //Arrange
             controlador.Request = new HttpRequestMessage(HttpMethod.Post, new Uri("http://localhost/api/diccionario/id/2"));
 
             HttpResponseMessage respuesta = null;

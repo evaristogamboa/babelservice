@@ -17,6 +17,9 @@ namespace Babel.Interfaz.WebApi.Controladores
 		[Route ("")]
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
 		{
+            //Solicitar respuesta
+
+
 			//Preparar respuesta
             respuesta = Request.CreateResponse(HttpStatusCode.OK, new Diccionarios(), new MediaTypeWithQualityHeaderValue("application/json"));
 			//Retornar respuesta
@@ -34,7 +37,6 @@ namespace Babel.Interfaz.WebApi.Controladores
             //retornar respuesta
             return respuesta;
 		}
-
 
 
         #endregion

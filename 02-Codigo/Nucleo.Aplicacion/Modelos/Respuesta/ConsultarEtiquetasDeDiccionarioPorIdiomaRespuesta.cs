@@ -8,15 +8,16 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	public class ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta
 	{
 		public List<Etiqueta> ListaDeEtiquetas { get; set; }
-		
-		public Guid DiccionarioId { get; set; }
 
+		public Dictionary<string, Guid> Relaciones { get; set; }
+
+		public ModeloRespuesta Respuesta { get; set; }
 
 		#region constructores
 
 		private ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta()
-		{ 
-		
+		{
+			this.Relaciones.Add("Diccionario", Guid.Empty);
 		}
 
 		public static ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta CrearNuevaInstancia()
@@ -25,7 +26,5 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 		}
 
 		#endregion
-
-
 	}
 }

@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
-using Babel.Nucleo.Aplicacion.Modelos;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
 	public class AgregarEtiquetasAUnDiccionarioRespuesta
 	{
-			
 		public List<Etiqueta> ListaDeEtiquetas { get; set; }
-		
-		public Guid DiccionarioId { get; set; }
+
+		public Dictionary<string, Guid> Relaciones { get; set; }
 
 		public ModeloRespuesta Respuesta { get; set; }
-
 
 		#region constructores
 
 		private AgregarEtiquetasAUnDiccionarioRespuesta()
-		{ 
+		{
+			this.Relaciones.Add("Diccionario", Guid.Empty);
 		}
 
 		public static AgregarEtiquetasAUnDiccionarioRespuesta CrearNuevaInstancia()

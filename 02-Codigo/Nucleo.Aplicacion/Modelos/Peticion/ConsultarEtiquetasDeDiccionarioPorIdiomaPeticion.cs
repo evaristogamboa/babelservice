@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
 	public class ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion

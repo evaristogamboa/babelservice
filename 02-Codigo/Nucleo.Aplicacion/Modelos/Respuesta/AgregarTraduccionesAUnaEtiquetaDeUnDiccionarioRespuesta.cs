@@ -7,15 +7,18 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
 	public class AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta
 	{
-		public List<Etiqueta> ListaDeEtiquetas { get; set; }
-		
-		public Guid DiccionarioId { get; set; }
+		public List<Traduccion> ListaDeTraducciones { get; set; }
+
+		public Dictionary<string, Guid> Relaciones { get; set; }
+
+		public ModeloRespuesta Respuesta { get; set; }
 
 		#region constructores
 
 		private AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta()
-		{ 
-		
+		{
+			this.Relaciones.Add("Diccionario", Guid.Empty);
+			this.Relaciones.Add("Etiqueta", Guid.Empty);
 		}
 
 		public static AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta CrearNuevaInstancia()

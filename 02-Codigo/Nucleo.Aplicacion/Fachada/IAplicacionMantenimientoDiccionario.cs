@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Babel.Nucleo.Dominio.Entidades.Etiquetas;
-using Babel.Nucleo.Dominio.Entidades.Diccionario;
-
+using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 namespace Babel.Nucleo.Aplicacion.Fachada
 {
 	public interface IAplicacionMantenimientoDiccionario

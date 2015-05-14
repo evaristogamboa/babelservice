@@ -5,7 +5,6 @@ using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using Should;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 {
@@ -13,9 +12,9 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 	public class DiccionarioTest
 	{
 		private Diccionario diccionarioPrueba;
-		private Dictionary<string, Etiqueta> listaEtiquetas;
-		private Etiqueta etiqueta1;
-		private Etiqueta etiqueta2;
+		private readonly Dictionary<string, Etiqueta> listaEtiquetas;
+        private readonly Etiqueta etiqueta1;
+        private readonly Etiqueta etiqueta2;
 
 		public DiccionarioTest ()
 		{

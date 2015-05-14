@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Babel.Nucleo.Dominio.Comunes;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
-using System.Collections.ObjectModel;
 
 namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 {
@@ -20,7 +19,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 
 		/*
 		public IReadOnlyCollection<Etiqueta> Etiquetas {
-			get { return new List<Etiqueta> (this.etiquetas.Values).AsReadOnly (); }
+			get { return new List<Etiqueta> (this.Etiquetas.Values).AsReadOnly (); }
 		}*/
 
 		#endregion

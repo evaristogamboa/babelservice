@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
@@ -10,15 +9,15 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 	[TestFixture]
 	public class EtiquetaTest
 	{
-		private Etiqueta etiqueta;
-		private Cultura cultura;
-		private string texto;
+		private readonly Etiqueta etiqueta;
+		private readonly Cultura cultura;
+		private readonly string texto;
 
 		public EtiquetaTest ()
 		{
-			this.etiqueta = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
+			this.etiqueta = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar2");
 			this.cultura = Cultura.CrearNuevaCultura ("en-US");
-			this.texto = "accept";
+			this.texto = "accept2";
 		}
 
 		#region creacion

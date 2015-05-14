@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Should;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
@@ -13,36 +11,36 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 	[TestFixture]
 	public class CulturaTest
 	{
-		private List<string> codigosISOCorrectos;
-		private List<string> codigosISOErrados;
+        private readonly List<string> codigosIsoCorrectos;
+        private readonly List<string> codigosIsoErrados;
 
 		public CulturaTest ()
 		{
-			codigosISOCorrectos = new List<string> () { "es", "es-VE" };
-			codigosISOErrados = new List<string> () { "esp", "es-ve", "es.VE", "ES-VE", "es-VE." };
+			codigosIsoCorrectos = new List<string> () { "es", "es-VE" };
+			codigosIsoErrados = new List<string> () { "esp", "es-ve", "es.VE", "ES-VE", "es-VE." };
 		}
 
 		[Category ("Creación")]
 		[Test]
-		public void PruebaCreacionDeNuevaCulturaConCodigoISOCorrectos ()
+		public void PruebaCreacionDeNuevaCulturaConCodigoIsoCorrectos ()
 		{
 			//Arrange
 			//Act
-			foreach (var item in codigosISOCorrectos) {
+			foreach (var item in codigosIsoCorrectos) {
 				Cultura cultura = Cultura.CrearNuevaCultura (item);
 
 				//Assert
-				cultura.CodigoISO.ShouldBeSameAs (item);
+				cultura.CodigoIso.ShouldBeSameAs (item);
 			}
 		}
 
 		[Category ("Creación")]
 		[Test]
-		public void PruebaCreacionDeNuevaCulturaConCodigoISOErrados ()
+		public void PruebaCreacionDeNuevaCulturaConCodigoIsoErrados ()
 		{
 			//Arrange
 			//Act
-			foreach (var item in codigosISOErrados) {
+			foreach (var item in codigosIsoErrados) {
 				//Assert
 				Assert.Throws<ValidationException> (delegate {
 					Cultura.CrearNuevaCultura (item);

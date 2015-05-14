@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Xml;
 using System.Xml.Serialization;
-using System.Xml.Schema;
 
 namespace Babel.Repositorio.Xml.Impl.Modelo
 {

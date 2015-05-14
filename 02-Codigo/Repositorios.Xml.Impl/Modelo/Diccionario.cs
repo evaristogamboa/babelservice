@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
-using System.Collections;
 
 namespace Babel.Repositorio.Xml.Impl.Modelo
 {
@@ -33,13 +31,6 @@ namespace Babel.Repositorio.Xml.Impl.Modelo
 		public Diccionario ()
 		{
 			this.Id = Guid.NewGuid ();
-		}
-
-		public Diccionario (string ambiente, Etiquetas etiquetas)
-		{
-			this.Id = Guid.NewGuid ();
-			this.Ambiente = ambiente;
-			this.Etiquetas = new Etiquetas ();
 		}
 
 		#endregion

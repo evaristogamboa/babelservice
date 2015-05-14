@@ -7,11 +7,11 @@ namespace  Babel.Interfaz.WebApi.Models.Response
 {
 	public class ObtenerTodosLosDiccionariosResponse
 	{
-		public List<Diccionario> diccionarios{ get; set; }
+		public List<Diccionario> Diccionarios{ get; set; }
 
 		public ObtenerTodosLosDiccionariosResponse ()
 		{
-			this.diccionarios = new List<Diccionario> ();
+			this.Diccionarios = new List<Diccionario> ();
 		}
 
 

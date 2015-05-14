@@ -1,21 +1,20 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Collections;
 
-namespace Babel.Dominio.Servicios
+namespace Babel.Nucleo.Dominio.Servicios
 {
 	public class ServicioDeCulturasIso
 	{
-		public IEnumerable culturasEspecificas { get; private set; }
+		public IEnumerable CulturasEspecificas { get; private set; }
 
-		public IEnumerable culturasNeutrales { get; private set; }
+		public IEnumerable CulturasNeutrales { get; private set; }
 
 		private ServicioDeCulturasIso ()
 		{
-			this.culturasEspecificas = CultureInfo.GetCultures (CultureTypes.SpecificCultures);
-			this.culturasNeutrales = CultureInfo.GetCultures (CultureTypes.NeutralCultures);
+			this.CulturasEspecificas = CultureInfo.GetCultures (CultureTypes.SpecificCultures);
+			this.CulturasNeutrales = CultureInfo.GetCultures (CultureTypes.NeutralCultures);
 		}
 
 		public static ServicioDeCulturasIso CrearObjetoDeCulturasIso ()

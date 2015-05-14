@@ -163,7 +163,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			//Arrange
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
 			//Act
-			prueba.EliminarTraduccion (this.cultura);
+            prueba.EliminarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, this.texto));
 			//Assert
 			prueba.Textos.Count.ShouldEqual (0);
 		}
@@ -175,7 +175,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
 			prueba.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.texto));
 			//Act
-			prueba.EliminarTraduccion (this.cultura);
+            prueba.EliminarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, this.texto));
 			//Assert
 			prueba.Textos.Count.ShouldEqual (0);
 		}
@@ -187,7 +187,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
 			prueba.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.texto));
 			//Act
-			prueba.EliminarTraduccion (Cultura.CrearNuevaCultura ("es"));
+            prueba.EliminarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, this.texto));
 			//Assert
 			prueba.Textos.Count.ShouldEqual (1);
 		}

@@ -85,6 +85,31 @@
     <Compile Include="Modelos\Diccionarios.cs" />
     <Compile Include="Modelos\Etiqueta.cs" />
     <Compile Include="Modelos\Etiquetas.cs" />
+    <Compile Include="Modelos\Peticion\AgregarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\CrearUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\EliminarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\EliminarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ModificarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\CrearUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\EliminarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\EliminarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ModificarUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Traduccion.cs" />
     <Compile Include="Modelos\Traducciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,8 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
-    <Folder Include="Modelos\Peticion" />
-    <Folder Include="Modelos\Respuesta" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">

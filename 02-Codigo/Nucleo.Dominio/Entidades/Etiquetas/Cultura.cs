@@ -6,7 +6,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 	public class Cultura : ValueObject<Cultura>
 	{
 		[Required]
-		[RegularExpression (@"^[a-z]{2}(-[A-Z]{2}){0,1}$")]
+		[RegularExpression (@"^[a-z]{2}(-[A-Z]{2}){0,1}$", ErrorMessage="El código ISO no es válido")]
 		public string CodigoIso { get; private set; }
 
 		private Cultura (string cultura)

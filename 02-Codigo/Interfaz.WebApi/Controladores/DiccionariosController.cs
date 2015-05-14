@@ -6,11 +6,12 @@ using System.Net.Http.Headers;
 using ModeloPeticion = Babel.Interfaz.WebApi.Modelos.Peticion;
 using ModeloRespuesta = Babel.Interfaz.WebApi.Modelos.Respuesta;
 using Babel.Nucleo.Aplicacion.Fachada;
+using Babel.Interfaz.WebApi.Modelos;
 
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
-    [RoutePrefix("api/diccionarios")]
+    [RoutePrefix("api/")]
 	public class DiccionariosController : ApiController
 	{
         HttpResponseMessage respuesta;
@@ -21,9 +22,14 @@ namespace Babel.Interfaz.WebApi.Controladores
             this.metodosAppDiccionario = metodosMantenimientoAplicacion;
         }
 
+        public DiccionariosController()
+        {
+            
+        }
+
         #region metodos Get
 		[HttpGet]
-		[Route ("")]
+		[Route ("diccionarios")]
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
 		{
             //Solicitar respuesta
@@ -56,12 +62,15 @@ namespace Babel.Interfaz.WebApi.Controladores
         public HttpResponseMessage CrearUndiccionario()
         {
             //Leer Parametros
-            var modeloPeticion = ;
+
+            //var modeloPeticion = ModeloPeticion.CrearUnDiccionarioPeticion();
+
+            //modeloPeticion
              
 
             //Solicitar Contenido
-            metodosAppDiccionario.CrearUnDiccionario(modeloPeticion);
-
+            //metodosAppDiccionario.CrearUnDiccionario(modeloPeticion);
+            return respuesta;
         }
 
 	}

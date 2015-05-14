@@ -8,6 +8,7 @@ using System.Net;
 using Babel.Interfaz.WebApi.Modelos;
 using Newtonsoft.Json;
 
+
 namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 {
 	[TestFixture]
@@ -15,6 +16,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 	{
 		private const int Id = 1;
         private DiccionariosController controlador;
+        //private readonly IAplicacionMantenimientoDiccionario metodosAppDiccionario;
 
         [SetUp]
         public void Iniciador()
@@ -46,7 +48,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 			controlador.Configuration = new HttpConfiguration ();
 
 			//Act
-			var respuesta = controlador.ObtenerUnDiccionarioPorId (Id);
+			var respuesta = controlador.ConsultarUnDiccionario (Id);
 
 			//Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
@@ -60,7 +62,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 			controlador.Configuration = new HttpConfiguration ();
 
 			//Act
-			var respuesta = controlador.ObtenerUnDiccionarioPorId (3);
+            var respuesta = controlador.ConsultarUnDiccionario(3);
 			
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
@@ -107,7 +109,7 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
 			controlador.Configuration = new HttpConfiguration ();
 
 			//Act
-			var respuesta = controlador.ObtenerUnDiccionarioPorId (1);
+            var respuesta = controlador.ConsultarUnDiccionario(1);
 			var textorespuesta = respuesta.Content.ReadAsStringAsync ().Result;
 			var respuestadeserializada = JsonConvert.DeserializeObject<Diccionario> (textorespuesta);
 			

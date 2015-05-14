@@ -8,17 +8,18 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class CrearUnDiccionarioPeticion 
 	{
-        public app.CrearUnDiccionarioPeticion DiccionarioPeticion { get; set; };
+        //public app.CrearUnDiccionarioPeticion DiccionarioPeticion { get; set; };
 
-        public void CrearUnDiccionarioPeticion()
-        {
-            if (DiccionarioPeticion.IsValid())
-            {
-                this.DiccionarioPeticion = app.Diccionario.CrearNuevoDiccionario();
-            }
+        //public void CrearUnDiccionarioPeticion()
+        //{
+        //    //if (DiccionarioPeticion.IsValid())
+        //    //{
+        //    //    this.DiccionarioPeticion = app.Diccionario.CrearNuevoDiccionario();
+        //    //}
 
-            return this.DiccionarioPeticion;
-        }
+        //    //return this.DiccionarioPeticion;
+        //    return;
+        //}
 
         
 	}

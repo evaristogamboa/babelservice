@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
+using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
+
 namespace Babel.Nucleo.Aplicacion.Fachada
 {
 	public interface IAplicacionMantenimientoDiccionario

@@ -1,11 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
-namespace Babel.Nucleo.Aplicacion.Fachada
+namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
 	public class ConsultarDiccionariosRespuesta
 	{
+		public List<Diccionario> ListaDeDiccionarios { get; set; }
+
+		#region constructores
+
+		private ConsultarDiccionariosRespuesta()
+		{ 
+		
+		}
+
+		public static ConsultarDiccionariosRespuesta CrearNuevaInstancia()
+		{
+			return new ConsultarDiccionariosRespuesta();
+		}
+
+		#endregion
 	}
 }

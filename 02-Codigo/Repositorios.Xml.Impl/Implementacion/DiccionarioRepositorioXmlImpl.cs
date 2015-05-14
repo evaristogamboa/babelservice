@@ -58,6 +58,8 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
 		private EntidadDom.Diccionario.Diccionario MapearRepositorioConDiccionario (EntidadRepo.Diccionario diccionarioRepo)
 		{
+                       
+
 			DiccionarioDominio = EntidadDom.Diccionario.Diccionario.CrearNuevoDiccionario (diccionarioRepo.Id);
 			DiccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta> ();
 
@@ -83,12 +85,25 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         private EntidadRepo.Diccionarios MapearDiccionarioConRepositorio(EntidadDom.Diccionario.Diccionario diccionarioDom)
         {
-            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();                                 
+                       
+            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
 
+            var etiquetaRepo = new EntidadRepo.Etiqueta();
+            var dicctionarioRepo = new EntidadRepo.Diccionario();
+                        
             foreach(var etiqueta in diccionarioDom.Etiquetas){
+                                
+                foreach (var texto in etiqueta.Textos)                
+                {
+                    etiquetaRepo.Traducciones.Traducciones1.Add(Mapper.Map<EntidadRepo.Traduccion>(texto.Texto));                    
+                }
+                                                                             
+                 etiquetaRepo = (Mapper.Map<EntidadRepo.Etiqueta>(etiqueta));
+                 dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(etiquetaRepo);                               
+               
+            }
 
-                DiccionarioRepositorio.Etiquetas.ListaEtiquetas.Add(Mapper.Map<EntidadRepo.Etiqueta>(etiqueta));                                   
-            }                                
+            DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
 
             return DiccionariosRepositorio;
         }
@@ -129,12 +144,37 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             return diccionarios;
 
 		}
+        
+        public Diccionario ObtenerUnDiccionario(Guid idDiccionario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Diccionario SalvarUnDiccionario(Diccionario diccionario)
+        {
+            throw new NotImplementedException();
+        }
+
 
 		#endregion
 
 
 
-	
-	}
+
+
+
+
+
+
+        EntidadDom.Diccionario.Diccionario IDiccionarioRepositorio.ObtenerUnDiccionario(Guid idDiccionario)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 

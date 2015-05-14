@@ -3,6 +3,10 @@ using System.Linq;
 using NUnit.Framework;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using Should;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using System.Collections.Generic;
+
+
 
 namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 {
@@ -12,6 +16,9 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 		private readonly Etiqueta etiqueta;
 		private readonly Cultura cultura;
 		private readonly string texto;
+        private readonly Diccionario Diccionario;
+               
+        
 
 		public EtiquetaTest ()
 		{
@@ -114,6 +121,10 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			Assert.Throws<ArgumentException> (delegate {
 				prueba.AgregarTraduccion (traduccion2);
 			});
+
+
+            
+           
 		}
 
 		[Test]
@@ -224,7 +235,10 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			//prueba.Textos.ContainsKey(Cultura.CrearNuevoValorDeCultura("it")).ShouldEqual(true);
 			//prueba.Textos.[Cultura.CrearNuevoValorDeCultura("it")].ShouldEqual(Valor.CrearNuevoValorDeTraduccion("ciao"));
 			prueba.Textos.ShouldContain (traduccion);
-		}
+		      
+        
+        }
+
 
 		#endregion
 	}

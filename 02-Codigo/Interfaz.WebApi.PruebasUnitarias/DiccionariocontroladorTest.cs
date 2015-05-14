@@ -66,6 +66,17 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
 		}
 
+        [Test]
+        public void ProbarPostDiccionarioCreatedCuandoDiccionarioNoExiste()
+        {
+            controlador.Request = new HttpRequestMessage(HttpMethod.Post, new Uri("http://localhost/api/diccionario/id/2"));
+
+            HttpResponseMessage respuesta = null;
+
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.Created);
+            
+        }
+
 		#endregion
 
 		#region contenido
@@ -102,7 +113,6 @@ namespace  Babel.Interfaz.WebApi.PruebasUnitarias
             //Assert
             respuestadeserializada.ShouldBeType<Diccionario>();
 		}
-
 
 		#endregion
 	}

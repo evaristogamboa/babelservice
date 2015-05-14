@@ -16,6 +16,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         public EtiquetasControllerTests() { 
             
         }
+
         #region Pruebas de status
         [Test]
         public void ProbarGetEtiquetasOk ()
@@ -23,17 +24,19 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
         }
 
+        //[Test]
         public void ProbarGetEtiquetasNotFound()
         {
 
         }
 
-        [Test]
+        //[Test]
         public void ProbarGetEtiquetaNotFoundCuandoEtiquetaNoExiste()
         {
 
         }
 
+        //[Test]
         public void ProbarGetEtiquetaOkCuandoEtiquetaExiste()
         {
 
@@ -41,11 +44,10 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         #endregion
 
         #region Pruebas de contenido Get
-        [Test]
+        //[Test]
         public void ProbarContenidoDeLasEtiquetasEsElEsperado()
         {
             
-
         }
         #endregion
 

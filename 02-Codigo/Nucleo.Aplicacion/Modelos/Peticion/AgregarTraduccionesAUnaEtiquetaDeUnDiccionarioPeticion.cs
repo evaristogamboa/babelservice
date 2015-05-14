@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
+using System.ComponentModel.DataAnnotations;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
 	public class AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion
 	{
-		public List<Etiqueta> ListaDeEtiquetas { get; set; }
-		
-		public Guid DiccionarioId { get; set; }
+		[Required]
+		public List<Traduccion> ListaDeTraducciones { get; set; }
 
+		[Required]
+		public Guid EtiquetaId { get; set; }
+
+		[Required]
+		public Guid DiccionarioId { get; set; }
 
 		#region constructores
 

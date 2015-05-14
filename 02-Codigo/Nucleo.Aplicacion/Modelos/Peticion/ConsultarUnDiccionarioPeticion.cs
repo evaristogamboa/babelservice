@@ -1,11 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Babel.Nucleo.Aplicacion.Fachada
+namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
 	public class ConsultarUnDiccionarioPeticion
 	{
+		public Guid DiccionarioId { get; set; }
+
+		#region constructores
+
+		private ConsultarUnDiccionarioPeticion()
+		{ 
+		
+		}
+
+		public static ConsultarUnDiccionarioPeticion CrearNuevaInstancia()
+		{
+			return new ConsultarUnDiccionarioPeticion();
+		}
+
+		#endregion
 	}
 }

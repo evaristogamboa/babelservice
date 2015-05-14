@@ -4,6 +4,7 @@ using System.Net;
 using System;
 using System.Net.Http.Headers;
 using Babel.Interfaz.WebApi.Modelos;
+using Babel.Nucleo.Aplicacion.Fachada;
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
@@ -11,6 +12,12 @@ namespace Babel.Interfaz.WebApi.Controladores
 	public class DiccionariosController : ApiController
 	{
         HttpResponseMessage respuesta;
+        private readonly IAplicacionMantenimientoDiccionario metodosAppDiccionario;
+
+        public DiccionariosController(IAplicacionMantenimientoDiccionario metodosMantenimientoAplicacion)
+        {
+            this.metodosAppDiccionario = metodosMantenimientoAplicacion;
+        }
 
         #region metodos Get
 		[HttpGet]
@@ -18,7 +25,6 @@ namespace Babel.Interfaz.WebApi.Controladores
 		public HttpResponseMessage ObtenerTodosLosDiccionarios ()
 		{
             //Solicitar respuesta
-
 
 			//Preparar respuesta
             respuesta = Request.CreateResponse(HttpStatusCode.OK, new Diccionarios(), new MediaTypeWithQualityHeaderValue("application/json"));
@@ -30,6 +36,8 @@ namespace Babel.Interfaz.WebApi.Controladores
 		[Route ("diccionario/{id}")]
 		public HttpResponseMessage ObtenerUnDiccionarioPorId (int id)
 		{
+            //Solicitar contenido
+
 
             //preparar respuesta
             respuesta = id == 1 ? Request.CreateResponse(HttpStatusCode.OK, new Diccionario(), new MediaTypeWithQualityHeaderValue("application/json")) : Request.CreateResponse(HttpStatusCode.NotFound, new Diccionario(), new MediaTypeWithQualityHeaderValue("application/json"));
@@ -40,6 +48,20 @@ namespace Babel.Interfaz.WebApi.Controladores
 
 
         #endregion
+
+        [HttpPut]
+        [Route("diccionario")]
+        public HttpResponseMessage CrearUndiccionario()
+        {
+            //Leer Parametros
+            var modeloPeticion = this.CrearUndiccionario();
+             
+
+            //Solicitar Contenido
+            metodosAppDiccionario.CrearUnDiccionario(modeloPeticion);
+
+        }
+
 	}
 
 }

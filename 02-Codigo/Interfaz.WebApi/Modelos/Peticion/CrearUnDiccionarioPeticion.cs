@@ -8,11 +8,11 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class CrearUnDiccionarioPeticion 
 	{
-        public app.CrearUnDiccionarioPeticion Diccionario { get; set; }
+        public app.CrearUnDiccionarioPeticion DiccionarioPeticion { get; set; }
 
         private void CrearUnDiccionarioPeticion()
         {
-            this.Diccionario = Dominio.Diccionario.CrearNuevoDiccionario();
+            this.DiccionarioPeticion = app.Diccionario.CrearNuevoDiccionario();
         }
 
 	}

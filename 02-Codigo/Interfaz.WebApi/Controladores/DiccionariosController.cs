@@ -28,7 +28,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 		{
 
             //preparar respuesta
-            respuesta = id == 1 ? Request.CreateResponse(HttpStatusCode.OK, new Diccionarios(), new MediaTypeWithQualityHeaderValue("application/json")) : Request.CreateResponse(HttpStatusCode.NotFound, new Diccionarios(), new MediaTypeWithQualityHeaderValue("application/json"));
+            respuesta = id == 1 ? Request.CreateResponse(HttpStatusCode.OK, new Diccionario(), new MediaTypeWithQualityHeaderValue("application/json")) : Request.CreateResponse(HttpStatusCode.NotFound, new Diccionario(), new MediaTypeWithQualityHeaderValue("application/json"));
             
             //retornar respuesta
             return respuesta;

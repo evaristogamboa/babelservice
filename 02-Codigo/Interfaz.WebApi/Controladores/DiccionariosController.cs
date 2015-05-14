@@ -34,7 +34,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
 		[HttpGet]
 		[Route ("diccionario/{id}")]
-		public HttpResponseMessage ObtenerUnDiccionarioPorId (int id)
+		public HttpResponseMessage ConsultarUnDiccionario (int id)
 		{
             //Solicitar contenido
 

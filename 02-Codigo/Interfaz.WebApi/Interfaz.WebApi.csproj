@@ -81,10 +81,39 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\Diccionario.cs" />
+    <Compile Include="Modelos\Diccionarios.cs" />
+    <Compile Include="Modelos\Etiqueta.cs" />
+    <Compile Include="Modelos\Etiquetas.cs" />
+    <Compile Include="Modelos\Peticion\AgregarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\CrearUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\EliminarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\EliminarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ModificarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasPorNombrePeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\CrearUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\EliminarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\EliminarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ModificarUnDiccionarioPeticion.cs" />
+    <Compile Include="Modelos\Traduccion.cs" />
+    <Compile Include="Modelos\Traducciones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\DiccionariosController.cs" />
-    <Compile Include="Models\Response\ObtenerTodosLosDiccionariosResponse.cs" />
-    <Compile Include="Models\Response\ObtenerUnDiccionarioEspecificoResponse.cs" />
+    <Compile Include="Controladores\DiccionariosController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -97,7 +126,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
-    <Folder Include="Models\Request\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">
+      <Project>{42cf1793-2674-424b-806a-c89555257e26}</Project>
+      <Name>Nucleo.Aplicacion</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -136,10 +170,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
-      <Project>{C7562B90-054F-4E96-B33E-4595F1E6B7CC}</Project>
-      <Name>Nucleo.Dominio</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

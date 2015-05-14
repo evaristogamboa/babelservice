@@ -18,7 +18,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         }
 
         #region Pruebas de status
-        [Test]
+        //[Test]
         public void ProbarGetEtiquetasOk ()
         {
 

@@ -35,10 +35,6 @@ namespace Babel.Interfaz.WebApi.Controladores
             return respuesta;
 		}
         #endregion
-
-
-        [HttpPost]
-        public HttpResponseMessage 
 	}
 
 }

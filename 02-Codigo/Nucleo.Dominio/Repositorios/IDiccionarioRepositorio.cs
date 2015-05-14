@@ -9,7 +9,7 @@ namespace Babel.Nucleo.Dominio.Repositorios
 		#region Consultas
 
 		List<Diccionario> ObtenerDiccionarios ();
-        
+
         Diccionario ObtenerUnDiccionario(Guid idDiccionario);
 
 		#endregion

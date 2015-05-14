@@ -370,7 +370,37 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                         
 
-        }       
+        }
+
+
+        [Test]
+
+        public void ObtenerDiccionario()
+        {
+
+       
+            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+            StreamReader reader = new StreamReader(directory);
+            object obj = deserializer.Deserialize(reader);
+            reader.Close();
+
+            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+
+            foreach (var diccionario in diccionarioRep.ListaDiccionarios) {
+
+                if (diccionario.Id == new Guid("d94ad229-aef2-49d4-a3df-51a29f8e11e0")) { 
+                
+
+                    
+                }
+            
+            
+            }
+        
+        
+        }
 
 
     }

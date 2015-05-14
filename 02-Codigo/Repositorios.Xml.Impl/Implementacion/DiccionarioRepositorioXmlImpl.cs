@@ -177,37 +177,62 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             return diccionarioDom;
 
 		}
-        
-        public Diccionario ObtenerUnDiccionario(Guid idDiccionario)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Diccionario SalvarUnDiccionario(Diccionario diccionario)
+        public Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario ObtenerUnDiccionario(Guid idDiccionario)
         {
-            throw new NotImplementedException();
-        }
+                        
+            throw new NotImplementedException(); 
+        
+            //var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+            //StreamReader reader = new StreamReader(Directory);
+            //object obj = deserializer.Deserialize(reader);
+            //reader.Close();
+
+  
+            //EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+
+            //foreach (var diccionario in diccionarioRep.ListaDiccionarios)
+            //{
+
+            //    if (diccionario.Id == new Guid(idDiccionario.ToString()))
+            //    {
+
+            //        return MapearRepositorioConDiccionario(diccionario);
+            //    }
+            //    else {                 
+                
+            //        throw new Exception();
+                    
+                
+            //    }               
+
+
+            }
+
+
+          
+        
+
+public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
+{
+ 	throw new NotImplementedException();
+}
+}
+
+       
 
 
 		#endregion
 
+        
 
 
 
+       
 
-
-
-
-
-        EntidadDom.Diccionario.Diccionario IDiccionarioRepositorio.ObtenerUnDiccionario(Guid idDiccionario)
-        {
-            throw new NotImplementedException();
-        }
-
-        public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
-        {
-            throw new NotImplementedException();
-        }
-    }
+       
+    
 }
 

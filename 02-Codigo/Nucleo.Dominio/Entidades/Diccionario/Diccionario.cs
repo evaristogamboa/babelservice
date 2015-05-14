@@ -17,6 +17,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 
 		public List<Etiqueta> Etiquetas { get; set; }
 
+		public string Ambiente { get; set; }
 		/*
 		public IReadOnlyCollection<Etiqueta> Etiquetas {
 			get { return new List<Etiqueta> (this.Etiquetas.Values).AsReadOnly (); }

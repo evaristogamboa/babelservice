@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
 	public class AgregarEtiquetasAUnDiccionarioPeticion
 	{
-		private Etiqueta listaDeEtiquetas;
-
-		private Guid diccionarioId;
+		public List<Etiqueta> ListaDeEtiquetas { get; set; }
+		
+		public Guid DiccionarioId { get; set; }
 
 
 		#region constructores
 
-		private AgregarEtiquetasAUnDiccionarioPeticion(Etiqueta listaDeEtiquetas, Guid diccionarioId)
+		private AgregarEtiquetasAUnDiccionarioPeticion()
+		{ 
+		
+		}
+
+		public static AgregarEtiquetasAUnDiccionarioPeticion CrearNuevaInstancia()
 		{
-			this.listaDeEtiquetas = listaDeEtiquetas;
-			this.diccionarioId = diccionarioId;
-			
+			return new AgregarEtiquetasAUnDiccionarioPeticion();
 		}
 
 		#endregion

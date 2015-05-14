@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using EntidadRepo = Babel.Repositorio.Xml.Impl.Modelo;
 using EntidadDom = Babel.Nucleo.Dominio.Entidades;
-
+using AutoMapper;
 
 namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 {
@@ -16,6 +16,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
     {
 
      
+        
         public Diccionarios Diccionarios { get; set; }
 
         public Diccionario DiccionarioEs { get; set; }
@@ -36,6 +37,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         private EntidadDom.Diccionario.Diccionario DiccionarioDominio { get; set; }
+
+        private EntidadDom.Diccionario.Diccionario DiccionarioDominio2 { get; set; }
 
         private readonly Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura cultura;
         private readonly string texto;
@@ -140,39 +143,234 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
         
         // Johans
-        public void CrearPruebasDominioRepositorioXml() 
+        public void CrearUnDiccionario() 
         {
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta Etq = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test");
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test");
                                                
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept","accept");
-
-            EtiquetaDom.Textos.Add(traduccionDom2);
-                                   
+                        
+            EtqDom.Textos = new List<EntidadDom.Etiquetas.Traduccion>();
             
+            EtqDom.Textos.Add(traduccionDom2);
+
+
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test2");
+
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+
+            EtqDom2.Textos = new List<EntidadDom.Etiquetas.Traduccion>();
+
+            EtqDom2.Textos.Add(traduccionDom22);
+
+
+            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
+
+            DiccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta>();
+
+            DiccionarioDominio.Etiquetas.Add(EtqDom);
+            DiccionarioDominio.Etiquetas.Add(EtqDom2);
+
+            // Metodo Mapeo
+
+                        
+            DiccionariosRepositorio = new EntidadRepo.Diccionarios();
+                        
+            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
+
+                          
+            var dicctionarioRepo = new EntidadRepo.Diccionario();
+            
+            dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
+
+            foreach (var etiqueta in DiccionarioDominio.Etiquetas)
+            {
+
+
+                var EtiquetaMapper = new EntidadRepo.Etiqueta() {
+                
+                    Activo = etiqueta.Activo,
+                    Descripcion = etiqueta.Descripcion,
+                    Id = etiqueta.Id,
+                    IdiomaPorDefecto = etiqueta.IdiomaPorDefecto,
+                    Nombre = etiqueta.Nombre,
+                    NombreEtiqueta = etiqueta.Nombre,
+                    Traducciones = new EntidadRepo.Traducciones()
+                
+                };
+
+
+                foreach (var texto in etiqueta.Textos)
+                {
+
+                    var TextoMapper = new EntidadRepo.Traduccion()
+                    {
+                        Cultura = texto.Cultura.CodigoIso.ToString(),
+                        Tooltip = texto.ToolTip,
+                        Value = texto.Texto
+                    };
+
+                    EtiquetaMapper.Traducciones.Traducciones1.Add(TextoMapper);
+                }
+
+                                
+
+                dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(EtiquetaMapper);
+
+            }
+
+            DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
+
+            if (File.Exists(directory))
+            {
+                File.Delete(directory);
+            }
+
             var serializer = new XmlSerializer(typeof(Diccionarios));
-            //Act
+
+
             using (TextWriter writer = new StreamWriter(directory))
             {
-                serializer.Serialize(writer, this.Diccionarios);
+                serializer.Serialize(writer, DiccionariosRepositorio);
             }
-            //Assert
-
-            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-            StreamReader reader = new StreamReader(directory);
-            object obj = deserializer.Deserialize(reader);
-            reader.Close();
-
-            DiccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
 
 
-            Assert.IsTrue(File.Exists(directory));
+            //var deserializer = new XmlSerializer(typeof(Diccionarios));
+
+            //StreamReader reader = new StreamReader(directory);
+            //object obj = deserializer.Deserialize(reader);
+            //reader.Close();
+
+            //DiccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
+
+            //foreach (EntidadRepo.Diccionario item in DiccionariosRepositorio.ListaDiccionarios)
+            //{
+            //    diccionarios.Add(MapearRepositorioConDiccionario(item));
+            //}
         
         }
 
 
-        
+        [Test]
+
+        // Johans
+        public void CrearDiccionarios()
+        {
+
+            var listaDiccionarios = new List<EntidadDom.Diccionario.Diccionario>();
+
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test");
+
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+
+            EtqDom.Textos = new List<EntidadDom.Etiquetas.Traduccion>();
+
+            EtqDom.Textos.Add(traduccionDom2);
+
+
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test2");
+
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+
+            EtqDom2.Textos = new List<EntidadDom.Etiquetas.Traduccion>();
+
+            EtqDom2.Textos.Add(traduccionDom22);
+
+
+            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
+
+            DiccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta>();
+
+            DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
+
+            DiccionarioDominio2.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta>();
+
+
+
+            DiccionarioDominio.Etiquetas.Add(EtqDom);
+            DiccionarioDominio.Etiquetas.Add(EtqDom2);
+
+            DiccionarioDominio2.Etiquetas.Add(EtqDom);
+            DiccionarioDominio2.Etiquetas.Add(EtqDom2);
+
+
+            listaDiccionarios.Add(DiccionarioDominio);
+
+            listaDiccionarios.Add(DiccionarioDominio2);
+
+            // Metodo Mapeo
+
+
+            DiccionariosRepositorio = new EntidadRepo.Diccionarios();
+
+            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
+
+
+            var dicctionarioRepo = new EntidadRepo.Diccionario();
+
+            dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
+
+
+            foreach (var diccioario in listaDiccionarios) {
+
+
+                foreach (var etiqueta in diccioario.Etiquetas)
+                {
+
+
+                    var EtiquetaMapper = new EntidadRepo.Etiqueta()
+                    {
+
+                        Activo = etiqueta.Activo,
+                        Descripcion = etiqueta.Descripcion,
+                        Id = etiqueta.Id,
+                        IdiomaPorDefecto = etiqueta.IdiomaPorDefecto,
+                        Nombre = etiqueta.Nombre,
+                        NombreEtiqueta = etiqueta.Nombre,
+                        Traducciones = new EntidadRepo.Traducciones()
+
+                    };
+
+
+                    foreach (var texto in etiqueta.Textos)
+                    {
+
+                        var TextoMapper = new EntidadRepo.Traduccion()
+                        {
+                            Cultura = texto.Cultura.CodigoIso.ToString(),
+                            Tooltip = texto.ToolTip,
+                            Value = texto.Texto
+                        };
+
+                        EtiquetaMapper.Traducciones.Traducciones1.Add(TextoMapper);
+                    }
+
+
+
+                    dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(EtiquetaMapper);
+
+                }
+
+            }
+
+            DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
+
+            if (File.Exists(directory))
+            {
+                File.Delete(directory);
+            }
+
+            var serializer = new XmlSerializer(typeof(Diccionarios));
+
+
+            using (TextWriter writer = new StreamWriter(directory))
+            {
+                serializer.Serialize(writer, DiccionariosRepositorio);
+            }
+
+                        
+
+        }       
 
 
     }

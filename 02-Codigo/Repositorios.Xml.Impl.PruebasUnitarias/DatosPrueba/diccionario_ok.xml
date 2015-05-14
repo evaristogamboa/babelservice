@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <diccionario id="01b3fe25-5787-4a5a-96da-ebe70b2b4d6f" ambiente="dev">
+  <diccionario id="bffb8176-4939-4aa3-9d38-1233619c1692">
     <etiquetas>
-      <etiqueta id="fcffd39c-16fb-442c-be1f-46438cb981b2" nombre="app.common.aceptar" activo="false" default="">
-        <nombre>app.common.aceptar</nombre>
-        <descripcion>Etiqueta aceptar</descripcion>
+      <etiqueta id="e28fc521-5bc8-4397-a714-bccb5929d844" nombre="app.test" activo="false">
+        <nombre>app.test</nombre>
         <traducciones>
-          <traduccion cultura="es-VE" tooltip="aceptar">aceptar</traduccion>
-          <traduccion cultura="es" tooltip="aceptar">aceptar</traduccion>
-          <traduccion cultura="en-EU" tooltip="accept">aceptar</traduccion>
-          <traduccion cultura="en" tooltip="accept">accept</traduccion>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="057dc596-0277-4765-9eeb-0572eaf8d98c" nombre="app.test2" activo="false">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="e28fc521-5bc8-4397-a714-bccb5929d844" nombre="app.test" activo="false">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="057dc596-0277-4765-9eeb-0572eaf8d98c" nombre="app.test2" activo="false">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
     </etiquetas>

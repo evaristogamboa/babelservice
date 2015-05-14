@@ -26,13 +26,13 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 
 		private Etiqueta (string nombre)
 		{
-            this.Nombre = nombre;   
+            this.Nombre = nombre;           
          
 		}
 
 		public static Etiqueta CrearNuevaEtiqueta (string nombre)
 		{
-			var entidad = new Etiqueta (nombre);
+			var entidad = new Etiqueta (nombre);           
 
 			//Validator.ValidateObject (entidad, new ValidationContext (entidad), true);
 

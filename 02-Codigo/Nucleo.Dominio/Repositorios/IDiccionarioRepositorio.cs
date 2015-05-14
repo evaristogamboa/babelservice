@@ -9,10 +9,14 @@ namespace Babel.Nucleo.Dominio.Repositorios
 		#region Consultas
 
 		List<Diccionario> ObtenerDiccionarios ();
+        
+        Diccionario ObtenerUnDiccionario(Guid idDiccionario);
 
 		#endregion
 
 		#region Salvar
+        
+        Diccionario SalvarUnDiccionario(Diccionario diccionario);
 
 		IEnumerable<Diccionario> SalvarDiccionarios (IEnumerable<Diccionario> diccionarioLista);
 

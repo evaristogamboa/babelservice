@@ -15,6 +15,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
     public class DiccionarioTest
     {
 
+     
         public Diccionarios Diccionarios { get; set; }
 
         public Diccionario DiccionarioEs { get; set; }
@@ -36,6 +37,12 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
         private EntidadDom.Diccionario.Diccionario DiccionarioDominio { get; set; }
 
+        private readonly Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura cultura;
+        private readonly string texto;
+
+        private Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta Etiq { get; set; }
+
+        
         
 
 
@@ -131,40 +138,17 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         }
 
         [Test]
-
-        public void CrearXml() 
+        
+        // Johans
+        public void CrearPruebasDominioRepositorioXml() 
         {
 
-         
-            //if (File.Exists(directory))
-            //{
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta Etq = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test");
+                                               
+            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept","accept");
 
-            //    File.Delete(directory);
-
-            //}
-
-            // Repositorio
-
-            var Traducciones = new Traducciones();
-            Traducciones.Traducciones1.Add(new Traduccion("es-VE", "aceptar", "aceptar"));
-            Traducciones.Traducciones1.Add(new Traduccion("es", "aceptar", "aceptar"));
-            Traducciones.Traducciones1.Add(new Traduccion("en-EU", "accept", "aceptar"));
-            Traducciones.Traducciones1.Add(new Traduccion("en", "accept", "accept"));
-            Etiqueta = new Etiqueta();
-            Etiqueta.Nombre = "app.common.aceptar";
-            Etiqueta.Descripcion = "Etiqueta aceptar";
-            Etiqueta.Traducciones = Traducciones;
-            Etiqueta.NombreEtiqueta = Etiqueta.Nombre;
-            Etiquetas = new Etiquetas(Etiqueta);
-            DiccionarioEs = new Diccionario("dev");
-            DiccionarioEs.Etiquetas = Etiquetas;
-            this.Diccionarios = new Diccionarios(DiccionarioEs);
-
-            // Dominio        
-    
-
-        
-
+            EtiquetaDom.Textos.Add(traduccionDom2);
+                                   
             
             var serializer = new XmlSerializer(typeof(Diccionarios));
             //Act

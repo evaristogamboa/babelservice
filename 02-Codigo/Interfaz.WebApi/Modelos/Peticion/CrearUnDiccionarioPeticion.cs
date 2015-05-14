@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Babel.Nucleo.Dominio.Comunes;
+using Dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
-	public class CrearUnDiccionarioPeticion : Entity<Diccionario>
+	public class CrearUnDiccionarioPeticion 
 	{
+        public Dominio.Diccionario Diccionario {get;set;}
+
         private void CrearUnDiccionarioPeticion()
         {
-            new CrearUnDiccionarioPeticion();
+            this.Diccionario = Dominio.Diccionario.CrearNuevoDiccionario();
         }
 
-        public void static CrearInstanciaDiccionario()
+        public CrearUnDiccionario()
         {
-
-        }
-
-        public void static CrearInstanciaDiccionario(int id)
-            base : (id)
-        {
-
+            CrearUnDiccionarioPeticion
         }
 
 	}

@@ -83,24 +83,49 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		}
 
 
-        private EntidadRepo.Diccionarios MapearDiccionarioConRepositorio(EntidadDom.Diccionario.Diccionario diccionarioDom)
+        private EntidadRepo.Diccionarios MapearDiccionarioConRepositorio(Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario diccionarioDom)
         {
-                       
-            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
 
-            var etiquetaRepo = new EntidadRepo.Etiqueta();
+            var dirRepositorio = new EntidadRepo.Diccionarios();
+
+            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();            
+
             var dicctionarioRepo = new EntidadRepo.Diccionario();
-                        
-            foreach(var etiqueta in diccionarioDom.Etiquetas){
-                                
-                foreach (var texto in etiqueta.Textos)                
+
+            dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
+
+            foreach (var etiqueta in diccionarioDom.Etiquetas)
+            {
+
+                var EtiquetaMapper = new EntidadRepo.Etiqueta()
                 {
-                    etiquetaRepo.Traducciones.Traducciones1.Add(Mapper.Map<EntidadRepo.Traduccion>(texto.Texto));                    
+
+                    Activo = etiqueta.Activo,
+                    Descripcion = etiqueta.Descripcion,
+                    Id = etiqueta.Id,
+                    IdiomaPorDefecto = etiqueta.IdiomaPorDefecto,
+                    Nombre = etiqueta.Nombre,
+                    NombreEtiqueta = etiqueta.Nombre,
+                    Traducciones = new EntidadRepo.Traducciones()
+
+                };
+
+
+                foreach (var texto in etiqueta.Textos)
+                {
+
+                    var TextoMapper = new EntidadRepo.Traduccion()
+                    {
+                        Cultura = texto.Cultura.CodigoIso.ToString(),
+                        Tooltip = texto.ToolTip,
+                        Value = texto.Texto
+                    };
+
+                    EtiquetaMapper.Traducciones.Traducciones1.Add(TextoMapper);
                 }
-                                                                             
-                 etiquetaRepo = (Mapper.Map<EntidadRepo.Etiqueta>(etiqueta));
-                 dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(etiquetaRepo);                               
-               
+
+                dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(EtiquetaMapper);
+
             }
 
             DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
@@ -112,22 +137,30 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         public IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> SalvarDiccionarios(IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> diccionarioLista)
 		{
-            
-            var diccionarios = new List<EntidadDom.Diccionario.Diccionario>();
-
+            var diccionarioRepo = new List<EntidadRepo.Diccionarios>();
+            var diccionarioDom = new List<EntidadDom.Diccionario.Diccionario>();
+         
             if (File.Exists(Directory))
             {
                 File.Delete(Directory);
-            }             
-                        
+            }
+                      
+
+            foreach (EntidadDom.Diccionario.Diccionario diccionario in diccionarioLista)
+            {
+
+                diccionarioRepo.Add(MapearDiccionarioConRepositorio(diccionario));
+            
+            }
+            
             var serializer = new XmlSerializer(typeof(Diccionarios));
             
            
             using (TextWriter writer = new StreamWriter(Directory))
             {
-                serializer.Serialize(writer, diccionarioLista);
-            }
-
+                serializer.Serialize(writer, diccionarioRepo);
+            }                       
+                        
             var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));	
 
             StreamReader reader = new StreamReader(Directory);
@@ -136,12 +169,12 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             DiccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
 
-            foreach (EntidadRepo.Diccionario item in DiccionariosRepositorio.ListaDiccionarios)
-            {
-                diccionarios.Add(MapearRepositorioConDiccionario(item));                    
+            foreach (EntidadRepo.Diccionario diccionario in DiccionariosRepositorio.ListaDiccionarios) {
+
+                diccionarioDom.Add(MapearRepositorioConDiccionario(diccionario));
             }
-            
-            return diccionarios;
+
+            return diccionarioDom;
 
 		}
         

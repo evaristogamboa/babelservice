@@ -40,8 +40,8 @@
     <Compile Include="Modelos\Peticion\EliminarUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Peticion\ModificarUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\ModeloRespuesta.cs" />
+    <Compile Include="Modelos\Peticion\ModificarUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Respuesta\AgregarEtiquetasAUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarDiccionariosRespuesta.cs" />

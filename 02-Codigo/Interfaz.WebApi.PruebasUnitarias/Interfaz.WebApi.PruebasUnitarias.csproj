@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="EtiquetasControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DiccionariocontroladorTest.cs" />
+    <Compile Include="DiccionarioControladorTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -71,6 +71,10 @@
     <ProjectReference Include="..\Interfaz.WebApi\Interfaz.WebApi.csproj">
       <Project>{BC3D30DD-3F1D-41DD-BD1B-3E9672E9DA71}</Project>
       <Name>Interfaz.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>
+      <Name>Nucleo.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

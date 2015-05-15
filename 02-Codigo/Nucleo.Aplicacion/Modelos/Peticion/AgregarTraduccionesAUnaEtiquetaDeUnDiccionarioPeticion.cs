@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Babel.Nucleo.Dominio.Entidades.Etiquetas;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
@@ -20,8 +20,10 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 		#region constructores
 
 		private AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion()
-		{ 
-		
+		{
+			ListaDeTraducciones = new List<Traduccion>();
+			EtiquetaId = Guid.Empty;
+			DiccionarioId = Guid.Empty;
 		}
 
 		public static AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion CrearNuevaInstancia()

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Babel.Nucleo.Dominio.Entidades.Etiquetas;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
@@ -17,8 +17,9 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 		#region constructores
 
 		private AgregarEtiquetasAUnDiccionarioPeticion()
-		{ 
-		
+		{
+			ListaDeEtiquetas = new List<Etiqueta>();
+			DiccionarioId = Guid.Empty;
 		}
 
 		public static AgregarEtiquetasAUnDiccionarioPeticion CrearNuevaInstancia()
@@ -27,26 +28,5 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 		}
 
 		#endregion
-
-		Boolean IsValid()
-		{
-
-			if (!(this.ListaDeEtiquetas.GetType().Equals(typeof(List<Etiqueta>))))
-			{
-				return false;
-			}
-
-			if (this.ListaDeEtiquetas.Count() == 0)
-			{
-				return false;
-			}
-
-			if (!(this.DiccionarioId.GetType().Equals(typeof(Guid))))
-			{
-				return false;
-			}
-
-			return true;
-		}
 	}
 }

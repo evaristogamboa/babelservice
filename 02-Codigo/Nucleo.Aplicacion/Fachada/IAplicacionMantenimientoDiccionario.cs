@@ -18,7 +18,7 @@ namespace Babel.Nucleo.Aplicacion.Fachada
 
 		ConsultarDiccionariosRespuesta ConsultarDiccionarios();
 
-		DiccionConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion);
+		ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion);
 
 		ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ConsultarEtiquetasDeDiccionarioPorNombre(ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion);
 
@@ -47,12 +47,6 @@ namespace Babel.Nucleo.Aplicacion.Fachada
 
 		EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta EliminarTraduccionesAUnaEtiquetaDeUnDiccionario(EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion);
 
-
-
-
 		#endregion
-
-
-
 	}
 }

@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart\WebApiConfig.cs" />
-    <Compile Include="Controladores\EtiquetasController.cs" />
+    <Compile Include="Controladores\Etiquetas.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -114,7 +114,7 @@
     <Compile Include="Modelos\Respuesta\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ModificarUnDiccionarioRespuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controladores\DiccionariosController.cs" />
+    <Compile Include="Controladores\Diccionarios.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

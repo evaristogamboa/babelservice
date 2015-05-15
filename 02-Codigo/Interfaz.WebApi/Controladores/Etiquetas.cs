@@ -13,7 +13,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 {
     
     [RoutePrefix("api/diccionario/{id}/")]
-    public class EtiquetasController : ApiController
+    public class Etiquetas : ApiController
     {
         HttpResponseMessage respuesta;
         private readonly IAplicacionMantenimientoDiccionario metodosAppDiccionario;

@@ -12,12 +12,12 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
     class EtiquetasControllerTests
     {
         private const int Id = 1;
-        private EtiquetasController controlador;
+        private Etiquetas controlador;
 
         [SetUp]
         public void Iniciador()
         {
-            controlador = new EtiquetasController();
+            controlador = new Etiquetas();
         }
 
         public EtiquetasControllerTests() { 

@@ -12,7 +12,7 @@ using Babel.Interfaz.WebApi.Modelos;
 namespace Babel.Interfaz.WebApi.Controladores
 {
     [RoutePrefix("api/")]
-	public class DiccionariosController : ApiController
+	public class Diccionarios : ApiController
 	{
 
 

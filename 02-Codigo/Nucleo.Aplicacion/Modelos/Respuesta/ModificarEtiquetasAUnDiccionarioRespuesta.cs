@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
 	public class ModificarEtiquetasAUnDiccionarioRespuesta
 	{
-
         #region Propiedades
-
-        /// <summary>
-        /// Obtiene o establece el identificador del Diccionario al cual se le moficarán las Etiquetas
-        /// </summary>
-        public Guid DiccionarioId { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<Etiqueta> ListaDeEtiquetaDeDiccionario { get; set; }
+        public List<Etiqueta> ListaDeEtiquetas { get; set; }
+
+		public Dictionary<string, Guid> Relaciones { get; set; }
+
+		public ModeloRespuesta Respuesta { get; set; }
 
         #endregion
 
@@ -30,7 +27,9 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	    /// </summary>
         private ModificarEtiquetasAUnDiccionarioRespuesta()
 	    {
-	        
+			Relaciones = new Dictionary<string, Guid> { { "diccionario", Guid.Empty }, { "etiqueta", Guid.Empty } };
+			ListaDeEtiquetas = new List<Etiqueta>();
+			Respuesta = new ModeloRespuesta();
 	    }
 
         /// <summary>
@@ -43,6 +42,5 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	    }
 
         #endregion
-
 	}
 }

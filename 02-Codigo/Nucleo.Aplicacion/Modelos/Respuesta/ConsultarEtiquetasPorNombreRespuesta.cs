@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
@@ -18,8 +18,9 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 		#region constructores
 
 		private ConsultarEtiquetasPorNombreRespuesta()
-		{ 
-		
+		{
+			ListaDeDiccionarios = new List<Diccionario>();
+			Respuesta = new ModeloRespuesta();
 		}
 
 		public static ConsultarEtiquetasPorNombreRespuesta CrearNuevaInstancia()

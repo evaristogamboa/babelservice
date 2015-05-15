@@ -20,7 +20,7 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<Etiqueta> ListaDeEtiquetaDeDiccionario { get; set; }
+        public List<Etiqueta> ListaDeEtiquetas { get; set; }
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 	    /// </summary>
         private ModificarEtiquetasAUnDiccionarioPeticion()
 	    {
-	        
+			DiccionarioId = Guid.Empty;
 	    }
 
         /// <summary>

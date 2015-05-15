@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
 	public class ModificarUnDiccionarioPeticion
 	{
-        /// <summary>
-        /// 
-        /// </summary>
-	    public Guid DiccionarioId { get; set; }
+        [Required]
+	    public Diccionario Diccionario { get; set; }
 
         #region Constructores
 
@@ -19,7 +17,7 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 	    /// </summary>
         private ModificarUnDiccionarioPeticion()
 	    {
-	        
+			Diccionario = Diccionario.CrearNuevoDiccionario();
 	    }
 
         /// <summary>

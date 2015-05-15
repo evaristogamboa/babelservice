@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
@@ -16,12 +14,13 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
         /// </summary>
         public Dictionary<string, Guid> Relaciones { get; set; }
 
+		public ModeloRespuesta Respuesta { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-	    public List<Traduccion> ListaDeTraduccionesDeEtiquetaDeDiccionario { get; set; }
+	    public List<Traduccion> ListaDeTraducciones { get; set; }
 
 
         #endregion
@@ -34,7 +33,8 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	    private ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta()
 	    {
 	        Relaciones = new Dictionary<string, Guid> {{"diccionario", Guid.Empty}, {"etiqueta", Guid.Empty}};
-            ListaDeTraduccionesDeEtiquetaDeDiccionario = new List<Traduccion>();
+			ListaDeTraducciones = new List<Traduccion>();
+			Respuesta = new ModeloRespuesta();
 	    }
 
         /// <summary>
@@ -47,6 +47,5 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	    }
 
         #endregion
-
 	}
 }

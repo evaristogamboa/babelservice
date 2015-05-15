@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Collections.Generic;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
 	public class ModificarUnDiccionarioRespuesta
     {
-
         #region Propiedades
 
         /// <summary>
         /// 
         /// </summary>
-        public Guid DiccionarioId { get; set; }
+        public Diccionario Diccionario { get; set; }
+
+		public Dictionary<string, Guid> Relaciones { get; set; }
+
+		public ModeloRespuesta Respuesta { get; set; }
 
         #endregion
        
@@ -24,7 +27,8 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	    /// </summary>
         private ModificarUnDiccionarioRespuesta()
 	    {
-	        
+			Relaciones = new Dictionary<string, Guid> { { "diccionario", Guid.Empty } };
+			Respuesta = new ModeloRespuesta();
 	    }
 
         /// <summary>
@@ -37,6 +41,5 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 	    }
 
         #endregion
-
 	}
 }

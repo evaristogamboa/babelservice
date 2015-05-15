@@ -24,9 +24,8 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         private EntidadRepo.Diccionario DiccionarioRepositorio { get; set; }
 
-        public string Directory = "DatosPrueba\\diccionario_ok.xml";
-
-
+        public string Directory =  Environment.CurrentDirectory.Replace("\\bin\\Debug","\\DatosPrueba\\") + "diccionario_ok.xml";
+        
 
         public DiccionarioRepositorioXmlImpl()
 		{
@@ -85,7 +84,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         private EntidadRepo.Diccionario MapearDiccionarioConRepositorio(Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario diccionarioDom)
         {
-            var dicctionarioRepo = new EntidadRepo.Diccionario();
+            var dicctionarioRepo = new EntidadRepo.Diccionario() { Id = diccionarioDom.Id };
 
             dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
 
@@ -190,6 +189,13 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
 
+
+            if (!File.Exists(Directory)) {
+
+                throw new ArgumentNullException();            
+            }
+
+
             StreamReader reader = new StreamReader(Directory);
             object obj = deserializer.Deserialize(reader);
             reader.Close();
@@ -215,22 +221,60 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
           
         
 
-        public List<EntidadDom.Diccionario.Diccionario> SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
+        public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
         {
+
+            var exist = false;
+            
+            EntidadDom.Diccionario.Diccionario dicDom = null;
+
 
             if (File.Exists(Directory))
             {
-                var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+                                
+                var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));                
                 
-                var listdiccionarioDom = new List<EntidadDom.Diccionario.Diccionario>();
 
                 StreamReader reader = new StreamReader(Directory);
                 object obj = deserializer.Deserialize(reader);
                 reader.Close();
 
-                EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;                
+                EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
 
-                diccionarioRep.ListaDiccionarios.Add(MapearDiccionarioConRepositorio(diccionario));
+           
+
+                foreach (EntidadRepo.Diccionario direp in diccionarioRep.ListaDiccionarios)
+                {
+
+                    if (direp.Id == diccionario.Id)
+                    {
+                        
+                        var dirRepoReplace = MapearDiccionarioConRepositorio(diccionario);
+
+                        direp.Etiquetas.ListaEtiquetas.Clear();
+
+                        foreach (var etiquetas in dirRepoReplace.Etiquetas.ListaEtiquetas)
+                        {
+
+                            direp.Etiquetas.ListaEtiquetas.Add(etiquetas);
+
+                        }
+
+                        exist = true;
+
+                    }                    
+                
+                }
+
+
+                if (exist == false) {
+
+                    diccionarioRep.ListaDiccionarios.Add(MapearDiccionarioConRepositorio(diccionario));                         
+                
+                }
+
+                File.Delete(Directory);
+    
 
                 var serializer = new XmlSerializer(typeof(Diccionarios));
 
@@ -253,21 +297,20 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
                 foreach (EntidadRepo.Diccionario dirRep in diccionarioRepDom.ListaDiccionarios)
                 {
 
-                    listdiccionarioDom.Add(MapearRepositorioConDiccionario(dirRep));
+
+                    if (dirRep.Id == diccionario.Id)                 
+                    
+                    {
+                        dicDom =  MapearRepositorioConDiccionario(dirRep);
+                        break;
+
+                    }                  
                
-                }
-
-
-                return listdiccionarioDom;
+                }                
 
             }
-            else
-            {
 
-                throw new Exception();
-
-            }
-            
+            return dicDom;
             
         }
     }

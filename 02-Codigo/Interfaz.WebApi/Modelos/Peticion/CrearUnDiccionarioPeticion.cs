@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +9,18 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class CrearUnDiccionarioPeticion 
 	{
-        //public app.CrearUnDiccionarioPeticion DiccionarioPeticion { get; set; };
+        public app.CrearUnDiccionarioPeticion DiccionarioPeticion { get; set; }
 
-        //public void CrearUnDiccionarioPeticion()
-        //{
-        //    //if (DiccionarioPeticion.IsValid())
-        //    //{
-        //    //    this.DiccionarioPeticion = app.Diccionario.CrearNuevoDiccionario();
-        //    //}
+        private CrearUnDiccionarioPeticion(Diccionario diccionario)
+        {
+            this.DiccionarioPeticion = app.CrearUnDiccionarioPeticion.CrearNuevaInstancia();
+            this.DiccionarioPeticion.DiccionarioNuevo = diccionario;
+        }
 
-        //    //return this.DiccionarioPeticion;
-        //    return;
-        //}
+        public static CrearUnDiccionarioPeticion CrearUnaNuevaPeticion(Diccionario diccionario)
+        {
+            return new CrearUnDiccionarioPeticion(diccionario);
+        }
 
         
 	}

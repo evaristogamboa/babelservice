@@ -59,7 +59,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         #endregion
 
         #region Pruebas de creacion
-        [Test]
+        //[Test]
         public void ProbarPostCrearEtiquetasInexistenteAUnDiccionario()
         {
             //Arrange

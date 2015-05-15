@@ -172,13 +172,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             DiccionarioDominio.Etiquetas.Add(EtqDom2);
 
             // Metodo Mapeo
-
-                        
-            DiccionariosRepositorio = new EntidadRepo.Diccionarios();
-                        
-            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
-
                           
+            
             var dicctionarioRepo = new EntidadRepo.Diccionario();
             
             dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
@@ -211,43 +206,40 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
                     };
 
                     EtiquetaMapper.Traducciones.Traducciones1.Add(TextoMapper);
-                }
-
-                                
+                }                                
 
                 dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(EtiquetaMapper);
 
             }
 
-            DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
-
             if (File.Exists(directory))
             {
-                File.Delete(directory);
+                var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+                StreamReader reader = new StreamReader(directory);
+                object obj = deserializer.Deserialize(reader);
+                reader.Close();
+
+                EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+                diccionarioRep.ListaDiccionarios.Add(dicctionarioRepo);
+
+                var serializer = new XmlSerializer(typeof(Diccionarios));
+
+                using (TextWriter writer = new StreamWriter(directory))
+                {
+                    serializer.Serialize(writer, diccionarioRep);
+                }
+
+            }
+            else {
+
+                throw new Exception();
+            
             }
 
-            var serializer = new XmlSerializer(typeof(Diccionarios));
+            Assert.IsTrue(File.Exists(directory));
 
-
-            using (TextWriter writer = new StreamWriter(directory))
-            {
-                serializer.Serialize(writer, DiccionariosRepositorio);
-            }
-
-
-            //var deserializer = new XmlSerializer(typeof(Diccionarios));
-
-            //StreamReader reader = new StreamReader(directory);
-            //object obj = deserializer.Deserialize(reader);
-            //reader.Close();
-
-            //DiccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
-
-            //foreach (EntidadRepo.Diccionario item in DiccionariosRepositorio.ListaDiccionarios)
-            //{
-            //    diccionarios.Add(MapearRepositorioConDiccionario(item));
-            //}
-        
         }
 
 
@@ -352,8 +344,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                 DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
             }
-
-            
+                        
 
             if (File.Exists(directory))
             {
@@ -368,6 +359,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
                 serializer.Serialize(writer, DiccionariosRepositorio);
             }
 
+            
+            Assert.IsTrue(File.Exists(directory));
                         
 
         }
@@ -378,7 +371,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         public void ObtenerDiccionario()
         {
 
-       
+                
             var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
 
             StreamReader reader = new StreamReader(directory);
@@ -392,7 +385,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                 if (diccionario.Id == new Guid("d94ad229-aef2-49d4-a3df-51a29f8e11e0")) { 
                 
-
+                    
                     
                 }
             

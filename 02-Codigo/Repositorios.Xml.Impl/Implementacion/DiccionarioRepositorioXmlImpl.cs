@@ -83,7 +83,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		}
 
 
-        private EntidadRepo.Diccionarios MapearDiccionarioConRepositorio(Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario diccionarioDom)
+        private EntidadRepo.Diccionario MapearDiccionarioConRepositorio(Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario diccionarioDom)
         {
 
             var dirRepositorio = new EntidadRepo.Diccionarios();
@@ -127,30 +127,37 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
                 dicctionarioRepo.Etiquetas.ListaEtiquetas.Add(EtiquetaMapper);
 
             }
+            
 
-            DiccionariosRepositorio.ListaDiccionarios.Add(dicctionarioRepo);
-
-            return DiccionariosRepositorio;
+            return dicctionarioRepo;
         }
 
 
 
         public IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> SalvarDiccionarios(IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> diccionarioLista)
 		{
-            var diccionarioRepo = new List<EntidadRepo.Diccionarios>();
+            
+            DiccionariosRepositorio.ListaDiccionarios = new List<EntidadRepo.Diccionario>();
+            
             var diccionarioDom = new List<EntidadDom.Diccionario.Diccionario>();
+
+
+            if (diccionarioLista.Count() == 0) {
+
+                return diccionarioDom;
+            }
+
          
             if (File.Exists(Directory))
             {
                 File.Delete(Directory);
-            }
-                      
+            }                      
+            
 
             foreach (EntidadDom.Diccionario.Diccionario diccionario in diccionarioLista)
             {
 
-                diccionarioRepo.Add(MapearDiccionarioConRepositorio(diccionario));
-            
+                DiccionariosRepositorio.ListaDiccionarios.Add(MapearDiccionarioConRepositorio(diccionario));            
             }
             
             var serializer = new XmlSerializer(typeof(Diccionarios));
@@ -158,7 +165,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
            
             using (TextWriter writer = new StreamWriter(Directory))
             {
-                serializer.Serialize(writer, diccionarioRepo);
+                serializer.Serialize(writer, DiccionariosRepositorio);
             }                       
                         
             var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));	
@@ -180,46 +187,82 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         public Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario ObtenerUnDiccionario(Guid idDiccionario)
         {
-                        
-            throw new NotImplementedException(); 
-        
-            //var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
 
-            //StreamReader reader = new StreamReader(Directory);
-            //object obj = deserializer.Deserialize(reader);
-            //reader.Close();
+            EntidadDom.Diccionario.Diccionario diccionarioDom = null;
 
-  
-            //EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+            StreamReader reader = new StreamReader(Directory);
+            object obj = deserializer.Deserialize(reader);
+            reader.Close();
+
+            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
 
 
-            //foreach (var diccionario in diccionarioRep.ListaDiccionarios)
-            //{
+            foreach (var diccionario in diccionarioRep.ListaDiccionarios)
+            {
 
-            //    if (diccionario.Id == new Guid(idDiccionario.ToString()))
-            //    {
+                if (diccionario.Id == new Guid(idDiccionario.ToString()))
+                {
 
-            //        return MapearRepositorioConDiccionario(diccionario);
-            //    }
-            //    else {                 
-                
-            //        throw new Exception();
-                    
-                
-            //    }               
+                    diccionarioDom = MapearRepositorioConDiccionario(diccionario);
 
+                }
 
             }
 
+            return diccionarioDom;
 
+        }
           
         
 
-public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
-{
- 	throw new NotImplementedException();
-}
-}
+        public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
+        {
+
+            if (File.Exists(Directory))
+            {
+                var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+                StreamReader reader = new StreamReader(Directory);
+                object obj = deserializer.Deserialize(reader);
+                reader.Close();
+
+                EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;                
+
+                diccionarioRep.ListaDiccionarios.Add(MapearDiccionarioConRepositorio(diccionario));
+
+                var serializer = new XmlSerializer(typeof(Diccionarios));
+
+                using (TextWriter writer = new StreamWriter(Directory))
+                {
+                    serializer.Serialize(writer, diccionarioRep);
+                }
+
+
+
+                var deserializerDom = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+                StreamReader readerDom = new StreamReader(Directory);
+                object objDom = deserializer.Deserialize(readerDom);
+                reader.Close();
+
+
+                EntidadRepo.Diccionario diccionarioRepDom = (EntidadRepo.Diccionario)obj;
+
+                return MapearRepositorioConDiccionario(diccionarioRepDom);
+
+            }
+            else
+            {
+
+                throw new Exception();
+
+            }
+            
+            
+        }
+    }
 
        
 

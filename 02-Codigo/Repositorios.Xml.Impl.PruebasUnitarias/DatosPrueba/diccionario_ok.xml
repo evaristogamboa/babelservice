@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <diccionario id="d94ad229-aef2-49d4-a3df-51a29f8e11e0">
+  <diccionario id="5c31096f-0cbb-46fe-ac27-4485ca463f73">
     <etiquetas>
-      <etiqueta id="580c02ce-e54b-4997-8a65-6b58092f0279" nombre="app.test" activo="false">
+      <etiqueta id="9c80d4be-df01-4622-83c3-acf394bc2855" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="dfab2477-aee7-402c-88f2-0a1c7a2c41fd" nombre="app.test2" activo="false">
+      <etiqueta id="90b9b7b3-3168-4255-98d6-d725a1d5c2be" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -16,15 +16,31 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="c8a9a919-6834-49da-aa9e-e12a3630cfec">
+  <diccionario id="7a83a1a0-415f-40bd-bd37-82e7f71efdab">
     <etiquetas>
-      <etiqueta id="580c02ce-e54b-4997-8a65-6b58092f0279" nombre="app.test" activo="false">
+      <etiqueta id="9c80d4be-df01-4622-83c3-acf394bc2855" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="dfab2477-aee7-402c-88f2-0a1c7a2c41fd" nombre="app.test2" activo="false">
+      <etiqueta id="90b9b7b3-3168-4255-98d6-d725a1d5c2be" nombre="app.test2" activo="false" default="">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="1a676f51-91de-44ff-9ed4-53d84ce82155">
+    <etiquetas>
+      <etiqueta id="1558aeb5-9cd5-4b1a-adc9-03455ff3c3e1" nombre="app.test" activo="false">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="5a8a178e-cf7f-454f-8e8b-448db6c2c733" nombre="app.test2" activo="false">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>

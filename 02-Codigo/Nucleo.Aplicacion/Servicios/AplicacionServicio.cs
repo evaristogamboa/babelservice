@@ -19,7 +19,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			throw new NotImplementedException();
 		}
 
-		public DiccionConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
+		public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
 		{
 			// TODO: Implement this method
 			throw new NotImplementedException();

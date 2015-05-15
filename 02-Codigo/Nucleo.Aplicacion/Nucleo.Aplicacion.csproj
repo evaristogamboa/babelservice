@@ -51,7 +51,7 @@
     <Compile Include="Modelos\Respuesta\ConsultarEtiquetasPorNombreRespuesta.cs" />
     <Compile Include="Modelos\Peticion\ConsultarUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Respuesta\CrearUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\DiccionConsultarUnDiccionarioarioRespuesta.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarUnDiccionarioarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarEtiquetasAUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarUnDiccionarioRespuesta.cs" />

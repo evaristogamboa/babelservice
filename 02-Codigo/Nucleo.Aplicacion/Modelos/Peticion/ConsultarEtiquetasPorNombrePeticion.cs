@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
@@ -8,13 +9,14 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 	/// </summary>
 	public class ConsultarEtiquetasPorNombrePeticion
 	{
+		[Required]
 		public string Nombre { get; set; }
 
 		#region Constructores
 
 		private ConsultarEtiquetasPorNombrePeticion()
-		{ 
-		
+		{
+			Nombre = string.Empty;
 		}
 
 		public static ConsultarEtiquetasPorNombrePeticion CrearNuevaInstancia()

@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 {
 	public class EliminarUnDiccionarioPeticion
     {
-
         #region Propiedades
 
         /// <summary>
         /// Obtiene o establece el identificador del Diccionario a eliminar
         /// </summary>
-        private Diccionario DiccionarioId { get; set; }
+        [Required]
+		public Guid DiccionarioId { get; set; }
 
         #endregion
 
@@ -25,7 +24,7 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
         /// </summary>
 	    private EliminarUnDiccionarioPeticion()
 	    {
-	        
+			DiccionarioId = Guid.Empty;
 	    }
 
         /// <summary>

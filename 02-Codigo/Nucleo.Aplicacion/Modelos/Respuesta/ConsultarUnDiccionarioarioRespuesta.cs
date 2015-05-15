@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {
-	public class CrearUnDiccionarioRespuesta
+	public class ConsultarUnDiccionarioarioRespuesta
 	{
-		public Diccionario DiccionarioNuevo { get; set; }
+		public Diccionario Diccionario { get; set; }
 
 		public Dictionary<string, Guid> Relaciones { get; set; }
 
@@ -15,16 +16,16 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 
 		#region constructores
 
-		private CrearUnDiccionarioRespuesta()
+		private ConsultarUnDiccionarioarioRespuesta()
 		{
 			Relaciones = new Dictionary<string, Guid> { { "diccionario", Guid.Empty } };
-			DiccionarioNuevo = Diccionario.CrearNuevoDiccionario();
+			Diccionario = Diccionario.CrearNuevoDiccionario();
 			Respuesta = new ModeloRespuesta();
 		}
 
-		public static CrearUnDiccionarioRespuesta CrearNuevaInstancia()
+		public static ConsultarUnDiccionarioarioRespuesta CrearNuevaInstancia()
 		{
-			return new CrearUnDiccionarioRespuesta();
+			return new ConsultarUnDiccionarioarioRespuesta();
 		}
 
 		#endregion

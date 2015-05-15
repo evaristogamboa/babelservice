@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
@@ -17,8 +17,9 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 
 		private AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta()
 		{
-			this.Relaciones.Add("Diccionario", Guid.Empty);
-			this.Relaciones.Add("Etiqueta", Guid.Empty);
+			Relaciones = new Dictionary<string, Guid> { { "diccionario", Guid.Empty }, { "etiqueta", Guid.Empty } };
+			ListaDeTraducciones = new List<Traduccion>();
+			Respuesta = new ModeloRespuesta();
 		}
 
 		public static AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta CrearNuevaInstancia()

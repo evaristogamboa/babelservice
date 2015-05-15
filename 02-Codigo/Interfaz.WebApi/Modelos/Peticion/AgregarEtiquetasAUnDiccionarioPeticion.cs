@@ -9,18 +9,8 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
     public class AgregarEtiquetasAUnDiccionarioPeticion
     {
-        
+
         public app.AgregarEtiquetasAUnDiccionarioPeticion AgregarEtiquetasAUnDiccionario { get; set; }
-
-        public AgregarEtiquetasAUnDiccionarioPeticion(string idDiccionario,List<Dominio.Etiqueta> nuevasEtiquetas)
-        {
-    
-            this.AgregarEtiquetasAUnDiccionario = app.AgregarEtiquetasAUnDiccionarioPeticion.CrearNuevaInstancia();
-
-            this.AgregarEtiquetasAUnDiccionario.DiccionarioId = idDiccionario;
-
-            return;
-        }
 
     }
 }

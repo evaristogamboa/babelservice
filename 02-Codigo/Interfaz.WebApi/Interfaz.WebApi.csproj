@@ -128,6 +128,16 @@
   <ItemGroup>
     <Folder Include="AppData\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">
+      <Project>{42cf1793-2674-424b-806a-c89555257e26}</Project>
+      <Name>Nucleo.Aplicacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>
+      <Name>Nucleo.Dominio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

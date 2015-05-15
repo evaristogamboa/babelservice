@@ -12,14 +12,14 @@ using Newtonsoft.Json;
 namespace Babel.Interfaz.WebApi.Controladores
 {
     
-    [RoutePrefix("Diccionario/{id}/")]
+    [RoutePrefix("api/diccionario/{id}/")]
     public class EtiquetasController : ApiController
     {
         HttpResponseMessage respuesta;
         private readonly IAplicacionMantenimientoDiccionario metodosAppDiccionario;
 
         [HttpPut]
-        [Route("Etiqueta/")]
+        [Route("etiqueta/")]
         public HttpResponseMessage AgregarEtiquetasAUnDiccionario(
             [FromUri]string idDiccionario,
             HttpRequestMessage request)
@@ -43,6 +43,7 @@ namespace Babel.Interfaz.WebApi.Controladores
             //{
             //    throw ex;
             //}
+            return respuesta;
         }
     }
 }

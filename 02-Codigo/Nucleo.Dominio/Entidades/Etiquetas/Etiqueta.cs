@@ -30,6 +30,16 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
          
 		}
 
+		private Etiqueta (Guid id)
+			: base (id)
+		{
+            
+		}
+		public static Etiqueta CrearNuevaEtiqueta(Guid id)
+		{
+			return new Etiqueta(id);
+		}
+
 		public static Etiqueta CrearNuevaEtiqueta (string nombre)
 		{
 			var entidad = new Etiqueta (nombre);           

@@ -8,12 +8,44 @@ using Should;
 using Babel.Nucleo.Aplicacion.Servicios;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 
 namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 {
 	[TestFixture]
 	public class AplicacionServicioPruebas
 	{
+		[SetUp]
+		public void Inicializar()
+		{
+			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+			Diccionario diccionario = Diccionario.CrearNuevoDiccionario();
+			Etiqueta etiqueta1 = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
+			Etiqueta etiqueta2 = Etiqueta.CrearNuevaEtiqueta("app.common.cancelar");
+			Cultura cultura = Cultura.CrearNuevaCultura("es-VE");
+			Traduccion traduccion = Traduccion.CrearNuevaTraduccion(cultura, "");
+
+			traduccion.Texto = "";
+			traduccion.ToolTip = "";
+
+
+			
+			//etiqueta1.Id = new Guid("8a87f8a7-3df9-4d90-9478-350b964fc888");
+			etiqueta1.IdiomaPorDefecto = "es-VE";
+			etiqueta1.Nombre = "";
+			etiqueta1.AgregarTraduccion(traduccion);
+
+			etiqueta1.Activo = true;
+
+
+			listaDeEtiquetas.Add(etiqueta1);
+			listaDeEtiquetas.Add(etiqueta2);
+
+			diccionario.Ambiente = "desarrollo";
+			diccionario.Etiquetas = listaDeEtiquetas;
+
+		}
 
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdioma()

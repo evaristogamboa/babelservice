@@ -61,6 +61,10 @@
       <Project>{42cf1793-2674-424b-806a-c89555257e26}</Project>
       <Name>Nucleo.Aplicacion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>
+      <Name>Nucleo.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

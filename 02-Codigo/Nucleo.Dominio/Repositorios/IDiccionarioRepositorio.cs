@@ -15,8 +15,8 @@ namespace Babel.Nucleo.Dominio.Repositorios
 		#endregion
 
 		#region Salvar
-        
-        Diccionario SalvarUnDiccionario(Diccionario diccionario);
+
+        List<Diccionario> SalvarUnDiccionario(Diccionario diccionario);
 
 		IEnumerable<Diccionario> SalvarDiccionarios (IEnumerable<Diccionario> diccionarioLista);
 

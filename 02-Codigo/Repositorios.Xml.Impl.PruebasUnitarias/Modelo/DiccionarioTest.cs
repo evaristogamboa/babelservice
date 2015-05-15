@@ -240,6 +240,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             Assert.IsTrue(File.Exists(directory));
 
+           
+
         }
 
 
@@ -383,7 +385,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             foreach (var diccionario in diccionarioRep.ListaDiccionarios) {
 
-                if (diccionario.Id == new Guid("d94ad229-aef2-49d4-a3df-51a29f8e11e0")) { 
+                if (diccionario.Id == new Guid("9c80d4be-df01-4622-83c3-acf394bc2855"))
+                { 
                 
                     
                     

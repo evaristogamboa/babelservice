@@ -28,6 +28,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.8.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.8.1.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="Should">
       <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
@@ -71,6 +75,10 @@
     <ProjectReference Include="..\Interfaz.WebApi\Interfaz.WebApi.csproj">
       <Project>{BC3D30DD-3F1D-41DD-BD1B-3E9672E9DA71}</Project>
       <Name>Interfaz.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">
+      <Project>{42CF1793-2674-424B-806A-C89555257E26}</Project>
+      <Name>Nucleo.Aplicacion</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
       <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>

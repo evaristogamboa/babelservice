@@ -7,7 +7,6 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class ConsultarUnDiccionarioPeticion
 	{
-        public string IdDiccionario { get; set; }
 
 	}
 }

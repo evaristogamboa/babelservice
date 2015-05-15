@@ -9,115 +9,116 @@ using Babel.Interfaz.WebApi.Modelos;
 using Newtonsoft.Json;
 
 
-namespace  Babel.Interfaz.WebApi.PruebasUnitarias
+namespace Babel.Interfaz.WebApi.PruebasUnitarias
 {
-	[TestFixture]
-	public class DiccionariocontroladorTest
-	{
-		private const int Id = 1;
-        private DiccionariosController controlador;
-        //private readonly IAplicacionMantenimientoDiccionario metodosAppDiccionario;
+    [TestFixture]
+    public class DiccionariocontroladorTest
+    {
+        //    private const int Id = 1;
+        //    private DiccionariosController controlador;
 
-        [SetUp]
-        public void Iniciador()
-		{
-            controlador = new DiccionariosController();
-		}
+        //    [SetUp]
+        //    public void Iniciador()
+        //    {
+        //        controlador = new DiccionariosController();
+        //    }
 
-		#region status
+        //    #region status
 
-		[Test]
-		public void ProbarGetDiccionariosOk ()
-		{
-			//Arrange
-			controlador.Request = new HttpRequestMessage ();
-			controlador.Configuration = new HttpConfiguration ();
+        //    [Test]
+        //    public void ProbarGetDiccionariosOk ()
+        //    {
+        //        //Arrange
+        //        controlador.Request = new HttpRequestMessage ();
+        //        controlador.Configuration = new HttpConfiguration ();
 
-			//Act
-			var respuesta = controlador.ObtenerTodosLosDiccionarios ();
-			
-            //Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
-		}
+        //        //Act
+        //        var respuesta = controlador.ObtenerTodosLosDiccionarios ();
 
-		[Test]
-		public void ProbarGetDiccionarioOkCuandoDiccionarioExiste ()
-		{
-			//Arrange
-			controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionarios/" ));
-			controlador.Configuration = new HttpConfiguration ();
+        //        //Assert
+        //        respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+        //    }
 
-			//Act
-			var respuesta = controlador.ConsultarUnDiccionario (Id);
+        //    [Test]
+        //    public void ProbarGetDiccionarioOkCuandoDiccionarioExiste ()
+        //    {
+        //        //Arrange
+        //        controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionarios/" ));
+        //        controlador.Configuration = new HttpConfiguration ();
 
-			//Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
-		}
+        //        //Act
+        //        var respuesta = controlador.ConsultarUnDiccionario (Id);
 
-		[Test]
-		public void ProbarGetDiccionarioNotFoundCuandoDiccionarioNoExiste ()
-		{
-			//Arrange
-			controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionario/id/1"));
-			controlador.Configuration = new HttpConfiguration ();
+        //        //Assert
+        //        respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+        //    }
 
-			//Act
-            var respuesta = controlador.ConsultarUnDiccionario(3);
-			
-            //Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
-		}
+        //    [Test]
+        //    public void ProbarGetDiccionarioNotFoundCuandoDiccionarioNoExiste ()
+        //    {
+        //        //Arrange
+        //        controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionario/id/1"));
+        //        controlador.Configuration = new HttpConfiguration ();
 
-        [Test]
-        public void ProbarPostDiccionarioCreatedCuandoDiccionarioNoExiste()
-        {
-            //Arrange
-            controlador.Request = new HttpRequestMessage(HttpMethod.Post, new Uri("http://localhost/api/diccionario/id/2"));
+        //        //Act
+        //        var respuesta = controlador.ConsultarUnDiccionario(3);
 
-            HttpResponseMessage respuesta = null;
+        //        //Assert
+        //        respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
+        //    }
 
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.Created);
-            
-        }
+        //    [Test]
+        //    public void ProbarPostDiccionarioCreatedCuandoDiccionarioNoExiste()
+        //    {
+        //        //Arrange
+        //        controlador.Request = new HttpRequestMessage(HttpMethod.Post, new Uri("http://localhost/api/diccionario/id/2"));
 
-		#endregion
+        //        HttpResponseMessage respuesta = null;
 
-		#region contenido
+        //        respuesta.StatusCode.ShouldEqual(HttpStatusCode.Created);
 
-		[Test]
-		public void ProbarContenidoDeObtenerDiccionariosEsTipoCorrecto ()
-		{
-			//Arrange
-			controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionarios"));
-			controlador.Configuration = new HttpConfiguration ();
+        //    }
 
-			//Act
-			var respuesta = controlador.ObtenerTodosLosDiccionarios ();
-			var textoRespuesta = respuesta.Content.ReadAsStringAsync ().Result;
-            var respuestaDeserializada = JsonConvert.DeserializeObject<Diccionarios>(textoRespuesta);
-			
-            //Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
-            respuestaDeserializada.ShouldBeType<Diccionarios>();
-		}
+        //    #endregion
 
-		[Test]
-		public void ProbarContenidoDeObtenerUnDiccionarioEsTipoCorrecto ()
-		{
-			//Arrange
-			controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionario/id/1"));
-			controlador.Configuration = new HttpConfiguration ();
+        //    #region contenido
 
-			//Act
-            var respuesta = controlador.ConsultarUnDiccionario(1);
-			var textorespuesta = respuesta.Content.ReadAsStringAsync ().Result;
-			var respuestadeserializada = JsonConvert.DeserializeObject<Diccionario> (textorespuesta);
-			
-            //Assert
-            respuestadeserializada.ShouldBeType<Diccionario>();
-		}
+        //    [Test]
+        //    public void ProbarContenidoDeObtenerDiccionariosEsTipoCorrecto ()
+        //    {
+        //        //Arrange
+        //        controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionarios"));
+        //        controlador.Configuration = new HttpConfiguration ();
 
-		#endregion
-	}
+        //        //Act
+        //        var respuesta = controlador.ObtenerTodosLosDiccionarios ();
+        //        var textoRespuesta = respuesta.Content.ReadAsStringAsync ().Result;
+        //        var respuestaDeserializada = JsonConvert.DeserializeObject<Diccionarios>(textoRespuesta);
+
+        //        //Assert
+        //        respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+        //        respuestaDeserializada.ShouldBeType<Diccionarios>();
+        //    }
+
+        //    [Test]
+        //    public void ProbarContenidoDeObtenerUnDiccionarioEsTipoCorrecto ()
+        //    {
+        //        //Arrange
+        //        controlador.Request = new HttpRequestMessage (HttpMethod.Get, new Uri ("http://localhost/api/diccionario/id/1"));
+        //        controlador.Configuration = new HttpConfiguration ();
+
+        //        //Act
+        //        var respuesta = controlador.ConsultarUnDiccionario(1);
+        //        var textorespuesta = respuesta.Content.ReadAsStringAsync ().Result;
+        //        var respuestadeserializada = JsonConvert.DeserializeObject<Diccionario> (textorespuesta);
+
+        //        //Assert
+        //        respuestadeserializada.ShouldBeType<Diccionario>();
+        //    }
+
+        //    #endregion
+        //}
+
+    }
 }
 

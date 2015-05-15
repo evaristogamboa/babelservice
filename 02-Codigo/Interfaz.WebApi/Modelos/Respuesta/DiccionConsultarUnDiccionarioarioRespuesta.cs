@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
-	public class EliminarUnDiccionarioPeticion
+	public class DiccionConsultarUnDiccionarioarioRespuesta
 	{
 	}
 }

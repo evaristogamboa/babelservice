@@ -72,6 +72,10 @@
       <Project>{BC3D30DD-3F1D-41DD-BD1B-3E9672E9DA71}</Project>
       <Name>Interfaz.WebApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
+      <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>
+      <Name>Nucleo.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

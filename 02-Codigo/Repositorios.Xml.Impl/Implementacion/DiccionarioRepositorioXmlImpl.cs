@@ -15,7 +15,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 {
 	public class DiccionarioRepositorioXmlImpl : IDiccionarioRepositorio
 	{
-
+        
         public Diccionarios Diccionarios { get; set; }
 
 		private EntidadDom.Diccionario.Diccionario DiccionarioDominio { get; set; }
@@ -59,13 +59,13 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		{
                        
 
-			DiccionarioDominio = EntidadDom.Diccionario.Diccionario.CrearNuevoDiccionario (diccionarioRepo.Id);
-			DiccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta> ();
+			DiccionarioDominio = EntidadDom.Diccionario.Diccionario.CrearNuevoDiccionario (diccionarioRepo.Id, diccionarioRepo.Ambiente);
+			
 
             
 			for (int i = 00; i < diccionarioRepo.Etiquetas.ListaEtiquetas.Count (); i++) {
 			
-				DiccionarioDominio.Etiquetas.Add (Mapper.Map<EntidadDom.Etiquetas.Etiqueta> (diccionarioRepo.Etiquetas.ListaEtiquetas [i]));
+				DiccionarioDominio.AgregarEtiqueta (Mapper.Map<EntidadDom.Etiquetas.Etiqueta> (diccionarioRepo.Etiquetas.ListaEtiquetas [i]));
 				
                 for (int x = 0; x < diccionarioRepo.Etiquetas.ListaEtiquetas [i].Traducciones.Traducciones1.Count (); x++) {
 

@@ -27,6 +27,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		public void Inicializar()
 		{
 			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+            Diccionario diccionario = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
 
 			List<Traduccion> listaDeTraduccionesAceptar = new List<Traduccion>();
 			List<Traduccion> listaDeTraduccionesCancelar = new List<Traduccion>();
@@ -77,7 +78,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			listaDeEtiquetas.Add(etiquetaCancelar);
 
 			diccionario.Ambiente = "desarrollo";
-			diccionario.Etiquetas = listaDeEtiquetas;
+			diccionario.AgregarEtiquetas(listaDeEtiquetas);
 		}
 
 		#region ConsultarEtiquetasDeDiccionarioPorIdioma

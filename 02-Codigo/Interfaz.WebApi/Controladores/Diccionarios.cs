@@ -2,23 +2,24 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System;
-using Babel.Interfaz.WebApi.Modelos.Respuesta;
-using Babel.Interfaz.WebApi.Modelos.Peticion;
-using Babel.Nucleo.Aplicacion.Fachada;
+using respuestaApi = Babel.Interfaz.WebApi.Modelos.Respuesta;
+using peticionApi = Babel.Interfaz.WebApi.Modelos.Peticion;
+using app = Babel.Nucleo.Aplicacion.Fachada;
+using modelosApp = Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using System.Net;
-using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
 using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
-
     [RoutePrefix("api/")]
-    
 	public class Diccionarios : ApiController
     {
-        private readonly IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
+        private readonly app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
+
+        const string Ambiente = "Desarrollo";
         
-        public Diccionarios(IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
+        public Diccionarios(app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
         {
             this.aplicacionMantenimientoDiccionario = aplicacionMantenimientoDiccionario;
         }
@@ -28,23 +29,30 @@ namespace Babel.Interfaz.WebApi.Controladores
         public HttpResponseMessage ObtenerTodosDiccionarios()
         {
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ConsultarDiccionarios();
-            var respuestaContenido = ConsultarDiccionariosRespuesta.CrearNuevaRespuestaConRespuestaDeAplicacion(respuestaApp);
+            var respuestaContenido = respuestaApi.ConsultarDiccionariosRespuesta.CrearNuevaRespuestaConRespuestaDeAplicacion(respuestaApp);
             var respuestaHttp = Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
 
           return respuestaHttp;
         }
         [Route("diccionarios")]
         [HttpPost]
-        public HttpResponseMessage CrearUnDiccionario([FromBody]HttpRequestMessage peticion)
+        public HttpResponseMessage CrearUnDiccionario()
         {
-            
-            var peticionHttp = JsonConvert.DeserializeObject<Diccionario>(peticion.Content.ReadAsStringAsync().Result);
-            var peticionApp = CrearUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticionHttp);
-            var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionApp.DiccionarioPeticion);
 
-            var respuestaContenido = CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
-            var respuestaHttp = Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
-            return respuestaHttp;
+            var peticionApp = peticionApi.CrearUnDiccionarioPeticion.CrearUnaNuevaPeticion(Ambiente);
+
+            var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionApp.AppDiccionarioPeticion);
+
+            if(respuestaApp is NullReferenceException || respuestaApp is ArgumentNullException)
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError,respuestaApp.Respuesta.ToString());
+
+            var respuestaContenido = respuestaApi.CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
+
+            if (respuestaContenido is ArgumentNullException || respuestaContenido is NullReferenceException)
+                return Request.CreateErrorResponse(HttpStatusCode.Conflict, respuestaApp.Respuesta.ToString());
+
+            //Devolvemos el diccionario creado seteado como respuesta http 
+            return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
             

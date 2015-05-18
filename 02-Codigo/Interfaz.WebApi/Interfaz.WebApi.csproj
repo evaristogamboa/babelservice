@@ -89,11 +89,11 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppStart\WebApiConfig.cs" />
     <Compile Include="Controladores\Etiquetas.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Modelos\Comunes\Diccionario.cs" />
     <Compile Include="Modelos\Comunes\Diccionarios.cs" />
     <Compile Include="Modelos\Comunes\Etiqueta.cs" />
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
+    <Folder Include="AppStart\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">

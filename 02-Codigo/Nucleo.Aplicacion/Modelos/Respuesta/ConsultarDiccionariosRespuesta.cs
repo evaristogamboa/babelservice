@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
-using Newtonsoft.Json;
 
 namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 {

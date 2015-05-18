@@ -16,7 +16,7 @@ namespace Babel.Interfaz.WebApi.Controladores
     
 	public class Diccionarios : ApiController
     {
-        private IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
+        private readonly IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
         
         public Diccionarios(IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
         {
@@ -35,8 +35,9 @@ namespace Babel.Interfaz.WebApi.Controladores
         }
         [Route("diccionarios")]
         [HttpPost]
-        public HttpResponseMessage CrearUnDiccionario(HttpRequestMessage peticion)
+        public HttpResponseMessage CrearUnDiccionario([FromBody]HttpRequestMessage peticion)
         {
+            
             var peticionHttp = JsonConvert.DeserializeObject<Diccionario>(peticion.Content.ReadAsStringAsync().Result);
             var peticionApp = CrearUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticionHttp);
             var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionApp.DiccionarioPeticion);

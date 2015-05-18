@@ -198,7 +198,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			Etiqueta prueba = Etiqueta.CrearNuevaEtiqueta ("app.common.aceptar");
 			prueba.AgregarTraduccion (Traduccion.CrearNuevaTraduccion (this.cultura, this.texto));
 			//Act
-            prueba.EliminarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, this.texto));
+            prueba.EliminarTraduccion(Traduccion.CrearNuevaTraduccion(this.cultura, "TextoNoExiste"));
 			//Assert
 			prueba.Textos.Count.ShouldEqual (1);
 		}

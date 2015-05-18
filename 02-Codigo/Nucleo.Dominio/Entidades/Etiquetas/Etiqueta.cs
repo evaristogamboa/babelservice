@@ -8,13 +8,13 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 	public class Etiqueta : Entity<Etiqueta>
 	{
 
-		[Required]
+
 		public bool Activo { get; set; }
 
-		[Required]
+
 		public string IdiomaPorDefecto { get; set; }
 
-		[Required]
+
 		public string Descripcion { get; set; }
 
 		[Required]
@@ -26,14 +26,15 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 
 		private Etiqueta (string nombre)
 		{
-            this.Nombre = nombre;           
+            this.Nombre = nombre;
+            Textos = new List<Traduccion>();
          
 		}
 
 		private Etiqueta (Guid id)
 			: base (id)
 		{
-            
+            Textos = new List<Traduccion>();
 		}
 		public static Etiqueta CrearNuevaEtiqueta(Guid id)
 		{
@@ -44,7 +45,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 		{
 			var entidad = new Etiqueta (nombre);           
 
-			//Validator.ValidateObject (entidad, new ValidationContext (entidad), true);
+			Validator.ValidateObject (entidad, new ValidationContext (entidad), true);
 
 			return entidad;
 		}
@@ -52,6 +53,11 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 		public Etiqueta AgregarTraduccion (Traduccion traduccion)
 		{
 			Validator.ValidateObject (traduccion, new ValidationContext (traduccion), true);
+
+            if (this.Textos.Exists(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
+            {
+                throw new ArgumentException("Ya existe una traducción con código Iso " + traduccion.Cultura.CodigoIso);
+            }
 
 			this.Textos.Add ( traduccion);
 
@@ -68,14 +74,14 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 
         public Etiqueta ModificarTraduccion(Traduccion traduccion)
         {
-            //if (this.Textos(traduccion.Cultura.CodigoIso) == true)
-            //{
-            //    this.Textos[traduccion.Cultura.CodigoIso] = traduccion;
-            //}
-            //else
-            //{
-            //    this.AgregarTraduccion(traduccion);
-            //}
+            if(this.Textos.Exists(item=> item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
+            {
+                this.Textos[this.Textos.FindIndex(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)] = traduccion;
+            }
+            else
+            {
+                this.AgregarTraduccion(traduccion);
+            }
 
             return this;
         }

@@ -15,18 +15,18 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 	    /// <summary>
 	    /// 
 	    /// </summary>
-        private ModificarUnDiccionarioPeticion()
+        private ModificarUnDiccionarioPeticion(string ambiente)
 	    {
-			Diccionario = Diccionario.CrearNuevoDiccionario();
+            Diccionario = Diccionario.CrearNuevoDiccionario(ambiente);
 	    }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public static ModificarUnDiccionarioPeticion CrearNuevaInstancia()
+        public static ModificarUnDiccionarioPeticion CrearNuevaInstancia(string ambiente)
 	    {
-            return new ModificarUnDiccionarioPeticion();
+            return new ModificarUnDiccionarioPeticion(ambiente);
 	    }
 
         #endregion

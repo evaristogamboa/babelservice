@@ -13,7 +13,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 
         private CrearUnDiccionarioPeticion(Diccionario diccionario)
         {
-            this.DiccionarioPeticion = app.CrearUnDiccionarioPeticion.CrearNuevaInstancia();
+            this.DiccionarioPeticion = app.CrearUnDiccionarioPeticion.CrearNuevaInstancia(diccionario.Ambiente);
             this.DiccionarioPeticion.DiccionarioNuevo = diccionario;
         }
 

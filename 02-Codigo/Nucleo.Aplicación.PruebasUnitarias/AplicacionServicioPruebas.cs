@@ -16,11 +16,13 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 	[TestFixture]
 	public class AplicacionServicioPruebas
 	{
+        private const string ambienteTestPrueba = "Prueba";
+
 		[SetUp]
 		public void Inicializar()
 		{
 			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
-			Diccionario diccionario = Diccionario.CrearNuevoDiccionario();
+            Diccionario diccionario = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
 			Etiqueta etiqueta1 = Etiqueta.CrearNuevaEtiqueta("app.common.aceptar");
 			Etiqueta etiqueta2 = Etiqueta.CrearNuevaEtiqueta("app.common.cancelar");
 			Cultura cultura = Cultura.CrearNuevaCultura("es-VE");
@@ -43,7 +45,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			listaDeEtiquetas.Add(etiqueta2);
 
 			diccionario.Ambiente = "desarrollo";
-			diccionario.Etiquetas = listaDeEtiquetas;
+			diccionario.AgregarEtiquetas(listaDeEtiquetas);
 
 		}
 

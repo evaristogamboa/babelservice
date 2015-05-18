@@ -60,10 +60,11 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 				throw new ArgumentNullException ();
 			}
 
-            if (etiquetaLista.Exists(item => item.Id == etiqueta.Id))
+            if (etiquetaLista.Exists(item => item.Nombre == etiqueta.Nombre))
             {
-                throw new ArgumentException("Ya existe una etiqueta con Id "+etiqueta.Id);
+				throw new ArgumentException("Ya existe una etiqueta con Nombre " + etiqueta.Nombre);
             }
+
             this.etiquetaLista.Add(etiqueta);
 
 			return this;

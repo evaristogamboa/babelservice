@@ -75,6 +75,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 		public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
 		{
+<<<<<<< HEAD
 			var unDiccionarioRespuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
 
 			try
@@ -91,6 +92,25 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			}
 
 			return unDiccionarioRespuesta;
+=======
+
+            var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+	
+            
+		    var dirRquest = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(diccionario.Ambiente);
+
+
+		    if (dirRquest != null)
+		    {
+
+		        return dirRquest;
+
+		    }
+		    
+                throw  new Exception();
+		    
+
+>>>>>>> 5555544df2090019e57779adf086a5934f0e5f84
 		}
 
 		public ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ConsultarEtiquetasDeDiccionarioPorNombre(ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion)
@@ -107,8 +127,16 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 		public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
 		{
-			// TODO: Implement this method
-			throw new NotImplementedException();
+            
+            var diccionario =  diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioNuevo.Id);
+            
+
+		    if (diccionario.Ambiente == peticion.DiccionarioNuevo.Ambiente)
+		    {
+		        throw new Exception("Ya existe un diccionario con ese ambiente");
+		    }
+		    
+            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(peticion.DiccionarioNuevo.Ambiente);
 		}
 
 		public ModificarUnDiccionarioRespuesta ModificarUnDiccionario(ModificarUnDiccionarioPeticion peticion)

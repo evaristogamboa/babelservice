@@ -75,7 +75,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 		public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
 		{
-<<<<<<< HEAD
+
 			var unDiccionarioRespuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
 
 			try
@@ -92,25 +92,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			}
 
 			return unDiccionarioRespuesta;
-=======
 
-            var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-	
-            
-		    var dirRquest = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(diccionario.Ambiente);
-
-
-		    if (dirRquest != null)
-		    {
-
-		        return dirRquest;
-
-		    }
-		    
-                throw  new Exception();
-		    
-
->>>>>>> 5555544df2090019e57779adf086a5934f0e5f84
 		}
 
 		public ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ConsultarEtiquetasDeDiccionarioPorNombre(ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion)

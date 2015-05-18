@@ -1,82 +1,100 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Babel.Nucleo.Dominio.Comunes;
 using System.ComponentModel.DataAnnotations;
 
 namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
-	public class Etiqueta : Entity<Etiqueta>
-	{
+    public class Etiqueta : Entity<Etiqueta>
+    {
+        private readonly List<Traduccion> listaTextos = new List<Traduccion>();
+
+        public bool Activo { get; set; }
 
 
-		public bool Activo { get; set; }
+        public string IdiomaPorDefecto { get; set; }
 
 
-		public string IdiomaPorDefecto { get; set; }
+        public string Descripcion { get; set; }
+
+        [Required]
+        public string Nombre { get; set; }
 
 
-		public string Descripcion { get; set; }
+        public IReadOnlyList<Traduccion> Textos
+        {
+            get
+            {
+                return new ReadOnlyCollection<Traduccion>(this.listaTextos);
+            }
+        }
 
-		[Required]
-		public string Nombre { get; set; }
-
-
-		public List<Traduccion> Textos { get; set; }
-
-
-		private Etiqueta (string nombre)
-		{
+        private Etiqueta(string nombre)
+        {
             this.Nombre = nombre;
-            Textos = new List<Traduccion>();
-         
-		}
+        }
 
-		private Etiqueta (Guid id)
-			: base (id)
-		{
-            Textos = new List<Traduccion>();
-		}
-		public static Etiqueta CrearNuevaEtiqueta(Guid id)
-		{
-			return new Etiqueta(id);
-		}
+        private Etiqueta(Guid id)
+            : base(id)
+        {
+        }
 
-		public static Etiqueta CrearNuevaEtiqueta (string nombre)
-		{
-			var entidad = new Etiqueta (nombre);           
+        public static Etiqueta CrearNuevaEtiqueta(Guid id)
+        {
+            return new Etiqueta(id);
+        }
 
-			Validator.ValidateObject (entidad, new ValidationContext (entidad), true);
+        public static Etiqueta CrearNuevaEtiqueta(string nombre)
+        {
+            var entidad = new Etiqueta(nombre);
 
-			return entidad;
-		}
+            Validator.ValidateObject(entidad, new ValidationContext(entidad), true);
 
-		public Etiqueta AgregarTraduccion (Traduccion traduccion)
-		{
-			Validator.ValidateObject (traduccion, new ValidationContext (traduccion), true);
+            return entidad;
+        }
 
-            if (this.Textos.Exists(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
+        public Etiqueta AgregarTraduccion(Traduccion traduccion)
+        {
+            Validator.ValidateObject(traduccion, new ValidationContext(traduccion), true);
+
+            if (this.listaTextos.Exists(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
             {
                 throw new ArgumentException("Ya existe una traducción con código Iso " + traduccion.Cultura.CodigoIso);
             }
 
-			this.Textos.Add ( traduccion);
+            this.listaTextos.Add(traduccion);
 
-			return this;
-		}
+            return this;
+        }
 
+        public Etiqueta AgregarTraducciones(List<Traduccion> traducciones)
+        {
+            if (traducciones == null)
+            {
+                throw new ArgumentNullException();
+            }
 
-		public Etiqueta EliminarTraduccion (Traduccion traduccion)
-		{
-			this.Textos.Remove (traduccion);
+            foreach (Traduccion item in traducciones)
+            {
+                this.AgregarTraduccion(item);
+            }
 
-			return this;
-		}
+            return this;
+        }
+
+        public Etiqueta EliminarTraduccion(Traduccion traduccion)
+        {
+            this.listaTextos.Remove(traduccion);
+
+            return this;
+        }
 
         public Etiqueta ModificarTraduccion(Traduccion traduccion)
         {
-            if(this.Textos.Exists(item=> item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
+            if (this.listaTextos.Exists(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
             {
-                this.Textos[this.Textos.FindIndex(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)] = traduccion;
+                this.listaTextos[this.listaTextos.FindIndex(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)] = traduccion;
             }
             else
             {
@@ -85,5 +103,5 @@ namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 
             return this;
         }
-	}
+    }
 }

@@ -12,14 +12,14 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 
 		#region Constructores
 
-		private CrearUnDiccionarioPeticion()
+		private CrearUnDiccionarioPeticion(string ambiente)
 		{
-			DiccionarioNuevo = Diccionario.CrearNuevoDiccionario();
+            DiccionarioNuevo = Diccionario.CrearNuevoDiccionario(ambiente);
 		}
 
-		public static CrearUnDiccionarioPeticion CrearNuevaInstancia()
+        public static CrearUnDiccionarioPeticion CrearNuevaInstancia(string ambiente)
 		{
-			return new CrearUnDiccionarioPeticion();
+            return new CrearUnDiccionarioPeticion(ambiente);
 		}
 
 		#endregion

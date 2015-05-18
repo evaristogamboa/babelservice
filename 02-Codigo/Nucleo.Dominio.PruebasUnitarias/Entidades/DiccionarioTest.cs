@@ -11,6 +11,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 	[TestFixture]
 	public class DiccionarioTest
 	{
+        private const string ambienteTestPrueba = "Prueba";
 		private Diccionario diccionarioPrueba;
 		private readonly Dictionary<string, Etiqueta> listaEtiquetas;
         private readonly Etiqueta etiqueta1;
@@ -30,7 +31,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 		[SetUp]
 		public void SetUp ()
 		{
-			this.diccionarioPrueba = Diccionario.CrearNuevoDiccionario ();
+            this.diccionarioPrueba = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
 		}
 
 		#region creacion
@@ -200,7 +201,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 		public void PruebaEliminarUnaEtiquetaAlDiccionarioVacio ()
 		{
 			//Arrange
-			Diccionario prueba = Diccionario.CrearNuevoDiccionario ();
+            Diccionario prueba = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
 			//Act
 			prueba.EliminarEtiqueta (this.etiqueta1);
 			//Assert
@@ -213,7 +214,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 			//Arrange
 
 			//Act
-			Diccionario prueba = Diccionario.CrearNuevoDiccionario ();
+            Diccionario prueba = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
 			//Assert
 			Assert.Throws<ArgumentNullException> (delegate {
 				prueba.EliminarEtiqueta (null);
@@ -238,7 +239,7 @@ namespace Babel.Nucleo.Dominio.PruebasUnitarias.Entidades
 		public void PruebaIgualdadDeDiccionariosFalseCuandoSonDiccionariosDistintos ()
 		{
 			//Arrange
-			Diccionario prueba = Diccionario.CrearNuevoDiccionario ();
+            Diccionario prueba = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
 			//Act
 			//Assert
 			this.diccionarioPrueba.Equals (prueba).ShouldBeFalse ();

@@ -9,43 +9,45 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 	{
 		# region campos
 
-		private readonly IDictionary<string, Etiqueta> etiquetas = new Dictionary<string, Etiqueta> ();
-
+        private readonly List<Etiqueta> etiquetaLista = new List<Etiqueta>();
+       
 		#endregion
 
 		#region propiedades
 
-		public List<Etiqueta> Etiquetas { get; set; }
+        public List<Etiqueta> Etiquetas { 
+             get 
+             {
+                 return etiquetaLista;
+             }
+        }
 
 		public string Ambiente { get; set; }
-		/*
-		public IReadOnlyCollection<Etiqueta> Etiquetas {
-			get { return new List<Etiqueta> (this.Etiquetas.Values).AsReadOnly (); }
-		}*/
+		
 
 		#endregion
 
 		#region constructores
 
-		private Diccionario ()
+        private Diccionario(string ambiente)
 		{
-			
+            this.Ambiente = ambiente;
 		}
 
-		private Diccionario (Guid id)
+		private Diccionario (Guid id, string ambiente)
 			: base (id)
 		{
-            
+            this.Ambiente = ambiente;
 		}
 
-		public static Diccionario CrearNuevoDiccionario ()
+        public static Diccionario CrearNuevoDiccionario(string ambiente)
 		{
-			return new Diccionario ();
+            return new Diccionario(ambiente);
 		}
 
-		public static Diccionario CrearNuevoDiccionario (Guid id)
+		public static Diccionario CrearNuevoDiccionario (Guid id, string ambiente)
 		{
-			return new Diccionario (id);
+			return new Diccionario (id,ambiente);
 		}
 
 		#endregion
@@ -58,11 +60,32 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 				throw new ArgumentNullException ();
 			}
 
-			this.etiquetas.Add (etiqueta.Nombre, etiqueta);
+            if (etiquetaLista.Exists(item => item.Nombre == etiqueta.Nombre))
+            {
+				throw new ArgumentException("Ya existe una etiqueta con Nombre " + etiqueta.Nombre);
+            }
+
+            this.etiquetaLista.Add(etiqueta);
 
 			return this;
 		}
 
+        public Diccionario AgregarEtiquetas(List<Etiqueta> etiquetas)
+        {
+            if (etiquetas == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            foreach (Etiqueta item in etiquetas)
+            {
+                this.AgregarEtiqueta(item);
+            }
+
+            return this;
+        }
+
+      
 		#endregion
 
 		#region editar
@@ -78,7 +101,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 
 		public void EliminarTodoElDiccionario ()
 		{
-			this.etiquetas.Clear ();
+			this.etiquetaLista.Clear ();
 		}
 
 		public Diccionario EliminarEtiqueta (Etiqueta etiqueta)
@@ -87,7 +110,7 @@ namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 				throw new ArgumentNullException ();
 			}
 
-			this.etiquetas.Remove (etiqueta.Nombre);
+            this.etiquetaLista.Remove(etiqueta);
 
 			return this;
 		}

@@ -15,7 +15,9 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
     public class DiccionarioTest
     {
 
-     
+
+        private const string ambienteTestPrueba = "Prueba";
+        private const string ambienteTestDesarrollo = "Desarrollo";
         
         public Diccionarios Diccionarios { get; set; }
 
@@ -52,7 +54,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         public Traducciones Traducciones { get; set; }
 
         //private string Directory = Environment.GetFolderPath (Environment.SpecialFolder.MyDocuments) + @"\Xml.xml";
-        private readonly string directory = "C:\\HC3\\02-Codigo\\Repositorios.Xml.Impl.PruebasUnitarias\\DatosPrueba\\diccionario_ok.xml";
+        private readonly string directory = "DatosPrueba\\diccionario_ok.xml";
 
         
 
@@ -164,12 +166,11 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             EtqDom2.Textos.Add(traduccionDom22);
 
 
-            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
+            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
 
-            DiccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta>();
-
-            DiccionarioDominio.Etiquetas.Add(EtqDom);
-            DiccionarioDominio.Etiquetas.Add(EtqDom2);
+           
+            DiccionarioDominio.AgregarEtiqueta(EtqDom);
+            DiccionarioDominio.AgregarEtiqueta(EtqDom2);
 
             // Metodo Mapeo
                           
@@ -271,21 +272,18 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             EtqDom2.Textos.Add(traduccionDom22);
 
 
-            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
-
-            DiccionarioDominio.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta>();
-
-            DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
-
-            DiccionarioDominio2.Etiquetas = new List<EntidadDom.Etiquetas.Etiqueta>();
+            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(),ambienteTestPrueba);
 
 
 
-            DiccionarioDominio.Etiquetas.Add(EtqDom);
-            DiccionarioDominio.Etiquetas.Add(EtqDom2);
+            DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestDesarrollo);
 
-            DiccionarioDominio2.Etiquetas.Add(EtqDom);
-            DiccionarioDominio2.Etiquetas.Add(EtqDom2);
+
+            DiccionarioDominio.AgregarEtiqueta(EtqDom);
+            DiccionarioDominio.AgregarEtiqueta(EtqDom2);
+
+            DiccionarioDominio2.AgregarEtiqueta(EtqDom);
+            DiccionarioDominio2.AgregarEtiqueta(EtqDom2);
 
 
             listaDiccionarios.Add(DiccionarioDominio);

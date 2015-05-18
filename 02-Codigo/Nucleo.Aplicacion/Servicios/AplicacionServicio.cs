@@ -1,16 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Aplicacion.Fachada;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Babel.Nucleo.Dominio.Entidades.Etiquetas;
+using Babel.Nucleo.Dominio.Repositorios;
 
 namespace Babel.Nucleo.Aplicacion.Servicios
 {
 	public class AplicacionServicio : IAplicacionMantenimientoDiccionario
 	{
+		private IDiccionarioRepositorio diccionarioRepositorio;
+		public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario) {
+			this.diccionarioRepositorio = repositorioDiccionario;
+		}
 		public ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta ConsultarEtiquetasDeDiccionarioPorIdioma(ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion)
 		{
 			// TODO: Implement this method
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
+			var diccionario=this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+			var etiquetasDeDiccionarioPorIdiomaRespuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
+			var etiquetas = diccionario.Etiquetas;
+
+			
+
+
+
+			return etiquetasDeDiccionarioPorIdiomaRespuesta;
+
 		}
 
 		public ConsultarDiccionariosRespuesta ConsultarDiccionarios()

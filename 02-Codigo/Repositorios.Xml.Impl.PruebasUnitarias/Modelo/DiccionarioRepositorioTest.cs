@@ -10,6 +10,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 	public class DiccionarioRepositorioTest
 	{
 
+        private const string ambienteTestPrueba = "Prueba";
+        private const string ambienteTestDesarrollo = "Desarrollo";
 
         private Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario DiccionarioDominio { get; set; }
 
@@ -58,7 +60,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
 
-            const string idDiccionario = "7a83a1a0-415f-40bd-bd37-82e7f71efdab";
+            const string idDiccionario = "0175a469-a3fa-46d8-a30c-59197800447a";
 
             var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
 
@@ -194,12 +196,12 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
              EtqDom2.Textos.Add(traduccionDom22);
 
 
-             DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
+             DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
 
-             DiccionarioDominio.Etiquetas = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta>();
+             
 
-             DiccionarioDominio.Etiquetas.Add(EtqDom);
-             DiccionarioDominio.Etiquetas.Add(EtqDom2);
+             DiccionarioDominio.AgregarEtiqueta(EtqDom);
+             DiccionarioDominio.AgregarEtiqueta(EtqDom2);
 
              repositorio.SalvarUnDiccionario(DiccionarioDominio).ShouldEqual(DiccionarioDominio);
 
@@ -243,13 +245,13 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             EtqDom3.Textos.Add(traduccionDom23);
 
 
-            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("17b1685e-47f4-4696-941a-fac497052f0d"));
-            
-            DiccionarioDominio.Etiquetas = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta>();
+            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("17b1685e-47f4-4696-941a-fac497052f0d"),ambienteTestPrueba);
 
-            DiccionarioDominio.Etiquetas.Add(EtqDom);
-            DiccionarioDominio.Etiquetas.Add(EtqDom2);
-            DiccionarioDominio.Etiquetas.Add(EtqDom3);
+          
+
+            DiccionarioDominio.AgregarEtiqueta(EtqDom);
+            DiccionarioDominio.AgregarEtiqueta(EtqDom2);
+            DiccionarioDominio.AgregarEtiqueta(EtqDom3);
 
             repositorio.SalvarUnDiccionario(DiccionarioDominio).ShouldEqual(DiccionarioDominio);
         
@@ -309,21 +311,21 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             EtqDom2.Textos.Add(traduccionDom22);
 
 
-            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
+            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
 
-            DiccionarioDominio.Etiquetas = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta>();
+          
 
-            DiccionarioDominio.Etiquetas.Add(EtqDom);
-            DiccionarioDominio.Etiquetas.Add(EtqDom2);
-
-
-            DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid());
-
-            DiccionarioDominio2.Etiquetas = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta>();
+            DiccionarioDominio.AgregarEtiqueta(EtqDom);
+            DiccionarioDominio.AgregarEtiqueta(EtqDom2);
 
 
-            DiccionarioDominio2.Etiquetas.Add(EtqDom);
-            DiccionarioDominio2.Etiquetas.Add(EtqDom2);
+            DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestDesarrollo);
+
+         
+
+
+            DiccionarioDominio2.AgregarEtiqueta(EtqDom);
+            DiccionarioDominio2.AgregarEtiqueta(EtqDom2);
 
             listaDiccionarios.Add(DiccionarioDominio);
             listaDiccionarios.Add(DiccionarioDominio2);

@@ -15,16 +15,16 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 
 		#region constructores
 
-		private CrearUnDiccionarioRespuesta()
+        private CrearUnDiccionarioRespuesta(string ambiente)
 		{
 			Relaciones = new Dictionary<string, Guid> { { "diccionario", Guid.Empty } };
-			DiccionarioNuevo = Diccionario.CrearNuevoDiccionario();
+            DiccionarioNuevo = Diccionario.CrearNuevoDiccionario(ambiente);
 			Respuesta = new ModeloRespuesta();
 		}
 
-		public static CrearUnDiccionarioRespuesta CrearNuevaInstancia()
+        public static CrearUnDiccionarioRespuesta CrearNuevaInstancia(string ambiente)
 		{
-			return new CrearUnDiccionarioRespuesta();
+            return new CrearUnDiccionarioRespuesta(ambiente);
 		}
 
 		#endregion

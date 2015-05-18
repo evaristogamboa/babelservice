@@ -11,6 +11,7 @@ using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using NSubstitute;
 using Newtonsoft.Json;
+using NSubstitute.Core;
 
 namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 {
@@ -341,7 +342,17 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 	        //Arrange
             CrearUnDiccionarioPeticion peticion = CrearUnDiccionarioPeticion.CrearNuevaInstancia("ambiente");
             peticion.DiccionarioNuevo = Diccionario.CrearNuevoDiccionario("ambiente");
+
+            // Validacion de que haya un solo diccionario con el mismo nombre
             
+            CrearUnDiccionarioPeticion peticion2 = CrearUnDiccionarioPeticion.CrearNuevaInstancia("ambiente");
+            peticion2.DiccionarioNuevo = Diccionario.CrearNuevoDiccionario("ambiente");
+            
+            if (peticion.DiccionarioNuevo.Ambiente == peticion2.DiccionarioNuevo.Ambiente)
+            {
+                throw new Exception();
+            }
+
             CrearUnDiccionarioRespuesta respuesta = CrearUnDiccionarioRespuesta.CrearNuevaInstancia("ambiente");
             //Act
 
@@ -354,38 +365,52 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
             respuesta.ShouldBeType(typeof(Diccionario));
 	    }
 
-	    public void PruebaConsultarDiccionarioPorGuid()
-	    {
-            //Arrange
-            ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-            peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-            
-            ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-            //Act
-            AplicacionServicio serviciosApi = new AplicacionServicio(diccionarioRepositorio);
-
-
-            //respuesta = serviciosApi.ConsultarUnDiccionario();
-
-            //Assert
-	        respuesta.ListaDeDiccionarios.Count.ShouldEqual(1);
-            
-	    }
-
-	    public void PruebaModificarAmbienteDiccionario()
-	    {
+        [Test]
+        public void PruebaConsultarDiccionarioPorGuid()
+        {
             //Arrange
             ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
             peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
 
-            ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
+            //ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
+     
+            var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 
-            //ACt
-            AplicacionServicio servicio = new AplicacionServicio(diccionarioRepositorio);
-            //respuesta = servicio.ConsultarDiccionarios()
+            
+
+
+           
+            var dirRquest = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(diccionario.Ambiente);
+
+
+            if (dirRquest != null)
+            {
+               
+
+            }
+
+            throw new Exception();
+
+
+
+            //diccionario.Id.ShouldEqual(peticion.DiccionarioId);
+
+        }
+
+
+        //public void PruebaModificarAmbienteDiccionario()
+        //{
+        //    //Arrange
+        //    ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
+        //    peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
+
+        //    ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
+
+        //    //ACt
+        //    AplicacionServicio servicio = new AplicacionServicio(diccionarioRepositorio);
+        //    //respuesta = servicio.ConsultarDiccionarios()
 	        
-	    }
+        //}
 
         #endregion
     }

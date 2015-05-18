@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Babel.Nucleo.Dominio.Repositorios;
 using NUnit.Framework;
 using Should;
@@ -12,6 +10,7 @@ using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using NSubstitute;
+using Newtonsoft.Json;
 
 namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 {
@@ -19,14 +18,21 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 	public class AplicacionServicioPruebas
 	{
 		private IDiccionarioRepositorio diccionarioRepositorio;
-		private const string ambienteTestPrueba = "prueba";
+		private const string ambienteTestPrueba = "desarrollo";
+		private Diccionario diccionarioPrueba;
+		private Diccionario diccionarioRespuesta;
+		private string nombreIdioma = "en-US";
 
 		public AplicacionServicioPruebas() { 
-			var repositorioMock=Substitute.For<IDiccionarioRepositorio>();			
+			var repositorioMock=Substitute.For<IDiccionarioRepositorio>();		
 			this.diccionarioRepositorio = repositorioMock;
+			this.diccionarioPrueba = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioPrueba.Id).Returns(diccionarioPrueba);
+			this.diccionarioRespuesta = DiccionarioRespuestaPorIdiomaEsVe();
 		}
-		[SetUp]
-		public void Inicializar()
+	
+
+		private Diccionario InicializarDiccionario()
 		{
 			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
            
@@ -81,6 +87,53 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 			diccionario.Ambiente = "desarrollo";
 			diccionario.AgregarEtiquetas(listaDeEtiquetas);
+
+			return diccionario;
+
+		}
+
+		private Diccionario DiccionarioRespuestaPorIdiomaEsVe()
+		{
+			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+
+
+			List<Traduccion> listaDeTraduccionesAceptar = new List<Traduccion>();
+			List<Traduccion> listaDeTraduccionesCancelar = new List<Traduccion>();
+
+			Diccionario diccionario = Diccionario.CrearNuevoDiccionario(new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114"), ambienteTestPrueba);
+
+			Etiqueta etiquetaAceptar = Etiqueta.CrearNuevaEtiqueta(new Guid("8a87f8a7-3df9-4d90-9478-350b964fc888"));
+			Etiqueta etiquetaCancelar = Etiqueta.CrearNuevaEtiqueta(new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0"));
+
+			Cultura culturaEsVe = Cultura.CrearNuevaCultura("es-VE");
+
+			Traduccion traduccionAceptarEsVe = Traduccion.CrearNuevaTraduccion(culturaEsVe, "aceptar");
+
+			listaDeTraduccionesAceptar.Add(traduccionAceptarEsVe);
+
+			etiquetaAceptar.IdiomaPorDefecto = "es-VE";
+			etiquetaAceptar.Nombre = "app.common.aceptar";
+			etiquetaAceptar.Textos = listaDeTraduccionesAceptar;
+			etiquetaAceptar.Activo = true;
+
+			Traduccion traduccionCancelarEsVe = Traduccion.CrearNuevaTraduccion(culturaEsVe, "cancelar");
+
+			listaDeTraduccionesCancelar.Add(traduccionCancelarEsVe);
+
+			etiquetaCancelar.IdiomaPorDefecto = "es-VE";
+			etiquetaCancelar.Nombre = "app.common.cancelar";
+			etiquetaCancelar.Textos = listaDeTraduccionesCancelar;
+			etiquetaCancelar.Activo = true;
+
+
+			listaDeEtiquetas.Add(etiquetaAceptar);
+			listaDeEtiquetas.Add(etiquetaCancelar);
+
+			diccionario.Ambiente = "desarrollo";
+			diccionario.AgregarEtiquetas(listaDeEtiquetas);
+
+			return diccionario;
+
 		}
 
 		#region ConsultarEtiquetasDeDiccionarioPorIdioma
@@ -91,20 +144,13 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
-
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
 
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
-
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
 
 			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
 
@@ -118,16 +164,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
 
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
@@ -147,16 +188,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
 
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
@@ -174,16 +210,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
 
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
@@ -202,17 +233,12 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
-
+			
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
 
@@ -221,6 +247,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 			//Assert
 			respuesta.ListaDeEtiquetas.Count.ShouldNotEqual(0);
+			
 		}
 
 		[Test]
@@ -229,16 +256,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
 
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
@@ -256,16 +278,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-			peticion.Idioma = "es-VE";
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//respuesta.ListaDeEtiquetas =
-			//respuesta.Relaciones =
-			//respuesta.Respuesta =
-
 
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
@@ -277,50 +294,42 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			respuesta.Respuesta.ShouldBeNull();
 		}
 
-		//[Test]
-		//public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaLasEtiquetasEnElIdiomaSolicitado()
-		//{
-		//	//Arrange
-		//	ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaLasEtiquetasEnElIdiomaSolicitado()
+		{
+			//Arrange
+			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
-		//	peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-		//	peticion.Idioma = "es-VE";
-
-
-		//	ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-		//	//respuesta.ListaDeEtiquetas =
-		//	//respuesta.Relaciones =
-		//	//respuesta.Respuesta =
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Idioma = nombreIdioma;
 
 
-		//	//Act
-		//	AplicacionServicio serviciosApi = new AplicacionServicio();
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
+
+			//Act
+			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
 
 
-		//	respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
 
-		//	List<Etiqueta> listaRespuestaEtiqueta = new List<Etiqueta>();
+			Boolean traduccionDiferenteDelIdioma = false;
 
-		//	listaRespuestaEtiqueta = respuesta.ListaDeEtiquetas;
+			foreach (Etiqueta item in respuesta.ListaDeEtiquetas)
+			{
+				foreach (Traduccion tra in item.Textos)
+				{
+					if (tra.Cultura.CodigoIso != "es-VE")
+					{
+						traduccionDiferenteDelIdioma = true;
+						break;
+					}
+				}
+			}
 
-		//	var test = (from T in listaRespuestaEtiqueta
-		//				where T.Textos.Count() > 1 
-		//				select T.Textos).ToList();
+			//Assert
+			traduccionDiferenteDelIdioma.ShouldBeFalse();
 
-		//	var unSoloIdiomaLista = (from R in test
-		//							 where  R.
-		//		);
-
-			
-			
-
-
-
-		//	//Assert
-
-			
-		//}
+		}
 
 		#endregion
 	}

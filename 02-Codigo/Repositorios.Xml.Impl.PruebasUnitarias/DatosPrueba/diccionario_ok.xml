@@ -34,19 +34,19 @@
   </diccionario>
   <diccionario id="17b1685e-47f4-4696-941a-fac497052f0d">
     <etiquetas>
-      <etiqueta id="aa3ffef6-84ca-40d1-a33f-bf2abc749d2a" nombre="app.testReplaceEvaristo2" activo="false" default="">
+      <etiqueta id="5238f77e-0b82-4fc4-8cde-7d015f1dbcc3" nombre="app.testReplaceEvaristo2" activo="false">
         <nombre>app.testReplaceEvaristo2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="5690e7b7-3f15-441f-aeb1-ff9fe4c5e495" nombre="app.testReplaceEvaristo2" activo="false" default="">
+      <etiqueta id="82189453-a771-4ff6-b0f1-76aea7418559" nombre="app.testReplaceEvaristo2" activo="false">
         <nombre>app.testReplaceEvaristo2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="e7f6ec00-786f-4aae-b6cc-b8130feb3ca0" nombre="app.testReplaceEvaristo3New" activo="false" default="">
+      <etiqueta id="3ea1680d-428f-4d7e-9e89-044835939799" nombre="app.testReplaceEvaristo3New" activo="false">
         <nombre>app.testReplaceEvaristo3New</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -56,13 +56,29 @@
   </diccionario>
   <diccionario id="772573cf-4d23-4d29-bdb3-f7d599cda07b">
     <etiquetas>
-      <etiqueta id="fc445dc7-4450-410a-8919-de73546893be" nombre="app.testNuevo2" activo="false">
+      <etiqueta id="fc445dc7-4450-410a-8919-de73546893be" nombre="app.testNuevo2" activo="false" default="">
         <nombre>app.testNuevo2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="9d2ddbff-9065-49fe-a62c-bec0e36abde3" nombre="app.testNuevo2" activo="false">
+      <etiqueta id="9d2ddbff-9065-49fe-a62c-bec0e36abde3" nombre="app.testNuevo2" activo="false" default="">
+        <nombre>app.testNuevo2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="7c3580d0-9f12-4eda-b961-441318e4b444">
+    <etiquetas>
+      <etiqueta id="e05fe255-10d6-478b-8f67-b8edd55f623e" nombre="app.testNuevo2" activo="false" default="">
+        <nombre>app.testNuevo2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="2925613b-cb0c-4a2b-8848-56745db868d8" nombre="app.testNuevo2" activo="false" default="">
         <nombre>app.testNuevo2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>

@@ -19,6 +19,8 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 	public class AplicacionServicioPruebas
 	{
 		private IDiccionarioRepositorio diccionarioRepositorio;
+		private const string ambienteTestPrueba = "prueba";
+
 		public AplicacionServicioPruebas() { 
 			var repositorioMock=Substitute.For<IDiccionarioRepositorio>();			
 			this.diccionarioRepositorio = repositorioMock;
@@ -27,12 +29,12 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		public void Inicializar()
 		{
 			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
-            Diccionario diccionario = Diccionario.CrearNuevoDiccionario(ambienteTestPrueba);
+           
 
 			List<Traduccion> listaDeTraduccionesAceptar = new List<Traduccion>();
 			List<Traduccion> listaDeTraduccionesCancelar = new List<Traduccion>();
 			
-			Diccionario diccionario = Diccionario.CrearNuevoDiccionario(new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114"));
+			Diccionario diccionario = Diccionario.CrearNuevoDiccionario(new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114"), ambienteTestPrueba);
 			
 			Etiqueta etiquetaAceptar = Etiqueta.CrearNuevaEtiqueta(new Guid("8a87f8a7-3df9-4d90-9478-350b964fc888"));
 			Etiqueta etiquetaCancelar = Etiqueta.CrearNuevaEtiqueta(new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0"));

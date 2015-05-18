@@ -66,7 +66,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			
 			etiquetaAceptar.IdiomaPorDefecto = "es-VE";
 			etiquetaAceptar.Nombre = "app.common.aceptar";
-			etiquetaAceptar.Textos = listaDeTraduccionesAceptar;
+			etiquetaAceptar.AgregarTraducciones(listaDeTraduccionesAceptar);
 			etiquetaAceptar.Activo = true;
 
 
@@ -82,7 +82,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 			etiquetaCancelar.IdiomaPorDefecto = "es-VE";
 			etiquetaCancelar.Nombre = "app.common.cancelar";
-			etiquetaCancelar.Textos = listaDeTraduccionesCancelar;
+			etiquetaCancelar.AgregarTraducciones(listaDeTraduccionesCancelar);
 			etiquetaCancelar.Activo = true;
 
 

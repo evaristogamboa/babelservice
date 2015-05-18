@@ -72,8 +72,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 					var cultura = EntidadDom.Etiquetas.Cultura.CrearNuevaCultura (diccionarioRepo.Etiquetas.ListaEtiquetas [i].Traducciones.Traducciones1 [x].Cultura);
 					var traduccion = Mapper.Map<EntidadDom.Etiquetas.Traduccion> (diccionarioRepo.Etiquetas.ListaEtiquetas [i].Traducciones.Traducciones1 [x]);
 					traduccion.Cultura = cultura;
-					DiccionarioDominio.Etiquetas [i].Textos = new List<EntidadDom.Etiquetas.Traduccion> ();
-					DiccionarioDominio.Etiquetas [i].Textos.Add (traduccion);
+					DiccionarioDominio.Etiquetas [i].AgregarTraduccion(traduccion);
 				}
 			}
 

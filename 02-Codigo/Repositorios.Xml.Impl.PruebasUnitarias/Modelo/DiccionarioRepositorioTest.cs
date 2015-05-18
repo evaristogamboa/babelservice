@@ -182,18 +182,14 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
              Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-             EtqDom.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-             EtqDom.Textos.Add(traduccionDom2);
+             EtqDom.AgregarTraduccion(traduccionDom2);
 
 
              Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2");
 
              Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-             EtqDom2.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-             EtqDom2.Textos.Add(traduccionDom22);
+             EtqDom2.AgregarTraduccion(traduccionDom22);
 
 
              DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
@@ -221,18 +217,14 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-            EtqDom.Textos.Add(traduccionDom2);
+            EtqDom.AgregarTraduccion(traduccionDom2);
 
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testReplaceEvaristo2");
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom2.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-            EtqDom2.Textos.Add(traduccionDom22);
+            EtqDom2.AgregarTraduccion(traduccionDom22);
 
 
 
@@ -240,9 +232,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom23 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom3.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-            EtqDom3.Textos.Add(traduccionDom23);
+            EtqDom3.AgregarTraduccion(traduccionDom23);
 
 
             DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("17b1685e-47f4-4696-941a-fac497052f0d"),ambienteTestPrueba);
@@ -297,18 +287,14 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-            EtqDom.Textos.Add(traduccionDom2);
+            EtqDom.AgregarTraduccion(traduccionDom2);
 
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test2");
 
             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom2.Textos = new List<Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion>();
-
-            EtqDom2.Textos.Add(traduccionDom22);
+            EtqDom2.AgregarTraduccion(traduccionDom22);
 
 
             DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
@@ -17,15 +18,30 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 		}
 		public ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta ConsultarEtiquetasDeDiccionarioPorIdioma(ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion)
 		{
-			// TODO: Implement this method
-			//throw new NotImplementedException();
 			var diccionario=this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 			var etiquetasDeDiccionarioPorIdiomaRespuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-			var etiquetas = diccionario.Etiquetas;
+		
+			List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
 
-			
+			foreach (Etiqueta item in diccionario.Etiquetas)
+			{	
+				foreach (Traduccion tra in item.Textos)
+				{
+					if (tra.Cultura.CodigoIso == peticion.Idioma)
+					{
+						Etiqueta nueva = Etiqueta.CrearNuevaEtiqueta(item.Id);
+						nueva.IdiomaPorDefecto = item.IdiomaPorDefecto;
+						nueva.Nombre = item.Nombre;
+						nueva.Textos.Add(tra);
 
+						listaEtiquetas.Add(nueva);	
+					}
+				}
+			}
 
+			etiquetasDeDiccionarioPorIdiomaRespuesta.ListaDeEtiquetas = listaEtiquetas;
+			etiquetasDeDiccionarioPorIdiomaRespuesta.Relaciones["diccionario"] = diccionario.Id;
+			etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = null;
 
 			return etiquetasDeDiccionarioPorIdiomaRespuesta;
 

@@ -1,43 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using app=Babel.Nucleo.Aplicacion.Modelos.Respuesta;
-using dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
-using CollectionJson;
+using System.Text;
+using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Newtonsoft.Json;
-using comunes=Babel.Interfaz.WebApi.Modelos.Comunes;
-
+using comunes = Babel.Interfaz.WebApi.Modelos.Comunes;
+using CollectionJson;
+using app = Babel.Nucleo.Aplicacion.Modelos.Respuesta;
+using Babel.Interfaz.WebApi.Modelos.Comunes;
+using dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
-	public class CrearUnDiccionarioRespuesta
+	public class ConsultarUnDiccionarioRespuesta
 	{
         [JsonProperty(PropertyName = "diccionario")]
-		public comunes.Diccionario DiccionarioNuevo { get; set; }
+		public comunes.Diccionario Diccionario { get; set; }
         
         [JsonProperty(PropertyName = "relaciones")]
 		public List<Link> Relaciones { get; set; }
 
 		#region constructores
 
-        CrearUnDiccionarioRespuesta(app.CrearUnDiccionarioRespuesta respuestaApp)
+        private ConsultarUnDiccionarioRespuesta(app.ConsultarUnDiccionarioarioRespuesta respuestaApp)
         {
-            this.DiccionarioNuevo = new comunes.Diccionario();
-            this.DiccionarioNuevo.Ambiente = respuestaApp.DiccionarioNuevo.Ambiente;
-            this.DiccionarioNuevo = MapearRespuestaApp(respuestaApp.DiccionarioNuevo);
+            this.Diccionario = new comunes.Diccionario();
+            this.Diccionario.Ambiente = respuestaApp.Diccionario.Ambiente;
+            this.Diccionario = MapearRespuestaApp(respuestaApp.Diccionario);
             this.Relaciones = new List<Link>();
         }
-
-        public CrearUnDiccionarioRespuesta() 
-        { 
-        }
-
-        public static CrearUnDiccionarioRespuesta CrearNuevaRespuesta(app.CrearUnDiccionarioRespuesta respuestaApp)
-		{
-			return new CrearUnDiccionarioRespuesta(respuestaApp);
-		}
-
-		#endregion
 
         private comunes.Diccionario MapearRespuestaApp(dominio.Diccionario diccionarioDom)
         {
@@ -81,6 +72,20 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 
             return dicctionarioRepo;
         }
+        public CrearUnDiccionarioRespuesta() 
+        { 
+        }
 
-	}
+        public static CrearUnDiccionarioRespuesta CrearNuevaRespuesta(app.CrearUnDiccionarioRespuesta respuestaApp)
+		{
+			return new CrearUnDiccionarioRespuesta(respuestaApp);
+		}
+
+		#endregion
+
+        public static ConsultarUnDiccionarioRespuesta CrearNuevaRespuestaConRespuestaDeAplicacion(Nucleo.Aplicacion.Modelos.Respuesta.ConsultarUnDiccionarioarioRespuesta respuestaApp)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

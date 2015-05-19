@@ -19,9 +19,13 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 	public class AplicacionServicioPruebas
 	{
 		private IDiccionarioRepositorio diccionarioRepositorio;
+
 		private const string ambienteTestPrueba = "desarrollo";
+		private const string consultarDiccionarioPorIdioma = "en-US";
+		private const string consultarEtiquetaPorNombre = "cancelar";
+		private const string consultarEtiquetasPorNombre = "app";
+
 		private Diccionario diccionarioPrueba;
-		private string nombreIdioma = "en-US";
 		private List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
 
 		public AplicacionServicioPruebas() { 
@@ -34,7 +38,6 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioPrueba.Id).Returns(diccionarioPrueba);
 			this.diccionarioRepositorio.ObtenerDiccionarios().Returns(this.listaDeDiccionarios);
 		}
-	
 
 		private Diccionario InicializarDiccionario()
 		{
@@ -96,17 +99,13 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 		}
 
-
-		#region ConsultarEtiquetasDeDiccionarioPorIdioma
-
-		[Test]
-		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaNoEsNull()
+		private ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma()
 		{
 			//Arrange
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
 			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
+			peticion.Idioma = consultarDiccionarioPorIdioma;
 
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
 
@@ -114,6 +113,82 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
 
 			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+
+			return respuesta;
+		}
+
+		private ConsultarDiccionariosRespuesta ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios()
+		{
+			//Arrange
+			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
+
+			//Act
+			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
+
+			respuesta = serviciosApi.ConsultarDiccionarios();
+
+			return respuesta;
+		}
+
+		private ConsultarUnDiccionarioarioRespuesta ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario()
+		{
+			//Arrange
+			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
+
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+
+			ConsultarUnDiccionarioarioRespuesta respuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
+
+			//Act
+			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
+
+			respuesta = serviciosApi.ConsultarUnDiccionario(peticion);
+
+			return respuesta;
+		}
+
+		private ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre()
+		{
+			//Arrange
+			ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion = ConsultarEtiquetasDeDiccionarioPorNombrePeticion.CrearNuevaInstancia();
+
+			peticion.DiccionarioId = diccionarioPrueba.Id;
+			peticion.Nombre = consultarEtiquetaPorNombre;
+
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorNombreRespuesta.CrearNuevaInstancia();
+
+			//Act
+			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
+
+			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorNombre(peticion);
+
+			return respuesta;
+		}
+
+		private ConsultarEtiquetasPorNombreRespuesta ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre()
+		{
+			//Arrange
+			ConsultarEtiquetasPorNombrePeticion peticion = ConsultarEtiquetasPorNombrePeticion.CrearNuevaInstancia();
+
+			peticion.Nombre = consultarEtiquetasPorNombre;
+
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ConsultarEtiquetasPorNombreRespuesta.CrearNuevaInstancia();
+
+			//Act
+			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
+
+			respuesta = serviciosApi.ConsultarEtiquetasPorNombre(peticion);
+
+			return respuesta;
+		}
+
+
+		#region ConsultarEtiquetasDeDiccionarioPorIdioma
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaNoEsNull()
+		{
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.ShouldNotBeNull();
@@ -122,20 +197,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaNoEsVacio()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.ListaDeEtiquetas.Count.ShouldNotEqual(0);
@@ -146,20 +208,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaElTipoRespuestaAdecuado()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.ShouldBeType(typeof(ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta));
@@ -168,20 +217,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaUnaListaDeEtiquetasDelTipoListaEtiqueta()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.ListaDeEtiquetas.ShouldBeType(typeof(List<Etiqueta>));
@@ -190,20 +226,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaUnaListaDeEtiquetasNoVacia()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-			
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.ListaDeEtiquetas.Count.ShouldNotEqual(0);
@@ -213,20 +236,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaRelacionesNoVacia()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.Relaciones.Count.ShouldNotEqual(0);
@@ -235,20 +245,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaNoRetornaErrores()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			//Assert
 			respuesta.Respuesta.ShouldBeNull();
@@ -257,20 +254,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaLasEtiquetasEnElIdiomaSolicitado()
 		{
-			//Arrange
-			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-			peticion.Idioma = nombreIdioma;
-
-
-			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-
-			respuesta = serviciosApi.ConsultarEtiquetasDeDiccionarioPorIdioma(peticion);
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
 			Boolean traduccionDiferenteDelIdioma = false;
 
@@ -278,7 +262,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			{
 				foreach (Traduccion tra in item.Textos)
 				{
-					if (tra.Cultura.CodigoIso != nombreIdioma)
+					if (tra.Cultura.CodigoIso != consultarDiccionarioPorIdioma)
 					{
 						traduccionDiferenteDelIdioma = true;
 						break;
@@ -297,30 +281,18 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		#region ConsultarDiccionarios
 
 		[Test]
-		public void PruebaConsultarDiccionariosNoEsNull()
+		public void PruebaDeConsultarDiccionariosNoEsNull()
 		{
-			//Arrange
-			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarDiccionarios();
+			ConsultarDiccionariosRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios();
 
 			//Assert
 			respuesta.ShouldNotBeNull();
 		}
 
 		[Test]
-		public void PruebaConsultarDiccionariosNoEsVacio()
+		public void PruebaDeConsultarDiccionariosNoEsVacio()
 		{
-			//Arrange
-			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarDiccionarios();
+			ConsultarDiccionariosRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios();
 
 			//Assert
 			respuesta.ListaDeDiccionarios.Count.ShouldNotEqual(0);
@@ -328,107 +300,59 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		}
 
 		[Test]
-		public void PruebaConsultarDiccionariosNoRetornaErrores()
+		public void PruebaDeConsultarDiccionariosNoRetornaErrores()
 		{
-			//Arrange
-			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarDiccionarios();
+			ConsultarDiccionariosRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios();
 
 			//Assert
 			respuesta.Respuesta.ShouldBeNull();
 		}
 
 		[Test]
-		public void PruebaConsultarDiccionariosRetornaElTipoRespuestaAdecuado()
+		public void PruebaDeConsultarDiccionariosRetornaElTipoRespuestaAdecuado()
 		{
-			//Arrange
-			
-			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarDiccionarios();
+			ConsultarDiccionariosRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios();
 
 			//Assert
 			respuesta.ShouldBeType(typeof(ConsultarDiccionariosRespuesta));
 		}
 
 		[Test]
-		public void PruebaConsultarDiccionariosRetornaUnaListaDeDiccionariosDelTipoListaDiccionario()
+		public void PruebaDeConsultarDiccionariosRetornaUnaListaDeDiccionariosDelTipoListaDiccionario()
 		{
-			//Arrange
-
-			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarDiccionarios();
+			ConsultarDiccionariosRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios();
 
 			//Assert
 			respuesta.ListaDeDiccionarios.ShouldBeType(typeof(List<Diccionario>));
 		}
 
 		[Test]
-		public void PruebaConsultarDiccionariosRetornaUnaListaDeDiccionariosNoVacia()
+		public void PruebaDeConsultarDiccionariosRetornaUnaListaDeDiccionariosNoVacia()
 		{
-			//Arrange
-			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarDiccionarios();
+			ConsultarDiccionariosRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios();
 
 			//Assert
 			respuesta.ListaDeDiccionarios.Count.ShouldNotEqual(0);
 		}
 
-
 		#endregion
-
 
 
 		#region ConsultarUnDiccionario
 
 		[Test]
-		public void PruebaConsultarUnDiccionarioNoEsNull()
+		public void PruebaDeConsultarUnDiccionarioNoEsNull()
 		{
-			//Arrange
-			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-
-			ConsultarUnDiccionarioarioRespuesta respuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarUnDiccionario(peticion);
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
 
 			//Assert
 			respuesta.ShouldNotBeNull();
 		}
 
 		[Test]
-		public void PruebaConsultarUnDiccionarioNoEsVacio()
+		public void PruebaDeConsultarUnDiccionarioNoEsVacio()
 		{
-			//Arrange
-			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-
-			ConsultarUnDiccionarioarioRespuesta respuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarUnDiccionario(peticion);
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
 
 			//Assert
 			//respuesta.Diccionario.Id.ShouldNotBeNull();
@@ -437,57 +361,27 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		}
 
 		[Test]
-		public void PruebaConsultarUnDiccionarioNoRetornaErrores()
+		public void PruebaDeConsultarUnDiccionarioNoRetornaErrores()
 		{
-			//Arrange
-			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-
-			ConsultarUnDiccionarioarioRespuesta respuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarUnDiccionario(peticion);
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
 
 			//Assert
 			respuesta.Respuesta.ShouldBeNull();
 		}
 
 		[Test]
-		public void PruebaConsultarUnDiccionarioRetornaElTipoRespuestaAdecuado()
+		public void PruebaDeConsultarUnDiccionarioRetornaElTipoRespuestaAdecuado()
 		{
-			//Arrange
-			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-
-			ConsultarUnDiccionarioarioRespuesta respuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarUnDiccionario(peticion);
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
 
 			//Assert
 			respuesta.ShouldBeType(typeof(ConsultarUnDiccionarioarioRespuesta));
 		}
 
 		[Test]
-		public void PruebaConsultarUnDiccionarioRetornaUnDiccionarioDelTipoDiccionario()
+		public void PruebaDeConsultarUnDiccionarioRetornaUnDiccionarioDelTipoDiccionario()
 		{
-			//Arrange
-			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-
-			peticion.DiccionarioId = diccionarioPrueba.Id;
-
-			ConsultarUnDiccionarioarioRespuesta respuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
-
-			//Act
-			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
-
-			respuesta = serviciosApi.ConsultarUnDiccionario(peticion);
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
 
 			//Assert
 			respuesta.Diccionario.ShouldBeType(typeof(Diccionario));
@@ -495,87 +389,164 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 		#endregion
 
+
+		#region ConsultarEtiquetasDeDiccionarioPorNombre
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreNoEsNull()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.ShouldNotBeNull();
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreNoEsVacio()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.ListaDeEtiquetas.Count.ShouldNotEqual(0);
+			respuesta.Relaciones.Count.ShouldNotEqual(0);
+			respuesta.Respuesta.ShouldBeNull();
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaElTipoRespuestaAdecuado()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.ShouldBeType(typeof(ConsultarEtiquetasDeDiccionarioPorNombreRespuesta));
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaUnaListaDeEtiquetasDelTipoListaEtiqueta()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.ListaDeEtiquetas.ShouldBeType(typeof(List<Etiqueta>));
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaUnaListaDeEtiquetasNoVacia()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.ListaDeEtiquetas.Count.ShouldNotEqual(0);
+
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaRelacionesNoVacia()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.Relaciones.Count.ShouldNotEqual(0);
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreNoRetornaErrores()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.Respuesta.ShouldBeNull();
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaLasEtiquetasConElNombreSolicitado()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			respuesta.ListaDeEtiquetas.Count().ShouldEqual(1);
+		}
+
+		#endregion
+
+
+		#region ConsultarEtiquetasPorNombre
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreNoEsNull()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ShouldNotBeNull();
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreNoEsVacio()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ListaDeDiccionarios.Count.ShouldNotEqual(0);
+			respuesta.Respuesta.ShouldBeNull();
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreRetornaElTipoRespuestaAdecuado()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ShouldBeType(typeof(ConsultarEtiquetasPorNombreRespuesta));
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreRetornaUnaListaDeEtiquetasDelTipoListaEtiqueta()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ListaDeDiccionarios.ShouldBeType(typeof(List<Diccionario>));
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreRetornaUnaListaDeEtiquetasNoVacia()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ListaDeDiccionarios.Count.ShouldNotEqual(0);
+
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreNoRetornaErrores()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.Respuesta.ShouldBeNull();
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreRetornaUnDiccionarioConLasEtiquetasConElNombreSolicitado()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ListaDeDiccionarios.Count().ShouldEqual(1);
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasPorNombreRetornaUnDiccionarioConDosEtiquetas()
+		{
+			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+			//Assert
+			respuesta.ListaDeDiccionarios[0].Etiquetas.Count().ShouldEqual(2);
+		}
+
+
+		#endregion
 	}
-//=======
-//		#region Mantenimiento
-
-//		[Test]
-//		public void PruebaCrearUnDiccionario()
-//		{
-//			//Arrange
-//			CrearUnDiccionarioPeticion peticion = CrearUnDiccionarioPeticion.CrearNuevaInstancia("ambiente");
-//			peticion.DiccionarioNuevo = Diccionario.CrearNuevoDiccionario("ambiente");
-
-//			// Validacion de que haya un solo diccionario con el mismo nombre
-            
-//			CrearUnDiccionarioPeticion peticion2 = CrearUnDiccionarioPeticion.CrearNuevaInstancia("ambiente");
-//			peticion2.DiccionarioNuevo = Diccionario.CrearNuevoDiccionario("ambiente");
-            
-//			if (peticion.DiccionarioNuevo.Ambiente == peticion2.DiccionarioNuevo.Ambiente)
-//			{
-//				throw new Exception();
-//			}
-
-//			CrearUnDiccionarioRespuesta respuesta = CrearUnDiccionarioRespuesta.CrearNuevaInstancia("ambiente");
-//			//Act
-
-//			AplicacionServicio serviciosApi = new AplicacionServicio(diccionarioRepositorio);
-
-//			respuesta = serviciosApi.CrearUnDiccionario(peticion);
-
-//			//Assert
-
-//			respuesta.ShouldBeType(typeof(Diccionario));
-//		}
-
-//		[Test]
-//		public void PruebaConsultarDiccionarioPorGuid()
-//		{
-//			//Arrange
-//			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-//			peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-
-//			//ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-     
-//			var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-
-            
-
-
-           
-//			var dirRquest = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(diccionario.Ambiente);
-
-
-//			if (dirRquest != null)
-//			{
-               
-
-//			}
-
-//			throw new Exception();
-
-
-
-//			//diccionario.Id.ShouldEqual(peticion.DiccionarioId);
-
-//		}
-
-
-//		//public void PruebaModificarAmbienteDiccionario()
-//		//{
-//		//    //Arrange
-//		//    ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
-//		//    peticion.DiccionarioId = new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114");
-
-//		//    ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-
-//		//    //ACt
-//		//    AplicacionServicio servicio = new AplicacionServicio(diccionarioRepositorio);
-//		//    //respuesta = servicio.ConsultarDiccionarios()
-	        
-//		//}
-
-//		#endregion
-//	}
-//>>>>>>> 5555544df2090019e57779adf086a5934f0e5f84
 }

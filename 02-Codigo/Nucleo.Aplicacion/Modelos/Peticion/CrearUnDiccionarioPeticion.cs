@@ -8,13 +8,13 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
 	public class CrearUnDiccionarioPeticion
 	{
 		[Required]
-		public Diccionario DiccionarioNuevo { get; set; }
+		public string Ambiente { get; set; }
 
 		#region Constructores
 
 		private CrearUnDiccionarioPeticion(string ambiente)
 		{
-            DiccionarioNuevo = Diccionario.CrearNuevoDiccionario(ambiente);
+            Ambiente = ambiente;
 		}
 
         public static CrearUnDiccionarioPeticion CrearNuevaInstancia(string ambiente)

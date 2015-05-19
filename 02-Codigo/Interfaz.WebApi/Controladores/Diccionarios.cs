@@ -15,15 +15,20 @@ namespace Babel.Interfaz.WebApi.Controladores
     [RoutePrefix("api/")]
 	public class Diccionarios : ApiController
     {
+        #region propiedades y variables globales
         private readonly app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
 
         const string Ambiente = "Desarrollo";
-        
+        #endregion
+
+        #region Constructor de la clase
         public Diccionarios(app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
         {
             this.aplicacionMantenimientoDiccionario = aplicacionMantenimientoDiccionario;
         }
+        #endregion
 
+#region 
         [Route("diccionarios")]
         [HttpGet]
         public HttpResponseMessage ObtenerTodosDiccionarios()
@@ -36,18 +41,22 @@ namespace Babel.Interfaz.WebApi.Controladores
         }
         [Route("diccionarios")]
         [HttpPost]
-        public HttpResponseMessage CrearUnDiccionario()
+        public HttpResponseMessage CrearUnDiccionario(HttpRequestMessage peticion)
         {
+            //Se instancia el modelo de peticion WebApi como referencia del modelo de peticion de la aplicación 
+            var peticionWeb = peticionApi.CrearUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticion);
 
-            var peticionApp = peticionApi.CrearUnDiccionarioPeticion.CrearUnaNuevaPeticion(Ambiente);
+            // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
+            var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
-            var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionApp.AppDiccionarioPeticion);
-
+            //Si la respuesta donde se llama al modulo de crear diccionario tiene el argumento peticionApp nulo o el metodo devuelve nulo se envia una respuesta http de error
             if(respuestaApp is NullReferenceException || respuestaApp is ArgumentNullException)
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError,respuestaApp.Respuesta.ToString());
 
+            //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
+            //Si la respuesta con el contenido tiene el argumento respuestaApp nulo o el metodo devuelve nulo se envia una respuesta http de error
             if (respuestaContenido is ArgumentNullException || respuestaContenido is NullReferenceException)
                 return Request.CreateErrorResponse(HttpStatusCode.Conflict, respuestaApp.Respuesta.ToString());
 
@@ -55,7 +64,7 @@ namespace Babel.Interfaz.WebApi.Controladores
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-            
     }
 }
 
+#endregion

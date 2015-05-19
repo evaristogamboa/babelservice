@@ -9,9 +9,12 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net;
 using NSubstitute;
-using webapiModelos=Babel.Interfaz.WebApi.Modelos.Respuesta;
+using webApiModelosRespuesta = Babel.Interfaz.WebApi.Modelos.Respuesta;
+using webApiModelosPeticion = Babel.Interfaz.WebApi.Modelos.Peticion;
 using Newtonsoft.Json;
-using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using comunes=Babel.Interfaz.WebApi.Modelos.Comunes;
+using System.Net.Http.Headers;
+
 namespace Babel.Interfaz.WebApi.PruebasUnitarias
 {
     [TestFixture]
@@ -19,21 +22,29 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
     {
         
         const string diccionariosJson="{ \"diccionarios\": { \"diccionario\": { \"id\": \"a1fa3369bc3f4ebc9cac5677cbaa8114\", \"amb\": \"desarrollo\", \"etiquetas\": { \"etiqueta\": [ { \"id\": \"8a87f8a73df94d909478350b964fc888\", \"nombre\": \"app.common.aceptar\", \"activo\": \"true\", \"default\": \"es-VE\", \"nombre\": \"app.common.aceptar\", \"descripcion\": \"Aceptar\", \"traducciones\": { \"traduccion\": [ { \"cultura\": \"es\", \"#text\": \"aceptar\" }, { \"cultura\": \"es-VE\", \"#text\": \"aceptar\" }, { \"cultura\": \"en\", \"#text\": \"accept\" }, { \"cultura\": \"en-US\", \"#text\": \"accept\" } ] } }, { \"id\": \"9a39ad6d62c842bfa8f766417b2b08d0\", \"nombre\": \"app.common.cancelar\", \"activo\": \"true\", \"default\": \"es-VE\", \"nombre\": \"app.common.cancelar\", \"descripcion\": \"Aceptar\", \"traducciones\": { \"traduccion\": [ { \"cultura\": \"es\", \"#text\": \"cancelar\" }, { \"cultura\": \"es-VE\", \"#text\": \"cancelar\" }, { \"cultura\": \"en\", \"#text\": \"cancel\" }, { \"cultura\": \"en-US\", \"#text\": \"cancel\" } ] } }, { \"id\": \"165db3e4d705406bbce02738b25c9023\", \"nombre\": \"app.common.usuario\", \"activo\": \"true\", \"default\": \"en\", \"nombre\": \"app.common.usuario\", \"descripcion\": \"Campo de texto usuario\", \"traducciones\": { \"traduccion\": [ { \"cultura\": \"es\", \"#text\": \"usuario\" }, { \"cultura\": \"es-VE\", \"#text\": \"usuario\" }, { \"cultura\": \"en\", \"#text\": \"user\" }, { \"cultura\": \"en-US\", \"#text\": \"user\" } ] } }, { \"id\": \"aaa55616722d410ca5f06f1f10f0b4a2\", \"nombre\": \"app.common.contraseña\", \"activo\": \"true\", \"default\": \"en\", \"nombre\": \"app.common.contraseña\", \"descripcion\": \"Campo de texto contraseña\", \"traducciones\": { \"traduccion\": [ { \"cultura\": \"es\", \"#text\": \"contraseña\" }, { \"cultura\": \"es-VE\", \"#text\": \"contraseña\" }, { \"cultura\": \"en\", \"#text\": \"password\" }, { \"cultura\": \"en-US\", \"#text\": \"password\" } ] } } ] } } } }";
-        
+
         private const string ambienteTestPrueba = "Prueba";
 
         private readonly app.IAplicacionMantenimientoDiccionario appMantenimientoDiccionario;
+        
+        private readonly CrearUnDiccionarioPeticion diccionarioPeticion;
 
-        private readonly CrearUnDiccionarioPeticion diccionarioPeticion = CrearUnDiccionarioPeticion.CrearNuevaInstancia(ambienteTestPrueba);
+        private readonly appModelosRespuesta.CrearUnDiccionarioRespuesta crearUnDiccionarioRespuesta;
 
         public DiccionarioControladorTest() {
+
+            //diccionarioPeticion  = webApiModelosPeticion.CrearUnDiccionarioPeticion.CrearUnaNuevaPeticion(ambienteTestPrueba);}
+            diccionarioPeticion = CrearUnDiccionarioPeticion.CrearNuevaInstancia(ambienteTestPrueba);
+
             this.appMantenimientoDiccionario = Substitute.For<app.IAplicacionMantenimientoDiccionario>();
+
             var consultarDiccionarioRespuesta = appModelosRespuesta.ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
-            var crearUnDiccionarioRespuesta = appModelosRespuesta.CrearUnDiccionarioRespuesta.CrearNuevaInstancia(ambienteTestPrueba);
+            
+            crearUnDiccionarioRespuesta = appModelosRespuesta.CrearUnDiccionarioRespuesta.CrearNuevaInstancia(ambienteTestPrueba);
 
             this.appMantenimientoDiccionario.ConsultarDiccionarios().Returns<appModelosRespuesta.ConsultarDiccionariosRespuesta>(consultarDiccionarioRespuesta);
-            this.appMantenimientoDiccionario.CrearUnDiccionario(diccionarioPeticion).Returns<appModelosRespuesta.CrearUnDiccionarioRespuesta>(crearUnDiccionarioRespuesta);
 
+            this.appMantenimientoDiccionario.CrearUnDiccionario(Arg.Any<CrearUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.CrearUnDiccionarioRespuesta>(crearUnDiccionarioRespuesta);
         }
 
         [Test]
@@ -56,25 +67,28 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             var respuesta = controlador.ObtenerTodosDiccionarios();
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
-            JsonConvert.DeserializeObject<webapiModelos.ConsultarDiccionariosRespuesta>(respuesta.Content.ReadAsStringAsync().Result).ListaDeDiccionarios.ShouldBeEmpty();
+            JsonConvert.DeserializeObject<webApiModelosRespuesta.ConsultarDiccionariosRespuesta>(respuesta.Content.ReadAsStringAsync().Result).ListaDeDiccionarios.ShouldBeEmpty();
         }
 
         [Test]
         public void PruebaCrearUnDiccionarioRetornaDiccionarioConRelaciones() 
-        {
+        {                
             //Arrange
             var controlador = new controladores.Diccionarios(this.appMantenimientoDiccionario);
             controlador.Configuration = new HttpConfiguration();
             controlador.Request = new HttpRequestMessage(HttpMethod.Post, "api/diccionarios");
+            var diccionario = new comunes.Diccionario();
+            diccionario.Ambiente = ambienteTestPrueba;
+            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
+            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+            var respuesta = controlador.CrearUnDiccionario(controlador.Request);
             
-            var respuesta = controlador.CrearUnDiccionario();
-
             //Mockeamos la respuesta de la app
             //var respuesta = this.appMantenimientoDiccionario.CrearUnDiccionario(diccionarioPeticion);
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
-            JsonConvert.DeserializeObject<webapiModelos.CrearUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result).ShouldNotBeNull();
+            JsonConvert.DeserializeObject<webApiModelosRespuesta.CrearUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result).ShouldNotBeNull();
         }
 
         

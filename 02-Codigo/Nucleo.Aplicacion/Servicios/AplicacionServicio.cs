@@ -115,16 +115,8 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
-
-            var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioNuevo.Id);
-
-
-            if (diccionario.Ambiente == peticion.DiccionarioNuevo.Ambiente)
-            {
-                throw new Exception("Ya existe un diccionario con ese ambiente");
-            }
-
-            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(peticion.DiccionarioNuevo.Ambiente);
+            
+            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(peticion.Ambiente);
         }
 
         public ModificarUnDiccionarioRespuesta ModificarUnDiccionario(ModificarUnDiccionarioPeticion peticion)

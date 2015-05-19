@@ -13,19 +13,19 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class CrearUnDiccionarioPeticion 
 	{
-
+        
         public comunes.Diccionario Diccionario { get; set; }
         public app.CrearUnDiccionarioPeticion AppDiccionarioPeticion { get; set; }
-        public string Respuesta { get; set; }
 
-        public CrearUnDiccionarioPeticion(string ambiente)
+        public CrearUnDiccionarioPeticion(HttpRequestMessage peticionHttp)
         {
-            AppDiccionarioPeticion = app.CrearUnDiccionarioPeticion.CrearNuevaInstancia(ambiente);
+            Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
+            AppDiccionarioPeticion = app.CrearUnDiccionarioPeticion.CrearNuevaInstancia(Diccionario.Ambiente);
         }
 
-        public static CrearUnDiccionarioPeticion CrearUnaNuevaPeticion(string ambiente)
+        public static CrearUnDiccionarioPeticion CrearUnaNuevaPeticion(HttpRequestMessage peticionHttp)
         {
-            return new CrearUnDiccionarioPeticion(ambiente);
+            return new CrearUnDiccionarioPeticion(peticionHttp) ;
         }
         
 	}

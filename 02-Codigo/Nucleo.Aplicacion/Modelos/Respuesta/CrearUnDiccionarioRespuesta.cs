@@ -17,8 +17,9 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
 
         private CrearUnDiccionarioRespuesta(string ambiente)
 		{
-			Relaciones = new Dictionary<string, Guid> { { "diccionario", Guid.Empty } };
             DiccionarioNuevo = Diccionario.CrearNuevoDiccionario(ambiente);
+            Relaciones = new Dictionary<string, Guid> { { "diccionario", DiccionarioNuevo.Id } };
+
 			Respuesta = new ModeloRespuesta();
 		}
 

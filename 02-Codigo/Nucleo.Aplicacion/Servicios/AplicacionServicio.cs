@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Aplicacion.Fachada;
@@ -175,13 +176,40 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(diccionarioNuevo);
 
-            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
+            CrearUnDiccionarioRespuesta respuesta =
+                CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
+
+            respuesta.DiccionarioNuevo = guardaRepositario;
+            respuesta.Relaciones["diccionario"] = guardaRepositario.Id;
+            respuesta.Respuesta = null;
+
+            return respuesta;
         }
 
+        /// <summary>
+        /// YCM
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public ModificarUnDiccionarioRespuesta ModificarUnDiccionario(ModificarUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var unDiccionarioRespuesta = ModificarUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+            try
+            {
+                var guardarRepositorio = diccionarioRepositorio.SalvarUnDiccionario(peticion.Diccionario);
+
+                unDiccionarioRespuesta.Diccionario = guardarRepositorio;
+                unDiccionarioRespuesta.Relaciones["diccionario"] = guardarRepositorio.Id;
+                unDiccionarioRespuesta.Respuesta = null;
+            }
+            catch(Exception)
+            {
+                //etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+            }
+
+            return unDiccionarioRespuesta;
+
         }
 
         public EliminarUnDiccionarioRespuesta EliminarUnDiccionario(EliminarUnDiccionarioPeticion peticion)
@@ -222,8 +250,39 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
         public EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta EliminarTraduccionesAUnaEtiquetaDeUnDiccionario(EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+			var eliminarTraduccionesAUnaEtiquetaDeUnDiccionario = EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+			try
+			{
+				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+
+				var etiqueta = diccionario.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault();
+
+				foreach (Traduccion itemTraduccion in peticion.ListaDeTraducciones)
+				{
+					etiqueta = etiqueta.EliminarTraduccion(itemTraduccion);
+				}
+
+				List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+
+				listaDeEtiquetas.Add(etiqueta);
+
+				diccionario = diccionario.ModificarEtiquetas(listaDeEtiquetas);
+
+				var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+
+				eliminarTraduccionesAUnaEtiquetaDeUnDiccionario.ListaDeTraducciones = diccionarioModificado.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault().Textos.ToList();
+				eliminarTraduccionesAUnaEtiquetaDeUnDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;
+				eliminarTraduccionesAUnaEtiquetaDeUnDiccionario.Relaciones["etiqueta"] = diccionarioModificado.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault().Id;
+				eliminarTraduccionesAUnaEtiquetaDeUnDiccionario.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+				string mensaje = ex.Message;
+				//etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+			}
+
+			return eliminarTraduccionesAUnaEtiquetaDeUnDiccionario;
         }
     }
 }

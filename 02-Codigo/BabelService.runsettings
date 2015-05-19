@@ -22,6 +22,7 @@
             <ModulePaths>
               <Exclude>
                 <ModulePath>.*PruebasUnitarias.*</ModulePath>
+                <ModulePath>.*Mapper.*</ModulePath>
               </Exclude>
             </ModulePaths>
           </CodeCoverage>

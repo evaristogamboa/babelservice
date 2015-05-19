@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using app=Babel.Nucleo.Aplicacion.Modelos.Respuesta;
-using dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using CollectionJson;
 using Newtonsoft.Json;
 using comunes=Babel.Interfaz.WebApi.Modelos.Comunes;
@@ -39,7 +39,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 
 		#endregion
 
-        private comunes.Diccionario MapearRespuestaApp(dominio.Diccionario diccionarioDom)
+        private comunes.Diccionario MapearRespuestaApp(Diccionario diccionarioDom)
         {
             var dicctionarioRepo = new comunes.Diccionario() { Id = diccionarioDom.Id };
 

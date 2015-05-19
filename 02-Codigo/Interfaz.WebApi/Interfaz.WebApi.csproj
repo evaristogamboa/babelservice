@@ -120,7 +120,7 @@
     <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorNombreRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarEtiquetasPorNombreRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\CrearUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ConsultarUnDiccionarioRespuesta.cs" />
+    <Compile Include="Modelos\Respuesta\DiccionConsultarUnDiccionarioarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarEtiquetasAUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarUnDiccionarioRespuesta.cs" />
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
+    <Folder Include="AppStart\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">

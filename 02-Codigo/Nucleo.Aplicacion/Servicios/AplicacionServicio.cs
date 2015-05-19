@@ -13,6 +13,8 @@ namespace Babel.Nucleo.Aplicacion.Servicios
     public class AplicacionServicio : IAplicacionMantenimientoDiccionario
     {
         private IDiccionarioRepositorio diccionarioRepositorio;
+       
+
         public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario)
         {
             this.diccionarioRepositorio = repositorioDiccionario;
@@ -26,25 +28,24 @@ namespace Babel.Nucleo.Aplicacion.Servicios
                 var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
                 List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
 
-                
-                listaEtiquetas = diccionario.Etiquetas.Where(e => e.Textos.FirstOrDefault(t => t.Cultura.CodigoIso.Equals(peticion.Idioma)) != null).ToList<Etiqueta>();
+               // listaEtiquetas = diccionario.Etiquetas.Where(e => e.Textos.FirstOrDefault(t => t.Cultura.CodigoIso.Equals(peticion.Idioma)) != null).ToList<Etiqueta>();
 
                 // TODO: Revisar y borrar
-                //foreach (Etiqueta item in diccionario.Etiquetas)
-                //{
-                //    foreach (Traduccion tra in item.Textos)
-                //    {
-                //        if (tra.Cultura.CodigoIso == peticion.Idioma)
-                //        {
-                //            Etiqueta nueva = Etiqueta.CrearNuevaEtiqueta(item.Id);
-                //            nueva.IdiomaPorDefecto = item.IdiomaPorDefecto;
-                //            nueva.Nombre = item.Nombre;
-                //            nueva.Textos.Add(tra);
+				foreach (Etiqueta itemEtiqueta in diccionario.Etiquetas)
+				{
+					foreach (Traduccion itemTraduccion in itemEtiqueta.Textos)
+					{
+						if (itemTraduccion.Cultura.CodigoIso == peticion.Idioma)
+						{
+							Etiqueta nuevaEtiqueta = Etiqueta.CrearNuevaEtiqueta(itemEtiqueta.Id);
+							nuevaEtiqueta.IdiomaPorDefecto = itemEtiqueta.IdiomaPorDefecto;
+							nuevaEtiqueta.Nombre = itemEtiqueta.Nombre;
+							nuevaEtiqueta.AgregarTraduccion(itemTraduccion);
 
-                //            listaEtiquetas.Add(nueva);
-                //        }
-                //    }
-                //}
+							listaEtiquetas.Add(nuevaEtiqueta);
+						}
+					}
+				}
 
                 etiquetasDeDiccionarioPorIdiomaRespuesta.ListaDeEtiquetas = listaEtiquetas;
                 etiquetasDeDiccionarioPorIdiomaRespuesta.Relaciones["diccionario"] = diccionario.Id;
@@ -79,6 +80,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             return diccionariosRespuesta;
         }
 
+        
         public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
         {
 
@@ -103,20 +105,83 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
         public ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ConsultarEtiquetasDeDiccionarioPorNombre(ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+           var etiquetasDeDiccionarioPorNombreRespuesta = ConsultarEtiquetasDeDiccionarioPorNombreRespuesta.CrearNuevaInstancia();
+
+            try
+            {
+                var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+                List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+
+               listaEtiquetas = diccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+
+                etiquetasDeDiccionarioPorNombreRespuesta.ListaDeEtiquetas = listaEtiquetas;
+                etiquetasDeDiccionarioPorNombreRespuesta.Relaciones["diccionario"] = diccionario.Id;
+                etiquetasDeDiccionarioPorNombreRespuesta.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+
+				//etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+
+			}
+
+			return etiquetasDeDiccionarioPorNombreRespuesta;
         }
 
         public ConsultarEtiquetasPorNombreRespuesta ConsultarEtiquetasPorNombre(ConsultarEtiquetasPorNombrePeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+			var etiquetasDeDiccionariosPorNombre = ConsultarEtiquetasPorNombreRespuesta.CrearNuevaInstancia();
+
+			try
+			{
+				var diccionarios = this.diccionarioRepositorio.ObtenerDiccionarios();
+
+				List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
+
+				foreach (Diccionario itemDiccionario in diccionarios)
+				{
+					Diccionario diccionario = Diccionario.CrearNuevoDiccionario(itemDiccionario.Id, itemDiccionario.Ambiente);
+
+					List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+
+					listaDeEtiquetas = itemDiccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+
+					diccionario.AgregarEtiquetas(listaDeEtiquetas);
+
+					listaDeDiccionarios.Add(diccionario);
+
+				}
+
+				etiquetasDeDiccionariosPorNombre.ListaDeDiccionarios = listaDeDiccionarios;
+				etiquetasDeDiccionariosPorNombre.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+				//etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+			}
+
+			return etiquetasDeDiccionariosPorNombre;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
-            
-            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(peticion.Ambiente);
+            //var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioNuevo.Id);
+
+
+            //if (diccionario != null)
+            //{
+            //    throw new Exception("Ya existe un diccionario con ese ambiente");
+            //}
+
+
+            var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(peticion.DiccionarioNuevo);
+
+            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
         }
 
         public ModificarUnDiccionarioRespuesta ModificarUnDiccionario(ModificarUnDiccionarioPeticion peticion)

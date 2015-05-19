@@ -27,6 +27,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 		private Diccionario diccionarioPrueba;
 		private List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
+		private List<Traduccion> listaDeTraducciones = new List<Traduccion>();
 
 		public AplicacionServicioPruebas() { 
 			var repositorioMock=Substitute.For<IDiccionarioRepositorio>();		
@@ -82,6 +83,55 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			listaDeTraduccionesCancelar.Add(traduccionCancelarEsVe);
 			listaDeTraduccionesCancelar.Add(traduccionCancelarEn);
 			listaDeTraduccionesCancelar.Add(traduccionCancelarEnUs);
+
+			etiquetaCancelar.IdiomaPorDefecto = "es-VE";
+			etiquetaCancelar.Nombre = "app.common.cancelar";
+			etiquetaCancelar.AgregarTraducciones(listaDeTraduccionesCancelar);
+			etiquetaCancelar.Activo = true;
+
+
+			listaDeEtiquetas.Add(etiquetaAceptar);
+			listaDeEtiquetas.Add(etiquetaCancelar);
+
+			diccionario.Ambiente = "desarrollo";
+			diccionario.AgregarEtiquetas(listaDeEtiquetas);
+
+			return diccionario;
+
+		}
+
+		private Diccionario DiccionarioConTraduccionEliminada()
+		{
+			// Primer diccionario
+			List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+
+			List<Traduccion> listaDeTraduccionesAceptar = new List<Traduccion>();
+			List<Traduccion> listaDeTraduccionesCancelar = new List<Traduccion>();
+
+			Diccionario diccionario = Diccionario.CrearNuevoDiccionario(new Guid("a1fa3369-bc3f-4ebc-9cac-5677cbaa8114"), ambienteTestPrueba);
+
+			Etiqueta etiquetaAceptar = Etiqueta.CrearNuevaEtiqueta(new Guid("8a87f8a7-3df9-4d90-9478-350b964fc888"));
+			Etiqueta etiquetaCancelar = Etiqueta.CrearNuevaEtiqueta(new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0"));
+
+			Cultura culturaEs = Cultura.CrearNuevaCultura("es");
+			Cultura culturaEsVe = Cultura.CrearNuevaCultura("es-VE");
+			Cultura culturaEn = Cultura.CrearNuevaCultura("en");
+			Cultura culturaEnUs = Cultura.CrearNuevaCultura("en-US");
+
+			Traduccion traduccionAceptarEs = Traduccion.CrearNuevaTraduccion(culturaEs, "aceptar");
+			Traduccion traduccionAceptarEsVe = Traduccion.CrearNuevaTraduccion(culturaEsVe, "aceptar");
+			Traduccion traduccionAceptarEn = Traduccion.CrearNuevaTraduccion(culturaEn, "accept");
+			Traduccion traduccionAceptarEnUs = Traduccion.CrearNuevaTraduccion(culturaEnUs, "accept");
+
+			listaDeTraduccionesAceptar.Add(traduccionAceptarEs);
+			listaDeTraduccionesAceptar.Add(traduccionAceptarEsVe);
+			listaDeTraduccionesAceptar.Add(traduccionAceptarEn);
+			listaDeTraduccionesAceptar.Add(traduccionAceptarEnUs);
+
+			etiquetaAceptar.IdiomaPorDefecto = "es-VE";
+			etiquetaAceptar.Nombre = "app.common.aceptar";
+			etiquetaAceptar.AgregarTraducciones(listaDeTraduccionesAceptar);
+			etiquetaAceptar.Activo = true;
 
 			etiquetaCancelar.IdiomaPorDefecto = "es-VE";
 			etiquetaCancelar.Nombre = "app.common.cancelar";
@@ -178,6 +228,27 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
 
 			respuesta = serviciosApi.ConsultarEtiquetasPorNombre(peticion);
+
+			return respuesta;
+		}
+
+		private EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta ArrangeYActDeTodasLasPruebasDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionario()
+		{
+			//Arrange
+			this.diccionarioRepositorio.SalvarUnDiccionario(diccionarioPrueba).Returns(DiccionarioConTraduccionEliminada());
+
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion = EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.CrearNuevaInstancia();
+
+			peticion.DiccionarioId = this.diccionarioPrueba.Id;
+			peticion.EtiquetaId = this.diccionarioPrueba.Etiquetas.FirstOrDefault().Id;
+			peticion.ListaDeTraducciones = this.diccionarioPrueba.Etiquetas.FirstOrDefault().Textos.ToList<Traduccion>();
+			
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+			//Act
+			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
+
+			respuesta = serviciosApi.EliminarTraduccionesAUnaEtiquetaDeUnDiccionario(peticion);
 
 			return respuesta;
 		}
@@ -546,6 +617,88 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			respuesta.ListaDeDiccionarios[0].Etiquetas.Count().ShouldEqual(2);
 		}
 
+		#endregion
+
+
+		#region EliminarTraduccionesAUnaEtiquetaDeUnDiccionario
+
+		[Test]
+		public void PruebaDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionarioNoEsNull()
+		{
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			//Assert
+			respuesta.ShouldNotBeNull();
+		}
+
+		[Test]
+		public void PruebaDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionarioNoEsVacio()
+		{
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			//Assert
+			respuesta.ListaDeTraducciones.Count().ShouldBeGreaterThanOrEqualTo(0);
+			respuesta.Relaciones.Count().ShouldNotEqual(0);
+			respuesta.Respuesta.ShouldBeNull();
+
+			respuesta.ListaDeTraducciones.Count().ShouldEqual(0);
+
+		}
+
+		[Test]
+		public void PruebaDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaElTipoRespuestaAdecuado()
+		{
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeEliminarTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			//Assert
+			respuesta.ShouldBeType(typeof(EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta));
+		}
+
+		//[Test]
+		//public void PruebaDeConsultarEtiquetasPorNombreRetornaUnaListaDeEtiquetasDelTipoListaEtiqueta()
+		//{
+		//	ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+		//	//Assert
+		//	respuesta.ListaDeDiccionarios.ShouldBeType(typeof(List<Diccionario>));
+		//}
+
+		//[Test]
+		//public void PruebaDeConsultarEtiquetasPorNombreRetornaUnaListaDeEtiquetasNoVacia()
+		//{
+		//	ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+		//	//Assert
+		//	respuesta.ListaDeDiccionarios.Count.ShouldNotEqual(0);
+
+		//}
+
+		//[Test]
+		//public void PruebaDeConsultarEtiquetasPorNombreNoRetornaErrores()
+		//{
+		//	ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+		//	//Assert
+		//	respuesta.Respuesta.ShouldBeNull();
+		//}
+
+		//[Test]
+		//public void PruebaDeConsultarEtiquetasPorNombreRetornaUnDiccionarioConLasEtiquetasConElNombreSolicitado()
+		//{
+		//	ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+		//	//Assert
+		//	respuesta.ListaDeDiccionarios.Count().ShouldEqual(1);
+		//}
+
+		//[Test]
+		//public void PruebaDeConsultarEtiquetasPorNombreRetornaUnDiccionarioConDosEtiquetas()
+		//{
+		//	ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
+
+		//	//Assert
+		//	respuesta.ListaDeDiccionarios[0].Etiquetas.Count().ShouldEqual(2);
+		//}
 
 		#endregion
 	}

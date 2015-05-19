@@ -39,6 +39,25 @@ namespace Babel.Interfaz.WebApi.Controladores
 
           return respuestaHttp;
         }
+
+        [Route("diccionarios/{id}")]
+        [HttpGet]
+        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp)
+        {
+            //Se instancia el modelo de peticion WebApi como referencia del modelo de peticion de la aplicación 
+            var peticionWeb = peticionApi.ConsultarUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticionHttp);
+
+            // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
+            var respuestaApp = this.aplicacionMantenimientoDiccionario.ConsultarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
+
+
+            //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
+            var respuestaContenido = respuestaApi.ConsultarDiccionariosRespuesta.CrearNuevaRespuestaVacia();
+
+
+            //Devolvemos el diccionario creado seteado como respuesta http 
+            return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
+        }
         #endregion
 
         #region Metodos POST
@@ -68,10 +87,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         }
         #endregion
 
-        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
 

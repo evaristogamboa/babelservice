@@ -258,16 +258,13 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 				var etiqueta = diccionario.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault();
 
-				foreach (Traduccion itemTraduccion in peticion.ListaDeTraducciones)
-				{
-					etiqueta = etiqueta.EliminarTraduccion(itemTraduccion);
-				}
+				etiqueta.EliminarTraducciones(peticion.ListaDeTraducciones);
 
-				List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+				//List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
 
-				listaDeEtiquetas.Add(etiqueta);
+				//listaDeEtiquetas.Add(etiqueta);
 
-				diccionario = diccionario.ModificarEtiquetas(listaDeEtiquetas);
+				diccionario = diccionario.ModificarEtiquetas(new List<Etiqueta> { etiqueta });
 
 				var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
 

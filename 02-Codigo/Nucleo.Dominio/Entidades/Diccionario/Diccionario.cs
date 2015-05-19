@@ -6,120 +6,129 @@ using System.Collections.ObjectModel;
 
 namespace Babel.Nucleo.Dominio.Entidades.Diccionario
 {
-    public class Diccionario : Entity<Diccionario>
-    {
-        # region campos
+	public class Diccionario : Entity<Diccionario>
+	{
+		# region campos
 
-        private readonly List<Etiqueta> etiquetaLista = new List<Etiqueta>();
+		private readonly List<Etiqueta> etiquetaLista = new List<Etiqueta> ();
 
-        #endregion
+		#endregion
 
-        #region propiedades
+		#region propiedades
 
-        public IReadOnlyList<Etiqueta> Etiquetas
-        {
-            get
-            {
-                return new ReadOnlyCollection<Etiqueta>(etiquetaLista);
-            }
-        }
+		public IReadOnlyList<Etiqueta> Etiquetas {
+			get {
+				return new ReadOnlyCollection<Etiqueta> (etiquetaLista);
+			}
+		}
 
-        public string Ambiente { get; set; }
+		public string Ambiente { get; set; }
 
 
-        #endregion
+		#endregion
 
-        #region constructores
+		#region constructores
 
-        private Diccionario(string ambiente)
-        {
-            this.Ambiente = ambiente;
-        }
+		private Diccionario (string ambiente)
+		{
+			this.Ambiente = ambiente;
+		}
 
-        private Diccionario(Guid id, string ambiente)
-            : base(id)
-        {
-            this.Ambiente = ambiente;
-        }
+		private Diccionario (Guid id, string ambiente)
+			: base (id)
+		{
+			this.Ambiente = ambiente;
+		}
 
-        public static Diccionario CrearNuevoDiccionario(string ambiente)
-        {
-            return new Diccionario(ambiente);
-        }
+		public static Diccionario CrearNuevoDiccionario (string ambiente)
+		{
+			return new Diccionario (ambiente);
+		}
 
-        public static Diccionario CrearNuevoDiccionario(Guid id, string ambiente)
-        {
-            return new Diccionario(id, ambiente);
-        }
+		public static Diccionario CrearNuevoDiccionario (Guid id, string ambiente)
+		{
+			return new Diccionario (id, ambiente);
+		}
 
-        #endregion
+		#endregion
 
-        #region agregar
+		#region agregar
 
-        public Diccionario AgregarEtiqueta(Etiqueta etiqueta)
-        {
-            if (etiqueta == null)
-            {
-                throw new ArgumentNullException();
-            }
+		public Diccionario AgregarEtiqueta (Etiqueta etiqueta)
+		{
+			if (etiqueta == null) {
+				throw new ArgumentNullException ();
+			}
 
-            if (etiquetaLista.Exists(item => item.Nombre == etiqueta.Nombre))
-            {
-                throw new ArgumentException("Ya existe una etiqueta con Nombre " + etiqueta.Nombre);
-            }
+			if (etiquetaLista.Exists (item => item.Nombre == etiqueta.Nombre)) {
+				throw new ArgumentException ("Ya existe una etiqueta con Nombre " + etiqueta.Nombre);
+			}
 
-            this.etiquetaLista.Add(etiqueta);
+			this.etiquetaLista.Add (etiqueta);
 
-            return this;
-        }
+			return this;
+		}
 
-        public Diccionario AgregarEtiquetas(List<Etiqueta> etiquetas)
-        {
-            if (etiquetas == null)
-            {
-                throw new ArgumentNullException();
-            }
+		public Diccionario AgregarEtiquetas (List<Etiqueta> etiquetas)
+		{
+			if (etiquetas == null) {
+				throw new ArgumentNullException ();
+			}
 
-            foreach (Etiqueta item in etiquetas)
-            {
-                this.AgregarEtiqueta(item);
-            }
+			foreach (Etiqueta item in etiquetas) {
+				this.AgregarEtiqueta (item);
+			}
 
-            return this;
-        }
+			return this;
+		}
 
 
-        #endregion
+		#endregion
 
-        #region editar
+		#region editar
 
-        public Diccionario ModificarEtiquetas(List<Etiqueta> etiquetas)
-        {
-            throw new NotImplementedException();
-        }
+		public Diccionario ModificarEtiquetas (List<Etiqueta> etiquetas)
+		{
+			foreach (Etiqueta item in etiquetas) {
+				this.ModificarEtiqueta (item);
+			}
 
-        #endregion
+			return this;
 
-        #region eliminar
+		}
 
-        public void EliminarTodoElDiccionario()
-        {
-            this.etiquetaLista.Clear();
-        }
+		public Diccionario ModificarEtiqueta (Etiqueta etiqueta)
+		{
+			if (this.etiquetaLista.Exists (item => item.Id == etiqueta.Id)) {
+				this.etiquetaLista [this.etiquetaLista.FindIndex (item => item.Id == etiqueta.Id)] = etiqueta;
+			} else {
+				this.AgregarEtiqueta (etiqueta);
+			}
 
-        public Diccionario EliminarEtiqueta(Etiqueta etiqueta)
-        {
-            if (etiqueta == null)
-            {
-                throw new ArgumentNullException();
-            }
+			return this;
+		}
 
-            this.etiquetaLista.Remove(etiqueta);
+		#endregion
 
-            return this;
-        }
+		#region eliminar
 
-        #endregion
+		public void EliminarTodoElDiccionario ()
+		{
+			this.etiquetaLista.Clear ();
+		}
 
-    }
+		public Diccionario EliminarEtiqueta (Etiqueta etiqueta)
+		{
+			if (etiqueta == null) {
+				throw new ArgumentNullException ();
+			}
+
+			this.etiquetaLista.Remove (etiqueta);
+
+			return this;
+		}
+
+		#endregion
+
+	}
 }

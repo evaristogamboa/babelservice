@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Aplicacion.Fachada;
@@ -175,13 +176,40 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(diccionarioNuevo);
 
-            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
+            CrearUnDiccionarioRespuesta respuesta =
+                CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
+
+            respuesta.DiccionarioNuevo = guardaRepositario;
+            respuesta.Relaciones["diccionario"] = guardaRepositario.Id;
+            respuesta.Respuesta = null;
+
+            return respuesta;
         }
 
+        /// <summary>
+        /// YCM
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public ModificarUnDiccionarioRespuesta ModificarUnDiccionario(ModificarUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var unDiccionarioRespuesta = ModificarUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+            try
+            {
+                var guardarRepositorio = diccionarioRepositorio.SalvarUnDiccionario(peticion.Diccionario);
+
+                unDiccionarioRespuesta.Diccionario = guardarRepositorio;
+                unDiccionarioRespuesta.Relaciones["diccionario"] = guardarRepositorio.Id;
+                unDiccionarioRespuesta.Respuesta = null;
+            }
+            catch(Exception)
+            {
+                //etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+            }
+
+            return unDiccionarioRespuesta;
+
         }
 
         public EliminarUnDiccionarioRespuesta EliminarUnDiccionario(EliminarUnDiccionarioPeticion peticion)

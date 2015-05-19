@@ -122,7 +122,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Arrange
 			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
 
-			//Act
+           //Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
 
 			respuesta = serviciosApi.ConsultarDiccionarios();

@@ -170,16 +170,10 @@ namespace Babel.Nucleo.Aplicacion.Servicios
         /// <returns></returns>
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
-            //var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioNuevo.Id);
 
+            var diccionarioNuevo = Diccionario.CrearNuevoDiccionario(peticion.Ambiente);
 
-            //if (diccionario != null)
-            //{
-            //    throw new Exception("Ya existe un diccionario con ese ambiente");
-            //}
-
-
-            var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(peticion.DiccionarioNuevo);
+            var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(diccionarioNuevo);
 
             return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
         }

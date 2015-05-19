@@ -96,8 +96,6 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         public void PruebaCrearUnDiccionarioRetornaDiccionarioConRelaciones() 
         {                
             //Arrange
-            var controlador = new controladores.Diccionarios(this.appMantenimientoDiccionario);
-            controlador.Configuration = new HttpConfiguration();
             controlador.Request = new HttpRequestMessage(HttpMethod.Post, "api/diccionarios");
             var diccionario = new comunes.Diccionario();
             diccionario.Ambiente = AmbienteTestPrueba;

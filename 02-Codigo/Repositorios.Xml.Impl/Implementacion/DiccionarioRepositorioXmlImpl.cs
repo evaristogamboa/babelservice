@@ -184,6 +184,8 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         public Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario ObtenerUnDiccionario(Guid idDiccionario)
         {
 
+            Directory = Directory.Replace("diccionario_ok.xml","diccionario_ok_Existe.xml");                
+
             EntidadDom.Diccionario.Diccionario diccionarioDom = null;
 
             var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
@@ -223,10 +225,13 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
         {
 
+          
+
             var exist = false;
             
             EntidadDom.Diccionario.Diccionario dicDom = null;
 
+            Directory = Directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");    
 
             if (File.Exists(Directory))
             {
@@ -287,7 +292,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
                 StreamReader readerDom = new StreamReader(Directory);
                 object objDom = deserializer.Deserialize(readerDom);
-                reader.Close();
+                readerDom.Close();
 
 
                 EntidadRepo.Diccionarios diccionarioRepDom = (EntidadRepo.Diccionarios)objDom;

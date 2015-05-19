@@ -6,102 +6,112 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Babel.Nucleo.Dominio.Entidades.Etiquetas
 {
-    public class Etiqueta : Entity<Etiqueta>
-    {
-        private readonly List<Traduccion> listaTextos = new List<Traduccion>();
+	public class Etiqueta : Entity<Etiqueta>
+	{
+		private readonly List<Traduccion> listaTextos = new List<Traduccion> ();
 
-        public bool Activo { get; set; }
-
-
-        public string IdiomaPorDefecto { get; set; }
+		public bool Activo { get; set; }
 
 
-        public string Descripcion { get; set; }
-
-        [Required]
-        public string Nombre { get; set; }
+		public string IdiomaPorDefecto { get; set; }
 
 
-        public IReadOnlyList<Traduccion> Textos
-        {
-            get
-            {
-                return new ReadOnlyCollection<Traduccion>(this.listaTextos);
-            }
-        }
+		public string Descripcion { get; set; }
 
-        private Etiqueta(string nombre)
-        {
-            this.Nombre = nombre;
-        }
+		[Required]
+		public string Nombre { get; set; }
 
-        private Etiqueta(Guid id)
-            : base(id)
-        {
-        }
 
-        public static Etiqueta CrearNuevaEtiqueta(Guid id)
-        {
-            return new Etiqueta(id);
-        }
+		public IReadOnlyList<Traduccion> Textos {
+			get {
+				return new ReadOnlyCollection<Traduccion> (this.listaTextos);
+			}
+		}
 
-        public static Etiqueta CrearNuevaEtiqueta(string nombre)
-        {
-            var entidad = new Etiqueta(nombre);
+		private Etiqueta (string nombre)
+		{
+			this.Nombre = nombre;
+		}
 
-            Validator.ValidateObject(entidad, new ValidationContext(entidad), true);
+		private Etiqueta (Guid id)
+			: base (id)
+		{
+		}
 
-            return entidad;
-        }
+		public static Etiqueta CrearNuevaEtiqueta (Guid id)
+		{
+			return new Etiqueta (id);
+		}
 
-        public Etiqueta AgregarTraduccion(Traduccion traduccion)
-        {
-            Validator.ValidateObject(traduccion, new ValidationContext(traduccion), true);
+		public static Etiqueta CrearNuevaEtiqueta (string nombre)
+		{
+			var entidad = new Etiqueta (nombre);
 
-            if (this.listaTextos.Exists(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
-            {
-                throw new ArgumentException("Ya existe una traducción con código Iso " + traduccion.Cultura.CodigoIso);
-            }
+			Validator.ValidateObject (entidad, new ValidationContext (entidad), true);
 
-            this.listaTextos.Add(traduccion);
+			return entidad;
+		}
 
-            return this;
-        }
+		public Etiqueta AgregarTraduccion (Traduccion traduccion)
+		{
+			Validator.ValidateObject (traduccion, new ValidationContext (traduccion), true);
 
-        public Etiqueta AgregarTraducciones(List<Traduccion> traducciones)
-        {
-            if (traducciones == null)
-            {
-                throw new ArgumentNullException();
-            }
+			if (this.listaTextos.Exists (item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)) {
+				throw new ArgumentException ("Ya existe una traducción con código Iso " + traduccion.Cultura.CodigoIso);
+			}
 
-            foreach (Traduccion item in traducciones)
-            {
-                this.AgregarTraduccion(item);
-            }
+			this.listaTextos.Add (traduccion);
 
-            return this;
-        }
+			return this;
+		}
 
-        public Etiqueta EliminarTraduccion(Traduccion traduccion)
-        {
-            this.listaTextos.Remove(traduccion);
+		public Etiqueta AgregarTraducciones (List<Traduccion> traducciones)
+		{
+			if (traducciones == null) {
+				throw new ArgumentNullException ();
+			}
 
-            return this;
-        }
+			foreach (Traduccion item in traducciones) {
+				this.AgregarTraduccion (item);
+			}
 
-        public Etiqueta ModificarTraduccion(Traduccion traduccion)
-        {
-            if (this.listaTextos.Exists(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso))
-            {
-                this.listaTextos[this.listaTextos.FindIndex(item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)] = traduccion;
-            }
-            else
-            {
-                this.AgregarTraduccion(traduccion);
-            }
+			return this;
+		}
 
-            return this;
-        }
-    }
+		public Etiqueta EliminarTraduccion (Traduccion traduccion)
+		{
+			this.listaTextos.Remove (traduccion);
+
+			return this;
+		}
+
+		public Etiqueta EliminarTraducciones (List<Traduccion> traducciones)
+		{
+			foreach (Traduccion item in traducciones) {
+				this.EliminarTraduccion (item);
+			}
+
+			return this;
+		}
+
+		public Etiqueta ModificarTraduccion (Traduccion traduccion)
+		{
+			if (this.listaTextos.Exists (item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)) {
+				this.listaTextos [this.listaTextos.FindIndex (item => item.Cultura.CodigoIso == traduccion.Cultura.CodigoIso)] = traduccion;
+			} else {
+				this.AgregarTraduccion (traduccion);
+			}
+
+			return this;
+		}
+
+		public Etiqueta ModificarTraducciones (List<Traduccion> traducciones)
+		{
+			foreach (Traduccion item in traducciones) {
+				this.ModificarTraduccion (item);
+			}
+
+			return this;
+		}
+	}
 }

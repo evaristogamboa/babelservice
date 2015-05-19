@@ -89,7 +89,6 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controladores\Etiquetas.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -141,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppData\" />
-    <Folder Include="AppStart\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">

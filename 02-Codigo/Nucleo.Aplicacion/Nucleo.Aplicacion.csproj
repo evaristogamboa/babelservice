@@ -23,7 +23,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -73,20 +73,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EmpaquetadoNuget\NuGet.config" />
-    <None Include="EmpaquetadoNuget\NuGetPackage.ps1" />
-    <None Include="EmpaquetadoNuget\NuGetSetup.ps1" />
     <None Include="Package.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="EmpaquetadoNuget\NuGet.exe" />
-  </ItemGroup>
-  <Import Project="..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets" Condition="Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets'))" />
-  </Target>
 </Project>

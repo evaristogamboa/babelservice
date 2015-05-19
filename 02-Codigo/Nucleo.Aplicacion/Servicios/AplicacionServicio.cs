@@ -79,6 +79,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             return diccionariosRespuesta;
         }
 
+        
         public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
         {
 
@@ -113,6 +114,11 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
 

@@ -352,6 +352,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Act
 			AplicacionServicio serviciosApi = new AplicacionServicio(this.diccionarioRepositorio);
 
+           
 			respuesta = serviciosApi.ConsultarDiccionarios();
 
 			//Assert
@@ -494,7 +495,45 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		}
 
 		#endregion
-        
+
+
+        //[Test]
+        //public void PruebaCrearUnDiccionario()
+        //{
+        //    //Arrange
+        //    var appPruebas = new AplicacionServicio(this.diccionarioRepositorio);
+
+        //    const string ambiente = "ambiente";
+
+        //    var unDiccionarioRespuesta = CrearUnDiccionarioRespuesta.CrearNuevaInstancia(String.Empty);
+
+        //    //var diccionario = Diccionario.CrearNuevoDiccionario("ambiente");
+
+        //    //var diccionario2 = Diccionario.CrearNuevoDiccionario("ambiente2");
+
+
+        //    unDiccionarioRespuesta = appPruebas.CrearUnDiccionario(CrearUnDiccionarioPeticion.CrearNuevaInstancia(ambiente));
+
+
+        //    //try
+        //    //{
+        //    //   var  diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(new Guid());
+
+        //    //    unDiccionarioRespuesta.Diccionario = diccionario;
+        //    //    unDiccionarioRespuesta.Relaciones["diccionario"] = diccionario.Id;
+        //    //    unDiccionarioRespuesta.Respuesta = null;
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    //etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+        //    //}
+
+
+
+        //    //Assert
+
+        //    //respuesta.ShouldBeType(typeof(Diccionario));
+        //}
 	}
 
 }

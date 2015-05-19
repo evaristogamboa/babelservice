@@ -2,20 +2,20 @@
 <diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <diccionario id="25829869-2551-4b60-9dd7-2aaafccf8bfa">
     <etiquetas>
-      <etiqueta id="c1a84b31-b40d-4c13-b618-cc11efbeab39" nombre="app.testNuevo1_635676512239542929" activo="false">
-        <nombre>app.testNuevo1_635676512239542929</nombre>
+      <etiqueta id="021c24f0-1d50-4e49-a859-af57ed6b2ab7" nombre="app.testNuevo1_635676523076744239" activo="false">
+        <nombre>app.testNuevo1_635676523076744239</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="bfafa4e1-43b6-4f5a-b628-7a76fb159b7c" nombre="app.testNuevo2_635676512239552962" activo="false">
-        <nombre>app.testNuevo2_635676512239552962</nombre>
+      <etiqueta id="f74180a9-c1fa-4af0-8ec7-aad2af432072" nombre="app.testNuevo2_635676523076754249" activo="false">
+        <nombre>app.testNuevo2_635676523076754249</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="aaf3856b-11a5-4736-8b2d-853244181e1f" nombre="app.testNuevo3_635676512239552962" activo="false">
-        <nombre>app.testNuevo3_635676512239552962</nombre>
+      <etiqueta id="b573a4b0-6325-4569-9eea-299e389f889c" nombre="app.testNuevo3_635676523076754249" activo="false">
+        <nombre>app.testNuevo3_635676523076754249</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
@@ -480,6 +480,134 @@
       </etiqueta>
       <etiqueta id="5d6326a0-2fb3-4e46-abda-217b912a0585" nombre="app.testNuevo2_635676512239462871" activo="false" default="">
         <nombre>app.testNuevo2_635676512239462871</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="d854c79d-fc10-4f06-8542-61bd0ca4d187">
+    <etiquetas>
+      <etiqueta id="798cac46-20e3-4bef-aaf5-ab362f816386" nombre="app.test" activo="false" default="">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="0c85f7d8-f8d6-4b6a-84a2-ba1f5f977da6" nombre="app.test2" activo="false" default="">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="3c1e1aa5-0223-4dfa-a584-48a786ec1c33">
+    <etiquetas>
+      <etiqueta id="29647fbc-6eff-4c1a-8a96-dc78ac3be2ad" nombre="app.testNuevo1_635676516501962724" activo="false" default="">
+        <nombre>app.testNuevo1_635676516501962724</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="b9bd1e44-6bc0-4165-b9aa-99f0d57cb25c" nombre="app.testNuevo2_635676516501962724" activo="false" default="">
+        <nombre>app.testNuevo2_635676516501962724</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="5b88e51f-73a0-4477-bd5c-244e008686df">
+    <etiquetas>
+      <etiqueta id="5d7ca686-5a92-4850-846e-50fe3c7deda7" nombre="app.test" activo="false" default="">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="0dd599f0-7078-482a-b98f-f33c3450e5ac" nombre="app.test2" activo="false" default="">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="ed14ab25-0178-43a4-ab77-d7c342bd8780">
+    <etiquetas>
+      <etiqueta id="8a170c0b-cddb-4289-8402-fe706712ad56" nombre="app.testNuevo1_635676517231250120" activo="false" default="">
+        <nombre>app.testNuevo1_635676517231250120</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="8bfe3c2a-67a7-435e-b4a4-5310e476408b" nombre="app.testNuevo2_635676517231250120" activo="false" default="">
+        <nombre>app.testNuevo2_635676517231250120</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="4dc68f37-b2d9-4274-852b-03938512864e">
+    <etiquetas>
+      <etiqueta id="1df5715c-1f24-4d8f-8bbb-973c4ee2a8d0" nombre="app.test" activo="false" default="">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="4d544224-1d42-4024-b756-828c7ce7f77f" nombre="app.test2" activo="false" default="">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="eb20c17f-306b-4cda-9c0c-0f79e287dc48">
+    <etiquetas>
+      <etiqueta id="c38ab24a-0ce1-4d71-ac86-2908365b4701" nombre="app.testNuevo1_635676519711346280" activo="false" default="">
+        <nombre>app.testNuevo1_635676519711346280</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="41cb85c4-6c29-4422-b125-e989450ef111" nombre="app.testNuevo2_635676519711356306" activo="false" default="">
+        <nombre>app.testNuevo2_635676519711356306</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="cd6205a8-d8dd-4c9c-84c1-63f381585c6e">
+    <etiquetas>
+      <etiqueta id="e2850768-35df-46bb-8f79-48b06ba45528" nombre="app.test" activo="false" default="">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="0260b80b-4ac6-40a6-b5eb-b57916eaab2b" nombre="app.test2" activo="false" default="">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="835944df-3bc0-46b3-8508-cb1aed001bc4">
+    <etiquetas>
+      <etiqueta id="da4aa67a-6ad8-4e90-acbe-bbc8c24531be" nombre="app.testNuevo1_635676523076584130" activo="false" default="">
+        <nombre>app.testNuevo1_635676523076584130</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="1f415d21-7290-4f72-b6ee-135bfaed919d" nombre="app.testNuevo2_635676523076584130" activo="false" default="">
+        <nombre>app.testNuevo2_635676523076584130</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>

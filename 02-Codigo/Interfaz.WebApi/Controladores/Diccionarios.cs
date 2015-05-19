@@ -28,7 +28,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         }
         #endregion
 
-#region 
+        #region Metodos GET
         [Route("diccionarios")]
         [HttpGet]
         public HttpResponseMessage ObtenerTodosDiccionarios()
@@ -39,6 +39,9 @@ namespace Babel.Interfaz.WebApi.Controladores
 
           return respuestaHttp;
         }
+        #endregion
+
+        #region Metodos POST
         [Route("diccionarios")]
         [HttpPost]
         public HttpResponseMessage CrearUnDiccionario(HttpRequestMessage peticion)
@@ -63,8 +66,12 @@ namespace Babel.Interfaz.WebApi.Controladores
             //Devolvemos el diccionario creado seteado como respuesta http 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
+        #endregion
 
+        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
-#endregion

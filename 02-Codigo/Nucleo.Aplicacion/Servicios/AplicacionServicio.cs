@@ -13,6 +13,8 @@ namespace Babel.Nucleo.Aplicacion.Servicios
     public class AplicacionServicio : IAplicacionMantenimientoDiccionario
     {
         private IDiccionarioRepositorio diccionarioRepositorio;
+       
+
         public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario)
         {
             this.diccionarioRepositorio = repositorioDiccionario;
@@ -78,6 +80,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             return diccionariosRespuesta;
         }
 
+        
         public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
         {
 
@@ -160,18 +163,25 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			return etiquetasDeDiccionariosPorNombre;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
+            //var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioNuevo.Id);
 
-            var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioNuevo.Id);
+
+            //if (diccionario != null)
+            //{
+            //    throw new Exception("Ya existe un diccionario con ese ambiente");
+            //}
 
 
-            if (diccionario.Ambiente == peticion.DiccionarioNuevo.Ambiente)
-            {
-                throw new Exception("Ya existe un diccionario con ese ambiente");
-            }
+            var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(peticion.DiccionarioNuevo);
 
-            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(peticion.DiccionarioNuevo.Ambiente);
+            return CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
         }
 
         public ModificarUnDiccionarioRespuesta ModificarUnDiccionario(ModificarUnDiccionarioPeticion peticion)

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Modelos.Comunes
 {
+    [JsonObject("diccionario")]
 	public class Diccionario
 	{
 		#region propiedades
@@ -28,9 +28,10 @@ namespace Babel.Interfaz.WebApi.Modelos.Comunes
 			this.Etiquetas = new Etiquetas ();
 		}
 
+        [JsonConstructor]
 		public Diccionario ()
 		{
-			this.Id = Guid.NewGuid ();
+
 		}
 
 		#endregion

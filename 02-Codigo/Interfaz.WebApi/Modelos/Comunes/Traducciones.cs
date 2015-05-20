@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Modelos.Comunes
 {
-	[XmlRoot ("traducciones")]
+	[JsonObject ("traducciones")]
 	public class Traducciones
 	{
-        [XmlElement ("traduccion")]
+        [JsonProperty ("traduccion")]
         public List<Babel.Interfaz.WebApi.Modelos.Comunes.Traduccion> Traducciones1 { get; set; }
 
+        [JsonConstructor]
         public Traducciones()
         {
             this.Traducciones1 = new List<Babel.Interfaz.WebApi.Modelos.Comunes.Traduccion>();

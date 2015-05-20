@@ -12,10 +12,10 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
 	public class CrearUnDiccionarioRespuesta
 	{
-        [JsonProperty(PropertyName = "diccionario")]
+        [JsonProperty("diccionario")]
 		public comunes.Diccionario DiccionarioNuevo { get; set; }
         
-        [JsonProperty(PropertyName = "relaciones")]
+        [JsonProperty("relaciones")]
 		public List<Link> Relaciones { get; set; }
 
 		#region constructores

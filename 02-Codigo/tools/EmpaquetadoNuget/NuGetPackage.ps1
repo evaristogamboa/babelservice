@@ -230,7 +230,7 @@ function Publish {
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
 
 			# Try to push package
-			$task = Create-Process 'C:\Program Files (x86)\NuGet\NuGet.exe' ("push " + $_.Name + " -s " + $url + " " + $apikey)
+			$task = Create-Process C:\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey)
 			$task.Start() | Out-Null
 			$task.WaitForExit()
 			
@@ -277,7 +277,7 @@ Write-Log "Creating package..." -ForegroundColor Green
 
 # Create symbols package if any .pdb files are located in the lib folder
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
-	$packageTask = Create-Process 'C:\Program Files (x86)\NuGet\NuGet.exe' ("pack .\Package.nuspec -Symbol -Verbosity Detailed")
+	$packageTask = Create-Process C:\NuGet.exe ("pack .\Package.nuspec -Symbol -Verbosity Detailed")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			
@@ -289,7 +289,7 @@ If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	$global:ExitCode = $packageTask.ExitCode
 }
 Else {
-	$packageTask = Create-Process 'C:\Program Files (x86)\NuGet\NuGet.exe' ("pack .\Package.nuspec -Verbosity Detailed")
+	$packageTask = Create-Process C:\NuGet.exe ("pack .\Package.nuspec -Verbosity Detailed")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			

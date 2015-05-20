@@ -203,19 +203,39 @@ namespace Babel.Nucleo.Aplicacion.Servicios
                 unDiccionarioRespuesta.Relaciones["diccionario"] = guardarRepositorio.Id;
                 unDiccionarioRespuesta.Respuesta = null;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                //etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = ex.Message;
+                throw new Exception(ex.Message);
             }
 
             return unDiccionarioRespuesta;
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public EliminarUnDiccionarioRespuesta EliminarUnDiccionario(EliminarUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var eliminarDiccionario = EliminarUnDiccionarioRespuesta.CrearNuevaInstancia();
+            try
+            {
+                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+                diccionario.EliminarTodoElDiccionario();
+                var diccionarioEliminado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+                eliminarDiccionario.DiccionarioId = diccionarioEliminado.Id;
+                eliminarDiccionario.Respuesta = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return eliminarDiccionario;
+
+            
         }
 
         public AgregarEtiquetasAUnDiccionarioRespuesta AgregarEtiquetasAUnDiccionario(AgregarEtiquetasAUnDiccionarioPeticion peticion)
@@ -224,10 +244,30 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="peticion"></param>
+        /// <returns></returns>
         public ModificarEtiquetasAUnDiccionarioRespuesta ModificarEtiquetasAUnDiccionario(ModificarEtiquetasAUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var unDiccionarioRespuesta = ModificarEtiquetasAUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+            try
+            {
+                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+                diccionario.ModificarEtiquetas(peticion.ListaDeEtiquetas);
+                var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+                unDiccionarioRespuesta.ListaDeEtiquetas = diccionarioModificado.Etiquetas.ToList();
+                unDiccionarioRespuesta.Relaciones["diccionario"] = diccionarioModificado.Id;
+                unDiccionarioRespuesta.Respuesta = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return unDiccionarioRespuesta;
         }
 
         public EliminarEtiquetasAUnDiccionarioRespuesta EliminarEtiquetasAUnDiccionario(EliminarEtiquetasAUnDiccionarioPeticion peticion)

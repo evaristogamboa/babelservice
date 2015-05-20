@@ -76,6 +76,7 @@
     <None Include="EmpaquetadoNuget\NuGet.config" />
     <None Include="EmpaquetadoNuget\NuGetPackage.ps1" />
     <None Include="Package.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Datos\DiccionarioTest.xml">

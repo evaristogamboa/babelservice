@@ -60,6 +60,7 @@
     <None Include="EmpaquetadoNuget\NuGet.config" />
     <None Include="EmpaquetadoNuget\NuGetPackage.ps1" />
     <None Include="Package.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets" Condition="Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" />

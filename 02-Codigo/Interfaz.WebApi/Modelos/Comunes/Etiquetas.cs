@@ -8,9 +8,10 @@ namespace Babel.Interfaz.WebApi.Modelos.Comunes
 	[JsonObject ("etiquetas")]
 	public class Etiquetas
 	{
-        [JsonProperty ("etiqueta")]
+        [JsonProperty ("etiquetas")]
         public List<Babel.Interfaz.WebApi.Modelos.Comunes.Etiqueta> ListaEtiquetas { get; set; }
 
+        [JsonConstructor]
         public Etiquetas()
         {
             this.ListaEtiquetas = new List<Babel.Interfaz.WebApi.Modelos.Comunes.Etiqueta>();

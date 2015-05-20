@@ -8,7 +8,7 @@
     <RootNamespace>Babel.Nucleo.Aplicacion</RootNamespace>
     <AssemblyName>Babel.Nucleo.Aplicacion</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>0f4796c1</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>0d2f8e01</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,7 +73,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="EmpaquetadoNuget\NuGet.config" />
+    <None Include="EmpaquetadoNuget\NuGetPackage.ps1" />
     <None Include="Package.nuspec" />
-    <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets" Condition="Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets'))" />
+  </Target>
 </Project>

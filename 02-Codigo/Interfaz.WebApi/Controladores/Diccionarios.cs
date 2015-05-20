@@ -40,7 +40,7 @@ namespace Babel.Interfaz.WebApi.Controladores
           return respuestaHttp;
         }
 
-        [Route("diccionarios/{id}")]
+        [Route("diccionario/{id}")]
         [HttpGet]
         public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp)
         {
@@ -51,8 +51,7 @@ namespace Babel.Interfaz.WebApi.Controladores
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ConsultarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
-            var respuestaContenido = respuestaApi.ConsultarDiccionariosRespuesta.CrearNuevaRespuestaVacia();
-
+            var respuestaContenido = respuestaApi.ConsultarUnDiccionarioRespuesta.CrearNuevaRespuestaConRespuestaDeAplicacion(respuestaApp);
 
             //Devolvemos el diccionario creado seteado como respuesta http 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
@@ -70,16 +69,8 @@ namespace Babel.Interfaz.WebApi.Controladores
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
-            //Si la respuesta donde se llama al modulo de crear diccionario tiene el argumento peticionApp nulo o el metodo devuelve nulo se envia una respuesta http de error
-            if(respuestaApp is NullReferenceException || respuestaApp is ArgumentNullException)
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError,respuestaApp.Respuesta.ToString());
-
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
-
-            //Si la respuesta con el contenido tiene el argumento respuestaApp nulo o el metodo devuelve nulo se envia una respuesta http de error
-            if (respuestaContenido is ArgumentNullException || respuestaContenido is NullReferenceException)
-                return Request.CreateErrorResponse(HttpStatusCode.Conflict, respuestaApp.Respuesta.ToString());
 
             //Devolvemos el diccionario creado seteado como respuesta http 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));

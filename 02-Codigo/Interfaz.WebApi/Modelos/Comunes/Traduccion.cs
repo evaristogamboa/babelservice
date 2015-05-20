@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Modelos.Comunes
 {
+    [JsonObject("traduccion")]
 	public class Traduccion
 	{
-		[XmlAttribute ("cultura")]
+		[JsonProperty ("cultura")]
 		public string Cultura{ get; set; }
 
-		[XmlAttribute ("tooltip")]
+        [JsonProperty("tooltip")]
 		public string Tooltip{ get; set; }
 
-		[XmlText]
+		[JsonProperty("value")]
 		public string Value{ get; set; }
 
+        [JsonConstructor]
 		public Traduccion ()
 		{
 

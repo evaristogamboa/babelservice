@@ -8,7 +8,7 @@
     <RootNamespace>Babel.Repositorio.Xml.Impl</RootNamespace>
     <AssemblyName>Babel.Repositorio.Xml.Impl</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>8e043aec</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>c48ce25d</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +29,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CollectionJson, Version=0.7.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CollectionJson.0.7.7\lib\portable-net40+sl50+win+wpa81+wp80\CollectionJson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -69,8 +73,9 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="Diccionario.xml" />
+    <None Include="EmpaquetadoNuget\NuGet.config" />
+    <None Include="EmpaquetadoNuget\NuGetPackage.ps1" />
     <None Include="Package.nuspec" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Datos\DiccionarioTest.xml">
@@ -83,4 +88,11 @@
       <Name>Nucleo.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets" Condition="Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NubiseConfiguracionNugetDesarrollo.1.0.0\build\NubiseConfiguracionNugetDesarrollo.targets'))" />
+  </Target>
 </Project>

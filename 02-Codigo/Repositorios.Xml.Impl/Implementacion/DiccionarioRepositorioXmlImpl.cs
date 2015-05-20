@@ -219,14 +219,155 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             return diccionarioDom;
 
         }
-          
+
+
+        public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarUnDiccionario(Guid idDiccionario)
+        {
+
+            Directory = Directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
+
+            List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
+
+            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+
+            if (!File.Exists(Directory))
+            {
+
+                throw new ArgumentNullException();
+            }
+
+                        
+
+            StreamReader reader = new StreamReader(Directory);
+            object obj = deserializer.Deserialize(reader);
+            reader.Close();
+
+            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+
+
+            var dicSearch = diccionarioRep.ListaDiccionarios.Find(e => e.Id == new Guid(idDiccionario.ToString()));
+
+            if (dicSearch != null) {
+
+                diccionarioRep.ListaDiccionarios.Remove(dicSearch);
+            
+            }else{
+
+                throw new NullReferenceException();
+            
+            }
+
+            File.Delete(Directory);
+
+            var serializer = new XmlSerializer(typeof(Diccionarios));
+
+
+            using (TextWriter writer = new StreamWriter(Directory))
+            {
+                serializer.Serialize(writer, diccionarioRep);
+            }
+
+            var deserializerNewDic = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+            StreamReader readerNewDic = new StreamReader(Directory);
+            object objNewDic = deserializer.Deserialize(readerNewDic);
+            readerNewDic.Close();
+
+            var dirRepositarioDom = (EntidadRepo.Diccionarios)obj;
+
+            foreach (EntidadRepo.Diccionario diccionario in dirRepositarioDom.ListaDiccionarios)
+            {
+
+                diccionarioDom.Add(MapearRepositorioConDiccionario(diccionario));
+            }
+                      
+
+            return diccionarioDom;
+
+        }
+
+
+        public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarDiccionarios(List<Guid> idDiccionarioList)
+        {
+
+            Directory = Directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
+
+            List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
+
+            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+
+            if (!File.Exists(Directory))
+            {
+
+                throw new ArgumentNullException();
+            }
+
+
+
+            StreamReader reader = new StreamReader(Directory);
+            object obj = deserializer.Deserialize(reader);
+            reader.Close();
+
+            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+
+            foreach (var idDiccionario in idDiccionarioList) {
+
+                var dicSearch = diccionarioRep.ListaDiccionarios.Find(e => e.Id == new Guid(idDiccionario.ToString()));
+
+                if (dicSearch != null)
+                {
+
+                    diccionarioRep.ListaDiccionarios.Remove(dicSearch);
+
+                }
+                else
+                {
+
+                    throw new NullReferenceException(dicSearch.Id.ToString());
+
+                }            
+            
+            }            
+
+            File.Delete(Directory);
+
+            var serializer = new XmlSerializer(typeof(Diccionarios));
+
+
+            using (TextWriter writer = new StreamWriter(Directory))
+            {
+                serializer.Serialize(writer, diccionarioRep);
+            }
+
+            var deserializerNewDic = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+            StreamReader readerNewDic = new StreamReader(Directory);
+            object objNewDic = deserializer.Deserialize(readerNewDic);
+            readerNewDic.Close();
+
+            var dirRepositarioDom = (EntidadRepo.Diccionarios)obj;
+
+            foreach (EntidadRepo.Diccionario diccionario in dirRepositarioDom.ListaDiccionarios)
+            {
+
+                diccionarioDom.Add(MapearRepositorioConDiccionario(diccionario));
+            }
+
+
+            return diccionarioDom;
+
+        }
+
+                 
         
 
         public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
         {
-
-          
-
+            
             var exist = false;
             
             EntidadDom.Diccionario.Diccionario dicDom = null;

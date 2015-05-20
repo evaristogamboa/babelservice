@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <diccionario id="cd6205a8-d8dd-4c9c-84c1-63f381585c6e">
+  <diccionario id="b916458a-fc81-4580-89a9-33177ed371aa">
     <etiquetas>
-      <etiqueta id="e2850768-35df-46bb-8f79-48b06ba45528" nombre="app.test" activo="false">
+      <etiqueta id="db9854b8-c4fb-49a0-9e44-a2d999f340f3" nombre="app.test" activo="false">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="0260b80b-4ac6-40a6-b5eb-b57916eaab2b" nombre="app.test2" activo="false">
+      <etiqueta id="2cba50ce-26b0-4247-a4bb-1220193622f6" nombre="app.test2" activo="false">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -16,15 +16,15 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="e9c79979-13c3-4f31-a924-b83181e07def">
+  <diccionario id="ef4bdd98-d68a-4c6f-94f9-c2b49b5b0c1e">
     <etiquetas>
-      <etiqueta id="e2850768-35df-46bb-8f79-48b06ba45528" nombre="app.test" activo="false">
+      <etiqueta id="db9854b8-c4fb-49a0-9e44-a2d999f340f3" nombre="app.test" activo="false">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="0260b80b-4ac6-40a6-b5eb-b57916eaab2b" nombre="app.test2" activo="false">
+      <etiqueta id="2cba50ce-26b0-4247-a4bb-1220193622f6" nombre="app.test2" activo="false">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>

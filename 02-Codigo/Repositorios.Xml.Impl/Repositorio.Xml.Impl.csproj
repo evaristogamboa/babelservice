@@ -73,7 +73,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="Diccionario.xml" />
-    <None Include="Package.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

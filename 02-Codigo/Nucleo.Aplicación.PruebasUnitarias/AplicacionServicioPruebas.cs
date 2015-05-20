@@ -24,6 +24,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private const string consultarDiccionarioPorIdioma = "en-US";
 		private const string consultarEtiquetaPorNombre = "cancelar";
 		private const string consultarEtiquetasPorNombre = "app";
+		private Guid idEtiquetaAEliminarDosTraducciones = new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
 		private Diccionario diccionarioInicialDeLasPruebas;
 		private Diccionario diccionarioRespuestaDeAgregarTraducciones;
@@ -31,7 +32,6 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private Diccionario diccionarioRespuestaDeEliminarTodasLasTraducciones;
 		private Diccionario diccionarioRespuestaDeElimnarDosTraducciones;
 
-		private List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
 		private List<Traduccion> listaDeTraduccionesAAgregar = new List<Traduccion>();
 		private List<Traduccion> listaDeTraduccionesAModificar = new List<Traduccion>();
 		private List<Traduccion> listaDeTraduccionesAEliminar = new List<Traduccion>();
@@ -39,7 +39,6 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		public AplicacionServicioPruebas() { 
 			var repositorioMock=Substitute.For<IDiccionarioRepositorio>();		
 			this.diccionarioRepositorio = repositorioMock;
-			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
 
 			this.diccionarioRespuestaDeAgregarTraducciones = DiccionarioConTraduccionesDeLaEtiquetaAceptarAgregadas();
 
@@ -51,12 +50,8 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			this.listaDeTraduccionesAEliminar = this.TraduccionesAEliminar();
 			this.listaDeTraduccionesAModificar = this.TraduccionesAModificar();
 			this.listaDeTraduccionesAAgregar = this.TraduccionesAAgregar();
-
-			this.listaDeDiccionarios.Add(this.diccionarioInicialDeLasPruebas);
-
-			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
-			this.diccionarioRepositorio.ObtenerDiccionarios().Returns(this.listaDeDiccionarios);
 		}
+
 
 		#region Definiciones de diccionarios Mocks
 
@@ -428,6 +423,9 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma()
 		{
 			//Arrange
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
+
 			ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion = ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.CrearNuevaInstancia();
 
 			peticion.DiccionarioId = diccionarioInicialDeLasPruebas.Id;
@@ -446,6 +444,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private ConsultarDiccionariosRespuesta ArrangeYActDeTodasLasPruebasDeConsultarDiccionarios()
 		{
 			//Arrange
+			List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			listaDeDiccionarios.Add(this.diccionarioInicialDeLasPruebas);
+			this.diccionarioRepositorio.ObtenerDiccionarios().Returns(listaDeDiccionarios);
+
 			ConsultarDiccionariosRespuesta respuesta = ConsultarDiccionariosRespuesta.CrearNuevaInstancia();
 
            //Act
@@ -459,6 +462,9 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private ConsultarUnDiccionarioarioRespuesta ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario()
 		{
 			//Arrange
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
+
 			ConsultarUnDiccionarioPeticion peticion = ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
 
 			peticion.DiccionarioId = diccionarioInicialDeLasPruebas.Id;
@@ -476,6 +482,9 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre()
 		{
 			//Arrange
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
+
 			ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion = ConsultarEtiquetasDeDiccionarioPorNombrePeticion.CrearNuevaInstancia();
 
 			peticion.DiccionarioId = diccionarioInicialDeLasPruebas.Id;
@@ -494,6 +503,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private ConsultarEtiquetasPorNombreRespuesta ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre()
 		{
 			//Arrange
+			List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			listaDeDiccionarios.Add(this.diccionarioInicialDeLasPruebas);
+			this.diccionarioRepositorio.ObtenerDiccionarios().Returns(listaDeDiccionarios);
+
 			ConsultarEtiquetasPorNombrePeticion peticion = ConsultarEtiquetasPorNombrePeticion.CrearNuevaInstancia();
 
 			peticion.Nombre = consultarEtiquetasPorNombre;
@@ -512,7 +526,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		{
 			//Arrange
 			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
-			//this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
 			this.diccionarioRepositorio.SalvarUnDiccionario(diccionarioInicialDeLasPruebas).Returns(diccionarioRespuestaDeAgregarTraducciones);
 
 			AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion = AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.CrearNuevaInstancia();
@@ -534,6 +548,8 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta ArrangeYActDeTodasLasPruebasDeModificarLasTraduccionesAUnaEtiquetaDeUnDiccionario()
 		{
 			//Arrange
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
 			this.diccionarioRepositorio.SalvarUnDiccionario(diccionarioInicialDeLasPruebas).Returns(diccionarioRespuestaDeModificarTraducciones);
 
 			ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion = ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.CrearNuevaInstancia();
@@ -555,6 +571,8 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta ArrangeYActDeTodasLasPruebasDeEliminarTodasLasTraduccionesAUnaEtiquetaDeUnDiccionario()
 		{
 			//Arrange
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
 			this.diccionarioRepositorio.SalvarUnDiccionario(diccionarioInicialDeLasPruebas).Returns(diccionarioRespuestaDeEliminarTodasLasTraducciones);
 
 			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion = EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.CrearNuevaInstancia();
@@ -576,12 +594,14 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		private EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta ArrangeYActDeTodasLasPruebasDeEliminarDosTraduccionesAUnaEtiquetaDeUnDiccionario()
 		{
 			//Arrange
+			this.diccionarioInicialDeLasPruebas = InicializarDiccionario();
+			this.diccionarioRepositorio.ObtenerUnDiccionario(diccionarioInicialDeLasPruebas.Id).Returns(diccionarioInicialDeLasPruebas);
 			this.diccionarioRepositorio.SalvarUnDiccionario(diccionarioInicialDeLasPruebas).Returns(diccionarioRespuestaDeElimnarDosTraducciones);
 
 			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion = EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.CrearNuevaInstancia();
 
 			peticion.DiccionarioId = this.diccionarioInicialDeLasPruebas.Id;
-			peticion.EtiquetaId = new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+			peticion.EtiquetaId = idEtiquetaAEliminarDosTraducciones;
 			peticion.ListaDeTraducciones = this.listaDeTraduccionesAEliminar;
 
 			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.CrearNuevaInstancia();
@@ -663,18 +683,18 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		{
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
 
-			//Assert
 			bool noContieneVacio = true;
 
 			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
 			{
 				if (item.Value == Guid.Empty)
-				{ 
+				{
 					noContieneVacio = false;
 					break;
 				}
 			}
 
+			//Assert
 			noContieneVacio.ShouldBeTrue();
 		}
 
@@ -709,6 +729,25 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			//Assert
 			traduccionDiferenteDelIdioma.ShouldBeFalse();
 
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaLasEtiquetasDelDiccionarioSolicitado()
+		{
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
+
+			Guid relacionesDiccionarioId = Guid.Empty;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Key == "diccionario")
+				{
+					relacionesDiccionarioId = item.Value;
+				}
+			}
+
+			//Assert
+			relacionesDiccionarioId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Id);
 		}
 
 		#endregion
@@ -843,6 +882,25 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			noContieneVacio.ShouldBeTrue();
 		}
 
+		[Test]
+		public void PruebaDeConsultarUnDiccionarioRetornaLasEtiquetasDelDiccionarioSolicitado()
+		{
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
+
+			Guid relacionesDiccionarioId = Guid.Empty;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Key == "diccionario")
+				{
+					relacionesDiccionarioId = item.Value;
+				}
+			}
+
+			//Assert
+			relacionesDiccionarioId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Id);
+		}
+
 		#endregion
 
 
@@ -941,6 +999,26 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 			//Assert
 			respuesta.ListaDeEtiquetas.Count().ShouldEqual(1);
+			respuesta.ListaDeEtiquetas.Where(e => e.Nombre.Contains(consultarEtiquetaPorNombre)).Count().ShouldEqual(respuesta.ListaDeEtiquetas.Count());
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaLasEtiquetasDelDiccionarioSolicitado()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			Guid relacionesDiccionarioId = Guid.Empty;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Key == "diccionario")
+				{
+					relacionesDiccionarioId = item.Value;
+				}
+			}
+
+			//Assert
+			relacionesDiccionarioId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Id);
 		}
 
 		#endregion
@@ -1009,8 +1087,20 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		{
 			ConsultarEtiquetasPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasPorNombre();
 
+			bool diccionarioCorrecto = true; 
+
+			foreach (Diccionario itemDiccionario in respuesta.ListaDeDiccionarios)
+			{
+				if (itemDiccionario.Etiquetas.Where(e => e.Nombre.Contains(consultarEtiquetasPorNombre)).Count() != itemDiccionario.Etiquetas.Count())
+				{
+					diccionarioCorrecto = false;
+					break;
+				}
+			}
+
 			//Assert
 			respuesta.ListaDeDiccionarios.Count().ShouldEqual(1);
+			diccionarioCorrecto.ShouldBeTrue();
 		}
 
 		[Test]
@@ -1028,7 +1118,6 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 
 		#region Pruebas de agregar, eliminar y modificar traducciones a una etiqueta de un diccionario
-
 
 		#region AgregarTraduccionesAUnaEtiquetaDeUnDiccionario
 
@@ -1108,7 +1197,54 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			noContieneVacio.ShouldBeTrue();
 		}
 
+		[Test]
+		public void PruebaDeAgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaLosValoresDeRelacionesCorrectos()
+		{
+			AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeAgregarLasTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			Guid relacionesDiccionarioId = Guid.Empty;
+			Guid relacionesEtiquetaId = Guid.Empty;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Key == "diccionario")
+				{
+					relacionesDiccionarioId = item.Value;
+				}
+
+				if (item.Key == "etiqueta")
+				{
+					relacionesEtiquetaId = item.Value;
+				}
+			}
+			
+			//Assert
+			relacionesDiccionarioId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Id);
+			relacionesEtiquetaId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Etiquetas.FirstOrDefault().Id);
+		}
+
+		[Test]
+		public void PruebaDeAgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaLosValoresAgregadosALaListaDeTraducciones()
+		{
+			AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeAgregarLasTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			bool traduccionesAgregadas = true;
+
+			foreach (Traduccion itemTraduccion in this.listaDeTraduccionesAAgregar)
+			{
+				if (!(respuesta.ListaDeTraducciones.Contains(itemTraduccion)))
+				{
+					traduccionesAgregadas = false;
+					break;
+				}
+			}
+
+			//Assert
+			traduccionesAgregadas.ShouldBeTrue();
+		}
+
 		#endregion
+
 
 		#region ModificarTraduccionesAUnaEtiquetaDeUnDiccionario
 
@@ -1186,6 +1322,52 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			}
 
 			noContieneVacio.ShouldBeTrue();
+		}
+
+		[Test]
+		public void PruebaDeModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaLosValoresDeRelacionesCorrectos()
+		{
+			ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeModificarLasTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			Guid relacionesDiccionarioId = Guid.Empty;
+			Guid relacionesEtiquetaId = Guid.Empty;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Key == "diccionario")
+				{
+					relacionesDiccionarioId = item.Value;
+				}
+
+				if (item.Key == "etiqueta")
+				{
+					relacionesEtiquetaId = item.Value;
+				}
+			}
+
+			//Assert
+			relacionesDiccionarioId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Id);
+			relacionesEtiquetaId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Etiquetas.FirstOrDefault().Id);
+		}
+
+		[Test]
+		public void PruebaDeModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaLosValoresModificadosDeLaListaDeTraducciones()
+		{
+			ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeModificarLasTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			bool traduccionesModificadas = true;
+
+			foreach (Traduccion itemTraduccion in this.listaDeTraduccionesAModificar)
+			{
+				if (!(respuesta.ListaDeTraducciones.Contains(itemTraduccion)))
+				{
+					traduccionesModificadas = false;
+					break;
+				}
+			}
+
+			//Assert
+			traduccionesModificadas.ShouldBeTrue();
 		}
 
 		#endregion
@@ -1277,6 +1459,73 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			}
 
 			noContieneVacio.ShouldBeTrue();
+		}
+
+		[Test]
+		public void PruebaDeEliminarDosTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaLosValoresDeRelacionesCorrectos()
+		{
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeEliminarDosTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			Guid relacionesDiccionarioId = Guid.Empty;
+			Guid relacionesEtiquetaId = Guid.Empty;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Key == "diccionario")
+				{
+					relacionesDiccionarioId = item.Value;
+				}
+
+				if (item.Key == "etiqueta")
+				{
+					relacionesEtiquetaId = item.Value;
+				}
+			}
+
+			//Assert
+			relacionesDiccionarioId.ShouldEqual(this.diccionarioInicialDeLasPruebas.Id);
+			relacionesEtiquetaId.ShouldEqual(idEtiquetaAEliminarDosTraducciones);
+		}
+
+		[Test]
+		public void PruebaDeEliminarDosTraduccionesAUnaEtiquetaDeUnDiccionarioNoRetornaLosValoresEliminadosDeLaListaDeTraducciones()
+		{
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeEliminarDosTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			bool traduccionesEliminadas = true;
+
+			foreach (Traduccion itemTraduccion in this.listaDeTraduccionesAEliminar)
+			{
+				if (respuesta.ListaDeTraducciones.Contains(itemTraduccion))
+				{
+					traduccionesEliminadas = false;
+					break;
+				}
+			}
+
+			//Assert
+			traduccionesEliminadas.ShouldBeTrue();
+		}
+
+		[Test]
+		public void PruebaDeEliminarTodasTraduccionesAUnaEtiquetaDeUnDiccionarioRetornaLaListaDeTraduccionesVacia()
+		{
+			EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeEliminarTodasLasTraduccionesAUnaEtiquetaDeUnDiccionario();
+
+			bool traduccionesEliminadas = true;
+
+			foreach (Traduccion itemTraduccion in (this.diccionarioInicialDeLasPruebas.Etiquetas.FirstOrDefault().Textos.ToList<Traduccion>()))
+			{
+				if (respuesta.ListaDeTraducciones.Contains(itemTraduccion))
+				{
+					traduccionesEliminadas = false;
+					break;
+				}
+			}
+
+			//Assert
+			traduccionesEliminadas.ShouldBeTrue();
+			respuesta.ListaDeTraducciones.Count().ShouldEqual(0);
 		}
 
 		#endregion

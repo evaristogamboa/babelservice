@@ -220,8 +220,26 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
         public AgregarEtiquetasAUnDiccionarioRespuesta AgregarEtiquetasAUnDiccionario(AgregarEtiquetasAUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+			var agregarEtiquetasAUnDiccionario = AgregarEtiquetasAUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+			try 
+			{
+				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+
+				diccionario = diccionario.AgregarEtiquetas(peticion.ListaDeEtiquetas);
+
+				var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+
+				agregarEtiquetasAUnDiccionario.ListaDeEtiquetas = diccionarioModificado.Etiquetas.ToList();
+				agregarEtiquetasAUnDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;
+				agregarEtiquetasAUnDiccionario.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+			return agregarEtiquetasAUnDiccionario;
         }
 
         public ModificarEtiquetasAUnDiccionarioRespuesta ModificarEtiquetasAUnDiccionario(ModificarEtiquetasAUnDiccionarioPeticion peticion)

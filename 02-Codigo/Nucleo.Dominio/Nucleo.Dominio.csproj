@@ -56,11 +56,6 @@
     <Compile Include="Entidades\Etiquetas\Traduccion.cs" />
     <Compile Include="Entidades\Etiquetas\Etiqueta.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="EmpaquetadoNuget\NuGet.config" />
-    <None Include="EmpaquetadoNuget\NuGetPackage.ps1" />
-    <None Include="Package.nuspec" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

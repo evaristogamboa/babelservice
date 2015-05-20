@@ -32,7 +32,8 @@
     <file src="build\_._" target="build\_._" />
     <file src="content\_._" target="content\_._" />    
     <file src="src\_._" target="src\_._" />
-    <file src="tools\_._" target="tools\_._" />    -->
-    <file src="bin\*.dll" target="lib\net45" />
+    <file src="tools\_._" target="tools\_._" />    
+    <file src="..\..\bin\*.dll" target="lib\net45" />-->
+    <file src="bin\*.dll" target="lib\net45" />    
   </files>
 </package>

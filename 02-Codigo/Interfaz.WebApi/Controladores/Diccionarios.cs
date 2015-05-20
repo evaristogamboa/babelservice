@@ -35,9 +35,9 @@ namespace Babel.Interfaz.WebApi.Controladores
         {
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ConsultarDiccionarios();
             var respuestaContenido = respuestaApi.ConsultarDiccionariosRespuesta.CrearNuevaRespuestaConRespuestaDeAplicacion(respuestaApp);
-            var respuestaHttp = Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
 
-          return respuestaHttp;
+            return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
+
         }
 
         [Route("diccionario/{id}")]
@@ -54,6 +54,9 @@ namespace Babel.Interfaz.WebApi.Controladores
             var respuestaContenido = respuestaApi.ConsultarUnDiccionarioRespuesta.CrearNuevaRespuestaConRespuestaDeAplicacion(respuestaApp);
 
             //Devolvemos el diccionario creado seteado como respuesta http 
+            if (respuestaContenido.Diccionario.Id != peticionWeb.Diccionario.Id)
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
+
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
         #endregion
@@ -73,7 +76,7 @@ namespace Babel.Interfaz.WebApi.Controladores
             var respuestaContenido = respuestaApi.CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
             //Devolvemos el diccionario creado seteado como respuesta http 
-            return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
+            return Request.CreateResponse(HttpStatusCode.Created, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
         #endregion
 

@@ -31,7 +31,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Comunes
         [JsonConstructor]
 		public Diccionario ()
 		{
-			this.Id = Guid.NewGuid ();
+
 		}
 
 		#endregion

@@ -35,7 +35,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
         {
             this.Diccionario = new comunes.Diccionario();
             this.Relaciones = respuestaApp.Relaciones;
-            MapearRespuestaApp(respuestaApp.Diccionario);
+            this.Diccionario = MapearRespuestaApp(respuestaApp.Diccionario);
             //this.Relaciones2 = new List<Link>();
 
             this.Respuesta = respuestaApp.Respuesta;

@@ -14,7 +14,6 @@ using webApiModelosPeticion = Babel.Interfaz.WebApi.Modelos.Peticion;
 using Newtonsoft.Json;
 using comunes=Babel.Interfaz.WebApi.Modelos.Comunes;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.PruebasUnitarias
 {
@@ -96,6 +95,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             var diccionario = new comunes.Diccionario();
             diccionario.Ambiente = AmbienteTestPrueba;
+            diccionario.Id = new Guid("8a87f8a7-3df9-4d90-9478-350b964fc888");
             controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
             controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
             
@@ -107,6 +107,28 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             validarContenidoRespuesta.Diccionario.ShouldNotBeNull();
 
+        }
+
+        [Test]
+        public void PruebaConsultarUnDiccionarioDebeTraerRespuestaDiccionarioNoEncontrado()
+        {
+            this.appMantenimientoDiccionario.ConsultarUnDiccionario(Arg.Any<ConsultarUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.ConsultarUnDiccionarioarioRespuesta>(consultarUnDiccionarioRespuesta);
+
+
+            controlador.Request = new HttpRequestMessage(HttpMethod.Get, "api/diccionario/8a87f8a7-3df9-4d90-9478-350b964fc888");
+
+            var diccionario = new comunes.Diccionario();
+            diccionario.Ambiente = AmbienteTestPrueba;
+            diccionario.Id = new Guid("8a87f8a7-3df9-4d90-9478-350b964fc888");
+            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
+            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+
+            //Act
+            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request);
+
+            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ConsultarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
+
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
         }
 
         #endregion
@@ -129,7 +151,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             //var respuesta = this.appMantenimientoDiccionario.CrearUnDiccionario(diccionarioPeticion);
 
             //Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.Created);
             var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.CrearUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
             validarContenidoRespuesta.DiccionarioNuevo.ShouldNotBeNull();

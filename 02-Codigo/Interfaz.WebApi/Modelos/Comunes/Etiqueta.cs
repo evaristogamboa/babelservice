@@ -1,32 +1,34 @@
 ﻿using System;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Modelos.Comunes
 {
+    [JsonObject ("etiqueta")]
 	public class Etiqueta
 	{
-		[XmlAttribute ("id")]
+		[JsonProperty ("id")]
 		public Guid Id { get; set; }
 
-		[XmlAttribute ("nombre")]
+        [JsonProperty("nombre")]
 		public string Nombre { get; set; }
 
-		[XmlAttribute ("activo")]
+        [JsonProperty("activo")]
 		public bool Activo { get; set; }
 
-		[XmlAttribute ("default")]
+        [JsonProperty("default")]
 		public string IdiomaPorDefecto { get; set; }
 
-		[XmlElement ("nombre")]
+        [JsonProperty("nombreetiqueta")]
 		public string NombreEtiqueta { get ; set ; }
 
-		[XmlElement ("descripcion")]
+        [JsonProperty("descripcion")]
 		public string Descripcion { get; set; }
 
-		[XmlElement ("traducciones")]
+        [JsonProperty("traducciones")]
 		public Traducciones Traducciones{ get; set; }
 
-
+        [JsonConstructor]
 		public Etiqueta ()
 		{
 			this.Id = Guid.NewGuid ();

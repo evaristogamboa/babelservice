@@ -10,8 +10,7 @@ using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
 using Babel.Nucleo.Dominio.Entidades.Etiquetas;
 using NSubstitute;
-using Newtonsoft.Json;
-using NSubstitute.Core;
+
 
 namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 {

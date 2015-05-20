@@ -72,7 +72,4 @@
       <Name>Nucleo.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Package.nuspec" />
-  </ItemGroup>
 </Project>

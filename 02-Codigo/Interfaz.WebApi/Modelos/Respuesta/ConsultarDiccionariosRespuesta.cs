@@ -7,6 +7,7 @@ using dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
+    
     public class ConsultarDiccionariosRespuesta : IEquatable<ConsultarDiccionariosRespuesta>
     {
         [JsonProperty(PropertyName = "diccionarios")]
@@ -36,6 +37,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 			return new ConsultarDiccionariosRespuesta();
 		}
 		#endregion
+
         #region igualdad
         public override int GetHashCode()
         {

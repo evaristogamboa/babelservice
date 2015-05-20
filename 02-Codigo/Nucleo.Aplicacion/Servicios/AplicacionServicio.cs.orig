@@ -203,9 +203,15 @@ namespace Babel.Nucleo.Aplicacion.Servicios
                 unDiccionarioRespuesta.Relaciones["diccionario"] = guardarRepositorio.Id;
                 unDiccionarioRespuesta.Respuesta = null;
             }
+<<<<<<< HEAD
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+=======
             catch (Exception ex)
             {
 				throw ex;
+>>>>>>> 9f117aa95378d9af0d7e6c1cee70cfffe7e787cd
             }
 
             return unDiccionarioRespuesta;

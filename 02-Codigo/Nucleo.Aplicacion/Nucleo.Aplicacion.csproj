@@ -8,6 +8,7 @@
     <RootNamespace>Babel.Nucleo.Aplicacion</RootNamespace>
     <AssemblyName>Babel.Nucleo.Aplicacion</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>0f4796c1</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +23,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -65,11 +66,14 @@
     <Compile Include="Servicios\AplicacionServicio.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Dominio\Nucleo.Dominio.csproj">
       <Project>{c7562b90-054f-4e96-b33e-4595f1e6b7cc}</Project>
       <Name>Nucleo.Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package.nuspec" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

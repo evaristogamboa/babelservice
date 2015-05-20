@@ -314,6 +314,26 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 		}
 
 		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaRetornaRelacionesContienenGuidsNoVacios()
+		{
+			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
+
+			//Assert
+			bool noContieneVacio = true;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Value == Guid.Empty)
+				{ 
+					noContieneVacio = false;
+					break;
+				}
+			}
+
+			noContieneVacio.ShouldBeTrue();
+		}
+
+		[Test]
 		public void PruebaDeConsultarEtiquetasDeDiccionarioPorIdiomaNoRetornaErrores()
 		{
 			ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorIdioma();
@@ -426,7 +446,7 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
 
 			//Assert
-			//respuesta.Diccionario.Id.ShouldNotBeNull();
+			respuesta.Diccionario.Id.ShouldNotEqual(Guid.Empty);
 			respuesta.Relaciones.Count.ShouldNotEqual(0);
 			respuesta.Respuesta.ShouldBeNull();
 		}
@@ -456,6 +476,26 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 			//Assert
 			respuesta.Diccionario.ShouldBeType(typeof(Diccionario));
+		}
+
+		[Test]
+		public void PruebaDeConsultarUnDiccionarioRetornaRelacionesContienenGuidsNoVacios()
+		{
+			ConsultarUnDiccionarioarioRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarUnDiccionario();
+
+			//Assert
+			bool noContieneVacio = true;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Value == Guid.Empty)
+				{
+					noContieneVacio = false;
+					break;
+				}
+			}
+
+			noContieneVacio.ShouldBeTrue();
 		}
 
 		#endregion
@@ -518,6 +558,26 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 			//Assert
 			respuesta.Relaciones.Count.ShouldNotEqual(0);
+		}
+
+		[Test]
+		public void PruebaDeConsultarEtiquetasDeDiccionarioPorNombreRetornaRelacionesContienenGuidsNoVacios()
+		{
+			ConsultarEtiquetasDeDiccionarioPorNombreRespuesta respuesta = ArrangeYActDeTodasLasPruebasDeConsultarEtiquetasDeDiccionarioPorNombre();
+
+			//Assert
+			bool noContieneVacio = true;
+
+			foreach (KeyValuePair<string, Guid> item in respuesta.Relaciones)
+			{
+				if (item.Value == Guid.Empty)
+				{
+					noContieneVacio = false;
+					break;
+				}
+			}
+
+			noContieneVacio.ShouldBeTrue();
 		}
 
 		[Test]

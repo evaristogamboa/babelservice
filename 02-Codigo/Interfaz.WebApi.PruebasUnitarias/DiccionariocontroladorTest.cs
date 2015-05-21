@@ -42,17 +42,6 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
         #endregion
 
-        #region Metodos Privados Utilitarios
-        private void UtilConfigurarMockPeticionHttp(string ambientePrueba, string id)
-        {
-            diccionario = new comunes.Diccionario();
-            diccionario.Ambiente = ambientePrueba;
-            diccionario.Id = new Guid(id);
-            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
-            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
-        }
-        #endregion
-
         #region Constructor de las pruebas
         public DiccionarioControladorTest()
         {
@@ -178,6 +167,17 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             validarContenidoRespuesta.DiccionarioNuevo.ShouldNotBeNull();
             //validarContenidoRespuesta.Relaciones.ToArray().ShouldNotBeNull("Todo Diccionario debe tener por lo menos una relacion consigo mismo");
+        }
+        #endregion
+
+        #region Metodos Privados Utilitarios
+        private void UtilConfigurarMockPeticionHttp(string ambientePrueba, string id)
+        {
+            diccionario = new comunes.Diccionario();
+            diccionario.Ambiente = ambientePrueba;
+            diccionario.Id = new Guid(id);
+            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
+            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
         }
         #endregion
 

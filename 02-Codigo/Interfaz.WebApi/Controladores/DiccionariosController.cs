@@ -12,18 +12,19 @@ using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
-    [RoutePrefix("api/")]
-	public class Diccionarios : ApiController
+    [RoutePrefix("api")]
+	public class DiccionariosController : ApiController
     {
         #region propiedades y variables globales
         private readonly app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
 
-        const string Ambiente = "Desarrollo";
         #endregion
 
         #region Constructor de la clase
-        public Diccionarios(app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
+        public DiccionariosController(app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
         {
+            if (aplicacionMantenimientoDiccionario == null)
+                throw new ArgumentNullException("aplicacionMantenimientoDiccionario");
             this.aplicacionMantenimientoDiccionario = aplicacionMantenimientoDiccionario;
         }
         #endregion
@@ -55,7 +56,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
             //Devolvemos el diccionario creado seteado como respuesta http 
             if (respuestaContenido.Diccionario.Id != peticionWeb.Diccionario.Id)
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
+                return Request.CreateResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -89,18 +90,29 @@ namespace Babel.Interfaz.WebApi.Controladores
         [HttpPut]
         public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp)
         {
+
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
             var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeModificacion(peticionHttp);
 
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ModificarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
+            if (respuestaApp.Diccionario == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.ModificarUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
             return Request.CreateResponse(HttpStatusCode.OK,respuestaContenido,new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
+
         #endregion
+
+        public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

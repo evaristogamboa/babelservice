@@ -28,7 +28,6 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         private string _directory = string.Empty;
 
-        
 
         public DiccionarioRepositorioXmlImpl(string directory)
 		{

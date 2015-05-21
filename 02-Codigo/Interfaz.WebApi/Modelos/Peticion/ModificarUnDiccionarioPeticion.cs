@@ -15,11 +15,13 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 	{
         public comunes.Diccionario Diccionario { get; set; }
         public app.ModificarUnDiccionarioPeticion AppDiccionarioPeticion { get; set; }
+        public string Respuesta { get; set; }
 
         private ModificarUnDiccionarioPeticion(HttpRequestMessage peticionHttp)
         {
             this.Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
             this.AppDiccionarioPeticion = app.ModificarUnDiccionarioPeticion.CrearNuevaInstancia(Diccionario.Id,Diccionario.Ambiente);
+
             this.AppDiccionarioPeticion.Diccionario.Ambiente = Diccionario.Ambiente;
 
         }

@@ -106,6 +106,11 @@ namespace Babel.Interfaz.WebApi.Controladores
 
 
         #endregion
+
+        public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

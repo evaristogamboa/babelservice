@@ -22,10 +22,20 @@ namespace Babel.Nucleo.Dominio.Repositorios
 
 		#endregion
 
+        #region "Eliminar"
+
+        List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarDiccionarios(List<Guid> idDiccionarioList);
+
+        List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarUnDiccionario(Guid idDiccionario);
+
+
+
+        #endregion
 
 
 
 
 
-	}
+
+    }
 }

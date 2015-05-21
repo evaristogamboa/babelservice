@@ -70,8 +70,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                 var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
 
-                diccionarioDom.ShouldBeType<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();            
-            
+                diccionarioDom.ShouldBeType<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();                       
             
             }
             

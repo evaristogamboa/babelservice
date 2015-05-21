@@ -1,5 +1,6 @@
 Param (
-	[switch]$Publish
+	[switch]$Publish,
+    [string]$Ambiente
 )
 
 $ErrorActionPreference = "Stop"
@@ -222,14 +223,16 @@ function Publish {
 	
 	$nugetConfig.configuration.config.add | ForEach-Object {
 		$url = $_.value
+        $apikey=$_.apikey
+        $ambiente_conf=$_.ambiente
 
 		Write-Log "Repository Url: $url"
-		Write-Log " "
-
+		Write-Log " Ambiente: $Ambiente "
+       
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
-
+         if ($ambiente_conf=$Ambiente){
 			# Try to push package
-			$task = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
+			$task = Create-Process .\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
 			$task.Start() | Out-Null
 			$task.WaitForExit()
 			
@@ -244,8 +247,10 @@ function Publish {
 			}
 			else {
 				$global:ExitCode = 0
-			}                
+			}
+          }                
 		}
+      
 	}
 }
 

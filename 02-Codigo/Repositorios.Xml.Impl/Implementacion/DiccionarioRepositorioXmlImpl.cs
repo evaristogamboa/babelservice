@@ -37,13 +37,8 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		public List<EntidadDom.Diccionario.Diccionario> ObtenerDiccionarios ()
 		{
 			List<EntidadDom.Diccionario.Diccionario> diccionarios = new List<EntidadDom.Diccionario.Diccionario> ();
-			var deserializer = new XmlSerializer (typeof(EntidadRepo.Diccionarios));	
 
-			StreamReader reader = new StreamReader (Directory);
-			object obj = deserializer.Deserialize (reader);
-			reader.Close ();
-
-			DiccionariosRepositorio = (EntidadRepo.Diccionarios)obj;
+            DiccionariosRepositorio = XmlDeSerializador(Directory);
 
 			foreach (EntidadRepo.Diccionario item in DiccionariosRepositorio.ListaDiccionarios) {
 				diccionarios.Add (MapearRepositorioConDiccionario (item));
@@ -79,11 +74,10 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		
 			return DiccionarioDominio;
 		}
-
-
+        
         private EntidadRepo.Diccionario MapearDiccionarioConRepositorio(Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario diccionarioDom)
         {
-            var dicctionarioRepo = new EntidadRepo.Diccionario() { Id = diccionarioDom.Id };
+            var dicctionarioRepo = new EntidadRepo.Diccionario() { Id = diccionarioDom.Id, Ambiente = diccionarioDom.Ambiente };
 
             dicctionarioRepo.Etiquetas = new EntidadRepo.Etiquetas();
 
@@ -124,9 +118,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             return dicctionarioRepo;
         }
-
-
-
+        
         public IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> SalvarDiccionarios(IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> diccionarioLista)
 		{
 
@@ -140,36 +132,17 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             if (diccionarioLista.Count() == 0) {
 
                 throw new ArgumentNullException();
-            }
-
-            
-         
-            if (File.Exists(Directory))
-            {
-                File.Delete(Directory);
-            }                      
+            }                    
             
 
             foreach (EntidadDom.Diccionario.Diccionario diccionario in diccionarioLista)
             {
                 dirRepositario.ListaDiccionarios.Add(MapearDiccionarioConRepositorio(diccionario));            
             }
-            
-            var serializer = new XmlSerializer(typeof(Diccionarios));
-            
-           
-            using (TextWriter writer = new StreamWriter(Directory))
-            {
-                serializer.Serialize(writer, dirRepositario);
-            }                       
-                        
-            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));	
 
-            StreamReader reader = new StreamReader(Directory);
-            object obj = deserializer.Deserialize(reader);
-            reader.Close();
+            XmlSerializador(dirRepositario, Directory);            
 
-            var dirRepositarioDom = (EntidadRepo.Diccionarios)obj;
+            var dirRepositarioDom = XmlDeSerializador(Directory);
 
             foreach (EntidadRepo.Diccionario diccionario in dirRepositarioDom.ListaDiccionarios)
             {
@@ -187,21 +160,8 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             Directory = Directory.Replace("diccionario_ok.xml","diccionario_ok_Existe.xml");                
 
             EntidadDom.Diccionario.Diccionario diccionarioDom = null;
-
-            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-
-            if (!File.Exists(Directory)) {
-
-                throw new ArgumentNullException();            
-            }
-
-
-            StreamReader reader = new StreamReader(Directory);
-            object obj = deserializer.Deserialize(reader);
-            reader.Close();
-
-            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+            
+            EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador(Directory);
 
 
             foreach (var diccionario in diccionarioRep.ListaDiccionarios)
@@ -228,24 +188,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
 
-            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-
-            if (!File.Exists(Directory))
-            {
-
-                throw new ArgumentNullException();
-            }
-
-                        
-
-            StreamReader reader = new StreamReader(Directory);
-            object obj = deserializer.Deserialize(reader);
-            reader.Close();
-
-            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
-
-
+            EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador(Directory);
 
             var dicSearch = diccionarioRep.ListaDiccionarios.Find(e => e.Id == new Guid(idDiccionario.ToString()));
 
@@ -259,23 +202,9 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             
             }
 
-            File.Delete(Directory);
+            XmlSerializador(diccionarioRep, Directory);
 
-            var serializer = new XmlSerializer(typeof(Diccionarios));
-
-
-            using (TextWriter writer = new StreamWriter(Directory))
-            {
-                serializer.Serialize(writer, diccionarioRep);
-            }
-
-            var deserializerNewDic = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-            StreamReader readerNewDic = new StreamReader(Directory);
-            object objNewDic = deserializer.Deserialize(readerNewDic);
-            readerNewDic.Close();
-
-            var dirRepositarioDom = (EntidadRepo.Diccionarios)obj;
+            var dirRepositarioDom = XmlDeSerializador(Directory);
 
             foreach (EntidadRepo.Diccionario diccionario in dirRepositarioDom.ListaDiccionarios)
             {
@@ -294,25 +223,9 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             Directory = Directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
 
-            List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
+            List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;            
 
-            var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-
-            if (!File.Exists(Directory))
-            {
-
-                throw new ArgumentNullException();
-            }
-
-
-
-            StreamReader reader = new StreamReader(Directory);
-            object obj = deserializer.Deserialize(reader);
-            reader.Close();
-
-            EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
-
+            EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador(Directory);
 
             foreach (var idDiccionario in idDiccionarioList) {
 
@@ -331,25 +244,11 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
                 }            
             
-            }            
-
-            File.Delete(Directory);
-
-            var serializer = new XmlSerializer(typeof(Diccionarios));
-
-
-            using (TextWriter writer = new StreamWriter(Directory))
-            {
-                serializer.Serialize(writer, diccionarioRep);
             }
 
-            var deserializerNewDic = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-            StreamReader readerNewDic = new StreamReader(Directory);
-            object objNewDic = deserializer.Deserialize(readerNewDic);
-            readerNewDic.Close();
-
-            var dirRepositarioDom = (EntidadRepo.Diccionarios)obj;
+            XmlSerializador(diccionarioRep, Directory);        
+                        
+            var dirRepositarioDom = XmlDeSerializador(Directory);
 
             foreach (EntidadRepo.Diccionario diccionario in dirRepositarioDom.ListaDiccionarios)
             {
@@ -361,10 +260,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             return diccionarioDom;
 
         }
-
-                 
-        
-
+                
         public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
         {
             
@@ -374,20 +270,23 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             Directory = Directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");    
 
-            if (File.Exists(Directory))
-            {
-                                
-                var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));                
-                
+                                                   
+            EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador(Directory);
 
-                StreamReader reader = new StreamReader(Directory);
-                object obj = deserializer.Deserialize(reader);
-                reader.Close();
+            if (diccionario == null) { 
+            
+                throw new Exception();
+            
+            }
 
-                EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+            if (diccionarioRep.ListaDiccionarios.Find(e => e.Ambiente == diccionario.Ambiente) != null) {
+
+                throw new Exception();
+            
+            }
 
            
-
                 foreach (EntidadRepo.Diccionario direp in diccionarioRep.ListaDiccionarios)
                 {
 
@@ -418,26 +317,10 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
                 
                 }
 
-                File.Delete(Directory);
-    
 
-                var serializer = new XmlSerializer(typeof(Diccionarios));
+                XmlSerializador(diccionarioRep, Directory);                
 
-                using (TextWriter writer = new StreamWriter(Directory))
-                {
-                    serializer.Serialize(writer, diccionarioRep);
-                }
-
-                
-                var deserializerDom = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
-
-                StreamReader readerDom = new StreamReader(Directory);
-                object objDom = deserializer.Deserialize(readerDom);
-                readerDom.Close();
-
-
-                EntidadRepo.Diccionarios diccionarioRepDom = (EntidadRepo.Diccionarios)objDom;
-
+                EntidadRepo.Diccionarios diccionarioRepDom = XmlDeSerializador(Directory);
 
                 foreach (EntidadRepo.Diccionario dirRep in diccionarioRepDom.ListaDiccionarios)
                 {
@@ -453,25 +336,83 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
                
                 }                
 
-            }
+            
 
             return dicDom;
             
         }
-    }
 
-       
+        /// <summary>
+        ///  Método: XmlSerializador
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 21/05/2015
+        ///  Descripción: Método que escribe los diccionarios según el directorio que se le envie.
+        /// </summary>
+        /// <param name="diccionarios">Lista de diccionario tipo repositorio</param>
+        /// <param name="Directory">Ruta del directorio del archivo especificado</param>
+        private void XmlSerializador(EntidadRepo.Diccionarios diccionarios, string Directory)
+        {
 
+            try
+            {
+                File.Delete(Directory);
 
-		#endregion
+                var serializer = new XmlSerializer(typeof(Diccionarios));
+
+                using (TextWriter writer = new StreamWriter(Directory))
+                {
+                    serializer.Serialize(writer, diccionarios);
+                }
+            }
+            catch (Exception ex) {
+
+                throw new Exception(ex.Message);
+            
+            }
 
         
+        }
 
 
+        /// <summary>
+        ///  Método: XmlSerializador
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 21/05/2015
+        ///  Descripción: Método que busca los diccionarios según el directorio que se le envie.
+        /// </summary>        
+        /// <param name="Directory">Ruta del directorio del archivo especificado</param>
+        private EntidadRepo.Diccionarios XmlDeSerializador(string Directory)
+        {
 
-       
 
-       
+                if (File.Exists(Directory))
+                {
+
+                    var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
+
+                    StreamReader reader = new StreamReader(Directory);
+                    object obj = deserializer.Deserialize(reader);
+                    reader.Close();
+
+                    EntidadRepo.Diccionarios diccionarioRep = (EntidadRepo.Diccionarios)obj;
+
+                    return diccionarioRep;
+
+                }
+                else
+                {
+
+                    throw new Exception();
+
+                }           
+           
+
+        }
+
+}
+ 
+     
+		#endregion  
     
 }
 

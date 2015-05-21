@@ -12,23 +12,13 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
         private const string ambienteTestPrueba = "Prueba";
         private const string ambienteTestDesarrollo = "Desarrollo";
+        private const string ambienteTestSoloAmbiente = "SoloAmbiente";
 
         private Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario DiccionarioDominio { get; set; }
 
 
         private Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario DiccionarioDominio2 { get; set; }
-                
-        [Test]
-		public void DiccionarioRepositorioTestSalvar ()
-		{
-
-            var file = @"diccionario_ok.xml";
-
-            var directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + file;		}
-
-
-
-
+    
 
 		[Test]
 		public void ProbarObtenerDiccionariosDelRepositorio ()
@@ -173,37 +163,66 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
          public void ProbarCrearUnDiccionarioNuevo()
          {
 
-             // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
+             try
+             {
+                 // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
 
-             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
-
-
-             Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo1_" + Convert.ToString(DateTime.Now.Ticks));
-
-             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
-
-             EtqDom.AgregarTraduccion(traduccionDom2);
+                 DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
 
 
-             Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2_" + Convert.ToString(DateTime.Now.Ticks));
+                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo1_" + Convert.ToString(DateTime.Now.Ticks));
 
-             Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-             EtqDom2.AgregarTraduccion(traduccionDom22);
+                 EtqDom.AgregarTraduccion(traduccionDom2);
 
 
-             DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
+                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2_" + Convert.ToString(DateTime.Now.Ticks));
 
+                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+
+                 EtqDom2.AgregarTraduccion(traduccionDom22);
+
+
+                 DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
+
+
+                 DiccionarioDominio.AgregarEtiqueta(EtqDom);
+                 DiccionarioDominio.AgregarEtiqueta(EtqDom2);
+
+                 repositorio.SalvarUnDiccionario(DiccionarioDominio).ShouldEqual(DiccionarioDominio);
+
+             }
+             catch (Exception ex) { 
              
-
-             DiccionarioDominio.AgregarEtiqueta(EtqDom);
-             DiccionarioDominio.AgregarEtiqueta(EtqDom2);
-
-             repositorio.SalvarUnDiccionario(DiccionarioDominio).ShouldEqual(DiccionarioDominio);
-
-
+             
+             }
 
          }
+
+        [Test]
+        public void ProbarCrearUnDiccionarioNuevoConAmbienteExistente()
+        {
+
+
+            try
+            {
+                // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
+
+                DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
+
+                DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestSoloAmbiente);
+
+                repositorio.SalvarUnDiccionario(DiccionarioDominio);
+
+            }
+            catch (Exception ex) {
+
+                ex.ShouldBeType<Exception>();
+            
+            }
+
+        }
 
 
         [Test]
@@ -212,42 +231,50 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
 
-            DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
+            try
+            {
+
+                DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
 
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo1_" + Convert.ToString(DateTime.Now.Ticks));
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo1_" + Convert.ToString(DateTime.Now.Ticks));
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom.AgregarTraduccion(traduccionDom2);
-
-
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2_" + Convert.ToString(DateTime.Now.Ticks));
-
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
-
-            EtqDom2.AgregarTraduccion(traduccionDom22);
+                EtqDom.AgregarTraduccion(traduccionDom2);
 
 
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2_" + Convert.ToString(DateTime.Now.Ticks));
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom3 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo3_" + Convert.ToString(DateTime.Now.Ticks));
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom23 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
-
-            EtqDom3.AgregarTraduccion(traduccionDom23);
+                EtqDom2.AgregarTraduccion(traduccionDom22);
 
 
-            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("25829869-2551-4b60-9dd7-2aaafccf8bfa"), ambienteTestPrueba);
 
-          
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom3 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo3_" + Convert.ToString(DateTime.Now.Ticks));
 
-            DiccionarioDominio.AgregarEtiqueta(EtqDom);
-            DiccionarioDominio.AgregarEtiqueta(EtqDom2);
-            DiccionarioDominio.AgregarEtiqueta(EtqDom3);
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom23 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            repositorio.SalvarUnDiccionario(DiccionarioDominio).ShouldEqual(DiccionarioDominio);
-        
+                EtqDom3.AgregarTraduccion(traduccionDom23);
 
+
+                DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("25829869-2551-4b60-9dd7-2aaafccf8bfa"), ambienteTestPrueba);
+
+
+
+                DiccionarioDominio.AgregarEtiqueta(EtqDom);
+                DiccionarioDominio.AgregarEtiqueta(EtqDom2);
+                DiccionarioDominio.AgregarEtiqueta(EtqDom3);
+
+                repositorio.SalvarUnDiccionario(DiccionarioDominio);
+
+            }
+            catch (Exception ex) {
+
+                ex.ShouldBeType<Exception>();
+            
+            }
         
         }
 
@@ -257,22 +284,19 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         public void ProbarCrearUnDiccionarioNoExistente()
         {
 
+            try
+            {
+
+                DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
+
+                repositorio.SalvarUnDiccionario(DiccionarioDominio);
+
+            }
+            catch (Exception ex) {
+
+                ex.ShouldBeType<Exception>();
             
-           DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
-
-           try
-           {
-               repositorio.SalvarUnDiccionario(DiccionarioDominio); ;
-
-           }
-           catch (Exception ex) {
-
-               ex.ShouldBeType<System.NullReferenceException>();
-           
-           }
-
-                      
-           
+            }
 
 
         }
@@ -283,48 +307,56 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         public void ProbarCrearDiccionariosExistentes()
         {
 
-            DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
+            try
+            {
 
-            var listaDiccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
+                DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
 
-
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test");
-
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
-
-            EtqDom.AgregarTraduccion(traduccionDom2);
+                var listaDiccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
 
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test2");
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test");
 
-            Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
-            EtqDom2.AgregarTraduccion(traduccionDom22);
-
-
-            DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
-
-          
-
-            DiccionarioDominio.AgregarEtiqueta(EtqDom);
-            DiccionarioDominio.AgregarEtiqueta(EtqDom2);
+                EtqDom.AgregarTraduccion(traduccionDom2);
 
 
-            DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestDesarrollo);
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test2");
 
-         
+                Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
+
+                EtqDom2.AgregarTraduccion(traduccionDom22);
 
 
-            DiccionarioDominio2.AgregarEtiqueta(EtqDom);
-            DiccionarioDominio2.AgregarEtiqueta(EtqDom2);
-
-            listaDiccionarios.Add(DiccionarioDominio);
-            listaDiccionarios.Add(DiccionarioDominio2);
+                DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
 
 
 
-            repositorio.SalvarDiccionarios(listaDiccionarios).ShouldBeType<List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>>();
+                DiccionarioDominio.AgregarEtiqueta(EtqDom);
+                DiccionarioDominio.AgregarEtiqueta(EtqDom2);
 
+
+                DiccionarioDominio2 = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestDesarrollo);
+
+
+
+
+                DiccionarioDominio2.AgregarEtiqueta(EtqDom);
+                DiccionarioDominio2.AgregarEtiqueta(EtqDom2);
+
+                listaDiccionarios.Add(DiccionarioDominio);
+                listaDiccionarios.Add(DiccionarioDominio2);
+
+
+
+                repositorio.SalvarDiccionarios(listaDiccionarios).ShouldBeType<List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>>();
+            }
+            catch (Exception ex) {
+
+                ex.ShouldBeType<SystemException>();            
+            
+            }
 
         }
 

@@ -24,7 +24,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         private EntidadRepo.Diccionario DiccionarioRepositorio { get; set; }
 
-        public string Directory =  Environment.CurrentDirectory.Replace("\\bin\\Debug","\\DatosPrueba\\") + "diccionario_ok.xml";
+        public string Directory =  Environment.CurrentDirectory.Replace("\\bin\\Release","\\DatosPrueba\\") + "diccionario_ok.xml";
         
 
         public DiccionarioRepositorioXmlImpl()

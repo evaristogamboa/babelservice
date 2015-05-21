@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
-    [RoutePrefix("api/")]
+    [RoutePrefix("api")]
 	public class Diccionarios : ApiController
     {
         #region propiedades y variables globales
@@ -23,6 +23,8 @@ namespace Babel.Interfaz.WebApi.Controladores
         #region Constructor de la clase
         public Diccionarios(app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario) 
         {
+            if (aplicacionMantenimientoDiccionario == null)
+                throw new ArgumentNullException("aplicacionMantenimientoDiccionario");
             this.aplicacionMantenimientoDiccionario = aplicacionMantenimientoDiccionario;
         }
         #endregion

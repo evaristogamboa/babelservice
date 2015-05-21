@@ -1,6 +1,7 @@
 Param (
 	[switch]$Publicar,
-    [string]$Ambiente
+    [string]$Ambiente,
+	[string]$ApiKey
 )
 $ErrorActionPreference = "Stop"
 $global:ExitCode = 1
@@ -190,7 +191,6 @@ function Publicar {
 	
 	$nugetConfig.configuration.pushRepos.repo | ForEach-Object {
 		$url = $_.url
-        $apikey=$_.apikey
         $ambienteConf=$_.ambiente
 		if ($Ambiente -eq $ambienteConf){
 		Escribir-Log "Url del Repositorio: $url"
@@ -200,7 +200,7 @@ function Publicar {
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
          
 			# Try to push package
-			$tarea = Crear-Proceso 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
+			$tarea = Crear-Proceso 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $ApiKey + " -Verbosity Detailed")
 			$tarea.Start() | Out-Null
 			$tarea.WaitForExit()
 			

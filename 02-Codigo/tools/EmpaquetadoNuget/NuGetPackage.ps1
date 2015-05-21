@@ -195,9 +195,9 @@ function Publicar {
 
 		Escribir-Log "Url del Repositorio: $url"
 		Escribir-Log " Ambiente: $Ambiente "
-       
+       if ($ambienteConf=$Ambiente){
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
-         if ($ambienteConf=$Ambiente){
+         
 			# Try to push package
 			$tarea = Crear-Proceso 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
 			$tarea.Start() | Out-Null
@@ -215,8 +215,7 @@ function Publicar {
 				$global:ExitCode = 0
 			}
           }                
-		}
-      
+		}      
 	}
 }
 

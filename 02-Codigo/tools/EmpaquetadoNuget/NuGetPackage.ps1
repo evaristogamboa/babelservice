@@ -192,7 +192,7 @@ function HandlePublishError {
 
 	if ($setupTask.ExitCode -eq 0) {
 		# Try to push package again
-		$publishTask = Create-Process .\NuGet.exe ("push " + $_.Name + " -Source " + $url)
+		$publishTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -Source " + $url)
 		$publishTask.Start() | Out-Null
 		$publishTask.WaitForExit()
 			
@@ -281,7 +281,7 @@ Write-Log "Creating package..." -ForegroundColor Green
 
 # Create symbols package if any .pdb files are located in the lib folder
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
-	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack Package.nuspec -Symbol -Verbosity Detailed")
+	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack 02-Codigo\tools\EmpaquetadoNuget\Package.nuspec -Symbol -Verbosity Detailed")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			
@@ -293,7 +293,7 @@ If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	$global:ExitCode = $packageTask.ExitCode
 }
 Else {
-	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack Package.nuspec -Verbosity Detailed")
+	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack 02-Codigo\tools\EmpaquetadoNuget\Package.nuspec -Verbosity Detailed")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			

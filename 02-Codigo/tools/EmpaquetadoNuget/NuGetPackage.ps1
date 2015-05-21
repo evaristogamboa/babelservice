@@ -194,7 +194,8 @@ function Publicar {
         $ambienteConf=$_.ambiente
 
 		Escribir-Log "Url del Repositorio: $url"
-		Escribir-Log " Ambiente: $Ambiente "
+		Escribir-Log " Ambiente a publicar: $Ambiente "
+		Escribir-Log " Ambiente configurado: $ambienteConf "
        if ($ambienteConf=$Ambiente){
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
          

@@ -32,12 +32,13 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         
         private readonly CrearUnDiccionarioPeticion diccionarioPeticion;
 
-        private readonly controladores.Diccionarios controlador;
+        private readonly controladores.DiccionariosController controlador;
 
         private readonly appModelosRespuesta.CrearUnDiccionarioRespuesta crearUnDiccionarioRespuesta;
         private readonly appModelosRespuesta.ConsultarUnDiccionarioarioRespuesta consultarUnDiccionarioRespuesta;
         private readonly appModelosRespuesta.ConsultarDiccionariosRespuesta consultarDiccionariosRespuesta;
         private readonly appModelosRespuesta.ModificarUnDiccionarioRespuesta modificarUnDiccionarioRespuesta;
+        private readonly appModelosRespuesta.EliminarUnDiccionarioRespuesta eliminarDiccionarioRespuesta;
 
         #endregion
 
@@ -60,8 +61,11 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             //Objeto de respuesta de la aplicacion al modificar un diccionario en particular
             this.modificarUnDiccionarioRespuesta = appModelosRespuesta.ModificarUnDiccionarioRespuesta.CrearNuevaInstancia();
             
+            //Objeto de respuesta de la aplicacion al eliminar un diccionario
+            this.eliminarDiccionarioRespuesta = appModelosRespuesta.EliminarUnDiccionarioRespuesta.CrearNuevaInstancia();
+
             // Se crea una nueva instancia del controlador inyectandole la interfaz con los metodos mock que se configuraran en las pruebas
-            controlador = new controladores.Diccionarios(this.appMantenimientoDiccionario);
+            controlador = new controladores.DiccionariosController(this.appMantenimientoDiccionario);
             controlador.Configuration = new HttpConfiguration();
         }
         #endregion
@@ -71,7 +75,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         public void PruebaCreacionControladorEsCorrecta()
         { 
             //Assert
-            controlador.ShouldBeType<controladores.Diccionarios>();
+            controlador.ShouldBeType<controladores.DiccionariosController>();
         }
         #endregion
 
@@ -225,6 +229,25 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
         }
 
+        #endregion
+
+        #region Pruebas de eliminación (DELETE)
+        [Test]
+        public void PruebaEliminarUnDiccionarioRetornaDiccionarioEliminado()
+        {
+            //Arrange
+            this.eliminarDiccionarioRespuesta.DiccionarioId = new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+            this.appMantenimientoDiccionario.EliminarUnDiccionario(Arg.Any<EliminarUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.EliminarUnDiccionarioRespuesta>(eliminarDiccionarioRespuesta);
+
+            controlador.Request = new HttpRequestMessage(HttpMethod.Delete, "api/diccionario/9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+            this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+
+            //Act
+            var respuesta = controlador.EliminarUnDiccionario(controlador.Request);
+
+            //Assert
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+        }
         #endregion
 
         #region Metodos Privados Utilitarios

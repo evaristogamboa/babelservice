@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <diccionario id="04991cb5-7778-407c-b69a-a81f31ad8108" ambiente="Prueba">
+  <diccionario id="f50bde2d-5691-4c95-baa0-0f2805dbed4a" ambiente="Prueba">
     <etiquetas>
-      <etiqueta id="cc4c5e9d-011e-42f2-8176-c52b59b7909b" nombre="app.test" activo="false">
+      <etiqueta id="994e5f13-5a65-4f64-9370-a58aa024773d" nombre="app.test" activo="false">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="b65774f8-d633-4f6b-bbfc-686212648915" nombre="app.test2" activo="false">
+      <etiqueta id="3ab50ded-bbd9-4fdc-bbb8-ec241eab62f7" nombre="app.test2" activo="false">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -16,15 +16,15 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="dd4ece61-162e-4cbe-a1de-8ee41fb7aa0b" ambiente="Desarrollo">
+  <diccionario id="413119cc-fb69-4719-8f5c-560fe5f2a536" ambiente="Desarrollo">
     <etiquetas>
-      <etiqueta id="cc4c5e9d-011e-42f2-8176-c52b59b7909b" nombre="app.test" activo="false">
+      <etiqueta id="994e5f13-5a65-4f64-9370-a58aa024773d" nombre="app.test" activo="false">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="b65774f8-d633-4f6b-bbfc-686212648915" nombre="app.test2" activo="false">
+      <etiqueta id="3ab50ded-bbd9-4fdc-bbb8-ec241eab62f7" nombre="app.test2" activo="false">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>

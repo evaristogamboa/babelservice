@@ -105,7 +105,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba,"8a87f8a7-3df9-4d90-9478-350b964fc888");
 
             //Act
-            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request);
+            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request, "8a87f8a7-3df9-4d90-9478-350b964fc888");
             
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
@@ -126,7 +126,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba,"9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Act
-            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request);
+            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request, "8a87f8a7-3df9-4d90-9478-350b964fc888");
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
@@ -201,7 +201,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba,"9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Act
-            var respuesta = controlador.ModificarUnDiccionario(controlador.Request);
+            var respuesta = controlador.ModificarUnDiccionario(controlador.Request, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
             var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ModificarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
             //Assert
@@ -223,7 +223,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Act
-            var respuesta = controlador.ModificarUnDiccionario(controlador.Request);
+            var respuesta = controlador.ModificarUnDiccionario(controlador.Request, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
@@ -243,7 +243,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Act
-            var respuesta = controlador.EliminarUnDiccionario(controlador.Request);
+            var respuesta = controlador.EliminarUnDiccionario(controlador.Request, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);

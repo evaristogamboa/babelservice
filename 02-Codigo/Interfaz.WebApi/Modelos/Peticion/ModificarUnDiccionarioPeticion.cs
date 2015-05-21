@@ -17,18 +17,18 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
         public app.ModificarUnDiccionarioPeticion AppDiccionarioPeticion { get; set; }
         public string Respuesta { get; set; }
 
-        private ModificarUnDiccionarioPeticion(HttpRequestMessage peticionHttp)
+        private ModificarUnDiccionarioPeticion(HttpRequestMessage peticionHttp,string id)
         {
             this.Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
             this.AppDiccionarioPeticion = app.ModificarUnDiccionarioPeticion.CrearNuevaInstancia(Diccionario.Id,Diccionario.Ambiente);
-
+            this.Diccionario.Id = new Guid(id);
             this.AppDiccionarioPeticion.Diccionario.Ambiente = Diccionario.Ambiente;
 
         }
         
-        public static ModificarUnDiccionarioPeticion CrearUnaNuevaPeticionDeModificacion(HttpRequestMessage peticionHttp)
+        public static ModificarUnDiccionarioPeticion CrearUnaNuevaPeticionDeModificacion(HttpRequestMessage peticionHttp,string id)
         {
-            return new ModificarUnDiccionarioPeticion(peticionHttp);
+            return new ModificarUnDiccionarioPeticion(peticionHttp,id);
         }
 
     }

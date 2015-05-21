@@ -18,6 +18,8 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
         public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario)
         {
+            if (repositorioDiccionario == null)
+                throw new ArgumentNullException("repositorioDiccionario");
             this.diccionarioRepositorio = repositorioDiccionario;
         }
 

@@ -32,7 +32,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         
         private readonly CrearUnDiccionarioPeticion diccionarioPeticion;
 
-        private readonly controladores.Diccionarios controlador;
+        private readonly controladores.DiccionariosController controlador;
 
         private readonly appModelosRespuesta.CrearUnDiccionarioRespuesta crearUnDiccionarioRespuesta;
         private readonly appModelosRespuesta.ConsultarUnDiccionarioarioRespuesta consultarUnDiccionarioRespuesta;
@@ -61,7 +61,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.modificarUnDiccionarioRespuesta = appModelosRespuesta.ModificarUnDiccionarioRespuesta.CrearNuevaInstancia();
             
 
-            controlador = new controladores.Diccionarios(this.appMantenimientoDiccionario);
+            controlador = new controladores.DiccionariosController(this.appMantenimientoDiccionario);
             controlador.Configuration = new HttpConfiguration();
         }
         #endregion
@@ -71,7 +71,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         public void PruebaCreacionControladorEsCorrecta()
         { 
             //Assert
-            controlador.ShouldBeType<controladores.Diccionarios>();
+            controlador.ShouldBeType<controladores.DiccionariosController>();
         }
         #endregion
 

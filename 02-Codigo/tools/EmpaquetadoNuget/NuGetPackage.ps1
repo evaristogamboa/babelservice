@@ -1,11 +1,11 @@
 Param (
-	[switch]$Publish,
+	[switch]$Publicar,
     [string]$Ambiente
 )
 $ErrorActionPreference = "Stop"
 $global:ExitCode = 1
 
-function Write-Log {
+function Escribir-Log {
 
 	#region Parameters
 	
@@ -164,7 +164,7 @@ function Write-Log {
 	#>
 }
 
-function Create-Process() {
+function Crear-Proceso() {
 	param([string] $fileName, [string] $arguments)
 
 	$pinfo = New-Object System.Diagnostics.ProcessStartInfo
@@ -180,42 +180,10 @@ function Create-Process() {
 	return $p
 }
 
-function HandlePublishError {
-	param([string] $ErrorMessage)
+function Publicar {
 
-	# Run NuGet Setup
-	$encodedMessage = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($ErrorMessage))
-	$setupTask = Start-Process PowerShell.exe "-ExecutionPolicy Unrestricted -File .\NuGetSetup.ps1 -Url $url -Base64EncodedMessage $encodedMessage" -Wait -PassThru
-
-	#Write-Log ("NuGet Setup Task Exit Code: " + $setupTask.ExitCode)
-
-	if ($setupTask.ExitCode -eq 0) {
-		# Try to push package again
-		$publishTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -Source " + $url)
-		$publishTask.Start() | Out-Null
-		$publishTask.WaitForExit()
-			
-		$output = ($publishTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-		$errorNuget = (($publishTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
-		Write-Log $output
-		Write-Log $errorNuget Error
-
-		if ($publishTask.ExitCode -eq 0) {
-			$global:ExitCode = 0
-		}
-	}
-	elseif ($setupTask.ExitCode -eq 2) {
-		$global:ExitCode = 2
-	}
-	else {
-		$global:ExitCode = 0
-	}
-}
-
-function Publish {
-
-	Write-Log " "
-	Write-Log "Publishing package..." -ForegroundColor Green
+	Escribir-Log " "
+	Escribir-Log "Publicando paquete..." -ForegroundColor Green
 
 	# Get nuget config
 	[xml]$nugetConfig = Get-Content 02-Codigo\tools\EmpaquetadoNuget\NuGet.Config
@@ -223,26 +191,25 @@ function Publish {
 	$nugetConfig.configuration.config.add | ForEach-Object {
 		$url = $_.value
         $apikey=$_.apikey
-        $ambiente_conf=$_.ambiente
+        $ambienteConf=$_.ambiente
 
-		Write-Log "Repository Url: $url"
-		Write-Log " Ambiente: $Ambiente "
+		Escribir-Log "Url del Repositorio: $url"
+		Escribir-Log " Ambiente: $Ambiente "
        
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
-         if ($ambiente_conf=$Ambiente){
+         if ($ambienteConf=$Ambiente){
 			# Try to push package
-			$task = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
-			$task.Start() | Out-Null
-			$task.WaitForExit()
+			$tarea = Crear-Proceso 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
+			$tarea.Start() | Out-Null
+			$tarea.WaitForExit()
 			
-			$output = ($task.StandardOutput.ReadToEnd() -Split '[\r\n]') |? { $_ }
-			$errorNuget = ($task.StandardError.ReadToEnd() -Split '[\r\n]') |? { $_ }
-			Write-Log $output
-			Write-Log $errorNuget Error
+			$salida = ($tarea.StandardOutput.ReadToEnd() -Split '[\r\n]') |? { $_ }
+			$errorNuget = ($tarea.StandardError.ReadToEnd() -Split '[\r\n]') |? { $_ }
+			Escribir-Log $salida
+			Escribir-Log $errorNuget Error
 		   
-			if ($task.ExitCode -gt 0) {
-				HandlePublishError -ErrorMessage $errorNuget
-				#Write-Log ("HandlePublishError() Exit Code: " + $global:ExitCode)
+			if ($tarea.ExitCode -gt 0) {
+				$global:ExitCode = 1
 			}
 			else {
 				$global:ExitCode = 0
@@ -253,64 +220,64 @@ function Publish {
 	}
 }
 
-Write-Log " "
-Write-Log "NuGet Packager 2.0.3" -ForegroundColor Yellow
+Escribir-Log " "
+Escribir-Log "Nubise Empaquetador NuGet 1.0.0" -ForegroundColor Yellow
 
-# Make sure the nuget executable is writable
+# Asegurarse que se puede escribir el ejecutable NuGet
 Set-ItemProperty 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe -Name IsReadOnly -Value $false
 
-# Make sure the nupkg files are writeable and create backup
+# Asegurarse que los archivos nupkg se pueden escribir y crear respaldo
 if (Test-Path *.nupkg) {
 	Set-ItemProperty *.nupkg -Name IsReadOnly -Value $false
 
-	Write-Log " "
-	Write-Log "Creating backup..." -ForegroundColor Green
+	Escribir-Log " "
+	Escribir-Log "Creando respaldo..." -ForegroundColor Green
 
 	Get-ChildItem *.nupkg | ForEach-Object { 
 		Move-Item $_.Name ($_.Name + ".bak") -Force
-		Write-Log ("Renamed " + $_.Name + " to " + $_.Name + ".bak")
+		Escribir-Log ("Renombrado " + $_.Name + " a " + $_.Name + ".bak")
 	}
 }
 
-Write-Log " "
+Escribir-Log " "
 
 
-Write-Log " "
-Write-Log "Creating package..." -ForegroundColor Green
+Escribir-Log " "
+Escribir-Log "Creando paquete..." -ForegroundColor Green
 
-# Create symbols package if any .pdb files are located in the lib folder
+# Crear paquete de simbolos si existe algun .pdb en el directorio lib
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
-	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack 02-Codigo\tools\EmpaquetadoNuget\Package.nuspec -Symbol -Verbosity Detailed")
-	$packageTask.Start() | Out-Null
-	$packageTask.WaitForExit()
+	$tareaEmpaquetado = Crear-Proceso 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack 02-Codigo\tools\EmpaquetadoNuget\Package.nuspec -Symbol -Verbosity Detailed")
+	$tareaEmpaquetado.Start() | Out-Null
+	$tareaEmpaquetado.WaitForExit()
 			
-	$output = ($packageTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-	$errorNuget = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
-	Write-Log $output
-	Write-Log $errorNuget Error
+	$salida = ($tareaEmpaquetado.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
+	$errorNuget = (($tareaEmpaquetado.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+	Escribir-Log $salida
+	Escribir-Log $errorNuget Error
 
-	$global:ExitCode = $packageTask.ExitCode
+	$global:ExitCode = $tareaEmpaquetado.ExitCode
 }
 Else {
 
-	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack 02-Codigo\tools\EmpaquetadoNuget\Package.nuspec -Verbosity Detailed")
-	$packageTask.Start() | Out-Null
-	$packageTask.WaitForExit()			
-	$output = ($packageTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-	$errorNuget = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
-	Write-Log $output
-	Write-Log $errorNuget Error
+	$tareaEmpaquetado = Crear-Proceso 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack 02-Codigo\tools\EmpaquetadoNuget\Package.nuspec -Verbosity Detailed")
+	$tareaEmpaquetado.Start() | Out-Null
+	$tareaEmpaquetado.WaitForExit()			
+	$salida = ($tareaEmpaquetado.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
+	$errorNuget = (($tareaEmpaquetado.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+	Escribir-Log $salida
+	Escribir-Log $errorNuget Error
 
-	$global:ExitCode = $packageTask.ExitCode
+	$global:ExitCode = $tareaEmpaquetado.ExitCode
 }
 
 # Check if package should be published
-if ($Publish -and $global:ExitCode -eq 0) {
-	Publish
+if ($Publicar -and $global:ExitCode -eq 0) {
+	Publicar
 }
 
-Write-Log " "
-Write-Log "Exit Code: $global:ExitCode" -ForegroundColor Gray
+Escribir-Log " "
+Escribir-Log "Codigo de Salida: $global:ExitCode" -ForegroundColor Gray
 
 $host.SetShouldExit($global:ExitCode)
 Exit $global:ExitCode

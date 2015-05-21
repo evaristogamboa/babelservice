@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using app = Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using comunes = Babel.Interfaz.WebApi.Modelos.Comunes;
+using dominio = Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
@@ -18,9 +19,9 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
         private ModificarUnDiccionarioPeticion(HttpRequestMessage peticionHttp)
         {
             this.Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
-            this.AppDiccionarioPeticion = app.ModificarUnDiccionarioPeticion.CrearNuevaInstancia(Diccionario.Ambiente);
+            this.AppDiccionarioPeticion = app.ModificarUnDiccionarioPeticion.CrearNuevaInstancia(Diccionario.Id,Diccionario.Ambiente);
+            this.AppDiccionarioPeticion.Diccionario.Ambiente = Diccionario.Ambiente;
 
-            this.AppDiccionarioPeticion.Diccionario = (Diccionario)Diccionario;
         }
         
         public static ModificarUnDiccionarioPeticion CrearUnaNuevaPeticionDeModificacion(HttpRequestMessage peticionHttp)
@@ -28,5 +29,5 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
             return new ModificarUnDiccionarioPeticion(peticionHttp);
         }
 
-	}
+    }
 }

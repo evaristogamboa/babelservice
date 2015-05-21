@@ -98,7 +98,7 @@ namespace Babel.Interfaz.WebApi.Controladores
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.ModificarUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
-            return Request.CreateResponse(HttpStatusCode.NotModified);
+            return Request.CreateResponse(HttpStatusCode.OK,respuestaContenido,new MediaTypeWithQualityHeaderValue("application/json"));
         }
         #endregion
     }

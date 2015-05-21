@@ -198,11 +198,11 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             //Act
             var respuesta = controlador.ModificarUnDiccionario(controlador.Request);
-            //var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ModificarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
+            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ModificarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
-            
+            validarContenidoRespuesta.Diccionario.Ambiente.ShouldEqual(AmbienteTestPrueba);
 
         }
 

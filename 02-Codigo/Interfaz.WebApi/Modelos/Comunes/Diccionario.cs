@@ -21,13 +21,6 @@ namespace Babel.Interfaz.WebApi.Modelos.Comunes
 
 		#region constructores
 
-		public Diccionario (string ambiente)
-		{
-			this.Id = Guid.NewGuid ();
-			this.Ambiente = ambiente;
-			this.Etiquetas = new Etiquetas ();
-		}
-
         [JsonConstructor]
 		public Diccionario ()
 		{

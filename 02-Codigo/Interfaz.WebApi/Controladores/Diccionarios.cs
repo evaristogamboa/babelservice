@@ -90,7 +90,13 @@ namespace Babel.Interfaz.WebApi.Controladores
         public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp)
         {
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
-           // var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion();
+            var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeModificacion(peticionHttp);
+
+            // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
+            var respuestaApp = this.aplicacionMantenimientoDiccionario.ModificarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
+
+            //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
+            var respuestaContenido = respuestaApi.ModificarUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
             return Request.CreateResponse(HttpStatusCode.NotModified);
         }

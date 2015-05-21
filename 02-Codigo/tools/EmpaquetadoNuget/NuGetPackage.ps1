@@ -197,9 +197,9 @@ function HandlePublishError {
 		$publishTask.WaitForExit()
 			
 		$output = ($publishTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-		$error = (($publishTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+		$errorNuget = (($publishTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
 		Write-Log $output
-		Write-Log $error Error
+		Write-Log $errorNuget Error
 
 		if ($publishTask.ExitCode -eq 0) {
 			$global:ExitCode = 0
@@ -237,12 +237,12 @@ function Publish {
 			$task.WaitForExit()
 			
 			$output = ($task.StandardOutput.ReadToEnd() -Split '[\r\n]') |? { $_ }
-			$error = ($task.StandardError.ReadToEnd() -Split '[\r\n]') |? { $_ }
+			$errorNuget = ($task.StandardError.ReadToEnd() -Split '[\r\n]') |? { $_ }
 			Write-Log $output
-			Write-Log $error Error
+			Write-Log $errorNuget Error
 		   
 			if ($task.ExitCode -gt 0) {
-				HandlePublishError -ErrorMessage $error
+				HandlePublishError -ErrorMessage $errorNuget
 				#Write-Log ("HandlePublishError() Exit Code: " + $global:ExitCode)
 			}
 			else {
@@ -286,9 +286,9 @@ If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	$packageTask.WaitForExit()
 			
 	$output = ($packageTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-	$error = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+	$errorNuget = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
 	Write-Log $output
-	Write-Log $error Error
+	Write-Log $errorNuget Error
 
 	$global:ExitCode = $packageTask.ExitCode
 }
@@ -298,9 +298,9 @@ Else {
 	$packageTask.WaitForExit()
 			
 	$output = ($packageTask.StandardOutput.ReadToEnd() -Split '[\r\n]') |? {$_}
-	$error = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
+	$errorNuget = (($packageTask.StandardError.ReadToEnd() -Split '[\r\n]') |? {$_}) 
 	Write-Log $output
-	Write-Log $error Error
+	Write-Log $errorNuget Error
 
 	$global:ExitCode = $packageTask.ExitCode
 }

@@ -20,6 +20,14 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
             Diccionario = Diccionario.CrearNuevoDiccionario(ambiente);
 	    }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		private ModificarUnDiccionarioPeticion(Guid diccionarioId, string ambiente)
+		{
+			Diccionario = Diccionario.CrearNuevoDiccionario(diccionarioId, ambiente);
+		}
+
         /// <summary>
         /// 
         /// </summary>
@@ -27,6 +35,14 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Peticion
         public static ModificarUnDiccionarioPeticion CrearNuevaInstancia(string ambiente)
 	    {
             return new ModificarUnDiccionarioPeticion(ambiente);
+	    }
+		/// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+		public static ModificarUnDiccionarioPeticion CrearNuevaInstancia(Guid diccionarioId, string ambiente)
+	    {
+			return new ModificarUnDiccionarioPeticion(diccionarioId, ambiente);
 	    }
 
         #endregion

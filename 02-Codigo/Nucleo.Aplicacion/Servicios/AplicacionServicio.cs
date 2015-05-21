@@ -14,53 +14,11 @@ namespace Babel.Nucleo.Aplicacion.Servicios
     public class AplicacionServicio : IAplicacionMantenimientoDiccionario
     {
         private IDiccionarioRepositorio diccionarioRepositorio;
-       
 
-        public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario)
-        {
-            this.diccionarioRepositorio = repositorioDiccionario;
-        }
-        public ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta ConsultarEtiquetasDeDiccionarioPorIdioma(ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion)
-        {
-            var etiquetasDeDiccionarioPorIdiomaRespuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
-
-            try
-            {
-                var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-                List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
-
-               // listaEtiquetas = diccionario.Etiquetas.Where(e => e.Textos.FirstOrDefault(t => t.Cultura.CodigoIso.Equals(peticion.Idioma)) != null).ToList<Etiqueta>();
-
-                // TODO: Revisar y borrar
-				foreach (Etiqueta itemEtiqueta in diccionario.Etiquetas)
-				{
-					foreach (Traduccion itemTraduccion in itemEtiqueta.Textos)
-					{
-						if (itemTraduccion.Cultura.CodigoIso == peticion.Idioma)
-						{
-							Etiqueta nuevaEtiqueta = Etiqueta.CrearNuevaEtiqueta(itemEtiqueta.Id);
-							nuevaEtiqueta.IdiomaPorDefecto = itemEtiqueta.IdiomaPorDefecto;
-							nuevaEtiqueta.Nombre = itemEtiqueta.Nombre;
-							nuevaEtiqueta.AgregarTraduccion(itemTraduccion);
-
-							listaEtiquetas.Add(nuevaEtiqueta);
-						}
-					}
-				}
-
-                etiquetasDeDiccionarioPorIdiomaRespuesta.ListaDeEtiquetas = listaEtiquetas;
-                etiquetasDeDiccionarioPorIdiomaRespuesta.Relaciones["diccionario"] = diccionario.Id;
-                etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = null;
-            }
-            catch (Exception ex)
-            {
-
-				throw ex;
-
-            }
-
-            return etiquetasDeDiccionarioPorIdiomaRespuesta;
-        }
+		public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario)
+		{
+			this.diccionarioRepositorio = repositorioDiccionario;
+		}
 
         public ConsultarDiccionariosRespuesta ConsultarDiccionarios()
         {
@@ -69,6 +27,18 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             try
             {
                 var diccionarios = this.diccionarioRepositorio.ObtenerDiccionarios();
+
+				if (diccionarios != null)
+				{
+					if (diccionarios.Count() == 0 )
+					{
+						throw new Exception("No se encontró ningún diccionario.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
 
                 diccionariosRespuesta.ListaDeDiccionarios = diccionarios;
                 diccionariosRespuesta.Respuesta = null;
@@ -80,16 +50,26 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             return diccionariosRespuesta;
         }
-
         
         public ConsultarUnDiccionarioarioRespuesta ConsultarUnDiccionario(ConsultarUnDiccionarioPeticion peticion)
         {
-
             var unDiccionarioRespuesta = ConsultarUnDiccionarioarioRespuesta.CrearNuevaInstancia(String.Empty);
 
             try
             {
                 var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+
+				if (diccionario != null)
+				{
+					if ((diccionario.Id.ToString() == Guid.Empty.ToString()) || (diccionario.Id.ToString() != peticion.DiccionarioId.ToString()))
+					{
+						throw new Exception("La consulta no retornó el diccionario solicitado.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
 
                 unDiccionarioRespuesta.Diccionario = diccionario;
                 unDiccionarioRespuesta.Relaciones["diccionario"] = diccionario.Id;
@@ -101,8 +81,109 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             }
 
             return unDiccionarioRespuesta;
-
         }
+
+		public ConsultarEtiquetasPorNombreRespuesta ConsultarEtiquetasPorNombre(ConsultarEtiquetasPorNombrePeticion peticion)
+		{
+			var etiquetasDeDiccionariosPorNombre = ConsultarEtiquetasPorNombreRespuesta.CrearNuevaInstancia();
+
+			try
+			{
+				var diccionarios = this.diccionarioRepositorio.ObtenerDiccionarios();
+				List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
+
+				if (diccionarios != null)
+				{
+					if (diccionarios.Count() != 0)
+					{
+						foreach (Diccionario itemDiccionario in diccionarios)
+						{
+							Diccionario diccionario = Diccionario.CrearNuevoDiccionario(itemDiccionario.Id, itemDiccionario.Ambiente);
+
+							List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
+
+							listaDeEtiquetas = itemDiccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+
+							diccionario.AgregarEtiquetas(listaDeEtiquetas);
+
+							listaDeDiccionarios.Add(diccionario);
+						}
+					}
+					else
+					{
+						throw new Exception("No se encontró ningún diccionario.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
+
+				etiquetasDeDiccionariosPorNombre.ListaDeDiccionarios = listaDeDiccionarios;
+				etiquetasDeDiccionariosPorNombre.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+			return etiquetasDeDiccionariosPorNombre;
+		}
+
+		public ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta ConsultarEtiquetasDeDiccionarioPorIdioma(ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion peticion)
+		{
+			var etiquetasDeDiccionarioPorIdiomaRespuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.CrearNuevaInstancia();
+
+			try
+			{
+				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+
+				// listaEtiquetas = diccionario.Etiquetas.Where(e => e.Textos.FirstOrDefault(t => t.Cultura.CodigoIso.Equals(peticion.Idioma)) != null).ToList<Etiqueta>();
+
+				if (diccionario != null)
+				{
+					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
+					{
+						foreach (Etiqueta itemEtiqueta in diccionario.Etiquetas)
+						{
+							foreach (Traduccion itemTraduccion in itemEtiqueta.Textos)
+							{
+								if (itemTraduccion.Cultura.CodigoIso == peticion.Idioma)
+								{
+									Etiqueta nuevaEtiqueta = Etiqueta.CrearNuevaEtiqueta(itemEtiqueta.Id);
+									nuevaEtiqueta.IdiomaPorDefecto = itemEtiqueta.IdiomaPorDefecto;
+									nuevaEtiqueta.Nombre = itemEtiqueta.Nombre;
+									nuevaEtiqueta.AgregarTraduccion(itemTraduccion);
+
+									listaEtiquetas.Add(nuevaEtiqueta);
+								}
+							}
+						}
+					}
+					else
+					{
+						throw new Exception("La consulta no retornó el diccionario solicitado.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
+
+				etiquetasDeDiccionarioPorIdiomaRespuesta.ListaDeEtiquetas = listaEtiquetas;
+				etiquetasDeDiccionarioPorIdiomaRespuesta.Relaciones["diccionario"] = diccionario.Id;
+				etiquetasDeDiccionarioPorIdiomaRespuesta.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+
+			}
+
+			return etiquetasDeDiccionarioPorIdiomaRespuesta;
+		}
 
         public ConsultarEtiquetasDeDiccionarioPorNombreRespuesta ConsultarEtiquetasDeDiccionarioPorNombre(ConsultarEtiquetasDeDiccionarioPorNombrePeticion peticion)
         {
@@ -113,7 +194,21 @@ namespace Babel.Nucleo.Aplicacion.Servicios
                 var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
                 List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
 
-               listaEtiquetas = diccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+				if (diccionario != null)
+				{
+					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
+					{
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+					}
+					else
+					{
+						throw new Exception("La consulta no retornó el diccionario solicitado.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
 
                 etiquetasDeDiccionarioPorNombreRespuesta.ListaDeEtiquetas = listaEtiquetas;
                 etiquetasDeDiccionarioPorNombreRespuesta.Relaciones["diccionario"] = diccionario.Id;
@@ -129,40 +224,122 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			return etiquetasDeDiccionarioPorNombreRespuesta;
         }
 
-        public ConsultarEtiquetasPorNombreRespuesta ConsultarEtiquetasPorNombre(ConsultarEtiquetasPorNombrePeticion peticion)
-        {
-			var etiquetasDeDiccionariosPorNombre = ConsultarEtiquetasPorNombreRespuesta.CrearNuevaInstancia();
+		public ConsultarEtiquetasDeDiccionarioPorDescripcionRespuesta ConsultarEtiquetasDeDiccionarioPorDescripcion(ConsultarEtiquetasDeDiccionarioPorDescripcionPeticion peticion)
+		{
+			var etiquetasDeDiccionarioPorDescripcionRespuesta = ConsultarEtiquetasDeDiccionarioPorDescripcionRespuesta.CrearNuevaInstancia();
 
 			try
 			{
-				var diccionarios = this.diccionarioRepositorio.ObtenerDiccionarios();
+				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
 
-				List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
-
-				foreach (Diccionario itemDiccionario in diccionarios)
+				if (diccionario != null)
 				{
-					Diccionario diccionario = Diccionario.CrearNuevoDiccionario(itemDiccionario.Id, itemDiccionario.Ambiente);
-
-					List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
-
-					listaDeEtiquetas = itemDiccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
-
-					diccionario.AgregarEtiquetas(listaDeEtiquetas);
-
-					listaDeDiccionarios.Add(diccionario);
-
+					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
+					{
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Descripcion.Contains(peticion.Descripcion)).ToList<Etiqueta>();
+					}
+					else
+					{
+						throw new Exception("La consulta no retornó el diccionario solicitado.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
 				}
 
-				etiquetasDeDiccionariosPorNombre.ListaDeDiccionarios = listaDeDiccionarios;
-				etiquetasDeDiccionariosPorNombre.Respuesta = null;
+				etiquetasDeDiccionarioPorDescripcionRespuesta.ListaDeEtiquetas = listaEtiquetas;
+				etiquetasDeDiccionarioPorDescripcionRespuesta.Relaciones["diccionario"] = diccionario.Id;
+				etiquetasDeDiccionarioPorDescripcionRespuesta.Respuesta = null;
 			}
 			catch (Exception ex)
 			{
+
 				throw ex;
+
 			}
 
-			return etiquetasDeDiccionariosPorNombre;
-        }
+			return etiquetasDeDiccionarioPorDescripcionRespuesta;
+		}
+
+		public ConsultarEtiquetasDeDiccionarioPorEstatusRespuesta ConsultarEtiquetasDeDiccionarioPorEstatus(ConsultarEtiquetasDeDiccionarioPorEstatusPeticion peticion)
+		{
+			var etiquetasDeDiccionarioPorEstatusRespuesta = ConsultarEtiquetasDeDiccionarioPorEstatusRespuesta.CrearNuevaInstancia();
+
+			try
+			{
+				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+
+				if (diccionario != null)
+				{
+					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
+					{
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Activo.Equals(peticion.Estatus)).ToList<Etiqueta>();
+					}
+					else
+					{
+						throw new Exception("La consulta no retornó el diccionario solicitado.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
+
+				etiquetasDeDiccionarioPorEstatusRespuesta.ListaDeEtiquetas = listaEtiquetas;
+				etiquetasDeDiccionarioPorEstatusRespuesta.Relaciones["diccionario"] = diccionario.Id;
+				etiquetasDeDiccionarioPorEstatusRespuesta.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+
+			}
+
+			return etiquetasDeDiccionarioPorEstatusRespuesta;
+		}
+
+		public ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefecto(ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion peticion)
+		{
+			var etiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta = ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.CrearNuevaInstancia();
+
+			try
+			{
+				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+
+				if (diccionario != null)
+				{
+					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
+					{
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.IdiomaPorDefecto.Contains(peticion.IdiomaPorDefecto)).ToList<Etiqueta>();
+					}
+					else
+					{
+						throw new Exception("La consulta no retornó el diccionario solicitado.");
+					}
+				}
+				else
+				{
+					throw new Exception("Ocurrió un error consultando los diccionarios.");
+				}
+
+				etiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.ListaDeEtiquetas = listaEtiquetas;
+				etiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.Relaciones["diccionario"] = diccionario.Id;
+				etiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.Respuesta = null;
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+
+			}
+
+			return etiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta;
+		}
 
         /// <summary>
         /// 
@@ -171,17 +348,22 @@ namespace Babel.Nucleo.Aplicacion.Servicios
         /// <returns></returns>
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
+			CrearUnDiccionarioRespuesta respuesta = CrearUnDiccionarioRespuesta.CrearNuevaInstancia(string.Empty); 
 
-            var diccionarioNuevo = Diccionario.CrearNuevoDiccionario(peticion.Ambiente);
+			try
+			{
+				var diccionarioNuevo = Diccionario.CrearNuevoDiccionario(peticion.Ambiente);
+				
+				var diccionarioNuevoCreado = diccionarioRepositorio.SalvarUnDiccionario(diccionarioNuevo);
 
-            var guardaRepositario = diccionarioRepositorio.SalvarUnDiccionario(diccionarioNuevo);
-
-            CrearUnDiccionarioRespuesta respuesta =
-                CrearUnDiccionarioRespuesta.CrearNuevaInstancia(guardaRepositario.Ambiente);
-
-            respuesta.DiccionarioNuevo = guardaRepositario;
-            respuesta.Relaciones["diccionario"] = guardaRepositario.Id;
-            respuesta.Respuesta = null;
+				respuesta.DiccionarioNuevo = diccionarioNuevoCreado;
+				respuesta.Relaciones["diccionario"] = diccionarioNuevoCreado.Id;
+				respuesta.Respuesta = null;
+			}
+            catch (Exception ex)
+			{
+				throw ex;
+			}
 
             return respuesta;
         }

@@ -2,7 +2,7 @@ Param (
 	[switch]$Publish,
     [string]$Ambiente
 )
-
+$carpetaEmpaquetado=02-Codigo\tools\EmpaquetadoNuget
 $ErrorActionPreference = "Stop"
 $global:ExitCode = 1
 
@@ -219,7 +219,7 @@ function Publish {
 	Write-Log "Publishing package..." -ForegroundColor Green
 
 	# Get nuget config
-	[xml]$nugetConfig = Get-Content 02-Codigo\tools\EmpaquetadoNuget\NuGet.Config
+	[xml]$nugetConfig = Get-Content $carpetaEmpaquetado\NuGet.Config
 	
 	$nugetConfig.configuration.config.add | ForEach-Object {
 		$url = $_.value
@@ -232,7 +232,7 @@ function Publish {
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
          if ($ambiente_conf=$Ambiente){
 			# Try to push package
-			$task = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
+			$task = Create-Process $carpetaEmpaquetado\NuGet.exe ("push " + $_.Name + " -s " + $url + " " + $apikey + " -Verbosity Detailed")
 			$task.Start() | Out-Null
 			$task.WaitForExit()
 			
@@ -258,7 +258,7 @@ Write-Log " "
 Write-Log "NuGet Packager 2.0.3" -ForegroundColor Yellow
 
 # Make sure the nuget executable is writable
-Set-ItemProperty 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe -Name IsReadOnly -Value $false
+Set-ItemProperty $carpetaEmpaquetado\NuGet.exe -Name IsReadOnly -Value $false
 
 # Make sure the nupkg files are writeable and create backup
 if (Test-Path *.nupkg) {
@@ -281,7 +281,7 @@ Write-Log "Creating package..." -ForegroundColor Green
 
 # Create symbols package if any .pdb files are located in the lib folder
 If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
-	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack Package.nuspec -Symbol -Verbosity Detailed")
+	$packageTask = Create-Process $carpetaEmpaquetado\NuGet.exe ("pack $carpetaEmpaquetado\Package.nuspec -Symbol -Verbosity Detailed")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			
@@ -293,7 +293,7 @@ If ((Get-ChildItem *.pdb -Path .\lib -Recurse).Count -gt 0) {
 	$global:ExitCode = $packageTask.ExitCode
 }
 Else {
-	$packageTask = Create-Process 02-Codigo\tools\EmpaquetadoNuget\NuGet.exe ("pack Package.nuspec -Verbosity Detailed")
+	$packageTask = Create-Process $carpetaEmpaquetado\NuGet.exe ("pack $carpetaEmpaquetado\Package.nuspec -Verbosity Detailed")
 	$packageTask.Start() | Out-Null
 	$packageTask.WaitForExit()
 			

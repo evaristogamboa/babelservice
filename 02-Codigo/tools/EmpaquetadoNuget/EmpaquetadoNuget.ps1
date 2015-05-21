@@ -192,11 +192,11 @@ function Publicar {
 		$url = $_.url
         $apikey=$_.apikey
         $ambienteConf=$_.ambiente
-
+		if ($Ambiente -eq $ambienteConf){
 		Escribir-Log "Url del Repositorio: $url"
 		Escribir-Log " Ambiente a publicar: $Ambiente "
 		Escribir-Log " Ambiente configurado: $ambienteConf "
-       if ($Ambiente -eq $ambienteConf){
+       
 		Get-ChildItem *.nupkg | Where-Object { $_.Name.EndsWith(".symbols.nupkg") -eq $false } | ForEach-Object { 
          
 			# Try to push package
@@ -216,7 +216,8 @@ function Publicar {
 				$global:ExitCode = 0
 			}
           }                
-		}      
+		 
+		}     
 	}
 }
 

@@ -18,7 +18,6 @@ namespace Babel.Interfaz.WebApi.Controladores
         #region propiedades y variables globales
         private readonly app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
 
-        const string Ambiente = "Desarrollo";
         #endregion
 
         #region Constructor de la clase
@@ -55,7 +54,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
             //Devolvemos el diccionario creado seteado como respuesta http 
             if (respuestaContenido.Diccionario.Id != peticionWeb.Diccionario.Id)
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
+                return Request.CreateResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -72,6 +71,10 @@ namespace Babel.Interfaz.WebApi.Controladores
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
+            //Preguntamos si el id del nuevo diccionario fue creado, en caso de ser vacio se envia codigo de error
+            if (respuestaApp.DiccionarioNuevo == null)
+                return Request.CreateErrorResponse(HttpStatusCode.Conflict, new Exception("El Servicio no pudo completar su solicitud por problemas internos, intente mas tarde"));
+
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
@@ -80,7 +83,29 @@ namespace Babel.Interfaz.WebApi.Controladores
         }
         #endregion
 
-        
+        #region Metodos Put
+        [Route("diccionario/{id}")]
+        [HttpPut]
+        public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp)
+        {
+
+            //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
+            var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeModificacion(peticionHttp);
+
+            // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
+            var respuestaApp = this.aplicacionMantenimientoDiccionario.ModificarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
+
+            if (respuestaApp.Diccionario == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+
+            //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
+            var respuestaContenido = respuestaApi.ModificarUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
+
+            return Request.CreateResponse(HttpStatusCode.OK,respuestaContenido,new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
+
+        #endregion
     }
 }
 

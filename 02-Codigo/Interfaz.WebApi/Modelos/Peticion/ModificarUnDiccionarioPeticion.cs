@@ -19,7 +19,8 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
         {
             this.Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
             this.AppDiccionarioPeticion = app.ModificarUnDiccionarioPeticion.CrearNuevaInstancia(Diccionario.Ambiente);
-            //this.AppDiccionarioPeticion.Diccionario = (Diccionario)Diccionario;
+
+            this.AppDiccionarioPeticion.Diccionario = (Diccionario)Diccionario;
         }
         
         public static ModificarUnDiccionarioPeticion CrearUnaNuevaPeticionDeModificacion(HttpRequestMessage peticionHttp)

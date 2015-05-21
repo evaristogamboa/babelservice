@@ -35,10 +35,9 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         private readonly controladores.Diccionarios controlador;
 
         private readonly appModelosRespuesta.CrearUnDiccionarioRespuesta crearUnDiccionarioRespuesta;
-
         private readonly appModelosRespuesta.ConsultarUnDiccionarioarioRespuesta consultarUnDiccionarioRespuesta;
-
         private readonly appModelosRespuesta.ConsultarDiccionariosRespuesta consultarDiccionariosRespuesta;
+        private readonly appModelosRespuesta.ModificarUnDiccionarioRespuesta modificarUnDiccionarioRespuesta;
 
         #endregion
 
@@ -58,6 +57,8 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             //Objeto de respuesta de la aplicación al crear un nuevo diccionario vacio
             this.crearUnDiccionarioRespuesta = appModelosRespuesta.CrearUnDiccionarioRespuesta.CrearNuevaInstancia(AmbienteTestPrueba);
 
+            //Objeto de respuesta de la aplicacion al modificar un diccionario en particular
+            this.modificarUnDiccionarioRespuesta = appModelosRespuesta.ModificarUnDiccionarioRespuesta.CrearNuevaInstancia();
             
 
             controlador = new controladores.Diccionarios(this.appMantenimientoDiccionario);
@@ -136,15 +137,14 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             //Act
             var respuesta = controlador.ConsultarUnDiccionario(controlador.Request);
-
-            //Assert
             var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ConsultarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
+            //Assert
             validarContenidoRespuesta.Diccionario.Etiquetas.ListaEtiquetas.ShouldBeEmpty();
         }
         #endregion
 
-        #region pruebas de creacion (POST)
+        #region Pruebas de creacion (POST)
         [Test]
         public void PruebaCrearUnDiccionarioRetornaDiccionarioConRelaciones() 
         {                
@@ -152,26 +152,65 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.appMantenimientoDiccionario.CrearUnDiccionario(Arg.Any<CrearUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.CrearUnDiccionarioRespuesta>(crearUnDiccionarioRespuesta);
 
             controlador.Request = new HttpRequestMessage(HttpMethod.Post, "api/diccionarios");
-            var diccionario = new comunes.Diccionario();
-            diccionario.Ambiente = AmbienteTestPrueba;
-            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
-            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
-            var respuesta = controlador.CrearUnDiccionario(controlador.Request);
+            this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba);
             
-            //Mockeamos la respuesta de la app
-            //var respuesta = this.appMantenimientoDiccionario.CrearUnDiccionario(diccionarioPeticion);
+            //Act
+            var respuesta = controlador.CrearUnDiccionario(controlador.Request);
+            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.CrearUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.Created);
+            validarContenidoRespuesta.DiccionarioNuevo.ShouldNotBeNull();
+
+        }
+
+        [Test]
+        public void PruebaCrearUnDiccionarioRetornaDiccionarioNoCreado()
+        {
+            //Arrange
+            this.crearUnDiccionarioRespuesta.DiccionarioNuevo = null;
+            this.appMantenimientoDiccionario.CrearUnDiccionario(Arg.Any<CrearUnDiccionarioPeticion>()).Returns(crearUnDiccionarioRespuesta);
+
+            controlador.Request = new HttpRequestMessage(HttpMethod.Post, "api/diccionarios");
+            this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba);
+
+            //Act
+            var respuesta = controlador.CrearUnDiccionario(controlador.Request);
             var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.CrearUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
-            validarContenidoRespuesta.DiccionarioNuevo.ShouldNotBeNull();
-            //validarContenidoRespuesta.Relaciones.ToArray().ShouldNotBeNull("Todo Diccionario debe tener por lo menos una relacion consigo mismo");
+            //Assert
+            validarContenidoRespuesta.DiccionarioNuevo.ShouldBeNull();
+
         }
         #endregion
 
+        #region Pruebas de modificación (PUT)
+        [Test]
+        public void PruebaModificarUnDiccionarioDebeTraerRespuestaDiccionarioModificado()
+        {
+            //Arrange
+            this.modificarUnDiccionarioRespuesta.Diccionario = Diccionario.CrearNuevoDiccionario(new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0"), AmbienteTestPrueba);
+            this.appMantenimientoDiccionario.ModificarUnDiccionario(Arg.Any<ModificarUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.ModificarUnDiccionarioRespuesta>(modificarUnDiccionarioRespuesta);
+
+
+            controlador.Request = new HttpRequestMessage(HttpMethod.Put, "api/diccionario/9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+            this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba,"9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+
+            //Act
+            var respuesta = controlador.ModificarUnDiccionario(controlador.Request);
+            //var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ModificarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
+
+            //Assert
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
+            
+
+        }
+
+
+        #endregion
+
         #region Metodos Privados Utilitarios
-        private void UtilConfigurarMockPeticionHttp(string ambientePrueba, string id)
+        private void UtilConfigurarMockPeticionHttp(string ambientePrueba, string id = "8a87f8a7-3456-4d90-9478-350b964fc888")
         {
             diccionario = new comunes.Diccionario();
             diccionario.Ambiente = ambientePrueba;

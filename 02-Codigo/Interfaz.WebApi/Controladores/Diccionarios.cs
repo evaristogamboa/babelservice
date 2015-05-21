@@ -72,6 +72,10 @@ namespace Babel.Interfaz.WebApi.Controladores
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.CrearUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
+            //Preguntamos si el id del nuevo diccionario fue creado, en caso de ser vacio se envia codigo de error
+            if (respuestaApp.DiccionarioNuevo == null)
+                return Request.CreateErrorResponse(HttpStatusCode.Conflict, new Exception("El Servicio no pudo completar su solicitud por problemas internos, intente mas tarde"));
+
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.CrearUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
@@ -80,7 +84,17 @@ namespace Babel.Interfaz.WebApi.Controladores
         }
         #endregion
 
-        
+        #region Metodos Put
+        [Route("diccionario/{id}")]
+        [HttpPut]
+        public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp)
+        {
+            //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
+           // var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion();
+
+            return Request.CreateResponse(HttpStatusCode.NotModified);
+        }
+        #endregion
     }
 }
 

@@ -406,9 +406,9 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             var eliminarDiccionario = EliminarUnDiccionarioRespuesta.CrearNuevaInstancia();
             try
             {
-                //var diccionarioEliminado = diccionarioRepositorio.(peticion.DiccionarioId);
-                //eliminarDiccionario.DiccionarioId = diccionarioEliminado.Id;
-                //eliminarDiccionario.Respuesta = null;
+                var diccionarioEliminado = diccionarioRepositorio.EliminarUnDiccionario(peticion.DiccionarioId);
+                eliminarDiccionario.ListaDeDiccionarios = diccionarioEliminado;
+                eliminarDiccionario.Respuesta = null;
             }
             catch (Exception ex)
             {

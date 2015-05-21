@@ -12,7 +12,7 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
         /// <summary>
         /// Obtiene o establece el identificador del Diccionario a eliminar
         /// </summary>
-		public Guid DiccionarioId { get; set; }
+        public List<Diccionario> ListaDeDiccionarios { get; set; }
 
 		public ModeloRespuesta Respuesta { get; set; }
 
@@ -25,7 +25,7 @@ namespace Babel.Nucleo.Aplicacion.Modelos.Respuesta
         /// </summary>
 	    private EliminarUnDiccionarioRespuesta()
 	    {
-			DiccionarioId = Guid.Empty;
+            ListaDeDiccionarios = new List<Diccionario>();
 			Respuesta = new ModeloRespuesta();
 	    }
 

@@ -197,7 +197,9 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             try
             {
-                var guardarRepositorio = diccionarioRepositorio.SalvarUnDiccionario(peticion.Diccionario);
+                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.Diccionario.Id);
+                diccionario.Ambiente = peticion.Diccionario.Ambiente;
+                var guardarRepositorio = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
 
                 unDiccionarioRespuesta.Diccionario = guardarRepositorio;
                 unDiccionarioRespuesta.Relaciones["diccionario"] = guardarRepositorio.Id;
@@ -222,11 +224,9 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             var eliminarDiccionario = EliminarUnDiccionarioRespuesta.CrearNuevaInstancia();
             try
             {
-                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-                diccionario.EliminarTodoElDiccionario();
-                var diccionarioEliminado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
-                eliminarDiccionario.DiccionarioId = diccionarioEliminado.Id;
-                eliminarDiccionario.Respuesta = null;
+                //var diccionarioEliminado = diccionarioRepositorio.(peticion.DiccionarioId);
+                //eliminarDiccionario.DiccionarioId = diccionarioEliminado.Id;
+                //eliminarDiccionario.Respuesta = null;
             }
             catch (Exception ex)
             {
@@ -274,7 +274,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             try
             {
                 var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-                diccionario.ModificarEtiquetas(peticion.ListaDeEtiquetas);
+                diccionario =  diccionario.ModificarEtiquetas(peticion.ListaDeEtiquetas);
                 var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
                 unDiccionarioRespuesta.ListaDeEtiquetas = diccionarioModificado.Etiquetas.ToList();
                 unDiccionarioRespuesta.Relaciones["diccionario"] = diccionarioModificado.Id;
@@ -284,14 +284,31 @@ namespace Babel.Nucleo.Aplicacion.Servicios
             {
                 throw new Exception(ex.Message);
             }
-
             return unDiccionarioRespuesta;
         }
 
         public EliminarEtiquetasAUnDiccionarioRespuesta EliminarEtiquetasAUnDiccionario(EliminarEtiquetasAUnDiccionarioPeticion peticion)
         {
-            // TODO: Implement this method
-            throw new NotImplementedException();
+            var eliminarEtiquetasDiccionario = EliminarEtiquetasAUnDiccionarioRespuesta.CrearNuevaInstancia();
+            try
+            {
+                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+                var etiquetasDiccionario = peticion.ListaDeEtiquetas;
+
+                diccionario = etiquetasDiccionario.Aggregate(diccionario, (current, etiquetaDiccionario) => current.EliminarEtiqueta(etiquetaDiccionario));
+                //diccionario = diccionario.ModificarEtiquetas(new List<Etiqueta> { etiquetaDiccionario });
+                var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+
+                eliminarEtiquetasDiccionario.ListaDeEtiquetas = diccionarioModificado.Etiquetas.ToList();
+                eliminarEtiquetasDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;
+                eliminarEtiquetasDiccionario.Respuesta = null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return eliminarEtiquetasDiccionario;
+
         }
 
         public AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta AgregarTraduccionesAUnaEtiquetaDeUnDiccionario(AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion)
@@ -319,8 +336,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			{
 				throw ex;
 			}
-
-			return agregarTraduccionesAUnaEtiquetaDeUnDiccionario;
+            return agregarTraduccionesAUnaEtiquetaDeUnDiccionario;
         }
 
         public ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta ModificarTraduccionesAUnaEtiquetaDeUnDiccionario(ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion peticion)
@@ -329,7 +345,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 
 				var etiqueta = diccionario.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault();
 
@@ -337,7 +353,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 				diccionario = diccionario.ModificarEtiquetas(new List<Etiqueta> { etiqueta });
 
-				var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+				var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
 
 				modificarTraduccionesAUnaEtiquetaDeUnDiccionario.ListaDeTraducciones = diccionarioModificado.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault().Textos.ToList();
 				modificarTraduccionesAUnaEtiquetaDeUnDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;
@@ -348,7 +364,6 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 			{
 				throw ex;
 			}
-
 			return modificarTraduccionesAUnaEtiquetaDeUnDiccionario;
         }
 

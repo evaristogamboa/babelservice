@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using app = Babel.Nucleo.Aplicacion.Modelos;
+using comunes = Babel.Interfaz.WebApi.Modelos.Comunes;
 
 namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
@@ -10,10 +12,9 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 
         #region Propiedades
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Guid DiccionarioId { get; set; }
+        public comunes.Diccionario Diccionario { get; set; }
+
+        public 
 
         #endregion
        
@@ -22,21 +23,20 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 	    /// <summary>
 	    /// 
 	    /// </summary>
-        private ModificarUnDiccionarioRespuesta()
+        ModificarUnDiccionarioRespuesta(app.Respuesta.ModificarUnDiccionarioRespuesta respuestaApp)
 	    {
-	        
+	        Diccionario = new comunes.Diccionario();
 	    }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public static ModificarUnDiccionarioRespuesta CrearNuevaInstancia()
+        public static ModificarUnDiccionarioRespuesta CrearNuevaRespuesta(app.Respuesta.ModificarUnDiccionarioRespuesta respuestaApp)
 	    {
-            return new ModificarUnDiccionarioRespuesta();
+            return new ModificarUnDiccionarioRespuesta(respuestaApp);
 	    }
 
         #endregion
-
-	}
+    }
 }

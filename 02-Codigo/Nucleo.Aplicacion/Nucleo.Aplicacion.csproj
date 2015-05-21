@@ -33,6 +33,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorDescripcionPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorDescripcionRespuesta.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorEstatusPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorEstatusRespuesta.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.cs" />
     <Compile Include="Modelos\Peticion\AgregarEtiquetasAUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\CrearUnDiccionarioPeticion.cs" />

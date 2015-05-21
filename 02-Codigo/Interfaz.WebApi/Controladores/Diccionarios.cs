@@ -18,7 +18,6 @@ namespace Babel.Interfaz.WebApi.Controladores
         #region propiedades y variables globales
         private readonly app.IAplicacionMantenimientoDiccionario aplicacionMantenimientoDiccionario;
 
-        const string Ambiente = "Desarrollo";
         #endregion
 
         #region Constructor de la clase
@@ -55,7 +54,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
             //Devolvemos el diccionario creado seteado como respuesta http 
             if (respuestaContenido.Diccionario.Id != peticionWeb.Diccionario.Id)
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
+                return Request.CreateResponse(HttpStatusCode.NotFound, respuestaContenido.Respuesta.ToString());
 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -89,6 +88,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         [HttpPut]
         public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp)
         {
+
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
             var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeModificacion(peticionHttp);
 
@@ -98,8 +98,13 @@ namespace Babel.Interfaz.WebApi.Controladores
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.ModificarUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
 
+            if (respuestaContenido.Diccionario == null || respuestaContenido.Diccionario.Id != peticionWeb.Diccionario.Id)
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+
             return Request.CreateResponse(HttpStatusCode.OK,respuestaContenido,new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
+
         #endregion
     }
 }

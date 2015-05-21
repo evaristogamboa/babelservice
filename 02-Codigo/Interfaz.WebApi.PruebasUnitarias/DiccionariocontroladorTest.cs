@@ -60,7 +60,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             //Objeto de respuesta de la aplicacion al modificar un diccionario en particular
             this.modificarUnDiccionarioRespuesta = appModelosRespuesta.ModificarUnDiccionarioRespuesta.CrearNuevaInstancia();
             
-
+            // Se crea una nueva instancia del controlador inyectandole la interfaz con los metodos mock que se configuraran en las pruebas
             controlador = new controladores.Diccionarios(this.appMantenimientoDiccionario);
             controlador.Configuration = new HttpConfiguration();
         }
@@ -206,6 +206,24 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
         }
 
+        [Test]
+        public void PruebaModificarUnDiccionarioDebeTraerRespuestaDiccionarioNoModificadoNoEncontrado()
+        {
+            //Arrange
+            this.modificarUnDiccionarioRespuesta.Diccionario = Diccionario.CrearNuevoDiccionario(new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0"), AmbienteTestPrueba);
+            this.appMantenimientoDiccionario.ModificarUnDiccionario(Arg.Any<ModificarUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.ModificarUnDiccionarioRespuesta>(modificarUnDiccionarioRespuesta);
+
+
+            controlador.Request = new HttpRequestMessage(HttpMethod.Put, "api/diccionario/9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+            this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+
+            //Act
+            var respuesta = controlador.ModificarUnDiccionario(controlador.Request);
+            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ModificarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
+
+            //Assert
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotModified);
+        }
 
         #endregion
 

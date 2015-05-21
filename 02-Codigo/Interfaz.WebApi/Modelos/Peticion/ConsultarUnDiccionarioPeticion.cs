@@ -11,11 +11,16 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class ConsultarUnDiccionarioPeticion
 	{
+        private const string Enrutador = "api/dicionario/";
         public comunes.Diccionario Diccionario { get; set; }
         public app.ConsultarUnDiccionarioPeticion AppDiccionarioPeticion { get; set; }
 
         private ConsultarUnDiccionarioPeticion(HttpRequestMessage peticionHttp)
         {
+            var urlcompleta = peticionHttp.RequestUri.OriginalString.ToString();
+
+            //urlcompleta.Split()
+
             Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
             this.AppDiccionarioPeticion = app.ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
 

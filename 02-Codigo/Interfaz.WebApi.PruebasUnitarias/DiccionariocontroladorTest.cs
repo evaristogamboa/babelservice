@@ -100,7 +100,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             //Arrange
             this.appMantenimientoDiccionario.ConsultarUnDiccionario(Arg.Any<ConsultarUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.ConsultarUnDiccionarioarioRespuesta>(consultarUnDiccionarioRespuesta);
 
-            controlador.Request = new HttpRequestMessage(HttpMethod.Get, "api/diccionario/8a87f8a7-3df9-4d90-9478-350b964fc888");
+            controlador.Request = new HttpRequestMessage(HttpMethod.Get, "http:/localhost:80/api/diccionario/8a87f8a7-3df9-4d90-9478-350b964fc888");
 
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba,"8a87f8a7-3df9-4d90-9478-350b964fc888");
 
@@ -136,11 +136,11 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         public void PruebaConsultarUnDiccionarioDebeTraerRespuestaDiccionarioVacio()
         {
             //Arrange
-            controlador.Request = new HttpRequestMessage(HttpMethod.Get, "api/diccionario/165db3e4-d705-406b-bce0-2738b25c9023");
+            controlador.Request = new HttpRequestMessage(HttpMethod.Get, "http:/localhost:80/api/diccionario/165db3e4-d705-406b-bce0-2738b25c9023");
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "8a87f8a7-3df9-4d90-9478-350b964fc888");
 
             //Act
-            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request);
+            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request, "8a87f8a7-3df9-4d90-9478-350b964fc888");
             var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ConsultarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
             //Assert

@@ -43,8 +43,9 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         [Route("diccionario/{id}")]
         [HttpGet]
-        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp)
+        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
         {
+                        
             //Se instancia el modelo de peticion WebApi como referencia del modelo de peticion de la aplicación 
             var peticionWeb = peticionApi.ConsultarUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticionHttp);
 
@@ -109,6 +110,8 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         #endregion
 
+        [Route("diccionario/{id}")]
+        [HttpDelete]
         public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp)
         {
             throw new NotImplementedException();

@@ -42,17 +42,6 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
         #endregion
 
-        #region Metodos Privados Utilitarios
-        private void UtilConfigurarMockPeticionHttp(string ambientePrueba, string id)
-        {
-            diccionario = new comunes.Diccionario();
-            diccionario.Ambiente = ambientePrueba;
-            diccionario.Id = new Guid(id);
-            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
-            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
-        }
-        #endregion
-
         #region Constructor de las pruebas
         public DiccionarioControladorTest()
         {
@@ -138,6 +127,21 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
         }
 
+        [Test]
+        public void PruebaConsultarUnDiccionarioDebeTraerRespuestaDiccionarioVacio()
+        {
+            //Arrange
+            controlador.Request = new HttpRequestMessage(HttpMethod.Get, "api/diccionario/165db3e4-d705-406b-bce0-2738b25c9023");
+            this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "8a87f8a7-3df9-4d90-9478-350b964fc888");
+
+            //Act
+            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request);
+
+            //Assert
+            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ConsultarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
+
+            validarContenidoRespuesta.Diccionario.Etiquetas.ListaEtiquetas.ShouldBeEmpty();
+        }
         #endregion
 
         #region pruebas de creacion (POST)
@@ -163,6 +167,17 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             validarContenidoRespuesta.DiccionarioNuevo.ShouldNotBeNull();
             //validarContenidoRespuesta.Relaciones.ToArray().ShouldNotBeNull("Todo Diccionario debe tener por lo menos una relacion consigo mismo");
+        }
+        #endregion
+
+        #region Metodos Privados Utilitarios
+        private void UtilConfigurarMockPeticionHttp(string ambientePrueba, string id)
+        {
+            diccionario = new comunes.Diccionario();
+            diccionario.Ambiente = ambientePrueba;
+            diccionario.Id = new Guid(id);
+            controlador.Request.Content = new StringContent(JsonConvert.SerializeObject(diccionario));
+            controlador.Request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
         }
         #endregion
 

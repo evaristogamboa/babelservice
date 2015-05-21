@@ -353,6 +353,65 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         }
 
 
+        [Test]
+        public void EliminarUnDiccionarioExistente() 
+        {
+
+            DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
+
+            var listaDiccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
+
+            try
+            {
+
+                repositorio.EliminarUnDiccionario(new Guid("835944df-3bc0-46b3-8508-cb1aed001bc4"));
+
+            }
+            catch (Exception ex)
+            {
+
+                ex.ShouldBeType<System.NullReferenceException>();
+            }     
+            
+        
+        
+        }
+
+
+
+        [Test]
+        public void EliminarListaDiccionarioExistente()
+        {
+
+            DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl();
+
+            var listaDiccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
+
+            var listaguid = new List<Guid>() {             
+                new Guid("ed14ab25-0178-43a4-ab77-d7c342bd8780"),
+                new Guid("4dc68f37-b2d9-4274-852b-03938512864e")            
+            };
+            
+           
+            try
+            {
+
+                repositorio.EliminarDiccionarios(listaguid);
+
+            }
+            catch (Exception ex)
+            {
+
+                ex.ShouldBeType<System.NullReferenceException>();
+            }
+
+
+
+        }
+
+
+
+
 	}
 }
 

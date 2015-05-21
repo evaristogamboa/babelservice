@@ -258,7 +258,7 @@ Write-Log " "
 Write-Log "NuGet Packager 2.0.3" -ForegroundColor Yellow
 
 # Make sure the nuget executable is writable
-Set-ItemProperty NuGet.exe -Name IsReadOnly -Value $false
+#Set-ItemProperty NuGet.exe -Name IsReadOnly -Value $false
 
 # Make sure the nupkg files are writeable and create backup
 if (Test-Path *.nupkg) {

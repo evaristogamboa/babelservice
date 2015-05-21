@@ -188,8 +188,8 @@ function Publicar {
 	# Get nuget config
 	[xml]$nugetConfig = Get-Content 02-Codigo\tools\EmpaquetadoNuget\NuGet.Config
 	
-	$nugetConfig.configuration.config.add | ForEach-Object {
-		$url = $_.value
+	$nugetConfig.configuration.pushRepos.repo | ForEach-Object {
+		$url = $_.url
         $apikey=$_.apikey
         $ambienteConf=$_.ambiente
 

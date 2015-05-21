@@ -95,11 +95,11 @@ namespace Babel.Interfaz.WebApi.Controladores
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ModificarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
 
+            if (respuestaApp.Diccionario == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+
             //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
             var respuestaContenido = respuestaApi.ModificarUnDiccionarioRespuesta.CrearNuevaRespuesta(respuestaApp);
-
-            if (respuestaContenido.Diccionario == null || respuestaContenido.Diccionario.Id != peticionWeb.Diccionario.Id)
-                return Request.CreateResponse(HttpStatusCode.NotFound);
 
             return Request.CreateResponse(HttpStatusCode.OK,respuestaContenido,new MediaTypeWithQualityHeaderValue("application/json"));
         }

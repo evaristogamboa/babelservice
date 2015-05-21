@@ -211,6 +211,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         {
             //Arrange
             this.modificarUnDiccionarioRespuesta.Diccionario = Diccionario.CrearNuevoDiccionario(new Guid("9a39ad6d-62c8-42bf-a8f7-66417b2b08d0"), AmbienteTestPrueba);
+            this.modificarUnDiccionarioRespuesta.Diccionario = null;
             this.appMantenimientoDiccionario.ModificarUnDiccionario(Arg.Any<ModificarUnDiccionarioPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.ModificarUnDiccionarioRespuesta>(modificarUnDiccionarioRespuesta);
 
 
@@ -219,10 +220,9 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
             //Act
             var respuesta = controlador.ModificarUnDiccionario(controlador.Request);
-            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.ModificarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
 
             //Assert
-            respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotModified);
+            respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
         }
 
         #endregion

@@ -88,7 +88,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         #region Metodos Put
         [Route("diccionario/id/{id}")]
         [HttpPut]
-        public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
+        public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp,string id)
         {
 
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
@@ -112,7 +112,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         #region Metodos Delete
         [Route("diccionario/id/{id}")]
         [HttpDelete]
-        public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
+        public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,string id)
         {
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
             var peticionWeb = peticionApi.EliminarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeEliminar(peticionHttp, id);

@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EtiquetaControladorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DiccionarioControladorTest.cs" />
   </ItemGroup>

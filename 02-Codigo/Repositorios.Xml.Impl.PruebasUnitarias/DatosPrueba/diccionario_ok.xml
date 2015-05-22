@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diccionarios xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <diccionario id="0190de55-3afb-49bf-a150-1bd8b301f8af" ambiente="Prueba">
+  <diccionario id="f9445e88-fdca-4276-81d4-6ff54d2a5e6b" ambiente="Prueba">
     <etiquetas>
-      <etiqueta id="389cccf9-4873-4c2c-96f9-fdd05896df1c" nombre="app.test" activo="false" default="">
+      <etiqueta id="096c4df2-eee1-465b-98d1-efc073a2254c" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="d94cfe49-5a62-4493-b47f-ddb1570cafb8" nombre="app.test2" activo="false" default="">
+      <etiqueta id="56b55b84-512c-4565-9589-5fd32fa71106" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -16,15 +16,15 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="5a97e302-f174-4988-8d8c-f4cad070568d" ambiente="Desarrollo">
+  <diccionario id="05609dcd-d579-4f6e-8be2-8127373e5416" ambiente="Desarrollo">
     <etiquetas>
-      <etiqueta id="389cccf9-4873-4c2c-96f9-fdd05896df1c" nombre="app.test" activo="false" default="">
+      <etiqueta id="096c4df2-eee1-465b-98d1-efc073a2254c" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="d94cfe49-5a62-4493-b47f-ddb1570cafb8" nombre="app.test2" activo="false" default="">
+      <etiqueta id="56b55b84-512c-4565-9589-5fd32fa71106" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -32,7 +32,7 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="ca99c395-9629-4f68-86d3-56672551e8dc" ambiente="SoloAmbiente">
+  <diccionario id="6792591d-c734-4775-a2a8-7296e65f7768" ambiente="SoloAmbiente">
     <etiquetas />
   </diccionario>
 </diccionarios>

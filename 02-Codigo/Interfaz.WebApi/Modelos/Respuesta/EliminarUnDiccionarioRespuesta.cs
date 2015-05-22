@@ -1,41 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Babel.Nucleo.Aplicacion.Modelos.Peticion;
+using app = Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Newtonsoft.Json;
+using comunes = Babel.Interfaz.WebApi.Modelos.Comunes;
 
 namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
+    [JsonObject]
 	public class EliminarUnDiccionarioRespuesta
 	{
 
         #region Propiedades
 
         /// <summary>
-        /// Obtiene o establece el identificador del Diccionario a eliminar
+        ///Propiedad que obtiene o establece la lista de diccionarios que se van a devolver en caso de que se logre eliminar el diccionario en caso contrario su valor es null
         /// </summary>
-        private Diccionario DiccionarioId { get; set; }
+        [JsonProperty("diccionario")]
+        public List<Diccionario> ListaDiccionarios { get; set; }
+
 
         #endregion
 
         #region Constructores
 
-        /// <summary>
-        /// 
-        /// </summary>
-	    private EliminarUnDiccionarioRespuesta()
+        [JsonConstructor]
+        private EliminarUnDiccionarioRespuesta()
+        {
+            //No implementada ninguna funcionalidad solo como constructor base para el tipo de dato del deserializador de Json
+        }
+
+	    private EliminarUnDiccionarioRespuesta(app.EliminarUnDiccionarioRespuesta respuestaApp)
 	    {
-	        
+            if(respuestaApp.ListaDeDiccionarios != null)
+                ListaDiccionarios = respuestaApp.ListaDeDiccionarios;
 	    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static EliminarUnDiccionarioRespuesta CrearNuevaInstancia()
+        public static EliminarUnDiccionarioRespuesta CrearNuevaInstancia(app.EliminarUnDiccionarioRespuesta respuestaApp)
 	    {
-            return new EliminarUnDiccionarioRespuesta();
+            return new EliminarUnDiccionarioRespuesta(respuestaApp);
 	    }
 
         #endregion

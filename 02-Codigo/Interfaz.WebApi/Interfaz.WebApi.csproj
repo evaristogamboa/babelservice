@@ -123,6 +123,7 @@
   <ItemGroup>
     <Compile Include="AppStart\NinjectWebCommon.cs" />
     <Compile Include="Controladores\DiccionariosController.cs" />
+    <Compile Include="Controladores\EtiquetasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

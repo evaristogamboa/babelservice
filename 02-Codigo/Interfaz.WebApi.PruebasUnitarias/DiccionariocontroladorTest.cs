@@ -1,20 +1,19 @@
-﻿using System;
-using Babel.Nucleo.Aplicacion.Modelos.Peticion;
-using appModelosRespuesta = Babel.Nucleo.Aplicacion.Modelos.Respuesta;
-using app = Babel.Nucleo.Aplicacion.Fachada;
+﻿using Babel.Nucleo.Aplicacion.Modelos.Peticion;
+using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using Newtonsoft.Json;
+using NSubstitute;
 using NUnit.Framework;
 using Should;
-using controladores = Babel.Interfaz.WebApi.Controladores;
-using System.Net.Http;
-using System.Web.Http;
+using System;
 using System.Net;
-using NSubstitute;
-using webApiModelosRespuesta = Babel.Interfaz.WebApi.Modelos.Respuesta;
-using webApiModelosPeticion = Babel.Interfaz.WebApi.Modelos.Peticion;
-using Newtonsoft.Json;
-using comunes=Babel.Interfaz.WebApi.Modelos.Comunes;
+using System.Net.Http;
 using System.Net.Http.Headers;
-using Babel.Nucleo.Dominio.Entidades.Diccionario;
+using System.Web.Http;
+using app = Babel.Nucleo.Aplicacion.Fachada;
+using appModelosRespuesta = Babel.Nucleo.Aplicacion.Modelos.Respuesta;
+using comunes = Babel.Interfaz.WebApi.Modelos.Comunes;
+using controladores = Babel.Interfaz.WebApi.Controladores;
+using webApiModelosRespuesta = Babel.Interfaz.WebApi.Modelos.Respuesta;
 
 namespace Babel.Interfaz.WebApi.PruebasUnitarias
 {
@@ -33,6 +32,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         private readonly CrearUnDiccionarioPeticion diccionarioPeticion;
 
         private readonly controladores.DiccionariosController controlador;
+        private HttpResponseMessage respuesta;
 
         private readonly appModelosRespuesta.CrearUnDiccionarioRespuesta crearUnDiccionarioRespuesta;
         private readonly appModelosRespuesta.ConsultarUnDiccionarioarioRespuesta consultarUnDiccionarioRespuesta;
@@ -45,7 +45,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         #region Constructor de las pruebas
         public DiccionarioControladorTest()
         {
-            // Se inicializa el proxy del NSustitute para posteriormente inyectar los mocks la dependencia en el 
+            // Se inicializa el proxy del NSustitute para posteriormente inyectar los mocks la dependencia
             this.appMantenimientoDiccionario = Substitute.For<app.IAplicacionMantenimientoDiccionario>();
 
             //Objeto de respuesta de la aplicación al consultar todos los diccionarios disponibles
@@ -81,7 +81,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
 
         #region Pruebas de consultar (GET)
         [Test]
-        public void PruebaConsultarTodosLosDiccionariosDebeTraerUnaRespuestaConDiccionariosConListaDeDiccionariosVacio()
+        public void PruebaConsultarTodosLosDiccionariosDebeTraerUnaRespuestaConListaDeDiccionariosVacio()
         {
             //Arrange
             this.appMantenimientoDiccionario.ConsultarDiccionarios().Returns<appModelosRespuesta.ConsultarDiccionariosRespuesta>(consultarDiccionariosRespuesta);
@@ -126,7 +126,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba,"9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Act
-            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request, "8a87f8a7-3df9-4d90-9478-350b964fc888");
+            var respuesta = controlador.ConsultarUnDiccionario(controlador.Request, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.NotFound);
@@ -243,11 +243,23 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
             this.UtilConfigurarMockPeticionHttp(AmbienteTestPrueba, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Act
-            var respuesta = controlador.EliminarUnDiccionario(controlador.Request, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
+            respuesta = controlador.EliminarUnDiccionario(controlador.Request, "9a39ad6d-62c8-42bf-a8f7-66417b2b08d0");
 
             //Assert
             respuesta.StatusCode.ShouldEqual(HttpStatusCode.OK);
         }
+
+        [Test]
+        public void PruebaEliminarUnDiccionarioRetornaDiccionarioEliminadoYListaDeDiccionariosVacia()
+        {
+            this.PruebaEliminarUnDiccionarioRetornaDiccionarioEliminado();
+
+            var validarContenidoRespuesta = JsonConvert.DeserializeObject<webApiModelosRespuesta.EliminarUnDiccionarioRespuesta>(respuesta.Content.ReadAsStringAsync().Result);
+
+            validarContenidoRespuesta.ListaDiccionarios.ShouldNotBeNull();
+            validarContenidoRespuesta.ListaDiccionarios.Count.ShouldEqual(0);
+        }
+
         #endregion
 
         #region Metodos Privados Utilitarios

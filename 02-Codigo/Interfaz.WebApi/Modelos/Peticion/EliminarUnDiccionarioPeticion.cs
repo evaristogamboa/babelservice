@@ -15,16 +15,16 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
         public comunes.Diccionarios Diccionario { get; set; }
         public app.EliminarUnDiccionarioPeticion AppDiccionarioPeticion { get; set; }
 
-        private EliminarUnDiccionarioPeticion(HttpRequestMessage peticionHttp)
+        private EliminarUnDiccionarioPeticion(HttpRequestMessage peticionHttp, string iddiccionario)
         {
             //Diccionario = JsonConvert.des
             this.AppDiccionarioPeticion = app.EliminarUnDiccionarioPeticion.CrearNuevaInstancia();
-            //this.AppDiccionarioPeticion.DiccionarioId = 
+            this.AppDiccionarioPeticion.DiccionarioId = new Guid(iddiccionario);
         }
 
-        public static EliminarUnDiccionarioPeticion CrearUnaNuevaPeticionDeEliminar(HttpRequestMessage peticionHttp)
+        public static EliminarUnDiccionarioPeticion CrearUnaNuevaPeticionDeEliminar(HttpRequestMessage peticionHttp, string iddiccionario)
         {
-            return new EliminarUnDiccionarioPeticion(peticionHttp);
+            return new EliminarUnDiccionarioPeticion(peticionHttp,iddiccionario);
         }
     }
 }

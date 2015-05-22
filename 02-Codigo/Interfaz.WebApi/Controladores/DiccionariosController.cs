@@ -41,12 +41,12 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         }
 
-        [Route("diccionario/{iddiccionario}")]
+        [Route("diccionario/id/{id:string}")]
         [HttpGet]
-        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp, [FromUri] string iddiccionario)
+        public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp, [FromUri] string id)
         {         
             //Se instancia el modelo de peticion WebApi como referencia del modelo de peticion de la aplicación 
-            var peticionWeb = peticionApi.ConsultarUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticionHttp, iddiccionario);
+            var peticionWeb = peticionApi.ConsultarUnDiccionarioPeticion.CrearUnaNuevaPeticion(peticionHttp, id);
 
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ConsultarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
@@ -86,13 +86,13 @@ namespace Babel.Interfaz.WebApi.Controladores
         #endregion
 
         #region Metodos Put
-        [Route("diccionario/{iddiccionario}")]
+        [Route("diccionario/id/{id:string}")]
         [HttpPut]
-        public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string iddiccionario)
+        public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
         {
 
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
-            var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeModificacion(peticionHttp,iddiccionario);
+            var peticionWeb = peticionApi.ModificarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeModificacion(peticionHttp,id);
 
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.ModificarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
@@ -109,12 +109,12 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         #endregion
 
-        [Route("diccionario/{iddiccionario}")]
+        [Route("diccionario/id/{id:string}")]
         [HttpDelete]
-        public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string iddiccionario)
+        public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
         {
             //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
-            var peticionWeb = peticionApi.EliminarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeEliminar(peticionHttp, iddiccionario);
+            var peticionWeb = peticionApi.EliminarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeEliminar(peticionHttp, id);
 
             // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
             var respuestaApp = this.aplicacionMantenimientoDiccionario.EliminarUnDiccionario(peticionWeb.AppDiccionarioPeticion);

@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<diccionarios xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <diccionario id="f676903f-4cff-4860-938a-0321cbfebd5c" ambiente="Prueba">
+<diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <diccionario id="aaa45d88-c33f-4ae4-9c87-bc07e00db760" ambiente="Prueba">
     <etiquetas>
-      <etiqueta id="57591ea4-f75b-4bf9-b3d1-81992a65816b" nombre="app.test" activo="false">
+      <etiqueta id="da36158e-3316-484a-a649-4cdf5915ee35" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="6609f095-24ba-45f8-b3bb-21aab3e2509d" nombre="app.test2" activo="false">
+      <etiqueta id="2d200c2c-1fac-49bd-9f85-589adbe2b098" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
     </etiquetas>
+  </diccionario>
+  <diccionario id="d6d99417-d9f3-40af-ae77-3a1da401013d" ambiente="Desarrollo">
+    <etiquetas>
+      <etiqueta id="da36158e-3316-484a-a649-4cdf5915ee35" nombre="app.test" activo="false" default="">
+        <nombre>app.test</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+      <etiqueta id="2d200c2c-1fac-49bd-9f85-589adbe2b098" nombre="app.test2" activo="false" default="">
+        <nombre>app.test2</nombre>
+        <traducciones>
+          <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
+        </traducciones>
+      </etiqueta>
+    </etiquetas>
+  </diccionario>
+  <diccionario id="6dd3ab5d-5e66-45a3-ba50-edbfcdfb2d3c" ambiente="SoloAmbiente">
+    <etiquetas />
   </diccionario>
 </diccionarios>

@@ -109,6 +109,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppData\Diccionario.xml" />
+    <Content Include="AppData\diccionario_ok.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AppData\diccionario_ok_Existe.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="web.config" />
@@ -165,7 +172,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AppData\" />
+    <Folder Include="Doxumentos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nucleo.Aplicacion\Nucleo.Aplicacion.csproj">

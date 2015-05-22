@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Babel.Nucleo.Aplicacion.Modelos.Respuesta;
 using Babel.Nucleo.Aplicacion.Fachada;
@@ -17,7 +16,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 		public AplicacionServicio(IDiccionarioRepositorio repositorioDiccionario)
 		{
-			this.diccionarioRepositorio = repositorioDiccionario;
+			diccionarioRepositorio = repositorioDiccionario;
 		}
 
         public ConsultarDiccionariosRespuesta ConsultarDiccionarios()
@@ -26,11 +25,11 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             try
             {
-                var diccionarios = this.diccionarioRepositorio.ObtenerDiccionarios();
+                var diccionarios = diccionarioRepositorio.ObtenerDiccionarios();
 
 				if (diccionarios != null)
 				{
-					if (diccionarios.Count() == 0 )
+					if (!diccionarios.Any())
 					{
 						throw new Exception("No se encontró ningún diccionario.");
 					}
@@ -57,7 +56,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             try
             {
-                var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 
 				if (diccionario != null)
 				{
@@ -89,20 +88,18 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionarios = this.diccionarioRepositorio.ObtenerDiccionarios();
-				List<Diccionario> listaDeDiccionarios = new List<Diccionario>();
+				var diccionarios = diccionarioRepositorio.ObtenerDiccionarios();
+				var listaDeDiccionarios = new List<Diccionario>();
 
 				if (diccionarios != null)
 				{
 					if (diccionarios.Count() != 0)
 					{
-						foreach (Diccionario itemDiccionario in diccionarios)
+						foreach (var itemDiccionario in diccionarios)
 						{
-							Diccionario diccionario = Diccionario.CrearNuevoDiccionario(itemDiccionario.Id, itemDiccionario.Ambiente);
+							var diccionario = Diccionario.CrearNuevoDiccionario(itemDiccionario.Id, itemDiccionario.Ambiente);
 
-							List<Etiqueta> listaDeEtiquetas = new List<Etiqueta>();
-
-							listaDeEtiquetas = itemDiccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+						    var listaDeEtiquetas = itemDiccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList();
 
 							diccionario.AgregarEtiquetas(listaDeEtiquetas);
 
@@ -136,26 +133,24 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				var listaEtiquetas = new List<Etiqueta>();
 
 				if (diccionario != null)
 				{
 					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
 					{
-						foreach (Etiqueta itemEtiqueta in diccionario.Etiquetas)
+						foreach (var itemEtiqueta in diccionario.Etiquetas)
 						{
-							foreach (Traduccion itemTraduccion in itemEtiqueta.Textos)
+							foreach (var itemTraduccion in itemEtiqueta.Textos)
 							{
-								if (itemTraduccion.Cultura.CodigoIso == peticion.Idioma)
-								{
-									Etiqueta nuevaEtiqueta = Etiqueta.CrearNuevaEtiqueta(itemEtiqueta.Id);
-									nuevaEtiqueta.IdiomaPorDefecto = itemEtiqueta.IdiomaPorDefecto;
-									nuevaEtiqueta.Nombre = itemEtiqueta.Nombre;
-									nuevaEtiqueta.AgregarTraduccion(itemTraduccion);
+							    if (itemTraduccion.Cultura.CodigoIso != peticion.Idioma) continue;
+							    var nuevaEtiqueta = Etiqueta.CrearNuevaEtiqueta(itemEtiqueta.Id);
+							    nuevaEtiqueta.IdiomaPorDefecto = itemEtiqueta.IdiomaPorDefecto;
+							    nuevaEtiqueta.Nombre = itemEtiqueta.Nombre;
+							    nuevaEtiqueta.AgregarTraduccion(itemTraduccion);
 
-									listaEtiquetas.Add(nuevaEtiqueta);
-								}
+							    listaEtiquetas.Add(nuevaEtiqueta);
 							}
 						}
 					}
@@ -189,14 +184,14 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
             try
             {
-                var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-                List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+                var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+                List<Etiqueta> listaEtiquetas;
 
 				if (diccionario != null)
 				{
 					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
 					{
-						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList<Etiqueta>();
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Nombre.Contains(peticion.Nombre)).ToList();
 					}
 					else
 					{
@@ -228,14 +223,14 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas;
 
 				if (diccionario != null)
 				{
 					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
 					{
-						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Descripcion.Contains(peticion.Descripcion)).ToList<Etiqueta>();
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Descripcion.Contains(peticion.Descripcion)).ToList();
 					}
 					else
 					{
@@ -267,14 +262,14 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas;
 
 				if (diccionario != null)
 				{
 					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
 					{
-						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Activo.Equals(peticion.Estatus)).ToList<Etiqueta>();
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.Activo.Equals(peticion.Estatus)).ToList();
 					}
 					else
 					{
@@ -306,14 +301,14 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
-				List<Etiqueta> listaEtiquetas = new List<Etiqueta>();
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				List<Etiqueta> listaEtiquetas;
 
 				if (diccionario != null)
 				{
 					if ((diccionario.Id.ToString() != Guid.Empty.ToString()) && (diccionario.Id.ToString() == peticion.DiccionarioId.ToString()))
 					{
-						listaEtiquetas = diccionario.Etiquetas.Where(e => e.IdiomaPorDefecto.Contains(peticion.IdiomaPorDefecto)).ToList<Etiqueta>();
+						listaEtiquetas = diccionario.Etiquetas.Where(e => e.IdiomaPorDefecto.Contains(peticion.IdiomaPorDefecto)).ToList();
 					}
 					else
 					{
@@ -339,7 +334,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
         public CrearUnDiccionarioRespuesta CrearUnDiccionario(CrearUnDiccionarioPeticion peticion)
         {
-			CrearUnDiccionarioRespuesta respuesta = CrearUnDiccionarioRespuesta.CrearNuevaInstancia(string.Empty); 
+			var respuesta = CrearUnDiccionarioRespuesta.CrearNuevaInstancia(string.Empty); 
 
 			try
 			{
@@ -420,7 +415,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try 
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 
 				if (diccionario != null)
 				{
@@ -428,7 +423,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 					{
 						diccionario = diccionario.AgregarEtiquetas(peticion.ListaDeEtiquetas);
 
-						var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+						var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
 
 						agregarEtiquetasAUnDiccionario.ListaDeEtiquetas = diccionarioModificado.Etiquetas.ToList();
 						agregarEtiquetasAUnDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;
@@ -535,7 +530,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 
 				if (diccionario != null)
 				{
@@ -549,7 +544,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 							diccionario = diccionario.ModificarEtiquetas(new List<Etiqueta> { etiqueta });
 
-							var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+							var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
 
 							agregarTraduccionesAUnaEtiquetaDeUnDiccionario.ListaDeTraducciones = diccionarioModificado.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault().Textos.ToList();
 							agregarTraduccionesAUnaEtiquetaDeUnDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;
@@ -635,7 +630,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 			try
 			{
-				var diccionario = this.diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
+				var diccionario = diccionarioRepositorio.ObtenerUnDiccionario(peticion.DiccionarioId);
 
 				if (diccionario != null)
 				{
@@ -649,7 +644,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 
 							diccionario = diccionario.ModificarEtiquetas(new List<Etiqueta> { etiqueta });
 
-							var diccionarioModificado = this.diccionarioRepositorio.SalvarUnDiccionario(diccionario);
+							var diccionarioModificado = diccionarioRepositorio.SalvarUnDiccionario(diccionario);
 
 							eliminarTraduccionesAUnaEtiquetaDeUnDiccionario.ListaDeTraducciones = diccionarioModificado.Etiquetas.Where(e => e.Id == peticion.EtiquetaId).ToList().FirstOrDefault().Textos.ToList();
 							eliminarTraduccionesAUnaEtiquetaDeUnDiccionario.Relaciones["diccionario"] = diccionarioModificado.Id;

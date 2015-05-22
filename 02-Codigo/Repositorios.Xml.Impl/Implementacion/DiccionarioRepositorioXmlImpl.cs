@@ -13,21 +13,43 @@ using Babel.Repositorio.Xml.Impl.Modelo;
 
 namespace Babel.Repositorio.Xml.Impl.Implementacion
 {
-	public class DiccionarioRepositorioXmlImpl : IDiccionarioRepositorio
-	{
-        
-        private string directory;
+	public class DiccionarioRepositorioXmlImpl : IDiccionarioRepositorio{
 
 
-        public DiccionarioRepositorioXmlImpl(string directory)
-		{
-			AutoMapperConfig.SetAutoMapperConfiguration ();
-            this.directory = directory;
-		}
 
-		#region IDiccionarioRepositorio implementation
+        #region "Atributos Privados"
+            private string directory = string.Empty;
+        #endregion        
 
-		public List<EntidadDom.Diccionario.Diccionario> ObtenerDiccionarios ()
+        #region "Constructor"
+
+
+        ///  Método: DiccionarioRepositorioXmlImpl
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 22/05/2015
+        ///  Descripción: Constructor de la clase DiccionarioRepositorioXmlImpl.        
+        /// </summary>
+        /// <param name="directory">Parametro de tipo string que contiene la ruta del archivo XML</param>       
+       public DiccionarioRepositorioXmlImpl(string directory)
+	   {
+			    AutoMapperConfig.SetAutoMapperConfiguration ();
+                this.directory = directory;
+	   }
+
+        #endregion
+
+        #region "IDiccionarioRepositorio implementation"      
+
+
+
+        /// <summary>	
+        ///  Método: ObtenerDiccionarios
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 20/05/2015
+        ///  Descripción: Método que busca todos los diccionarios contenido en el xml repositario.        
+        /// </summary>
+        /// <returns>Lista de tipo EntidadDom.Diccionario.Diccionario</returns>
+        public List<EntidadDom.Diccionario.Diccionario> ObtenerDiccionarios ()
 		{
 
             EntidadRepo.Diccionarios DiccionariosRepositorio = null;
@@ -45,7 +67,14 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		}
 
 
-
+        /// <summary>	
+        ///  Método: MapearRepositorioConDiccionario
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 14/05/2015
+        ///  Descripción: Método que mapea dinámicamente objetos repositorios a objetos dominio.        
+        /// </summary>
+        /// <param name="diccionarioRepo">Diccionario de tipo repositorio</param>
+        /// <returns>Un diccionario de tipo objetos de dominio</returns>
 		private EntidadDom.Diccionario.Diccionario MapearRepositorioConDiccionario (EntidadRepo.Diccionario diccionarioRepo)
 		{
             
@@ -70,7 +99,15 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 		
 			return DiccionarioDominio;
 		}
-        
+
+        /// <summary>	
+        ///  Método: MapearDiccionarioConRepositorio
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 15/05/2015
+        ///  Descripción: Método que mapea dinámicamente objetos dominio a objetos repositorio.        
+        /// </summary>
+        /// <param name="diccionarioDom">Dicionario de tipo dominio</param>
+        /// <returns>Diccionario mapeado de tipo repositorio</returns>
         private EntidadRepo.Diccionario MapearDiccionarioConRepositorio(Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario diccionarioDom)
         {
             var dicctionarioRepo = new EntidadRepo.Diccionario() { Id = diccionarioDom.Id, Ambiente = diccionarioDom.Ambiente };
@@ -114,7 +151,15 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             return dicctionarioRepo;
         }
-        
+
+        /// <summary>	
+        ///  Método: SalvarDiccionarios
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 12/05/2015
+        ///  Descripción: Método que guarda los diccionarios en el xml repositario.
+        /// </summary>        
+        /// <param name="diccionarioLista">Lista de Diccionarios de tipo Dominio.Entidades.Diccionario.Diccionario</param>
+        /// <returns>Lista de Diccionarios de tipo EntidadDom.Diccionario.Diccionario</returns>
         public IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> SalvarDiccionarios(IEnumerable<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> diccionarioLista)
 		{
 
@@ -150,6 +195,15 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
 		}
 
+
+        /// <summary>	
+        ///  Método: ObtenerUnDiccionario
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 14/05/2015
+        ///  Descripción: Método que busca los diccionarios en el xml repositario.
+        /// </summary>    
+        /// <param name="idDiccionario">Recibe el id del diccionario a buscar de tipo Guid</param>
+        /// <returns>Un diccionario de tipo EntidadDom.Diccionario.Diccionario</returns>
         public Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario ObtenerUnDiccionario(Guid idDiccionario)
         {
 
@@ -176,7 +230,14 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         }
 
-
+        /// <summary>	
+        ///  Método: EliminarUnDiccionario
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 18/05/2015
+        ///  Descripción: Método que elimina un diccionario en el xml repositario.
+        /// </summary>    
+        /// <param name="idDiccionario">Id del diccionario a buscar de tipo Guid</param>
+        /// <returns>Lista de diccionarios de tipo EntidadDom.Diccionario.Diccionario</returns>
         public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarUnDiccionario(Guid idDiccionario)
         {
 
@@ -212,8 +273,15 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             return diccionarioDom;
 
         }
-
-
+        
+        /// <summary>	
+        ///  Método: EliminarDiccionarios
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 18/05/2015
+        ///  Descripción: Método que busca los diccionarios en el xml repositario para ser eliminados.
+        /// </summary> 
+        /// <param name="idDiccionarioList">Lista de id's de diccionarios a buscar de tipo Guid's</param>
+        /// <returns>Lista de diccionarios de tipo Dominio.Entidades.Diccionario.Diccionario</returns>
         public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarDiccionarios(List<Guid> idDiccionarioList)
         {
 
@@ -256,7 +324,15 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             return diccionarioDom;
 
         }
-                
+
+        /// <summary>	
+        ///  Método: SalvarUnDiccionario
+        ///  Desarrollador: Johans Cuéllar
+        ///  Creado: 21/05/2015
+        ///  Descripción: Método que salva un diccionario en el xml repositario.
+        /// </summary>   
+        /// <param name="diccionario">Diccionario de tipo EntidadDom.Diccionario.Diccionario</param>
+        /// <returns>Diccionario de tipo EntidadDom.Diccionario.Diccionario</returns>
         public EntidadDom.Diccionario.Diccionario SalvarUnDiccionario(EntidadDom.Diccionario.Diccionario diccionario)
         {
             
@@ -339,6 +415,14 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             
         }
 
+        #endregion
+
+        #region "Metodos de lectura - escritura"
+
+
+        
+
+
         /// <summary>
         ///  Método: XmlSerializador
         ///  Desarrollador: Johans Cuéllar
@@ -379,8 +463,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         /// </summary>        
         /// <param name="Directory">Ruta del directorio del archivo especificado</param>
         private EntidadRepo.Diccionarios XmlDeSerializador()
-        {
-
+       {
 
             if (File.Exists(directory))
                 {
@@ -401,15 +484,17 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
                     throw new Exception();
 
-                }           
-           
+                }
+
 
         }
 
-}
+        #endregion
+
+    }
  
      
-		#endregion  
+
     
 }
 

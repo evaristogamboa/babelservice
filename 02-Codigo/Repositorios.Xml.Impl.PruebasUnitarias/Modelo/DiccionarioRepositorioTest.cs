@@ -22,101 +22,65 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
     
 
 		[Test]
-        public void ProbarObtenerDiccionariosDelRepositorioEnElXMLRepositorio()
+        public void ProbarObtenerDiccionariosDelRepositorioEnElXMLRepositorioRetornaListaDeDiccionarios()
 		{		
 			//Arrange
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
 			var diccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> ();
 			//Act
-
 			diccionarios = repositorio.ObtenerDiccionarios ();
-
 			//Assert
 			diccionarios.ShouldBeType<List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>> ();
-
 		}
 
 
 
-        [Test]
-
-        // Johans
-        public void ProbarObtenerUnDiccionarioExisteEnElXMLRepositorio() 
+        [Test]       
+        public void ProbarObtenerUnDiccionarioExisteEnElXMLRepositorioRetornaNullReferenceException() 
         {
-
-
-            try { 
-
+            try {
+            //Arrange
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
             const string idDiccionario = "25829869-2551-4b60-9dd7-2aaafccf8bfa";
-
+            //Act
             repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
-            
-
             }
-            catch (Exception ex) {
-            
-                    ex.ShouldBeType<NullReferenceException>();
-            
+            catch (Exception ex) {            
+                    ex.ShouldBeType<NullReferenceException>();            
             }
-
         }
 
          [Test]
-
-        // Johans
-        public void ProbarObtenerUnDiccionarioArchivoNoExisteEnElXMLRepositorio()
+        public void ProbarObtenerUnDiccionarioArchivoNoExisteEnElXMLRepositorioRetornaArgumentNullException()
         {
-
             // Para que ejecute la excepción modificar el ID del diccionario por uno que no exista (Verificar Diccionario)
-
+            //Arrange
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
             const string idDiccionario = "25829869-2551-4b60-9dd7-2aaafccf8bfa";
-
             try {
-
-                var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));                
-            
-            }
-            
-            
-            catch (Exception ex) {
-
-                ex.ShouldBeType<System.ArgumentNullException>();              
-            
+            //Act
+            repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));        
+            }catch (Exception ex) {
+                ex.ShouldBeType<System.ArgumentNullException>();            
             }
 
         }
         
 
          [Test]
-
-         // Johans
-         public void ProbarObtenerUnDiccionarioArchivoVacioEnElXMLRepositorio()
+         public void ProbarObtenerUnDiccionarioArchivoVacioEnElXMLRepositorioRetornaInvalidOperationException()
          {
-
              // Para que ejecute la excepción modificar el ID del diccionario por uno que no exista (Verificar Diccionario)
-
+             //Arrange
              DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
              const string idDiccionario = "25829869-2551-4b60-9dd7-2aaafccf8bfa";
-
              try
              {
-
-                 var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));                
-
-
-             }
-
-
-             catch (Exception ex)
+             //Act
+             repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
+             }catch (Exception ex)
              {
-
                  ex.ShouldBeType <System.InvalidOperationException>();
-
              }
 
          }
@@ -124,55 +88,44 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         [Test]
-         public void ProbarObtenerUnDiccionarioNoExisteEnElXMLRepositorio()
+         public void ProbarObtenerUnDiccionarioNoExisteEnElXMLRepositorioRetornaNulo()
         {
-
+            //Arrange
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
             const string idDiccionario = "7a83a1a0-415f-40bd-bd37-66e7f71efdab";
-
-            var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
-
-
-            diccionarioDom.ShouldBeNull();
-
+            //Act
+            repositorio.ObtenerUnDiccionario(new Guid(idDiccionario)).ShouldBeNull();           
+            
         }
 
          [Test]
-        public void ProbarObtenerUnDiccionarioGuidInvalidoEnElXMLRepositorio()
+        public void ProbarObtenerUnDiccionarioGuidInvalidoEnElXMLRepositorioRetornaFormatException()
         {
-
+            //Arrange
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
             const string idDiccionario = "918646121";
-
             try
             {
-
-                var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
-
+            //Act
+            repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
             }
             catch (Exception ex) {
-
-                ex.ShouldBeType<System.FormatException>();
+            //Assert
+            ex.ShouldBeType<System.FormatException>();
             }
-            
-
         }
 
 
         [Test]
-        //Johans
-
-         public void ProbarCrearUnDiccionarioNuevoEnElXMLRepositorio()
+         public void ProbarCrearUnDiccionarioNuevoEnElXMLRepositorioRetornaDiccionarioCreadoRetornaDiccionarioCreado()
          {
 
              try
              {
                  // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
 
+                 //Arrange
                  DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
 
                  Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo1_" + Convert.ToString(DateTime.Now.Ticks));
 
@@ -180,48 +133,45 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                  EtqDom.AgregarTraduccion(traduccionDom2);
 
-
                  Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2_" + Convert.ToString(DateTime.Now.Ticks));
 
                  Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
                  EtqDom2.AgregarTraduccion(traduccionDom22);
 
-
                  DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestPrueba);
-
 
                  DiccionarioDominio.AgregarEtiqueta(EtqDom);
                  DiccionarioDominio.AgregarEtiqueta(EtqDom2);
 
+                 //Act
                  repositorio.SalvarUnDiccionario(DiccionarioDominio).ShouldEqual(DiccionarioDominio);
 
              }
-             catch (Exception ex) { 
-             
+             catch (Exception ex) {
+                 //Assert
+                 ex.ShouldBeType<Exception>();
              
              }
 
          }
 
         [Test]
-        public void ProbarCrearUnDiccionarioNuevoConAmbienteExistenteEnElXMLRepositorio()
+        public void ProbarCrearUnDiccionarioNuevoConAmbienteExistenteEnElXMLRepositorioRetornaDiccionarioCreado()
         {
 
 
             try
-            {
-                // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
-
+            {                
+                //Arrange
                 DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
                 DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.NewGuid(), ambienteTestSoloAmbiente);
-
+                //Act
                 repositorio.SalvarUnDiccionario(DiccionarioDominio);
 
             }
             catch (Exception ex) {
-
+                //Assert
                 ex.ShouldBeType<Exception>();
             
             }
@@ -230,13 +180,15 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         [Test]
-        public void ProbarModificarUnDiccionarioExistenteEnElXMLRepositorio()
+        public void ProbarModificarUnDiccionarioExistenteEnElXMLRepositorioRetornaDiccionarioModificado()
         {
 
             // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
 
             try
             {
+
+                //Arrange
 
                 DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
 
@@ -245,15 +197,12 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
                 EtqDom.AgregarTraduccion(traduccionDom2);
-
-
+                
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo2_" + Convert.ToString(DateTime.Now.Ticks));
 
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom22 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
                 EtqDom2.AgregarTraduccion(traduccionDom22);
-
-
 
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom3 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo3_" + Convert.ToString(DateTime.Now.Ticks));
 
@@ -261,18 +210,18 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
                 EtqDom3.AgregarTraduccion(traduccionDom23);
 
-
                 DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("25829869-2551-4b60-9dd7-2aaafccf8bfa"), ambienteTestPrueba);
                 
                 DiccionarioDominio.AgregarEtiqueta(EtqDom);
                 DiccionarioDominio.AgregarEtiqueta(EtqDom2);
                 DiccionarioDominio.AgregarEtiqueta(EtqDom3);
 
+                //Act
                 repositorio.SalvarUnDiccionario(DiccionarioDominio);
 
             }
             catch (Exception ex) {
-
+                //Assert
                 ex.ShouldBeType<Exception>();
             
             }
@@ -282,21 +231,19 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
 
         // Johans
-        public void ProbarCrearUnDiccionarioNoExistenteEnElXMLRepositorio()
+        public void ProbarCrearUnDiccionarioNoExistenteEnElXMLRepositorioRetornaException()
         {
-
             try
             {
-
+                //Arrange
                 DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
+                //Act
                 repositorio.SalvarUnDiccionario(DiccionarioDominio);
 
             }
             catch (Exception ex) {
-
-                ex.ShouldBeType<Exception>();
-            
+                //Assert
+                ex.ShouldBeType<Exception>();            
             }
 
 
@@ -305,7 +252,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
 
         // Johans
-        public void ProbarCrearListadeDiccionariosExistentesEnElXMLRepositorio()
+        public void ProbarCrearListadeDiccionariosExistentesEnElXMLRepositorioRetornaListaDiccionarios()
         {
 
             try
@@ -321,7 +268,6 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion traduccionDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Traduccion.CrearNuevaTraduccion(Babel.Nucleo.Dominio.Entidades.Etiquetas.Cultura.CrearNuevaCultura("en-US"), "accept", "accept");
 
                 EtqDom.AgregarTraduccion(traduccionDom2);
-
 
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom2 = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.test2");
 

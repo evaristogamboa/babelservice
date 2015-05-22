@@ -9,7 +9,7 @@ using Babel.Nucleo.Dominio.Entidades.Diccionario;
 
 namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 {
-    public class ConsultarUnDiccionarioRespuesta : IEquatable<ConsultarUnDiccionarioRespuesta>
+    public class ConsultarUnDiccionarioRespuesta 
     {
         [JsonProperty("diccionario")]
         public comunes.Diccionario Diccionario { get; set; }
@@ -46,45 +46,8 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
             return new ConsultarUnDiccionarioRespuesta(respuestaApp);
         }
 
-        public static ConsultarUnDiccionarioRespuesta CrearNuevaRespuestaVacia()
-        {
-            return new ConsultarUnDiccionarioRespuesta();
-        }
         #endregion
-        #region igualdad
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                int result = 17;
-                result = result * 23 + ((Diccionario != null) ? this.Diccionario.GetHashCode() : 0);
-                result = result * 23 + ((Respuesta != null) ? this.Respuesta.GetHashCode() : 0);
-                return result;
-            }
-        }
-
-        public bool Equals(ConsultarUnDiccionarioRespuesta other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-            return Equals(this.Diccionario, other.Diccionario) &&
-                   Equals(this.Respuesta, other.Respuesta);
-        }
-
-        public override bool Equals(object obj)
-        {
-            ConsultarUnDiccionarioRespuesta temp = obj as ConsultarUnDiccionarioRespuesta;
-            if (temp == null)
-                return false;
-            return this.Equals(temp);
-        }
-        #endregion
+        
 
         private comunes.Diccionario MapearRespuestaApp(Diccionario diccionarioDom)
         {

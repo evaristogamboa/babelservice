@@ -18,7 +18,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
         private ConsultarUnDiccionarioPeticion(HttpRequestMessage peticionHttp, string id)
         {
 
-            Diccionario = JsonConvert.DeserializeObject<comunes.Diccionario>(peticionHttp.Content.ReadAsStringAsync().Result);
+            Diccionario = new comunes.Diccionario();
             Diccionario.Id = new Guid(id);
             this.AppDiccionarioPeticion = app.ConsultarUnDiccionarioPeticion.CrearNuevaInstancia();
 

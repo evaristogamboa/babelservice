@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <diccionarios xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <diccionario id="f676903f-4cff-4860-938a-0321cbfebd5c" ambiente="Prueba">
+  <diccionario id="0190de55-3afb-49bf-a150-1bd8b301f8af" ambiente="Prueba">
     <etiquetas>
-      <etiqueta id="57591ea4-f75b-4bf9-b3d1-81992a65816b" nombre="app.test" activo="false">
+      <etiqueta id="389cccf9-4873-4c2c-96f9-fdd05896df1c" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="6609f095-24ba-45f8-b3bb-21aab3e2509d" nombre="app.test2" activo="false">
+      <etiqueta id="d94cfe49-5a62-4493-b47f-ddb1570cafb8" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -16,20 +16,23 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="b4b5a47f-e73c-4d5b-a744-c6481a884e23" ambiente="Desarrollo">
+  <diccionario id="5a97e302-f174-4988-8d8c-f4cad070568d" ambiente="Desarrollo">
     <etiquetas>
-      <etiqueta id="57591ea4-f75b-4bf9-b3d1-81992a65816b" nombre="app.test" activo="false">
+      <etiqueta id="389cccf9-4873-4c2c-96f9-fdd05896df1c" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="6609f095-24ba-45f8-b3bb-21aab3e2509d" nombre="app.test2" activo="false">
+      <etiqueta id="d94cfe49-5a62-4493-b47f-ddb1570cafb8" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
     </etiquetas>
+  </diccionario>
+  <diccionario id="ca99c395-9629-4f68-86d3-56672551e8dc" ambiente="SoloAmbiente">
+    <etiquetas />
   </diccionario>
 </diccionarios>

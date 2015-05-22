@@ -26,9 +26,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz.WebApi.PruebasUnitarias", "Interfaz.WebApi.PruebasUnitarias\Interfaz.WebApi.PruebasUnitarias.csproj", "{B16792D2-3450-45A4-BDA7-98FB1BD1AABB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16C2712F-E912-4CEC-9B53-E4CDFBBD5A35}"
-	ProjectSection(SolutionItems) = preProject
-		BabelService.runsettings = BabelService.runsettings
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

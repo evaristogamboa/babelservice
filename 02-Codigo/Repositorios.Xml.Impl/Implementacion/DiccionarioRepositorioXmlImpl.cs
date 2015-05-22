@@ -13,18 +13,18 @@ using Babel.Repositorio.Xml.Impl.Modelo;
 
 namespace Babel.Repositorio.Xml.Impl.Implementacion
 {
-	public class DiccionarioRepositorioXmlImpl : IDiccionarioRepositorio
-    {
+	public class DiccionarioRepositorioXmlImpl : IDiccionarioRepositorio{
 
 
 
         #region "Atributos Privados"
-            private string _directory = string.Empty;
-        #endregion
+            private string directory = string.Empty;
+        #endregion        
 
         #region "Constructor"
 
-            ///  Método: DiccionarioRepositorioXmlImpl
+
+        ///  Método: DiccionarioRepositorioXmlImpl
         ///  Desarrollador: Johans Cuéllar
         ///  Creado: 22/05/2015
         ///  Descripción: Constructor de la clase DiccionarioRepositorioXmlImpl.        
@@ -33,12 +33,13 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
        public DiccionarioRepositorioXmlImpl(string directory)
 	   {
 			    AutoMapperConfig.SetAutoMapperConfiguration ();
-                this._directory = directory;
+                this.directory = directory;
 	   }
 
         #endregion
 
-        #region "IDiccionarioRepositorio implementation"
+        #region "IDiccionarioRepositorio implementation"      
+
 
 
         /// <summary>	
@@ -206,7 +207,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         public Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario ObtenerUnDiccionario(Guid idDiccionario)
         {
 
-            _directory = _directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");                
+            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");                
 
             EntidadDom.Diccionario.Diccionario diccionarioDom = null;
 
@@ -240,7 +241,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarUnDiccionario(Guid idDiccionario)
         {
 
-            _directory = _directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
+            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
 
             List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
 
@@ -284,7 +285,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarDiccionarios(List<Guid> idDiccionarioList)
         {
 
-            _directory = _directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
+            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
 
             List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
 
@@ -339,7 +340,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             
             EntidadDom.Diccionario.Diccionario dicDom = null;
 
-            _directory = _directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
+            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
 
 
             EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador();
@@ -435,11 +436,11 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
             try
             {
-                File.Delete(_directory);
+                File.Delete(directory);
 
                 var serializer = new XmlSerializer(typeof(Diccionarios));
 
-                using (TextWriter writer = new StreamWriter(_directory))
+                using (TextWriter writer = new StreamWriter(directory))
                 {
                     serializer.Serialize(writer, diccionarios);
                 }
@@ -464,12 +465,12 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         private EntidadRepo.Diccionarios XmlDeSerializador()
        {
 
-            if (File.Exists(_directory))
+            if (File.Exists(directory))
                 {
 
                     var deserializer = new XmlSerializer(typeof(EntidadRepo.Diccionarios));
 
-                    StreamReader reader = new StreamReader(_directory);
+                    StreamReader reader = new StreamReader(directory);
                     object obj = deserializer.Deserialize(reader);
                     reader.Close();
 

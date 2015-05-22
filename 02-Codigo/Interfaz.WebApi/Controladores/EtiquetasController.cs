@@ -7,14 +7,13 @@ using System.Web.Http;
 
 namespace Babel.Interfaz.WebApi.Controladores
 {
-    [RoutePrefix("api/diccionario/{iddiccionario:string}")]
+    [RoutePrefix("api/diccionario/{id1}")]
     public class EtiquetasController : ApiController
     {
         
-
-        [Route("etiquetas/")]
+        [Route("etiquetas")]
         [HttpGet]
-        public HttpResponseMessage ConsultarEtiquetasPorIdiomaPorDefecto(HttpRequestMessage httpRequestMessage,[FromUri]string iddionario)
+        public HttpResponseMessage ConsultarEtiquetasPorIdiomaPorDefecto(HttpRequestMessage httpRequestMessage,string id1)
         {
             throw new NotImplementedException();
         }

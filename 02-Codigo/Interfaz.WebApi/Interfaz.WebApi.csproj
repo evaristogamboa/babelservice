@@ -137,6 +137,7 @@
     <Compile Include="Modelos\Peticion\AgregarEtiquetasAUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
+    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion.cs" />
     <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
     <Compile Include="Modelos\Peticion\ConsultarEtiquetasPorNombrePeticion.cs" />
     <Compile Include="Modelos\Peticion\ConsultarUnDiccionarioPeticion.cs" />

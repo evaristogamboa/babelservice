@@ -14,6 +14,7 @@ namespace Babel.Interfaz.WebApi.AppStart
     using Ninject;
     using Ninject.Web.Common;
     using Babel.Interfaz.WebApi.Controladores;
+    using System.Configuration;
 
     public static class NinjectWebCommon 
     {
@@ -65,7 +66,8 @@ namespace Babel.Interfaz.WebApi.AppStart
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IDiccionarioRepositorio>().To<DiccionarioRepositorioXmlImpl>();
+            var diccionarioPath = HttpRuntime.AppDomainAppPath + ConfigurationManager.AppSettings["archivoDiccionario"];
+            kernel.Bind<IDiccionarioRepositorio>().To<DiccionarioRepositorioXmlImpl>().WithConstructorArgument(diccionarioPath);
             kernel.Bind<IAplicacionMantenimientoDiccionario>().To<AplicacionServicio>();
         }        
     }

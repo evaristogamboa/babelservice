@@ -1,13 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using Babel.Nucleo.Dominio.Entidades.Diccionario;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Net.Http;
 using app = Babel.Nucleo.Aplicacion.Modelos.Peticion;
 using Newtonsoft.Json;
 using comunes = Babel.Interfaz.WebApi.Modelos.Comunes;
-using dominio = Babel.Nucleo.Dominio.Entidades;
 
 namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {

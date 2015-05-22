@@ -151,6 +151,7 @@
     <Compile Include="Modelos\Respuesta\AgregarEtiquetasAUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarDiccionariosRespuesta.cs" />
+    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorNombreRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarEtiquetasPorNombreRespuesta.cs" />

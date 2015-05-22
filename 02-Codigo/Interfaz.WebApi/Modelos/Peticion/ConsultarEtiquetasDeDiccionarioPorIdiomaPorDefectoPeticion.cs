@@ -10,11 +10,7 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
 {
 	public class ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion
 	{
-
-        [JsonProperty]
-        public Guid DiccionarioId { get; set; }
-
-        [JsonProperty]
+        [JsonProperty ()]
         public string IdiomaPorDefecto { get; set; }
 
         private ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion ParametrosPeticion{get;  set;} 
@@ -28,21 +24,21 @@ namespace Babel.Interfaz.WebApi.Modelos.Peticion
         {
 
         }
-
+ 
 		private ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion(HttpRequestMessage peticionHttp,string id)
 		{
-            ParametrosPeticion = new ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion();
             ParametrosPeticion= JsonConvert.DeserializeObject<ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion>(peticionHttp.Content.ReadAsStringAsync().Result);
             this.appEtiquetasDicionarioPeticion.DiccionarioId = new Guid(id);
             this.appEtiquetasDicionarioPeticion.IdiomaPorDefecto = ParametrosPeticion.IdiomaPorDefecto;
 
 		}
 
-		public static ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion CrearNuevaPeticion(HttpRequestMessage peticionHttp, string id)
+		public static ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion CrearUnaNuevaPeticion(HttpRequestMessage peticionHttp, string id)
 		{
 			return new ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion( peticionHttp,id);
 		}
 
 		#endregion
-	}
+
+    }
 }

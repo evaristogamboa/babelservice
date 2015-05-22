@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<diccionarios xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <diccionario id="aaa45d88-c33f-4ae4-9c87-bc07e00db760" ambiente="Prueba">
+<diccionarios xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <diccionario id="0190de55-3afb-49bf-a150-1bd8b301f8af" ambiente="Prueba">
     <etiquetas>
-      <etiqueta id="da36158e-3316-484a-a649-4cdf5915ee35" nombre="app.test" activo="false" default="">
+      <etiqueta id="389cccf9-4873-4c2c-96f9-fdd05896df1c" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="2d200c2c-1fac-49bd-9f85-589adbe2b098" nombre="app.test2" activo="false" default="">
+      <etiqueta id="d94cfe49-5a62-4493-b47f-ddb1570cafb8" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -16,15 +16,15 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="d6d99417-d9f3-40af-ae77-3a1da401013d" ambiente="Desarrollo">
+  <diccionario id="5a97e302-f174-4988-8d8c-f4cad070568d" ambiente="Desarrollo">
     <etiquetas>
-      <etiqueta id="da36158e-3316-484a-a649-4cdf5915ee35" nombre="app.test" activo="false" default="">
+      <etiqueta id="389cccf9-4873-4c2c-96f9-fdd05896df1c" nombre="app.test" activo="false" default="">
         <nombre>app.test</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
         </traducciones>
       </etiqueta>
-      <etiqueta id="2d200c2c-1fac-49bd-9f85-589adbe2b098" nombre="app.test2" activo="false" default="">
+      <etiqueta id="d94cfe49-5a62-4493-b47f-ddb1570cafb8" nombre="app.test2" activo="false" default="">
         <nombre>app.test2</nombre>
         <traducciones>
           <traduccion cultura="en-US" tooltip="accept">accept</traduccion>
@@ -32,7 +32,7 @@
       </etiqueta>
     </etiquetas>
   </diccionario>
-  <diccionario id="6dd3ab5d-5e66-45a3-ba50-edbfcdfb2d3c" ambiente="SoloAmbiente">
+  <diccionario id="ca99c395-9629-4f68-86d3-56672551e8dc" ambiente="SoloAmbiente">
     <etiquetas />
   </diccionario>
 </diccionarios>

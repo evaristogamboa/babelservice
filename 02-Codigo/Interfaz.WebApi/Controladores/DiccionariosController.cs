@@ -109,6 +109,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         #endregion
 
+        #region Metodos Delete
         [Route("diccionario/id/{id}")]
         [HttpDelete]
         public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
@@ -130,6 +131,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
             return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
+        #endregion
     }
 }
 

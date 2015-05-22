@@ -48,7 +48,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         {
             //Arrange
             var listaEtiquetas = JsonConvert.DeserializeObject<Dictionary<string,Guid>>(EtiquetaJson);
-            this.ConsultarEtiquetasPorIdiomaPorDefecto.ListaDeEtiquetas = new Dictionary<string, Guid>(listaEtiquetas)ToList();
+            //this.ConsultarEtiquetasPorIdiomaPorDefecto.ListaDeEtiquetas = new Dictionary<string, Guid>(listaEtiquetas);
             this.appMantenimientoDiccionarioEtiquetas.ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefecto(Arg.Any<appModelosPeticion.ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion>()).ReturnsForAnyArgs<appModelosRespuesta.ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta>(this.ConsultarEtiquetasPorIdiomaPorDefecto);
 
             var respuesta = controlador.ConsultarEtiquetasPorIdiomaPorDefecto(controlador.Request,"1");

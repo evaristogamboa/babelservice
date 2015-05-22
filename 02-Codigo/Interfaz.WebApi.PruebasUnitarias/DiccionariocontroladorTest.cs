@@ -45,7 +45,7 @@ namespace Babel.Interfaz.WebApi.PruebasUnitarias
         #region Constructor de las pruebas
         public DiccionarioControladorTest()
         {
-            // Se inicializa el proxy del NSustitute para posteriormente inyectar los mocks la dependencia en el 
+            // Se inicializa el proxy del NSustitute para posteriormente inyectar los mocks la dependencia
             this.appMantenimientoDiccionario = Substitute.For<app.IAplicacionMantenimientoDiccionario>();
 
             //Objeto de respuesta de la aplicación al consultar todos los diccionarios disponibles

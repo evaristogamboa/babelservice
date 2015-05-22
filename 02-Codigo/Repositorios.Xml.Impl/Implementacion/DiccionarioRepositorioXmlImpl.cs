@@ -206,9 +206,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         /// <returns>Un diccionario de tipo EntidadDom.Diccionario.Diccionario</returns>
         public Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario ObtenerUnDiccionario(Guid idDiccionario)
         {
-
-            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");                
-
+                        
             EntidadDom.Diccionario.Diccionario diccionarioDom = null;
 
             EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador();
@@ -240,8 +238,6 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         /// <returns>Lista de diccionarios de tipo EntidadDom.Diccionario.Diccionario</returns>
         public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarUnDiccionario(Guid idDiccionario)
         {
-
-            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
 
             List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
 
@@ -285,8 +281,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
         public List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario> EliminarDiccionarios(List<Guid> idDiccionarioList)
         {
 
-            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
-
+            
             List<EntidadDom.Diccionario.Diccionario> diccionarioDom = null;
 
             EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador();
@@ -339,10 +334,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
             var exist = false;
             
             EntidadDom.Diccionario.Diccionario dicDom = null;
-
-            directory = directory.Replace("diccionario_ok.xml", "diccionario_ok_Existe.xml");
-
-
+            
             EntidadRepo.Diccionarios diccionarioRep = XmlDeSerializador();
 
             if (diccionario == null) { 
@@ -417,10 +409,7 @@ namespace Babel.Repositorio.Xml.Impl.Implementacion
 
         #endregion
 
-        #region "Metodos de lectura - escritura"
-
-
-        
+        #region "Metodos de lectura - escritura"       
 
 
         /// <summary>

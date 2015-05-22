@@ -118,7 +118,6 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-    <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppStart\NinjectWebCommon.cs" />
@@ -166,12 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <None Include="Properties\PublishProfiles\Desarrollo.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Doxumentos\" />

@@ -22,7 +22,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
     
 
 		[Test]
-		public void ProbarObtenerDiccionariosDelRepositorio ()
+        public void ProbarObtenerDiccionariosDelRepositorioEnElXMLRepositorio()
 		{		
 			//Arrange
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
@@ -41,24 +41,32 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
 
         // Johans
-        public void ProbarObtenerUnDiccionarioExiste() 
+        public void ProbarObtenerUnDiccionarioExisteEnElXMLRepositorio() 
         {
+
+
+            try { 
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
 
             const string idDiccionario = "25829869-2551-4b60-9dd7-2aaafccf8bfa";
 
-            var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
+            repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
+            
 
-
-            diccionarioDom.ShouldBeType<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
+            }
+            catch (Exception ex) {
+            
+                    ex.ShouldBeType<NullReferenceException>();
+            
+            }
 
         }
 
          [Test]
 
         // Johans
-        public void ProbarObtenerUnDiccionarioArchivoNoExiste()
+        public void ProbarObtenerUnDiccionarioArchivoNoExisteEnElXMLRepositorio()
         {
 
             // Para que ejecute la excepción modificar el ID del diccionario por uno que no exista (Verificar Diccionario)
@@ -69,9 +77,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
             try {
 
-                var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
-
-                diccionarioDom.ShouldBeType<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();                       
+                var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));                
             
             }
             
@@ -88,7 +94,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
          [Test]
 
          // Johans
-         public void ProbarObtenerUnDiccionarioArchivoVacio()
+         public void ProbarObtenerUnDiccionarioArchivoVacioEnElXMLRepositorio()
          {
 
              // Para que ejecute la excepción modificar el ID del diccionario por uno que no exista (Verificar Diccionario)
@@ -100,9 +106,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
              try
              {
 
-                 var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));
-
-                 diccionarioDom.ShouldBeType<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
+                 var diccionarioDom = repositorio.ObtenerUnDiccionario(new Guid(idDiccionario));                
 
 
              }
@@ -120,7 +124,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         [Test]
-        public void ProbarObtenerUnDiccionarioNoExiste()
+         public void ProbarObtenerUnDiccionarioNoExisteEnElXMLRepositorio()
         {
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
@@ -135,7 +139,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         }
 
          [Test]
-        public void ProbarObtenerUnDiccionarioGuidInvalido()
+        public void ProbarObtenerUnDiccionarioGuidInvalidoEnElXMLRepositorio()
         {
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
@@ -159,8 +163,8 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
         [Test]
         //Johans
-            
-         public void ProbarCrearUnDiccionarioNuevo()
+
+         public void ProbarCrearUnDiccionarioNuevoEnElXMLRepositorio()
          {
 
              try
@@ -201,7 +205,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
          }
 
         [Test]
-        public void ProbarCrearUnDiccionarioNuevoConAmbienteExistente()
+        public void ProbarCrearUnDiccionarioNuevoConAmbienteExistenteEnElXMLRepositorio()
         {
 
 
@@ -226,7 +230,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         [Test]
-        public void ProbarModificarUnDiccionarioExistente()
+        public void ProbarModificarUnDiccionarioExistenteEnElXMLRepositorio()
         {
 
             // Se coloca este valor Convert.ToString(DateTime.Now.Ticks) para que cree diccionarios dinamico con un numero X basado en milisegundos
@@ -235,7 +239,6 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             {
 
                 DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
-
 
                 Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta EtqDom = Babel.Nucleo.Dominio.Entidades.Etiquetas.Etiqueta.CrearNuevaEtiqueta("app.testNuevo1_" + Convert.ToString(DateTime.Now.Ticks));
 
@@ -260,9 +263,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
                 DiccionarioDominio = Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario.CrearNuevoDiccionario(Guid.Parse("25829869-2551-4b60-9dd7-2aaafccf8bfa"), ambienteTestPrueba);
-
-
-
+                
                 DiccionarioDominio.AgregarEtiqueta(EtqDom);
                 DiccionarioDominio.AgregarEtiqueta(EtqDom2);
                 DiccionarioDominio.AgregarEtiqueta(EtqDom3);
@@ -281,7 +282,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
 
         // Johans
-        public void ProbarCrearUnDiccionarioNoExistente()
+        public void ProbarCrearUnDiccionarioNoExistenteEnElXMLRepositorio()
         {
 
             try
@@ -304,7 +305,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
 
         // Johans
-        public void ProbarCrearDiccionariosExistentes()
+        public void ProbarCrearListadeDiccionariosExistentesEnElXMLRepositorio()
         {
 
             try
@@ -357,7 +358,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
         [Test]
 
         // Johans
-        public void ProbarCrearDiccionariosNoExistentes()
+        public void ProbarCrearListadeDiccionariosNoExistentesEnElXMLRepositorio()
         {
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
@@ -380,7 +381,33 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
 
 
         [Test]
-        public void EliminarUnDiccionarioExistente() 
+        public void EliminarUnDiccionarioExistenteEnElXMLRepositorio() 
+        {
+
+            // Se tiene que buscar un ID en el Xml del repositorio.
+
+            DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
+
+            var listaDiccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
+
+            try
+            {
+
+                repositorio.EliminarUnDiccionario(new Guid("25829869-2551-4b60-9dd7-2aaafccf8bfa")); ;
+
+            }
+            catch (Exception ex)
+            {
+
+                ex.ShouldBeType<System.NullReferenceException>();
+            }     
+            
+        
+        
+        }
+        
+        [Test]
+        public void EliminarUnDiccionarioNoExistenteEnElXMLRepositorio()
         {
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
@@ -397,23 +424,23 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             {
 
                 ex.ShouldBeType<System.NullReferenceException>();
-            }     
-            
-        
-        
+            }
+
+
+
         }
 
 
 
         [Test]
-        public void EliminarListaDiccionarioExistente()
+        public void EliminarListadeDiccionariosExistentesEnElXMLRepositorio()
         {
 
             DiccionarioRepositorioXmlImpl repositorio = new DiccionarioRepositorioXmlImpl(Directory);
 
             var listaDiccionarios = new List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>();
 
-            var listaguid = new List<Guid>() {             
+            var listaguid = new List<Guid>() {            
                 new Guid("ed14ab25-0178-43a4-ab77-d7c342bd8780"),
                 new Guid("4dc68f37-b2d9-4274-852b-03938512864e")            
             };
@@ -422,7 +449,7 @@ namespace Babel.Repositorio.Xml.Impl.PruebasUnitarias.Modelo
             try
             {
 
-                repositorio.EliminarDiccionarios(listaguid);
+                repositorio.EliminarDiccionarios(listaguid).ShouldBeType<List<Babel.Nucleo.Dominio.Entidades.Diccionario.Diccionario>>();
 
             }
             catch (Exception ex)

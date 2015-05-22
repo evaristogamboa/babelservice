@@ -113,7 +113,22 @@ namespace Babel.Interfaz.WebApi.Controladores
         [HttpDelete]
         public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string iddiccionario)
         {
-            throw new NotImplementedException();
+            //Solicitamos el modelo del web api que se encargara de deserializar la peticion e referenciar el modelo de aplica
+            var peticionWeb = peticionApi.EliminarUnDiccionarioPeticion.CrearUnaNuevaPeticionDeEliminar(peticionHttp, iddiccionario);
+
+            // Se llama al metodo crear diccionario de la interfaz IAplicacionMantenimientoDiccionario
+            var respuestaApp = this.aplicacionMantenimientoDiccionario.EliminarUnDiccionario(peticionWeb.AppDiccionarioPeticion);
+
+            if (respuestaApp == null) 
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, new Exception("El Servicio no pudo completar su solicitud por problemas internos, intente mas tarde"));
+                
+            if(respuestaApp.ListaDeDiccionarios == null)
+                return Request.CreateResponse(HttpStatusCode.Forbidden,respuestaApp.Respuesta.ToString());
+
+            //Se solicita cargar el modelo de respuesta del WebApi con la respuesta del metodo fachada de la aplicación
+            var respuestaContenido = respuestaApi.EliminarUnDiccionarioRespuesta.CrearNuevaInstancia();
+
+            return Request.CreateResponse(HttpStatusCode.OK, respuestaContenido, new MediaTypeWithQualityHeaderValue("application/json"));
         }
     }
 }

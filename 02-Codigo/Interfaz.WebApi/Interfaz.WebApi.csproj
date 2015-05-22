@@ -122,7 +122,6 @@
   <ItemGroup>
     <Compile Include="AppStart\NinjectWebCommon.cs" />
     <Compile Include="Controladores\DiccionariosController.cs" />
-    <Compile Include="Controladores\EtiquetasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -133,34 +132,15 @@
     <Compile Include="Modelos\Comunes\Etiquetas.cs" />
     <Compile Include="Modelos\Comunes\Traduccion.cs" />
     <Compile Include="Modelos\Comunes\Traducciones.cs" />
-    <Compile Include="Modelos\Peticion\AgregarEtiquetasAUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPeticion.cs" />
-    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoPeticion.cs" />
-    <Compile Include="Modelos\Peticion\ConsultarEtiquetasDeDiccionarioPorNombrePeticion.cs" />
-    <Compile Include="Modelos\Peticion\ConsultarEtiquetasPorNombrePeticion.cs" />
     <Compile Include="Modelos\Peticion\ConsultarUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\CrearUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Peticion\EliminarEtiquetasAUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Peticion\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\EliminarUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Peticion\ModificarEtiquetasAUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Peticion\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioPeticion.cs" />
     <Compile Include="Modelos\Peticion\ModificarUnDiccionarioPeticion.cs" />
-    <Compile Include="Modelos\Respuesta\AgregarEtiquetasAUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\AgregarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarDiccionariosRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorIdiomaRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasDeDiccionarioPorNombreRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ConsultarEtiquetasPorNombreRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\CrearUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ConsultarUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\EliminarEtiquetasAUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\EliminarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\EliminarUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ModificarEtiquetasAUnDiccionarioRespuesta.cs" />
-    <Compile Include="Modelos\Respuesta\ModificarTraduccionesAUnaEtiquetaDeUnDiccionarioRespuesta.cs" />
     <Compile Include="Modelos\Respuesta\ModificarUnDiccionarioRespuesta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

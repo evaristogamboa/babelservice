@@ -17,8 +17,8 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
         /// <summary>
         ///Propiedad que obtiene o establece la lista de diccionarios que se van a devolver en caso de que se logre eliminar el diccionario en caso contrario su valor es null
         /// </summary>
-        [JsonProperty]
-        private List<comunes.Diccionarios> ListaDiccionarios { get; set; }
+        [JsonProperty("diccionario")]
+        public List<Diccionario> ListaDiccionarios { get; set; }
 
 
         #endregion
@@ -33,8 +33,8 @@ namespace Babel.Interfaz.WebApi.Modelos.Respuesta
 
 	    private EliminarUnDiccionarioRespuesta(app.EliminarUnDiccionarioRespuesta respuestaApp)
 	    {
-            ListaDiccionarios = JsonConvert.SerializeObject(respuestaApp.ListaDeDiccionarios,)
-            //ListaDiccionarios = respuestaApp.ListaDeDiccionarios();
+            if(respuestaApp.ListaDeDiccionarios != null)
+                ListaDiccionarios = respuestaApp.ListaDeDiccionarios;
 	    }
 
         public static EliminarUnDiccionarioRespuesta CrearNuevaInstancia(app.EliminarUnDiccionarioRespuesta respuestaApp)

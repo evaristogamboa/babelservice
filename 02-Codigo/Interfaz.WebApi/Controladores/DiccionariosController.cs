@@ -41,7 +41,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         }
 
-        [Route("diccionario/id/{id:string}")]
+        [Route("diccionario/id/{id}")]
         [HttpGet]
         public HttpResponseMessage ConsultarUnDiccionario(HttpRequestMessage peticionHttp, [FromUri] string id)
         {         
@@ -86,7 +86,7 @@ namespace Babel.Interfaz.WebApi.Controladores
         #endregion
 
         #region Metodos Put
-        [Route("diccionario/id/{id:string}")]
+        [Route("diccionario/id/{id}")]
         [HttpPut]
         public HttpResponseMessage ModificarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
         {
@@ -109,7 +109,7 @@ namespace Babel.Interfaz.WebApi.Controladores
 
         #endregion
 
-        [Route("diccionario/id/{id:string}")]
+        [Route("diccionario/id/{id}")]
         [HttpDelete]
         public HttpResponseMessage EliminarUnDiccionario(HttpRequestMessage peticionHttp,[FromUri] string id)
         {

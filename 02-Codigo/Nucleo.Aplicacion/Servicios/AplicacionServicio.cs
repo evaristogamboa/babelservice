@@ -68,7 +68,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 				}
 				else
 				{
-					throw new Exception("Ocurrió un error consultando los diccionarios.");
+					throw new Exception("Ocurrió un error consultando el diccionario.");
 				}
 
                 unDiccionarioRespuesta.Diccionario = diccionario;
@@ -168,7 +168,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 				}
 				else
 				{
-					throw new Exception("Ocurrió un error consultando los diccionarios.");
+					throw new Exception("Ocurrió un error consultando el diccionario.");
 				}
 
 				etiquetasDeDiccionarioPorIdiomaRespuesta.ListaDeEtiquetas = listaEtiquetas;
@@ -207,7 +207,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 				}
 				else
 				{
-					throw new Exception("Ocurrió un error consultando los diccionarios.");
+					throw new Exception("Ocurrió un error consultando el diccionario.");
 				}
 
                 etiquetasDeDiccionarioPorNombreRespuesta.ListaDeEtiquetas = listaEtiquetas;
@@ -246,7 +246,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 				}
 				else
 				{
-					throw new Exception("Ocurrió un error consultando los diccionarios.");
+					throw new Exception("Ocurrió un error consultando el diccionario.");
 				}
 
 				etiquetasDeDiccionarioPorDescripcionRespuesta.ListaDeEtiquetas = listaEtiquetas;
@@ -285,7 +285,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 				}
 				else
 				{
-					throw new Exception("Ocurrió un error consultando los diccionarios.");
+					throw new Exception("Ocurrió un error consultando el diccionario.");
 				}
 
 				etiquetasDeDiccionarioPorEstatusRespuesta.ListaDeEtiquetas = listaEtiquetas;
@@ -324,7 +324,7 @@ namespace Babel.Nucleo.Aplicacion.Servicios
 				}
 				else
 				{
-					throw new Exception("Ocurrió un error consultando los diccionarios.");
+					throw new Exception("Ocurrió un error consultando el diccionario.");
 				}
 
 				etiquetasDeDiccionarioPorIdiomaPorDefectoRespuesta.ListaDeEtiquetas = listaEtiquetas;

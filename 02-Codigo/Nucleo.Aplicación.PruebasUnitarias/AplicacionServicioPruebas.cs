@@ -42,15 +42,11 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			var repositorioMock=Substitute.For<IDiccionarioRepositorio>();		
 			this.diccionarioRepositorio = repositorioMock;
 
-
 			this.diccionarioRespuestaDeAgregarTraducciones = DiccionarioConTraduccionesDeLaEtiquetaAceptarAgregadas();
-
 			this.diccionarioRespuestaDeModificarTraducciones = DiccionarioConTraduccionesDeLaEtiquetaAceptarModificadas();
 
 			this.diccionarioRespuestaDeEliminarTodasLasTraducciones = DiccionarioConTodasLasTraduccionesDeLaEtiquetaAceptarEliminadas();
 			this.diccionarioRespuestaDeElimnarDosTraducciones = DiccionarioConDosTraduccionesDeLaEtiquetaCancelarEliminadas();
-
-		
 
 			this.listaDeTraduccionesAEliminar = TraduccionesAEliminar();
 			this.listaDeTraduccionesAModificar = TraduccionesAModificar();
@@ -120,7 +116,6 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 			return diccionario;
 
 		}
-
 
 		private Diccionario DiccionarioConTraduccionesDeLaEtiquetaAceptarAgregadas()
 		{
@@ -353,24 +348,19 @@ namespace Babel.Nucleo.Aplicación.PruebasUnitarias
 
 		#endregion
 
+
         #region Definiciones de traducciones Mocks
 
 		private List<Traduccion> TraduccionesAAgregar()
 		{
 			List<Traduccion> listaDeTraduccionesAceptar = new List<Traduccion>();
 
-			//Cultura culturaEs = Cultura.CrearNuevaCultura("es");
-			//Cultura culturaEsVe = Cultura.CrearNuevaCultura("es-VE");
 			Cultura culturaFr = Cultura.CrearNuevaCultura("fr");
 			Cultura culturaFrFr = Cultura.CrearNuevaCultura("fr-FR");
 
-			//Traduccion traduccionAceptarEs = Traduccion.CrearNuevaTraduccion(culturaEs, "aceptar");
-			//Traduccion traduccionAceptarEsVe = Traduccion.CrearNuevaTraduccion(culturaEsVe, "aceptar");
 			Traduccion traduccionAceptarFr = Traduccion.CrearNuevaTraduccion(culturaFr, "francés en francés neutral");
 			Traduccion traduccionAceptarFrFr = Traduccion.CrearNuevaTraduccion(culturaFrFr, "francés en francés de Francia");
 
-			//listaDeTraduccionesAceptar.Add(traduccionAceptarEs);
-			//listaDeTraduccionesAceptar.Add(traduccionAceptarEsVe);
 			listaDeTraduccionesAceptar.Add(traduccionAceptarFr);
 			listaDeTraduccionesAceptar.Add(traduccionAceptarFrFr);
 
